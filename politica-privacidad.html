@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +10,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<script>
+// idioma antes de pintar: el del enlace (?lang=ca), el que eligió la última vez, o el del navegador
+(() => {
+  const L = ['ca', 'es', 'en'];
+  let l = new URLSearchParams(location.search).get('lang');
+  if (!L.includes(l)) { try { l = localStorage.getItem('cerapal-lang'); } catch (e) {} }
+  if (!L.includes(l)) l = (navigator.languages || [navigator.language || '']).map(x => x.slice(0, 2).toLowerCase()).find(x => L.includes(x)) || 'es';
+  document.documentElement.dataset.lang = l;
+  document.documentElement.lang = l;
+})();
+</script>
 <style>
 /* ============================================================
    Tokens — paleta Cerapal (los mismos que la landing)
@@ -353,24 +364,55 @@ a { color: inherit; }
   html { scroll-behavior: auto; }
   .btn::before, .nav-links a::after { transition: none; }
 }
+
+/* ============================================================
+   Idiomas: cada texto está en castellano, catalán e inglés y solo se ve el del idioma elegido
+   ============================================================ */
+[data-l]:not([data-l="es"]) { display: none; }
+html[data-lang="ca"] [data-l="es"], html[data-lang="en"] [data-l="es"] { display: none; }
+html[data-lang="ca"] [data-l="ca"], html[data-lang="en"] [data-l="en"] { display: revert; }
+.lang { display: flex; align-items: center; gap: 2px; }
+.lang button {
+  min-width: 34px; height: 34px; padding: 0 6px;
+  border: 0; border-radius: 2px; background: none;
+  font: inherit; font-size: 12px; font-weight: 700; font-stretch: 112%; letter-spacing: .08em;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .2s, box-shadow .2s;
+}
+@media (hover: hover) { .lang button:hover { color: var(--black); } }
+.lang button[aria-pressed="true"] { color: var(--black); box-shadow: inset 0 -2px 0 var(--black); }
+.legal-note { margin: 18px 0 0; font-size: 13px; color: var(--muted); }
+@media (max-width: 900px) {
+  .lang { margin-left: auto; }
+  .nav-cta { margin-left: 4px; }
+}
+@media (max-width: 520px) {
+  .nav-cta { display: none; }
+}
 </style>
 </head>
 <body>
-<a class="skip" href="#contenido">Saltar al contenido</a>
+<a class="skip" href="#contenido"><span data-l="es" lang="es">Saltar al contenido</span><span data-l="ca" lang="ca">Salta al contingut</span><span data-l="en" lang="en">Skip to content</span></a>
 
 <header class="nav" id="nav">
   <div class="nav-inner">
-    <a class="nav-logo" href="index.html" aria-label="Cerapal, ir al inicio">
+    <a class="nav-logo" href="index.html" data-keep-lang aria-label="Cerapal, ir al inicio" data-t-attr="aria-label:logoHome">
       <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FwYV8yIiBkYXRhLW5hbWU9IkNhcGEgMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTIwMCAzMjUiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICMxOTE5MTk7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnIGlkPSJDYXBhXzEtMiIgZGF0YS1uYW1lPSJDYXBhIDEiPgogICAgPGcgaWQ9IkxvZ290aXBvIj4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTEiIGRhdGEtbmFtZT0iVHJhemFkbyAxMSIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTIiIGRhdGEtbmFtZT0iVHJhemFkbyAxMiIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTMiIGRhdGEtbmFtZT0iVHJhemFkbyAxMyIgY2xhc3M9ImNscy0xIiBkPSJtNDcyLjQ5LDEzMy45NmMtMTEuOTMtMjEuNC0yOC41Ny0zMy43NC01My44OC0zMy43NC00MC4xNCwwLTYyLjU3LDMxLjkyLTYyLjU3LDY4LjJzMjQuMDUsNjguMjEsNjUuMDksNjguMjFjMjIuMDQtLjU2LDQxLjk5LTEzLjI1LDUxLjg5LTMzLjAxbC0yNS41LTEyLjMzYy00Ljg1LDEwLjQyLTE0Ljk2LDE3LjM3LTI2LjQsMTguMTMtMjUuMzIsMC0zMi45MS0yMi4xMy0zMi45MS00MSwwLTI5LjAyLDE0LjExLTQwLjk5LDMxLjgyLTQwLjk5LDEyLjA0LjMzLDIyLjY1LDguMDQsMjYuNzMsMTkuNDFsMjUuNzItMTIuODlabTExNi41Niw5OS4wNHYtMjUuMDNoLTY3Ljk5di0zMC40OGg1OC40di0yNS4wMmgtNTguNHYtMjMuNTZoNjIuNTd2LTI1LjAzaC05NC43NnYxMjkuMTlsMTAwLjE4LS4wNlptNDkuMTUtMTA1LjIxaDI5LjQ3YzkuNTkuMjEsMTcuMTksOC4xOCwxNi45OCwxNy43OS0uMiw5LjMyLTcuNjksMTYuODMtMTYuOTgsMTcuMDRoLTI5LjQ3di0zNC44M1ptLTMyLjE5LDEwNS4yMWgzMi4xOXYtNDYuNDNoMjAuNDNsMjUuMzEsNDYuNDNoMzUuOTlsLTI5LjQ3LTUxLjg4YzE1Ljc3LTQuMTMsMjYuNzItMTguNDgsMjYuNTgtMzQuODMsMC0yOS4wMi0xNy43Mi00Mi40NC00Ni42NS00Mi40NGgtNjQuMzd2MTI5LjE1Wm0xMjIuMTksMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptMTI2LjE3LTYwLjk0aDI2LjIyYzE0LjY0LDAsMjAuOCw3LjA4LDIwLjgsMTkuOTUuODUsOS45OS02LjU0LDE4Ljc3LTE2LjUsMTkuNjItMS4xMy4xLTIuMjcuMDktMy4zOS0uMDNoLTI3LjEydi0zOS41NFptLTMyLjE5LDEwNS4yMWgzMi41NXYtNDEuNzJoMjUuMTFjNDQuMTIsMCw1My43MS0yNi40OSw1My43MS00My43MSwwLTI1LjU4LTEyLjg0LTQzLjcyLTQ3LjU2LTQzLjcyaC02My44M2wuMDIsMTI5LjE2Wm0xMDQuNDgsMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptOTMuOTUsNDQuMjZoODIuNDV2LTI3LjIxaC01MC4yNnYtMTAxLjk1aC0zMi4xOXYxMjkuMTZaIi8+CiAgICAgIDxwYXRoIGlkPSJUcmF6YWRvXzE0IiBkYXRhLW5hbWU9IlRyYXphZG8gMTQiIGNsYXNzPSJjbHMtMSIgZD0ibTQ3Mi40OSwxMzMuOTZjLTExLjkzLTIxLjQtMjguNTctMzMuNzQtNTMuODgtMzMuNzQtNDAuMTQsMC02Mi41NywzMS45Mi02Mi41Nyw2OC4yczI0LjA1LDY4LjIxLDY1LjA5LDY4LjIxYzIyLjA0LS41Niw0MS45OS0xMy4yNSw1MS44OS0zMy4wMWwtMjUuNS0xMi4zM2MtNC44NSwxMC40Mi0xNC45NiwxNy4zNy0yNi40LDE4LjEzLTI1LjMyLDAtMzIuOTEtMjIuMTMtMzIuOTEtNDEsMC0yOS4wMiwxNC4xMS00MC45OSwzMS44Mi00MC45OSwxMi4wNC4zMywyMi42NSw4LjA0LDI2LjczLDE5LjQxbDI1LjcyLTEyLjg5Wm0xMTYuNTYsOTkuMDR2LTI1LjAzaC02Ny45OXYtMzAuNDhoNTguNHYtMjUuMDJoLTU4LjR2LTIzLjU2aDYyLjU3di0yNS4wM2gtOTQuNzZ2MTI5LjE5bDEwMC4xOC0uMDZabTQ5LjE1LTEwNS4yMWgyOS40N2M5LjU5LjIxLDE3LjE5LDguMTgsMTYuOTgsMTcuNzktLjIsOS4zMi03LjY5LDE2LjgzLTE2Ljk4LDE3LjA0aC0yOS40N3YtMzQuODNabS0zMi4xOSwxMDUuMjFoMzIuMTl2LTQ2LjQzaDIwLjQzbDI1LjMxLDQ2LjQzaDM1Ljk5bC0yOS40Ny01MS44OGMxNS43Ny00LjEzLDI2LjcyLTE4LjQ4LDI2LjU4LTM0LjgzLDAtMjkuMDItMTcuNzItNDIuNDQtNDYuNjUtNDIuNDRoLTY0LjM3djEyOS4xNVptMTIyLjE5LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTEyNi4xNy02MC45NGgyNi4yMmMxNC42NCwwLDIwLjgsNy4wOCwyMC44LDE5Ljk1Ljg1LDkuOTktNi41NCwxOC43Ny0xNi41LDE5LjYyLTEuMTMuMS0yLjI3LjA5LTMuMzktLjAzaC0yNy4xMnYtMzkuNTRabS0zMi4xOSwxMDUuMjFoMzIuNTV2LTQxLjcyaDI1LjExYzQ0LjEyLDAsNTMuNzEtMjYuNDksNTMuNzEtNDMuNzEsMC0yNS41OC0xMi44NC00My43Mi00Ny41Ni00My43MmgtNjMuODNsLjAyLDEyOS4xNlptMTA0LjQ4LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTkzLjk1LDQ0LjI2aDgyLjQ1di0yNy4yMWgtNTAuMjZ2LTEwMS45NWgtMzIuMTl2MTI5LjE2WiIvPgogICAgICA8cGF0aCBpZD0iVHJhemFkb18xNSIgZGF0YS1uYW1lPSJUcmF6YWRvIDE1IiBjbGFzcz0iY2xzLTEiIGQ9Im0wLDE2Mi41QzAsNzIuNzUsNzIuNTIsMCwxNjEuOTksMHMxNjEuOTksNzIuNzUsMTYxLjk5LDE2Mi41LTcyLjUyLDE2Mi41LTE2MS45OSwxNjIuNVMwLDI1Mi4yNSwwLDE2Mi41bTI0OC40NC01MS40MmMtMTcuODItMzEuOTMtNDIuNjItNTAuMzMtODAuMzgtNTAuMzMtNTkuODgsMC05My4zMyw0Ny42My05My4zMywxMDEuNzRzMzUuODgsMTAxLjc0LDk3LjEsMTAxLjc0YzMyLjg4LS44Myw2Mi42NC0xOS43Niw3Ny40MS00OS4yNWwtMzguMDctMTguMzljLTcuMjMsMTUuNTUtMjIuMzIsMjUuOTItMzkuMzksMjcuMDYtMzcuNzYsMC00OS4wOS0zMy00OS4wOS02MS4xNSwwLTQzLjI5LDIxLjA2LTYxLjE1LDQ3LjQ3LTYxLjE1LDE3Ljk4LjQ4LDMzLjgzLDExLjk3LDM5LjkyLDI4Ljk1bDM4LjM0LTE5LjIyWiIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+" alt="Cerapal · Estudi de cuines" width="141" height="38">
     </a>
-    <nav class="nav-links" aria-label="Principal">
-      <a href="index.html#proyectos">Proyectos</a>
-      <a href="index.html#opiniones">Opiniones</a>
-      <a href="index.html#financiacion">Financiación</a>
-      <a href="index.html#contacto">Contacto</a>
+    <nav class="nav-links" aria-label="Principal" data-t-attr="aria-label:navMain">
+      <a href="index.html#proyectos" data-keep-lang><span data-l="es" lang="es">Proyectos</span><span data-l="ca" lang="ca">Projectes</span><span data-l="en" lang="en">Projects</span></a>
+      <a href="index.html#opiniones" data-keep-lang><span data-l="es" lang="es">Opiniones</span><span data-l="ca" lang="ca">Opinions</span><span data-l="en" lang="en">Reviews</span></a>
+      <a href="index.html#financiacion" data-keep-lang><span data-l="es" lang="es">Financiación</span><span data-l="ca" lang="ca">Finançament</span><span data-l="en" lang="en">Financing</span></a>
+      <a href="index.html#contacto" data-keep-lang><span data-l="es" lang="es">Contacto</span><span data-l="ca" lang="ca">Contacte</span><span data-l="en" lang="en">Contact</span></a>
     </nav>
+    <div class="lang" role="group" aria-label="Idioma" data-t-attr="aria-label:langLabel">
+      <button type="button" data-lang="ca" lang="ca" aria-label="Català" aria-pressed="false">CA</button>
+      <button type="button" data-lang="es" lang="es" aria-label="Castellano" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+    </div>
     <a class="nav-tel" href="tel:+34937620832">937 620 832</a>
-    <a class="btn btn-dark nav-cta" href="index.html#contacto">Pedir mi presupuesto</a>
+    <a class="btn btn-dark nav-cta" href="index.html#contacto" data-keep-lang><span data-l="es" lang="es">Pedir mi presupuesto</span><span data-l="ca" lang="ca">Demanar pressupost</span><span data-l="en" lang="en">Get my quote</span></a>
   </div>
 </header>
 
@@ -378,69 +420,162 @@ a { color: inherit; }
   <section class="legal-hero">
     <div class="wrap">
       <p class="eyebrow">Legal</p>
-      <h1 class="legal-title">Política de privacidad</h1>
-      <nav class="legal-tabs" aria-label="Textos legales">
-        <a href="aviso-legal.html"><span class="tab-long">Aviso legal</span><span class="tab-short">Aviso legal</span></a>
-        <a href="politica-privacidad.html" aria-current="page"><span class="tab-long">Política de privacidad</span><span class="tab-short">Privacidad</span></a>
-        <a href="politica-cookies.html"><span class="tab-long">Política de cookies</span><span class="tab-short">Cookies</span></a>
+      <h1 class="legal-title"><span data-l="es" lang="es">Política de privacidad</span><span data-l="ca" lang="ca">Política de privacitat</span><span data-l="en" lang="en">Privacy policy</span></h1>
+      <nav class="legal-tabs" aria-label="Textos legales" data-t-attr="aria-label:legalTexts">
+        <a href="aviso-legal.html" data-keep-lang><span class="tab-long"><span data-l="es" lang="es">Aviso legal</span><span data-l="ca" lang="ca">Avís legal</span><span data-l="en" lang="en">Legal notice</span></span><span class="tab-short"><span data-l="es" lang="es">Aviso legal</span><span data-l="ca" lang="ca">Avís legal</span><span data-l="en" lang="en">Legal notice</span></span></a>
+        <a href="politica-privacidad.html" data-keep-lang aria-current="page"><span class="tab-long"><span data-l="es" lang="es">Política de privacidad</span><span data-l="ca" lang="ca">Política de privacitat</span><span data-l="en" lang="en">Privacy policy</span></span><span class="tab-short"><span data-l="es" lang="es">Privacidad</span><span data-l="ca" lang="ca">Privacitat</span><span data-l="en" lang="en">Privacy</span></span></a>
+        <a href="politica-cookies.html" data-keep-lang><span class="tab-long"><span data-l="es" lang="es">Política de cookies</span><span data-l="ca" lang="ca">Política de galetes</span><span data-l="en" lang="en">Cookie policy</span></span><span class="tab-short"><span data-l="es" lang="es">Cookies</span><span data-l="ca" lang="ca">Galetes</span><span data-l="en" lang="en">Cookies</span></span></a>
       </nav>
+      <p class="legal-note" data-l="ca" lang="ca">Traducció de la versió original en castellà.</p><p class="legal-note" data-l="en" lang="en">Translated from the original Spanish version.</p>
     </div>
   </section>
 
   <div class="wrap legal-grid">
     <nav class="toc" aria-label="En esta página">
-      <p class="eyebrow">En esta página</p>
-      <ol>
-          <li class="toc-h2"><a href="#cuadro-resumen-de-informacion">CUADRO RESUMEN DE INFORMACIÓN</a></li>
-          <li class="toc-h2"><a href="#que-significa-el-tratamiento-de-datos-personales">¿QUÉ SIGNIFICA EL TRATAMIENTO DE DATOS PERSONALES?</a></li>
-          <li class="toc-h2"><a href="#que-supone-el-uso-de-la-web">¿QUÉ SUPONE EL USO DE LA WEB?</a></li>
-          <li class="toc-h2"><a href="#quien-es-el-responsable-del-tratamiento">¿QUIÉN ES EL RESPONSABLE DEL TRATAMIENTO?</a></li>
-          <li class="toc-h2"><a href="#con-que-finalidad-utilizaremos-los-datos-recabados">¿CON QUÉ FINALIDAD UTILIZAREMOS LOS DATOS RECABADOS?</a></li>
-          <li class="toc-h2"><a href="#cual-es-la-legitimacion-del-tratamiento">¿CUÁL ES LA LEGITIMACIÓN DEL TRATAMIENTO?</a></li>
-          <li class="toc-h2"><a href="#cedemos-los-datos">¿CEDEMOS LOS DATOS?</a></li>
-          <li class="toc-h2"><a href="#cual-es-nuestra-politica-con-los-encargados-de-tratamientos">¿CUÁL ES NUESTRA POLÍTICA CON LOS ENCARGADOS DE TRATAMIENTOS?</a></li>
-          <li class="toc-h2"><a href="#que-hacemos-con-los-datos-en-redes-sociales">¿QUÉ HACEMOS CON LOS DATOS EN REDES SOCIALES?</a></li>
-          <li class="toc-h2"><a href="#que-derechos-tiene-el-usuario-como-se-ejercitan-los-derechos">¿QUÉ DERECHOS TIENE EL USUARIO? ¿CÓMO SE EJERCITAN LOS DERECHOS?</a></li>
-          <li class="toc-h2"><a href="#en-que-consisten-estos-derechos">¿EN QUÉ CONSISTEN ESTOS DERECHOS?</a></li>
-          <li class="toc-h2"><a href="#otros-derechos">OTROS DERECHOS</a></li>
-          <li class="toc-h2"><a href="#que-medidas-de-seguridad-tenemos-aplicadas-al-tratamiento-de">¿QUÉ MEDIDAS DE SEGURIDAD TENEMOS APLICADAS AL TRATAMIENTO DE DATOS PERSONALES?</a></li>
-          <li class="toc-h2"><a href="#notificacion-de-brechas-de-la-seguridad-de-los-datos-persona">NOTIFICACIÓN DE BRECHAS DE LA SEGURIDAD DE LOS DATOS PERSONALES</a></li>
-          <li class="toc-h2"><a href="#durante-cuanto-tiempo-guardamos-los-datos">¿DURANTE CUÁNTO TIEMPO GUARDAMOS LOS DATOS?</a></li>
-          <li class="toc-h2"><a href="#politica-de-cookies">POLÍTICA DE COOKIES</a></li>
-          <li class="toc-h2"><a href="#privacidad-de-menores">PRIVACIDAD DE MENORES</a></li>
-          <li class="toc-h2"><a href="#responsabilidad-del-usuario">RESPONSABILIDAD DEL USUARIO</a></li>
-          <li class="toc-h2"><a href="#prohibicion-a-los-usuarios-de-ceder-datos-de-terceros">PROHIBICIÓN A LOS USUARIOS DE CEDER DATOS DE TERCEROS</a></li>
-          <li class="toc-h2"><a href="#legislacion-y-jurisdiccion-aplicable">LEGISLACIÓN Y JURISDICCIÓN APLICABLE</a></li>
-          <li class="toc-h2"><a href="#modificacion">MODIFICACIÓN</a></li>
+      <p class="eyebrow"><span data-l="es" lang="es">En esta página</span><span data-l="ca" lang="ca">En aquesta pàgina</span><span data-l="en" lang="en">On this page</span></p>
+      <ol data-l="es">
+        <li class="toc-h2"><a href="#cuadro-resumen-de-informacion">CUADRO RESUMEN DE INFORMACIÓN</a></li>
+        <li class="toc-h2"><a href="#que-significa-el-tratamiento-de-datos-personales">¿QUÉ SIGNIFICA EL TRATAMIENTO DE DATOS PERSONALES?</a></li>
+        <li class="toc-h2"><a href="#que-supone-el-uso-de-la-web">¿QUÉ SUPONE EL USO DE LA WEB?</a></li>
+        <li class="toc-h2"><a href="#quien-es-el-responsable-del-tratamiento">¿QUIÉN ES EL RESPONSABLE DEL TRATAMIENTO?</a></li>
+        <li class="toc-h2"><a href="#con-que-finalidad-utilizaremos-los-datos-recabados">¿CON QUÉ FINALIDAD UTILIZAREMOS LOS DATOS RECABADOS?</a></li>
+        <li class="toc-h2"><a href="#cual-es-la-legitimacion-del-tratamiento">¿CUÁL ES LA LEGITIMACIÓN DEL TRATAMIENTO?</a></li>
+        <li class="toc-h2"><a href="#cedemos-los-datos">¿CEDEMOS LOS DATOS?</a></li>
+        <li class="toc-h2"><a href="#cual-es-nuestra-politica-con-los-encargados-de-tratamientos">¿CUÁL ES NUESTRA POLÍTICA CON LOS ENCARGADOS DE TRATAMIENTOS?</a></li>
+        <li class="toc-h2"><a href="#que-hacemos-con-los-datos-en-redes-sociales">¿QUÉ HACEMOS CON LOS DATOS EN REDES SOCIALES?</a></li>
+        <li class="toc-h2"><a href="#que-derechos-tiene-el-usuario-como-se-ejercitan-los-derechos">¿QUÉ DERECHOS TIENE EL USUARIO? ¿CÓMO SE EJERCITAN LOS DERECHOS?</a></li>
+        <li class="toc-h2"><a href="#en-que-consisten-estos-derechos">¿EN QUÉ CONSISTEN ESTOS DERECHOS?</a></li>
+        <li class="toc-h2"><a href="#otros-derechos">OTROS DERECHOS</a></li>
+        <li class="toc-h2"><a href="#que-medidas-de-seguridad-tenemos-aplicadas-al-tratamiento-de">¿QUÉ MEDIDAS DE SEGURIDAD TENEMOS APLICADAS AL TRATAMIENTO DE DATOS PERSONALES?</a></li>
+        <li class="toc-h2"><a href="#notificacion-de-brechas-de-la-seguridad-de-los-datos-persona">NOTIFICACIÓN DE BRECHAS DE LA SEGURIDAD DE LOS DATOS PERSONALES</a></li>
+        <li class="toc-h2"><a href="#durante-cuanto-tiempo-guardamos-los-datos">¿DURANTE CUÁNTO TIEMPO GUARDAMOS LOS DATOS?</a></li>
+        <li class="toc-h2"><a href="#politica-de-cookies">POLÍTICA DE COOKIES</a></li>
+        <li class="toc-h2"><a href="#privacidad-de-menores">PRIVACIDAD DE MENORES</a></li>
+        <li class="toc-h2"><a href="#responsabilidad-del-usuario">RESPONSABILIDAD DEL USUARIO</a></li>
+        <li class="toc-h2"><a href="#prohibicion-a-los-usuarios-de-ceder-datos-de-terceros">PROHIBICIÓN A LOS USUARIOS DE CEDER DATOS DE TERCEROS</a></li>
+        <li class="toc-h2"><a href="#legislacion-y-jurisdiccion-aplicable">LEGISLACIÓN Y JURISDICCIÓN APLICABLE</a></li>
+        <li class="toc-h2"><a href="#modificacion">MODIFICACIÓN</a></li>
+      </ol>
+      <ol data-l="ca">
+        <li class="toc-h2"><a href="#ca-quadre-resum-dinformacio">QUADRE RESUM D’INFORMACIÓ</a></li>
+        <li class="toc-h2"><a href="#ca-que-significa-el-tractament-de-dades-personals">QUÈ SIGNIFICA EL TRACTAMENT DE DADES PERSONALS?</a></li>
+        <li class="toc-h2"><a href="#ca-que-suposa-lus-del-web">QUÈ SUPOSA L’ÚS DEL WEB?</a></li>
+        <li class="toc-h2"><a href="#ca-qui-es-el-responsable-del-tractament">QUI ÉS EL RESPONSABLE DEL TRACTAMENT?</a></li>
+        <li class="toc-h2"><a href="#ca-amb-quina-finalitat-farem-servir-les-dades-recollides">AMB QUINA FINALITAT FAREM SERVIR LES DADES RECOLLIDES?</a></li>
+        <li class="toc-h2"><a href="#ca-quina-es-la-legitimacio-del-tractament">QUINA ÉS LA LEGITIMACIÓ DEL TRACTAMENT?</a></li>
+        <li class="toc-h2"><a href="#ca-cedim-les-dades">CEDIM LES DADES?</a></li>
+        <li class="toc-h2"><a href="#ca-quina-es-la-nostra-politica-amb-els-encarregats-del-tractame">QUINA ÉS LA NOSTRA POLÍTICA AMB ELS ENCARREGATS DEL TRACTAMENT?</a></li>
+        <li class="toc-h2"><a href="#ca-que-fem-amb-les-dades-a-les-xarxes-socials">QUÈ FEM AMB LES DADES A LES XARXES SOCIALS?</a></li>
+        <li class="toc-h2"><a href="#ca-quins-drets-te-lusuari-com-sexerceixen-els-drets">QUINS DRETS TÉ L’USUARI? COM S’EXERCEIXEN ELS DRETS?</a></li>
+        <li class="toc-h2"><a href="#ca-en-que-consisteixen-aquests-drets">EN QUÈ CONSISTEIXEN AQUESTS DRETS?</a></li>
+        <li class="toc-h2"><a href="#ca-altres-drets">ALTRES DRETS</a></li>
+        <li class="toc-h2"><a href="#ca-quines-mesures-de-seguretat-apliquem-al-tractament-de-dades-">QUINES MESURES DE SEGURETAT APLIQUEM AL TRACTAMENT DE DADES PERSONALS?</a></li>
+        <li class="toc-h2"><a href="#ca-notificacio-de-bretxes-de-seguretat-de-les-dades-personals">NOTIFICACIÓ DE BRETXES DE SEGURETAT DE LES DADES PERSONALS</a></li>
+        <li class="toc-h2"><a href="#ca-durant-quant-de-temps-guardem-les-dades">DURANT QUANT DE TEMPS GUARDEM LES DADES?</a></li>
+        <li class="toc-h2"><a href="#ca-politica-de-galetes">POLÍTICA DE GALETES</a></li>
+        <li class="toc-h2"><a href="#ca-privacitat-de-menors">PRIVACITAT DE MENORS</a></li>
+        <li class="toc-h2"><a href="#ca-responsabilitat-de-lusuari">RESPONSABILITAT DE L’USUARI</a></li>
+        <li class="toc-h2"><a href="#ca-prohibicio-als-usuaris-de-cedir-dades-de-tercers">PROHIBICIÓ ALS USUARIS DE CEDIR DADES DE TERCERS</a></li>
+        <li class="toc-h2"><a href="#ca-legislacio-i-jurisdiccio-aplicable">LEGISLACIÓ I JURISDICCIÓ APLICABLE</a></li>
+        <li class="toc-h2"><a href="#ca-modificacio">MODIFICACIÓ</a></li>
+      </ol>
+      <ol data-l="en">
+        <li class="toc-h2"><a href="#en-summary-of-information">SUMMARY OF INFORMATION</a></li>
+        <li class="toc-h2"><a href="#en-what-does-processing-personal-data-mean">WHAT DOES PROCESSING PERSONAL DATA MEAN?</a></li>
+        <li class="toc-h2"><a href="#en-what-does-using-the-website-involve">WHAT DOES USING THE WEBSITE INVOLVE?</a></li>
+        <li class="toc-h2"><a href="#en-who-is-the-data-controller">WHO IS THE DATA CONTROLLER?</a></li>
+        <li class="toc-h2"><a href="#en-for-what-purpose-will-we-use-the-data-collected">FOR WHAT PURPOSE WILL WE USE THE DATA COLLECTED?</a></li>
+        <li class="toc-h2"><a href="#en-what-is-the-legal-basis-for-processing">WHAT IS THE LEGAL BASIS FOR PROCESSING?</a></li>
+        <li class="toc-h2"><a href="#en-do-we-share-the-data">DO WE SHARE THE DATA?</a></li>
+        <li class="toc-h2"><a href="#en-what-is-our-policy-with-data-processors">WHAT IS OUR POLICY WITH DATA PROCESSORS?</a></li>
+        <li class="toc-h2"><a href="#en-what-do-we-do-with-data-on-social-networks">WHAT DO WE DO WITH DATA ON SOCIAL NETWORKS?</a></li>
+        <li class="toc-h2"><a href="#en-what-rights-does-the-user-have-how-are-the-rights-exercised">WHAT RIGHTS DOES THE USER HAVE? HOW ARE THE RIGHTS EXERCISED?</a></li>
+        <li class="toc-h2"><a href="#en-what-do-these-rights-consist-of">WHAT DO THESE RIGHTS CONSIST OF?</a></li>
+        <li class="toc-h2"><a href="#en-other-rights">OTHER RIGHTS</a></li>
+        <li class="toc-h2"><a href="#en-what-security-measures-do-we-apply-to-the-processing-of-pers">WHAT SECURITY MEASURES DO WE APPLY TO THE PROCESSING OF PERSONAL DATA?</a></li>
+        <li class="toc-h2"><a href="#en-notification-of-personal-data-security-breaches">NOTIFICATION OF PERSONAL DATA SECURITY BREACHES</a></li>
+        <li class="toc-h2"><a href="#en-how-long-do-we-keep-the-data">HOW LONG DO WE KEEP THE DATA?</a></li>
+        <li class="toc-h2"><a href="#en-cookie-policy">COOKIE POLICY</a></li>
+        <li class="toc-h2"><a href="#en-privacy-of-minors">PRIVACY OF MINORS</a></li>
+        <li class="toc-h2"><a href="#en-user-responsibility">USER RESPONSIBILITY</a></li>
+        <li class="toc-h2"><a href="#en-prohibition-on-users-disclosing-third-party-data">PROHIBITION ON USERS DISCLOSING THIRD-PARTY DATA</a></li>
+        <li class="toc-h2"><a href="#en-applicable-law-and-jurisdiction">APPLICABLE LAW AND JURISDICTION</a></li>
+        <li class="toc-h2"><a href="#en-changes">CHANGES</a></li>
       </ol>
     </nav>
     <details class="toc-mobile">
-      <summary>En esta página</summary>
-      <ol>
-          <li class="toc-h2"><a href="#cuadro-resumen-de-informacion">CUADRO RESUMEN DE INFORMACIÓN</a></li>
-          <li class="toc-h2"><a href="#que-significa-el-tratamiento-de-datos-personales">¿QUÉ SIGNIFICA EL TRATAMIENTO DE DATOS PERSONALES?</a></li>
-          <li class="toc-h2"><a href="#que-supone-el-uso-de-la-web">¿QUÉ SUPONE EL USO DE LA WEB?</a></li>
-          <li class="toc-h2"><a href="#quien-es-el-responsable-del-tratamiento">¿QUIÉN ES EL RESPONSABLE DEL TRATAMIENTO?</a></li>
-          <li class="toc-h2"><a href="#con-que-finalidad-utilizaremos-los-datos-recabados">¿CON QUÉ FINALIDAD UTILIZAREMOS LOS DATOS RECABADOS?</a></li>
-          <li class="toc-h2"><a href="#cual-es-la-legitimacion-del-tratamiento">¿CUÁL ES LA LEGITIMACIÓN DEL TRATAMIENTO?</a></li>
-          <li class="toc-h2"><a href="#cedemos-los-datos">¿CEDEMOS LOS DATOS?</a></li>
-          <li class="toc-h2"><a href="#cual-es-nuestra-politica-con-los-encargados-de-tratamientos">¿CUÁL ES NUESTRA POLÍTICA CON LOS ENCARGADOS DE TRATAMIENTOS?</a></li>
-          <li class="toc-h2"><a href="#que-hacemos-con-los-datos-en-redes-sociales">¿QUÉ HACEMOS CON LOS DATOS EN REDES SOCIALES?</a></li>
-          <li class="toc-h2"><a href="#que-derechos-tiene-el-usuario-como-se-ejercitan-los-derechos">¿QUÉ DERECHOS TIENE EL USUARIO? ¿CÓMO SE EJERCITAN LOS DERECHOS?</a></li>
-          <li class="toc-h2"><a href="#en-que-consisten-estos-derechos">¿EN QUÉ CONSISTEN ESTOS DERECHOS?</a></li>
-          <li class="toc-h2"><a href="#otros-derechos">OTROS DERECHOS</a></li>
-          <li class="toc-h2"><a href="#que-medidas-de-seguridad-tenemos-aplicadas-al-tratamiento-de">¿QUÉ MEDIDAS DE SEGURIDAD TENEMOS APLICADAS AL TRATAMIENTO DE DATOS PERSONALES?</a></li>
-          <li class="toc-h2"><a href="#notificacion-de-brechas-de-la-seguridad-de-los-datos-persona">NOTIFICACIÓN DE BRECHAS DE LA SEGURIDAD DE LOS DATOS PERSONALES</a></li>
-          <li class="toc-h2"><a href="#durante-cuanto-tiempo-guardamos-los-datos">¿DURANTE CUÁNTO TIEMPO GUARDAMOS LOS DATOS?</a></li>
-          <li class="toc-h2"><a href="#politica-de-cookies">POLÍTICA DE COOKIES</a></li>
-          <li class="toc-h2"><a href="#privacidad-de-menores">PRIVACIDAD DE MENORES</a></li>
-          <li class="toc-h2"><a href="#responsabilidad-del-usuario">RESPONSABILIDAD DEL USUARIO</a></li>
-          <li class="toc-h2"><a href="#prohibicion-a-los-usuarios-de-ceder-datos-de-terceros">PROHIBICIÓN A LOS USUARIOS DE CEDER DATOS DE TERCEROS</a></li>
-          <li class="toc-h2"><a href="#legislacion-y-jurisdiccion-aplicable">LEGISLACIÓN Y JURISDICCIÓN APLICABLE</a></li>
-          <li class="toc-h2"><a href="#modificacion">MODIFICACIÓN</a></li>
+      <summary><span data-l="es" lang="es">En esta página</span><span data-l="ca" lang="ca">En aquesta pàgina</span><span data-l="en" lang="en">On this page</span></summary>
+      <ol data-l="es">
+        <li class="toc-h2"><a href="#cuadro-resumen-de-informacion">CUADRO RESUMEN DE INFORMACIÓN</a></li>
+        <li class="toc-h2"><a href="#que-significa-el-tratamiento-de-datos-personales">¿QUÉ SIGNIFICA EL TRATAMIENTO DE DATOS PERSONALES?</a></li>
+        <li class="toc-h2"><a href="#que-supone-el-uso-de-la-web">¿QUÉ SUPONE EL USO DE LA WEB?</a></li>
+        <li class="toc-h2"><a href="#quien-es-el-responsable-del-tratamiento">¿QUIÉN ES EL RESPONSABLE DEL TRATAMIENTO?</a></li>
+        <li class="toc-h2"><a href="#con-que-finalidad-utilizaremos-los-datos-recabados">¿CON QUÉ FINALIDAD UTILIZAREMOS LOS DATOS RECABADOS?</a></li>
+        <li class="toc-h2"><a href="#cual-es-la-legitimacion-del-tratamiento">¿CUÁL ES LA LEGITIMACIÓN DEL TRATAMIENTO?</a></li>
+        <li class="toc-h2"><a href="#cedemos-los-datos">¿CEDEMOS LOS DATOS?</a></li>
+        <li class="toc-h2"><a href="#cual-es-nuestra-politica-con-los-encargados-de-tratamientos">¿CUÁL ES NUESTRA POLÍTICA CON LOS ENCARGADOS DE TRATAMIENTOS?</a></li>
+        <li class="toc-h2"><a href="#que-hacemos-con-los-datos-en-redes-sociales">¿QUÉ HACEMOS CON LOS DATOS EN REDES SOCIALES?</a></li>
+        <li class="toc-h2"><a href="#que-derechos-tiene-el-usuario-como-se-ejercitan-los-derechos">¿QUÉ DERECHOS TIENE EL USUARIO? ¿CÓMO SE EJERCITAN LOS DERECHOS?</a></li>
+        <li class="toc-h2"><a href="#en-que-consisten-estos-derechos">¿EN QUÉ CONSISTEN ESTOS DERECHOS?</a></li>
+        <li class="toc-h2"><a href="#otros-derechos">OTROS DERECHOS</a></li>
+        <li class="toc-h2"><a href="#que-medidas-de-seguridad-tenemos-aplicadas-al-tratamiento-de">¿QUÉ MEDIDAS DE SEGURIDAD TENEMOS APLICADAS AL TRATAMIENTO DE DATOS PERSONALES?</a></li>
+        <li class="toc-h2"><a href="#notificacion-de-brechas-de-la-seguridad-de-los-datos-persona">NOTIFICACIÓN DE BRECHAS DE LA SEGURIDAD DE LOS DATOS PERSONALES</a></li>
+        <li class="toc-h2"><a href="#durante-cuanto-tiempo-guardamos-los-datos">¿DURANTE CUÁNTO TIEMPO GUARDAMOS LOS DATOS?</a></li>
+        <li class="toc-h2"><a href="#politica-de-cookies">POLÍTICA DE COOKIES</a></li>
+        <li class="toc-h2"><a href="#privacidad-de-menores">PRIVACIDAD DE MENORES</a></li>
+        <li class="toc-h2"><a href="#responsabilidad-del-usuario">RESPONSABILIDAD DEL USUARIO</a></li>
+        <li class="toc-h2"><a href="#prohibicion-a-los-usuarios-de-ceder-datos-de-terceros">PROHIBICIÓN A LOS USUARIOS DE CEDER DATOS DE TERCEROS</a></li>
+        <li class="toc-h2"><a href="#legislacion-y-jurisdiccion-aplicable">LEGISLACIÓN Y JURISDICCIÓN APLICABLE</a></li>
+        <li class="toc-h2"><a href="#modificacion">MODIFICACIÓN</a></li>
+      </ol>
+      <ol data-l="ca">
+        <li class="toc-h2"><a href="#ca-quadre-resum-dinformacio">QUADRE RESUM D’INFORMACIÓ</a></li>
+        <li class="toc-h2"><a href="#ca-que-significa-el-tractament-de-dades-personals">QUÈ SIGNIFICA EL TRACTAMENT DE DADES PERSONALS?</a></li>
+        <li class="toc-h2"><a href="#ca-que-suposa-lus-del-web">QUÈ SUPOSA L’ÚS DEL WEB?</a></li>
+        <li class="toc-h2"><a href="#ca-qui-es-el-responsable-del-tractament">QUI ÉS EL RESPONSABLE DEL TRACTAMENT?</a></li>
+        <li class="toc-h2"><a href="#ca-amb-quina-finalitat-farem-servir-les-dades-recollides">AMB QUINA FINALITAT FAREM SERVIR LES DADES RECOLLIDES?</a></li>
+        <li class="toc-h2"><a href="#ca-quina-es-la-legitimacio-del-tractament">QUINA ÉS LA LEGITIMACIÓ DEL TRACTAMENT?</a></li>
+        <li class="toc-h2"><a href="#ca-cedim-les-dades">CEDIM LES DADES?</a></li>
+        <li class="toc-h2"><a href="#ca-quina-es-la-nostra-politica-amb-els-encarregats-del-tractame">QUINA ÉS LA NOSTRA POLÍTICA AMB ELS ENCARREGATS DEL TRACTAMENT?</a></li>
+        <li class="toc-h2"><a href="#ca-que-fem-amb-les-dades-a-les-xarxes-socials">QUÈ FEM AMB LES DADES A LES XARXES SOCIALS?</a></li>
+        <li class="toc-h2"><a href="#ca-quins-drets-te-lusuari-com-sexerceixen-els-drets">QUINS DRETS TÉ L’USUARI? COM S’EXERCEIXEN ELS DRETS?</a></li>
+        <li class="toc-h2"><a href="#ca-en-que-consisteixen-aquests-drets">EN QUÈ CONSISTEIXEN AQUESTS DRETS?</a></li>
+        <li class="toc-h2"><a href="#ca-altres-drets">ALTRES DRETS</a></li>
+        <li class="toc-h2"><a href="#ca-quines-mesures-de-seguretat-apliquem-al-tractament-de-dades-">QUINES MESURES DE SEGURETAT APLIQUEM AL TRACTAMENT DE DADES PERSONALS?</a></li>
+        <li class="toc-h2"><a href="#ca-notificacio-de-bretxes-de-seguretat-de-les-dades-personals">NOTIFICACIÓ DE BRETXES DE SEGURETAT DE LES DADES PERSONALS</a></li>
+        <li class="toc-h2"><a href="#ca-durant-quant-de-temps-guardem-les-dades">DURANT QUANT DE TEMPS GUARDEM LES DADES?</a></li>
+        <li class="toc-h2"><a href="#ca-politica-de-galetes">POLÍTICA DE GALETES</a></li>
+        <li class="toc-h2"><a href="#ca-privacitat-de-menors">PRIVACITAT DE MENORS</a></li>
+        <li class="toc-h2"><a href="#ca-responsabilitat-de-lusuari">RESPONSABILITAT DE L’USUARI</a></li>
+        <li class="toc-h2"><a href="#ca-prohibicio-als-usuaris-de-cedir-dades-de-tercers">PROHIBICIÓ ALS USUARIS DE CEDIR DADES DE TERCERS</a></li>
+        <li class="toc-h2"><a href="#ca-legislacio-i-jurisdiccio-aplicable">LEGISLACIÓ I JURISDICCIÓ APLICABLE</a></li>
+        <li class="toc-h2"><a href="#ca-modificacio">MODIFICACIÓ</a></li>
+      </ol>
+      <ol data-l="en">
+        <li class="toc-h2"><a href="#en-summary-of-information">SUMMARY OF INFORMATION</a></li>
+        <li class="toc-h2"><a href="#en-what-does-processing-personal-data-mean">WHAT DOES PROCESSING PERSONAL DATA MEAN?</a></li>
+        <li class="toc-h2"><a href="#en-what-does-using-the-website-involve">WHAT DOES USING THE WEBSITE INVOLVE?</a></li>
+        <li class="toc-h2"><a href="#en-who-is-the-data-controller">WHO IS THE DATA CONTROLLER?</a></li>
+        <li class="toc-h2"><a href="#en-for-what-purpose-will-we-use-the-data-collected">FOR WHAT PURPOSE WILL WE USE THE DATA COLLECTED?</a></li>
+        <li class="toc-h2"><a href="#en-what-is-the-legal-basis-for-processing">WHAT IS THE LEGAL BASIS FOR PROCESSING?</a></li>
+        <li class="toc-h2"><a href="#en-do-we-share-the-data">DO WE SHARE THE DATA?</a></li>
+        <li class="toc-h2"><a href="#en-what-is-our-policy-with-data-processors">WHAT IS OUR POLICY WITH DATA PROCESSORS?</a></li>
+        <li class="toc-h2"><a href="#en-what-do-we-do-with-data-on-social-networks">WHAT DO WE DO WITH DATA ON SOCIAL NETWORKS?</a></li>
+        <li class="toc-h2"><a href="#en-what-rights-does-the-user-have-how-are-the-rights-exercised">WHAT RIGHTS DOES THE USER HAVE? HOW ARE THE RIGHTS EXERCISED?</a></li>
+        <li class="toc-h2"><a href="#en-what-do-these-rights-consist-of">WHAT DO THESE RIGHTS CONSIST OF?</a></li>
+        <li class="toc-h2"><a href="#en-other-rights">OTHER RIGHTS</a></li>
+        <li class="toc-h2"><a href="#en-what-security-measures-do-we-apply-to-the-processing-of-pers">WHAT SECURITY MEASURES DO WE APPLY TO THE PROCESSING OF PERSONAL DATA?</a></li>
+        <li class="toc-h2"><a href="#en-notification-of-personal-data-security-breaches">NOTIFICATION OF PERSONAL DATA SECURITY BREACHES</a></li>
+        <li class="toc-h2"><a href="#en-how-long-do-we-keep-the-data">HOW LONG DO WE KEEP THE DATA?</a></li>
+        <li class="toc-h2"><a href="#en-cookie-policy">COOKIE POLICY</a></li>
+        <li class="toc-h2"><a href="#en-privacy-of-minors">PRIVACY OF MINORS</a></li>
+        <li class="toc-h2"><a href="#en-user-responsibility">USER RESPONSIBILITY</a></li>
+        <li class="toc-h2"><a href="#en-prohibition-on-users-disclosing-third-party-data">PROHIBITION ON USERS DISCLOSING THIRD-PARTY DATA</a></li>
+        <li class="toc-h2"><a href="#en-applicable-law-and-jurisdiction">APPLICABLE LAW AND JURISDICTION</a></li>
+        <li class="toc-h2"><a href="#en-changes">CHANGES</a></li>
       </ol>
     </details>
-    <article class="legal-body">
+    <article class="legal-body" data-l="es" lang="es">
 <p>Para el equipo de <strong>CERAPAL, S.L.</strong>, propietario de esta página web y de la marca <strong>CERAPAL -estudi de cuines-</strong>, es de extrema importancia la protección de la información personal, su seguridad y confidencialidad. Por ello, les recomendamos que lean atentamente el siguiente Aviso de Privacidad, ya que la información que como usuario proporcione a través de esta web (<a href="https://cerapal.cat/" target="_blank" rel="noopener">cerapal.cat</a>) queda protegida en los términos de esta Política de Privacidad. <strong>Les recordamos que el uso de esta web implica la aceptación de esta Política de Privacidad</strong>.</p>
 <h2 id="cuadro-resumen-de-informacion">CUADRO RESUMEN DE INFORMACIÓN</h2>
 <div class="table-wrap wrap-table-summary" role="region" aria-label="Tabla" tabindex="0"><table class="table-summary"><thead>
@@ -567,6 +702,260 @@ a { color: inherit; }
 <h2 id="modificacion">MODIFICACIÓN</h2>
 <p><strong>CERAPAL -estudi de cuines-</strong> podrá modificar esta política de privacidad en cualquier momento publicándola en este sitio Web, en el que constará siempre la fecha de la última actualización aplicable.</p>
     </article>
+    <article class="legal-body" data-l="ca" lang="ca">
+<p>Per a l’equip de <strong>CERAPAL, S.L.</strong>, propietari d’aquesta pàgina web i de la marca <strong>CERAPAL -estudi de cuines-</strong>, la protecció de la informació personal, la seva seguretat i la seva confidencialitat són d’una importància extrema. Per això, els recomanem que llegeixin atentament el següent avís de privacitat, ja que la informació que com a usuari proporcioni a través d’aquest web (<a href="https://cerapal.cat/" target="_blank" rel="noopener">cerapal.cat</a>) queda protegida en els termes d’aquesta política de privacitat. <strong>Els recordem que l’ús d’aquest web implica l’acceptació d’aquesta política de privacitat</strong>.</p>
+<h2 id="ca-quadre-resum-dinformacio">QUADRE RESUM D’INFORMACIÓ</h2>
+<div class="table-wrap wrap-table-summary" role="region" aria-label="Taula" tabindex="0"><table class="table-summary"><thead>
+<tr>
+<th colspan="2">Informació bàsica sobre protecció de dades</th></tr></thead><tbody>
+<tr>
+<td><strong>Responsable</strong></td><td>CERAPAL, S.L.</td></tr><tr>
+<td><strong>Finalitats</strong></td><td><ul>
+<li>Mostrar els serveis desenvolupats per CERAPAL -estudi de cuines-.</li>
+<li>Gestió i resposta a consultes en línia.</li>
+<li>Enviament de promocions, publicitat i informació d’esdeveniments.</li>
+</ul>
+<p>Per a més informació, continuï llegint.</p>
+</td></tr><tr>
+<td><strong>Legitimació</strong></td><td>Consentiment de la persona interessada. Per a més informació, continuï llegint.</td></tr><tr>
+<td><strong>Destinataris</strong></td><td>No se cediran dades a tercers, excepte per obligació legal. Es podran cedir resultats analítics a petició de les eines instal·lades. Per a més informació, consulti la política de galetes.</td></tr><tr>
+<td><strong>Drets</strong></td><td>Accedir a les dades, rectificar-les i suprimir-les, limitar-ne el tractament i oposar-s’hi, sol·licitar-ne la portabilitat i retirar el consentiment.</td></tr><tr>
+<td><strong>Informació addicional</strong></td><td>Pot consultar la informació addicional i detallada sobre protecció de dades si continua llegint aquest avís.</td></tr></tbody></table></div>
+<h2 id="ca-que-significa-el-tractament-de-dades-personals">QUÈ SIGNIFICA EL TRACTAMENT DE DADES PERSONALS?</h2>
+<p>Les operacions, gestions i procediments tècnics que es facin de manera automatitzada o no automatitzada i que possibilitin la recollida, l’emmagatzematge, la modificació, la transferència i altres accions sobre dades de caràcter personal tenen la consideració <strong>de tractament de dades personals</strong>.</p>
+<h2 id="ca-que-suposa-lus-del-web">QUÈ SUPOSA L’ÚS DEL WEB?</h2>
+<p>Abans d’enviar qualsevol sol·licitud d’informació a través de qualsevol adreça de correu electrònic del web cerapal.cat, <strong>l’usuari accepta llegir aquesta política de privacitat</strong>, de manera que dona el seu <strong>consentiment inequívoc, lliure, específic i informat</strong> al tractament de les seves dades personals amb les finalitats indicades.</p>
+<p>Aquest consentiment exprés implica l’autorització del tractament de les seves dades per part de <strong>CERAPAL -estudi de cuines-</strong> en els termes establerts en aquesta política de privacitat, així com per part dels corresponsables i encarregats del tractament amb els quals <strong>CERAPAL -estudi de cuines-</strong> manté l’obligada relació contractual i de control de compliment.</p>
+<h2 id="ca-qui-es-el-responsable-del-tractament">QUI ÉS EL RESPONSABLE DEL TRACTAMENT?</h2>
+<ul>
+<li><strong>Denominació comercial:</strong> CERAPAL -estudi de cuines-</li>
+<li><strong>Denominació fiscal:</strong> CERAPAL, S.L.</li>
+<li><strong>CIF:</strong> B64025430</li>
+<li><strong>Adreça:</strong> Carrer Ramon Turró, 4 local-1 · 08389 · Palafolls · Barcelona · Catalunya · Espanya (ES)</li>
+<li><strong>Telèfon:</strong> 937 620 832</li>
+<li><strong>Correu electrònic:</strong> <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a></li>
+<li><strong>Lloc web</strong> <a href="https://cerapal.cat" target="_blank" rel="noopener">https://cerapal.cat</a></li>
+</ul>
+<p><strong>CERAPAL -estudi de cuines-</strong> garanteix la confidencialitat i la privacitat de les dades personals recollides, i ha adoptat mesures de seguretat per evitar-ne l’alteració, la pèrdua, el tractament o l’accés no autoritzat i garantir la integritat i la seguretat de les dades de caràcter personal, d’acord amb el que preveu el Reglament 2016/679 del Parlament Europeu i del Consell, de 27 d’abril de 2016, que desenvolupa la Llei orgànica 3/2018, de 5 de desembre, de protecció de dades personals i garantia dels drets digitals, i hi posa els mitjans tècnics necessaris per impedir qualsevol alteració, pèrdua, accés sense autorització o mala utilització de les dades tractades, d’acord amb la naturalesa de les dades, l’estat de la tecnologia i els riscos a què estan exposades.</p>
+<h2 id="ca-amb-quina-finalitat-farem-servir-les-dades-recollides">AMB QUINA FINALITAT FAREM SERVIR LES DADES RECOLLIDES?</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> l’informa que les dades personals que faciliti a través d’aquest web, inclosa l’adreça IP, es tractaran amb les finalitats següents:</p>
+<ol>
+<li>Prestar adequadament i amb totes les garanties el producte o servei sol·licitat.</li>
+<li>Enviar comunicacions informatives arran de la sol·licitud d’alta com a usuari o de la inscripció al butlletí de notícies i esdeveniments, ja sigui a través del correu electrònic proporcionat al lloc web o a través dels formularis de contacte o dels registres d’usuaris.</li>
+<li>Gestionar i oferir promocions, descomptes i nous serveis amb finalitats publicitàries i comercials.</li>
+<li>Respondre i enviar informació a la persona interessada sobre la nostra política de privacitat o sobre la sol·licitud d’exercici dels drets en matèria de protecció de dades.</li>
+<li>Gestionar les nostres xarxes socials respecte a les dades de les persones que se’n facin seguidores. En aquest sentit, el tractament de les dades es regeix pel que disposa aquesta política de privacitat i pels termes i condicions, polítiques de privacitat i normatives d’accés específiques de cada xarxa social.</li>
+<li>Fer estudis periòdics d’anàlisi del web amb finalitats estadístiques a partir de les dades facilitades.</li>
+<li>Analitzar el comportament de l’usuari durant la navegació pel web.</li>
+</ol>
+<p>Amb el consentiment exprés i informat, queda legitimat l’accés per part de <strong>CERAPAL -estudi de cuines-</strong> a les dades que, d’acord amb la infraestructura d’aquest web, calguin per contactar amb l’usuari, administrar comentaris al blog, validacions o recomanacions a les xarxes socials i/o enviar-li el butlletí de notícies de <strong>CERAPAL -estudi de cuines-</strong>.</p>
+<p><strong>No farem servir les seves dades per a cap altra finalitat que no s’expressi en aquesta política de privacitat, ni li enviarem informació addicional no sol·licitada mitjançant el seu consentiment exprés</strong>.</p>
+<h2 id="ca-quina-es-la-legitimacio-del-tractament">QUINA ÉS LA LEGITIMACIÓ DEL TRACTAMENT?</h2>
+<p>La legitimació de les diferents activitats de tractament dutes a terme per <strong>CERAPAL -estudi de cuines-</strong> és la següent:</p>
+<ul>
+<li><strong>Per a la finalitat de prestació del servei</strong>, el tractament es basa en l’execució d’un contracte entre les parts.</li>
+<li><strong>Per a les finalitats de màrqueting i gestió comercial</strong>, el tractament es basa en el consentiment de la mateixa persona interessada.</li>
+<li><strong>Per a les finalitats relacionades amb l’anàlisi del comportament dels usuaris al web</strong>, el tractament es basa en l’interès legítim de <strong>CERAPAL -estudi de cuines-</strong>, que es fonamenta en la recerca de la millora de la plataforma, la seva funcionalitat, la seva adaptació als usuaris i la prestació d’un servei més individualitzat per a les mateixes persones interessades.</li>
+</ul>
+<h2 id="ca-cedim-les-dades">CEDIM LES DADES?</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> es compromet a no cedir dades a tercers sense haver obtingut el consentiment exprés dels usuaris. No obstant això, sí que pot cedir mètriques i analítiques sol·licitades per eines informàtiques instal·lades al lloc web la titularitat de les quals és diferent de la de <strong>CERAPAL -estudi de cuines-</strong>. Alguns d’aquests serveis poden ser titularitat de tercers residents fora de la Unió Europea (Google, WordPress, etc.).</p>
+<p><strong>CERAPAL -estudi de cuines-</strong> intenta i sol utilitzar eines segures els servidors de les quals es trobin preferiblement a Espanya o, si no, en algun estat membre de la Unió Europea, o bé que compleixin la legalitat europea d’acord amb les guies i recomanacions de l’Agència Espanyola de Protecció de Dades, la Comissió Europea i els acords comunitaris de referència en matèria de transferència internacional de dades, inclosa l’obtenció de la certificació a la llista Privacy Shield.</p>
+<h2 id="ca-quina-es-la-nostra-politica-amb-els-encarregats-del-tractame">QUINA ÉS LA NOSTRA POLÍTICA AMB ELS ENCARREGATS DEL TRACTAMENT?</h2>
+<p>A <strong>CERAPAL -estudi de cuines-</strong> només compartim la informació personal amb tercers per prestar serveis o fer operacions comercials en els termes que es descriuen en aquesta política de privacitat o quan considerem que la llei ho permet o ho exigeix. La major part de les vegades, el que compartim amb tercers són dades no personals, anònimes o estadístiques. Quan compartim informació personal, ho fem d’acord amb els requisits de privacitat i seguretat de dades informats prèviament en cada cas i amb la signatura de contractes privats d’encarregat del tractament, en què s’assegura que els nostres proveïdors compleixen les mesures de seguretat adequades per a una protecció completa de les dades i el compliment legal.</p>
+<h2 id="ca-que-fem-amb-les-dades-a-les-xarxes-socials">QUÈ FEM AMB LES DADES A LES XARXES SOCIALS?</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> té canals a les xarxes socials Facebook, Youtube, Linkedin i Twitter amb la finalitat principal de publicar i difondre informació sobre els productes oferts a través del web de <strong>CERAPAL -estudi de cuines-</strong>, interactuar amb els usuaris i servir de canal d’atenció i interacció social.</p>
+<p>En cas que accedeixi a aquest web mitjançant alguna aplicació que connecti una xarxa social amb aquest web, autoritzarà que la xarxa social comparteixi algunes dades amb <strong>CERAPAL -estudi de cuines-</strong>.</p>
+<p>És important que sàpiga que, si té els seus comptes a les xarxes socials geolocalitzats, la informació de la seva ubicació en compartir a les xarxes serà visible per als tercers amb qui comparteixi o comparteixin la seva informació.</p>
+<p>Pot obtenir més informació sobre l’ús de les seves dades en aquestes xarxes socials consultant la política de privacitat de cadascuna.</p>
+<h2 id="ca-quins-drets-te-lusuari-com-sexerceixen-els-drets">QUINS DRETS TÉ L’USUARI? COM S’EXERCEIXEN ELS DRETS?</h2>
+<p><strong>Com es poden exercir els drets?</strong> En qualsevol moment l’usuari pot retirar el seu consentiment i exercir els seus drets d’accés, rectificació, supressió, limitació, oposició i portabilitat previstos al Reglament de protecció de dades 679/2016 i a la LO 3/2018 de protecció de dades i garantia dels drets digitals, enviant un correu electrònic a <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a> o per correu postal adreçat a Carrer Ramon Turró, 4 local-1 · 08389 · Palafolls · Barcelona · Catalunya · Espanya (ES).</p>
+<p><strong>Què necessitem per verificar la seva identitat?</strong> En tots dos casos, l’usuari haurà d’adjuntar una còpia del document nacional d’identitat, del passaport o d’un altre document vàlid que l’identifiqui.</p>
+<p><strong>Hi ha algun model per a l’exercici de drets?</strong> Pot sol·licitar el nostre model a través del correu electrònic o adreçant-se a la nostra seu (totes dues adreces descrites anteriorment).</p>
+<p>També pot fer servir els models i formularis que, per a l’exercici d’aquests drets, posa a la seva disposició el portal de l’Agència Espanyola de Protecció de Dades, que trobarà a l’adreça següent:</p>
+<p><a href="http://www.agpd.es/portalwebAGPD/CanalDelCiudadano/derechos/principales_derchos/index-ides-idphp.php" target="_blank" rel="noopener">http://www.agpd.es/portalwebAGPD/CanalDelCiudadano/derechos/principales_derchos/index-ides-idphp.php</a>.</p>
+<h2 id="ca-en-que-consisteixen-aquests-drets">EN QUÈ CONSISTEIXEN AQUESTS DRETS?</h2>
+<ul>
+<li><strong>Dret d’informació:</strong> la persona interessada ha de ser informada prèviament de manera expressa, precisa i inequívoca, entre altres coses, de l’existència d’un fitxer, de la possibilitat d’exercir els seus drets i del responsable del tractament.</li>
+<li><strong>Dret d’accés:</strong> permet al ciutadà conèixer i obtenir gratuïtament informació sobre les seves dades de caràcter personal sotmeses a tractament.</li>
+<li><strong>Dret de rectificació:</strong> aquest dret es caracteritza perquè permet corregir errors, modificar les dades que resultin inexactes o incompletes i garantir la certesa de la informació objecte de tractament.</li>
+<li><strong>Dret de cancel·lació:</strong> permet suprimir les dades que resultin inadequades o excessives, sens perjudici del deure de bloqueig recollit a la LOPD.</li>
+<li><strong>Dret d’oposició:</strong> el dret d’oposició és el dret de la persona afectada que no es dugui a terme el tractament de les seves dades de caràcter personal o que s’hi posi fi.</li>
+<li><strong>Dret de limitació:</strong> l’usuari té dret a decidir quines dades personals no vol que es tornin a tractar en el futur, i pot exercir aquest dret quan n’hagi impugnat prèviament l’exactitud; quan el tractament sigui il·lícit i, en lloc d’exercir-ne la supressió, decideixi limitar-les per a tractaments futurs. En cas de limitació del tractament, es podrà aixecar la restricció si hi ha consentiment de la persona interessada; possibilitat que el tractament afecti la protecció dels drets d’una altra persona física o jurídica; un procediment judicial que ho justifiqui; o hi hagi un motiu important d’interès públic fonamentat en la legislació vigent.</li>
+<li><strong>Dret de portabilitat:</strong> té dret a rebre les dades personals facilitades o que <strong>CERAPAL -estudi de cuines-</strong> les transmeti a un altre responsable, en un format estructurat, d’ús comú i de lectura mecànica, sempre que el tractament s’efectuï per mitjans automatitzats i estigui basat en el consentiment que en el seu moment l’usuari va donar per a una o diverses finalitats específiques, o en l’execució d’un contracte en què va ser part. El dret a la portabilitat no s’aplicarà quan la transmissió sigui tècnicament impossible; ni quan pugui afectar negativament els drets i les llibertats de tercers; ni quan el tractament tingui una missió d’interès públic fonamentada en la legislació vigent.</li>
+<li><strong>Dret a presentar una reclamació davant l’autoritat de control:</strong> té dret a presentar una reclamació davant l’Agència Espanyola de Protecció de Dades (autoritat de control a Espanya) a través de l’enllaç següent: <a href="https://www.aepd.es/" target="_blank" rel="noopener">aepd.es</a>.</li>
+</ul>
+<h2 id="ca-altres-drets">ALTRES DRETS</h2>
+<ul>
+<li><strong>Dret a l’oblit:</strong> eliminació de noms a la llista de resultats del cercador.</li>
+<li><strong>Drets publicitaris:</strong> dret d’exclusió de guies telefòniques, dret a no rebre publicitat no desitjada, drets dels abonats i usuaris de serveis de telecomunicacions,</li>
+</ul>
+<h2 id="ca-quines-mesures-de-seguretat-apliquem-al-tractament-de-dades-">QUINES MESURES DE SEGURETAT APLIQUEM AL TRACTAMENT DE DADES PERSONALS?</h2>
+<p>A <strong>CERAPAL -estudi de cuines-</strong>, per a la protecció de les dades personals dels nostres usuaris, disposem de protocols de seguretat i apliquem les mesures tècniques i organitzatives adequades a l’estat de la tècnica, tenint en compte l’abast, el context i les finalitats del tractament, així com els riscos de probabilitat i gravetat variables per als drets i les llibertats de les persones interessades, i procurem estar en condicions d’assegurar la confidencialitat, la integritat, la disponibilitat i la resiliència dels sistemes i serveis del tractament.</p>
+<p>A més, ens preocupem de vetllar per una elecció correcta dels nostres encarregats del tractament, en compliment de la normativa sobre protecció de dades.</p>
+<p>En especial, <strong>CERAPAL -estudi de cuines-</strong> disposa de les mesures següents:</p>
+<ol>
+<li><strong>Estratègia d’avaluació de riscos de privacitat i seguretat</strong>, així com un pla de recuperació de desastres dissenyat per salvaguardar la continuïtat dels nostres serveis i per protegir el nostre personal i les nostres dades.</li>
+<li><strong>Implementació de les mesures tècniques i organitzatives de seguretat:</strong> apliquem les mesures tècniques i organitzatives a les funcions descrites en aquesta política de privacitat.</li>
+<li><strong>Registre d’incidències:</strong> el personal de <strong>CERAPAL -estudi de cuines-</strong> fa servir el registre d’incidències per comunicar qualsevol incidència relacionada amb la seguretat de la informació i de les dades personals incloses en els fitxers amb dades personals que tracta.</li>
+<li><strong>Formació i sensibilització periòdica</strong> del nostre personal i dels col·laboradors per evitar errors en la gestió de les dades.</li>
+<li><strong>Sistema d’identificació i autenticació:</strong> per donar accés únicament a les dades necessàries i al perfil concret que les utilitzi.</li>
+</ol>
+<h2 id="ca-notificacio-de-bretxes-de-seguretat-de-les-dades-personals">NOTIFICACIÓ DE BRETXES DE SEGURETAT DE LES DADES PERSONALS</h2>
+<p>En cas de vulneració de la seguretat de les dades personals, sempre que no sigui improbable que aquesta violació de la seguretat constitueixi un risc per als drets i les llibertats de les persones físiques, <strong>CERAPAL -estudi de cuines-</strong> ho notificarà a l’Agència Espanyola de Protecció de Dades abans que transcorrin 72 hores des que se’n tingui constància, i en descriurà la naturalesa de la violació, les possibles conseqüències que se’n puguin derivar i les mesures adoptades o proposades per posar remei a la bretxa de seguretat; i, si és possible, s’indicaran les categories i el nombre aproximat de persones interessades i de dades afectades.</p>
+<p>A més, <strong>CERAPAL -estudi de cuines-</strong> ho notificarà a les persones interessades com més aviat millor quan sigui probable que la violació de la seguretat de les dades personals comporti un risc alt per als drets i les llibertats de les persones físiques, i en descriurà les possibles conseqüències que se’n puguin derivar i les mesures adoptades o proposades per posar remei a la bretxa de seguretat.</p>
+<h2 id="ca-durant-quant-de-temps-guardem-les-dades">DURANT QUANT DE TEMPS GUARDEM LES DADES?</h2>
+<p>Les dades personals proporcionades a <strong>CERAPAL -estudi de cuines-</strong> s’eliminaran un cop hagi transcorregut el termini pertinent per a l’exercici de reclamacions. En els casos en què el tractament es fonamenti en el consentiment de la persona interessada, les dades es conservaran fins que en sol·liciti la baixa o la supressió, retiri el seu consentiment o deixin de ser necessàries per a la finalitat per a la qual es van recollir.</p>
+<h2 id="ca-politica-de-galetes">POLÍTICA DE GALETES</h2>
+<p>A l’enllaç <strong>“Política de galetes”</strong> l’informem que aquest web de <strong>CERAPAL -estudi de cuines-</strong> pot utilitzar galetes (petits arxius d’informació que el servidor envia a l’ordinador de l’usuari que accedeix a aquest web) per dur a terme determinades funcions que es consideren imprescindibles per al funcionament i la visualització correctes del lloc, per compartir a les xarxes socials i, en alguns casos, per fer anàlisis estadístiques d’avaluació i propostes de millora.</p>
+<p>Per obtenir aquestes anàlisis, aquest web pot emmagatzemar determinada informació als registres del servidor de manera automàtica mitjançant l’ús de galetes que recullen dades d’ús i navegació relatives a la utilització que en fas com a usuari.</p>
+<p>La IP es considera una dada personal; <strong>CERAPAL -estudi de cuines-</strong> no associa adreces IP, ni altres dades que resultin de l’ús de galetes, ni els resultats de mètriques, amb informació identificable de les persones, ni per recollir informació de caràcter personal, encara que puntualment ens pugui servir per adreçar publicitat o segmentar els usuaris a qui adreçar-la.</p>
+<p>És convenient que, com a usuari, sàpiga que fem servir eines i plataformes d’internet que instal·len galetes que no depenen de nosaltres, per la qual cosa és possible que els titulars d’aquestes eines utilitzin aquestes dades per a altres usos, <strong>dels quals no ens fem responsables</strong>.</p>
+<p>Per aquest motiu, és convenient que llegeixi la política de galetes per saber quines són pròpies, quines són de tercers, quines són permanents, temporals o de sessió, i pugui decidir desinstal·lar les que consideri oportunes, ja que això no afectarà gaire el resultat, la comoditat o l’experiència de navegació.</p>
+<h2 id="ca-privacitat-de-menors">PRIVACITAT DE MENORS</h2>
+<p>Seguint les instruccions de l’Agència Espanyola de Protecció de Dades, els menors de 14 anys no han de cedir les seves dades personals a <strong>CERAPAL -estudi de cuines-</strong> sense el consentiment previ dels seus pares o tutors. Amb la publicació del Reglament general europeu de protecció de dades, es preveu que l’edat per consentir la cessió de dades personals es fixi entre els 16 i els 13 anys, qüestió que actualment està per definir.</p>
+<p>En cas que <strong>CERAPAL -estudi de cuines-</strong> detecti usuaris que puguin ser menors de 16 anys, es reserva el dret de sol·licitar-los una còpia del DNI o d’un document equivalent o, si escau, l’autorització dels seus pares o tutors, i en provocarà la baixa en cas que no s’acrediti el compliment d’aquest requisit o no hi hagi resposta.</p>
+<h2 id="ca-responsabilitat-de-lusuari">RESPONSABILITAT DE L’USUARI</h2>
+<p>Com a usuari, accepta i garanteix que les dades personals que faciliti són veraces, i és l’únic responsable de qualsevol dany o perjudici, directe o indirecte, que es pugui ocasionar a <strong>CERAPAL -estudi de cuines-</strong> com a responsable d’aquest web o a un tercer, si emplena qualsevol formulari amb dades falses o de terceres persones causant engany, dany o perjudici.</p>
+<p>Li preguem que ens comuniqui qualsevol variació que es pugui produir en les dades facilitades enviant un correu electrònic a <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>.</p>
+<p>A <strong>CERAPAL -estudi de cuines-</strong> emmagatzemem les dades personals de l’usuari en servidors segurs, protegits contra els tipus d’atacs més habituals i ubicats a Espanya. No obstant això, i atès que no hi ha cap tecnologia invulnerable, l’usuari també ha de posar els mitjans al seu abast per mantenir el nivell de seguretat de les seves dades, mitjançant l’ús de contrasenyes robustes i la modificació periòdica de les contrasenyes, evitant fer servir la mateixa en diversos comptes i evitant anotar-les en cap suport físic o no xifrat.</p>
+<h2 id="ca-prohibicio-als-usuaris-de-cedir-dades-de-tercers">PROHIBICIÓ ALS USUARIS DE CEDIR DADES DE TERCERS</h2>
+<p><strong>CERAPAL -estudi de cuines- prohibeix expressament a l’usuari compartir, facilitar o cedir a ningú dades de tercers</strong> que pugui obtenir com a conseqüència del contacte, la interacció o la navegació o consulta a través d’aquest web, excepte si pot acreditar l’autorització expressa de l’usuari les dades del qual pretén cedir. Li recordem que les imatges es consideren una dada protegida i, per això, ningú no les pot utilitzar sense el consentiment exprés de la persona que hi apareix.</p>
+<p>Com a usuari, reconeix que assumeix la seva responsabilitat i s’obliga a mantenir indemne <strong>CERAPAL -estudi de cuines-</strong> davant de qualsevol possible reclamació, pena, multa o sanció que es pugui veure obligada a suportar com a conseqüència de l’incompliment per part de l’usuari del deure descrit.</p>
+<p>En cas que ens faciliti dades de caràcter personal d’altres persones, ho haurà de fer amb el seu consentiment i havent-les informat prèviament dels aspectes continguts en aquesta política de privacitat.</p>
+<h2 id="ca-legislacio-i-jurisdiccio-aplicable">LEGISLACIÓ I JURISDICCIÓ APLICABLE</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> té la seu a Espanya, concretament a la ciutat de Sevilla, per la qual cosa està subjecta a les lleis espanyoles i europees en matèria de protecció de dades.</p>
+<p>Per això, l’usuari accepta que les reclamacions o queixes contra <strong>CERAPAL -estudi de cuines-</strong> que provinguin o estiguin relacionades amb l’ús d’aquest lloc web i, més concretament, amb el tractament de les seves dades personals, les resoldrà el tribunal de la jurisdicció competent situat a Sevilla.</p>
+<p>Si l’usuari accedeix a aquest lloc des d’una ubicació fora d’Espanya, és responsable de complir totes les lleis locals i internacionals que li siguin aplicables.</p>
+<h2 id="ca-modificacio">MODIFICACIÓ</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> podrà modificar aquesta política de privacitat en qualsevol moment publicant-la en aquest lloc web, en què sempre hi constarà la data de l’última actualització aplicable.</p>
+    </article>
+    <article class="legal-body" data-l="en" lang="en">
+<p>For the team at <strong>CERAPAL, S.L.</strong>, owner of this website and of the <strong>CERAPAL -estudi de cuines-</strong> brand, the protection of personal information, its security and its confidentiality are of the utmost importance. We therefore recommend that you read the following Privacy Notice carefully, as the information you provide as a user through this website (<a href="https://cerapal.cat/" target="_blank" rel="noopener">cerapal.cat</a>) is protected under the terms of this Privacy Policy. <strong>Please remember that using this website implies acceptance of this Privacy Policy</strong>.</p>
+<h2 id="en-summary-of-information">SUMMARY OF INFORMATION</h2>
+<div class="table-wrap wrap-table-summary" role="region" aria-label="Table" tabindex="0"><table class="table-summary"><thead>
+<tr>
+<th colspan="2">Basic information on data protection</th></tr></thead><tbody>
+<tr>
+<td><strong>Controller</strong></td><td>CERAPAL, S.L.</td></tr><tr>
+<td><strong>Purposes</strong></td><td><ul>
+<li>Showcasing the services developed by CERAPAL -estudi de cuines-.</li>
+<li>Managing and answering online enquiries.</li>
+<li>Sending promotions, advertising and information about events.</li>
+</ul>
+<p>For more information, please read on.</p>
+</td></tr><tr>
+<td><strong>Legal basis</strong></td><td>Consent of the data subject. For more information, please read on.</td></tr><tr>
+<td><strong>Recipients</strong></td><td>Data will not be disclosed to third parties, except where legally required. Analytical results may be shared at the request of installed tools. For more information, see the Cookie Policy.</td></tr><tr>
+<td><strong>Rights</strong></td><td>To access, rectify and erase the data, to restrict and object to processing, to data portability and to withdraw consent.</td></tr><tr>
+<td><strong>Additional information</strong></td><td>You can find additional and detailed information on Data Protection by reading the rest of this notice.</td></tr></tbody></table></div>
+<h2 id="en-what-does-processing-personal-data-mean">WHAT DOES PROCESSING PERSONAL DATA MEAN?</h2>
+<p>The operations, procedures and technical processes, whether automated or not, that make it possible to collect, store, modify, transfer and carry out other actions on personal data are considered <strong>processing of personal data</strong>.</p>
+<h2 id="en-what-does-using-the-website-involve">WHAT DOES USING THE WEBSITE INVOLVE?</h2>
+<p>Before sending any request for information through any email address on the cerapal.cat website, <strong>the user agrees to read this Privacy Policy</strong>, and thereby gives their <strong>unequivocal, free, specific and informed consent</strong> to the processing of their personal data for the stated purposes.</p>
+<p>This express consent implies authorisation for <strong>CERAPAL -estudi de cuines-</strong> to process your data under the terms set out in this Privacy Policy, as well as for the joint controllers and processors with which <strong>CERAPAL -estudi de cuines-</strong> maintains the required contractual relationship and compliance controls.</p>
+<h2 id="en-who-is-the-data-controller">WHO IS THE DATA CONTROLLER?</h2>
+<ul>
+<li><strong>Trade name:</strong> CERAPAL -estudi de cuines-</li>
+<li><strong>Registered name:</strong> CERAPAL, S.L.</li>
+<li><strong>Tax ID (CIF):</strong> B64025430</li>
+<li><strong>Address:</strong> Carrer Ramon Turró, 4 local-1 · 08389 · Palafolls · Barcelona · Catalonia · Spain (ES)</li>
+<li><strong>Phone:</strong> 937 620 832</li>
+<li><strong>Email:</strong> <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a></li>
+<li><strong>Website</strong> <a href="https://cerapal.cat" target="_blank" rel="noopener">https://cerapal.cat</a></li>
+</ul>
+<p><strong>CERAPAL -estudi de cuines-</strong> guarantees the confidentiality and privacy of the personal data collected and has adopted security measures to prevent its alteration, loss, processing or unauthorised access and to guarantee the integrity and security of personal data, as provided for in Regulation 2016/679 of the European Parliament and of the Council of 27 April 2016, which develops Organic Law 3/2018 of 5 December on the Protection of Personal Data and Guarantee of Digital Rights, using the technical means necessary to prevent any alteration, loss, unauthorised access or misuse of the data processed, taking into account the nature of the data, the state of technology and the risks to which they are exposed.</p>
+<h2 id="en-for-what-purpose-will-we-use-the-data-collected">FOR WHAT PURPOSE WILL WE USE THE DATA COLLECTED?</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> informs you that the personal data you provide through this website, including your IP address, will be processed for the following purposes:</p>
+<ol>
+<li>To provide the requested product or service properly and with all guarantees.</li>
+<li>To send informative communications following a request to register as a user or to subscribe to the news and events newsletter, either through the email address provided on the website or through the contact forms or user registrations.</li>
+<li>To manage and offer promotions, discounts and new services for advertising and commercial purposes.</li>
+<li>To respond to and send information to the data subject about our privacy policy or about requests to exercise data protection rights.</li>
+<li>To manage our social networks with regard to the data of the people who follow them. In this respect, data processing is governed by this Privacy Policy and by the terms and conditions, privacy policies and specific access rules of each social network.</li>
+<li>To carry out periodic analyses of the website for statistical purposes based on the data provided.</li>
+<li>To analyse user behaviour while browsing the website.</li>
+</ol>
+<p>With express and informed consent, <strong>CERAPAL -estudi de cuines-</strong> is lawfully entitled to access the data which, in accordance with the infrastructure of this website, are needed to contact the user, manage blog comments, validations or recommendations on social networks and/or send them the <strong>CERAPAL -estudi de cuines-</strong> newsletter.</p>
+<p><strong>We will not use your data for any other purpose not stated in this privacy policy, nor will we send additional information that you have not requested with your express consent</strong>.</p>
+<h2 id="en-what-is-the-legal-basis-for-processing">WHAT IS THE LEGAL BASIS FOR PROCESSING?</h2>
+<p>The legal bases for the different processing activities carried out by <strong>CERAPAL -estudi de cuines-</strong> are:</p>
+<ul>
+<li><strong>For the purpose of providing the service</strong>, processing is based on the performance of a contract between the parties.</li>
+<li><strong>For marketing and commercial management purposes</strong>, processing is based on the consent of the data subject.</li>
+<li><strong>For purposes related to analysing user behaviour on the website</strong>, processing is based on the legitimate interest of <strong>CERAPAL -estudi de cuines-</strong>, which lies in seeking to improve the platform, its functionality, its adaptation to users and the provision of a more individualised service for the data subjects themselves.</li>
+</ul>
+<h2 id="en-do-we-share-the-data">DO WE SHARE THE DATA?</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> undertakes not to disclose data to third parties without having obtained users’ express consent. However, it may share metrics and analytics requested by software tools installed on the website that are owned by parties other than <strong>CERAPAL -estudi de cuines-</strong>. Some of these services may be owned by third parties resident outside the European Union (Google, WordPress, etc).</p>
+<p><strong>CERAPAL -estudi de cuines-</strong> tries to use, and usually uses, secure tools whose servers are preferably located in Spain or, failing that, in a member state of the European Union, or that comply with European law in accordance with the guidelines and recommendations of the Spanish Data Protection Agency, the European Commission and the relevant EU agreements on international data transfers, including certification under the Privacy Shield list.</p>
+<h2 id="en-what-is-our-policy-with-data-processors">WHAT IS OUR POLICY WITH DATA PROCESSORS?</h2>
+<p>At <strong>CERAPAL -estudi de cuines-</strong> we only share personal information with third parties in order to provide services or carry out commercial operations under the terms described in this Privacy Policy, or when we consider that the law permits or requires it. Most of the time, what we share with third parties is non-personal, anonymous or statistical data. When we share personal information, we do so in accordance with the privacy and data security requirements previously communicated in each case and under signed private data processing agreements, which ensure that our providers comply with the appropriate security measures for full data protection and legal compliance.</p>
+<h2 id="en-what-do-we-do-with-data-on-social-networks">WHAT DO WE DO WITH DATA ON SOCIAL NETWORKS?</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> has channels on the social networks Facebook, Youtube, Linkedin and Twitter, mainly to publish and share information about the products offered through the <strong>CERAPAL -estudi de cuines-</strong> website, to interact with users and to serve as a channel for customer service and social interaction.</p>
+<p>If you access this website using an application that connects a social network with this website, you will be authorising the social network to share some data with <strong>CERAPAL -estudi de cuines-</strong>.</p>
+<p>It is important to know that, if your social network accounts are geolocated, information about your location when sharing on social networks will be visible to the third parties with whom you or others share your information.</p>
+<p>You can find out more about how your data is used on these social networks by consulting the privacy policy of each of them.</p>
+<h2 id="en-what-rights-does-the-user-have-how-are-the-rights-exercised">WHAT RIGHTS DOES THE USER HAVE? HOW ARE THE RIGHTS EXERCISED?</h2>
+<p><strong>How can the rights be exercised?</strong> At any time, the user may withdraw their consent and exercise their rights of access, rectification, erasure, restriction, objection and portability provided for in Data Protection Regulation 679/2016 and Organic Law 3/2018 on Data Protection and Guarantee of Digital Rights, by sending an email to <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a> or by post to Carrer Ramon Turró, 4 local-1 · 08389 · Palafolls · Barcelona · Catalonia · Spain (ES).</p>
+<p><strong>What do we need to verify your identity?</strong> In both cases, the user must enclose a copy of their national identity document, passport or other valid identity document.</p>
+<p><strong>Is there a form for exercising rights?</strong> You can request our form by email or by visiting our premises (both addresses described above).</p>
+<p>You can also use the forms and templates for exercising these rights made available by the Spanish Data Protection Agency on its website, at the following address:</p>
+<p><a href="http://www.agpd.es/portalwebAGPD/CanalDelCiudadano/derechos/principales_derchos/index-ides-idphp.php" target="_blank" rel="noopener">http://www.agpd.es/portalwebAGPD/CanalDelCiudadano/derechos/principales_derchos/index-ides-idphp.php</a>.</p>
+<h2 id="en-what-do-these-rights-consist-of">WHAT DO THESE RIGHTS CONSIST OF?</h2>
+<ul>
+<li><strong>Right to information:</strong> the data subject must be informed beforehand, expressly, precisely and unequivocally, of, among other things, the existence of a file, the possibility of exercising their rights and the identity of the data controller.</li>
+<li><strong>Right of access:</strong> allows citizens to know and obtain, free of charge, information about their personal data being processed.</li>
+<li><strong>Right to rectification:</strong> this right makes it possible to correct errors, modify data that turn out to be inaccurate or incomplete and guarantee the accuracy of the information being processed.</li>
+<li><strong>Right to cancellation:</strong> allows data that turn out to be inadequate or excessive to be erased, without prejudice to the duty of blocking set out in the LOPD.</li>
+<li><strong>Right to object:</strong> the right to object is the right of the data subject to have the processing of their personal data not carried out, or stopped.</li>
+<li><strong>Right to restriction:</strong> the user has the right to decide which personal data they do not want to be processed again in the future, and may exercise this right when they have previously contested its accuracy; when the processing is unlawful and, instead of requesting erasure, they decide to restrict it for future processing. In the event of restriction of processing, the restriction may be lifted if the data subject consents; if the processing may affect the protection of the rights of another natural or legal person; if legal proceedings justify it; or if there is an important reason of public interest based on current legislation.</li>
+<li><strong>Right to portability:</strong> you have the right to receive the personal data you have provided, or to have <strong>CERAPAL -estudi de cuines-</strong> transmit them to another controller, in a structured, commonly used and machine-readable format, provided that the processing is carried out by automated means and is based on the consent the User once gave for one or more specific purposes, or on the performance of a contract to which they were party. The right to portability will not apply when the transmission is technically impossible; nor when it may adversely affect the rights and freedoms of third parties; nor when the processing has a public-interest mission based on current legislation.</li>
+<li><strong>Right to lodge a complaint with the Supervisory Authority:</strong> you have the right to lodge a complaint with the Spanish Data Protection Agency (the supervisory authority in Spain) through the following link: <a href="https://www.aepd.es/" target="_blank" rel="noopener">aepd.es</a>.</li>
+</ul>
+<h2 id="en-other-rights">OTHER RIGHTS</h2>
+<ul>
+<li><strong>Right to be forgotten:</strong> removal of names from search engine results.</li>
+<li><strong>Advertising rights:</strong> Right to be excluded from telephone directories, Right not to receive unwanted advertising, Rights of subscribers and users of telecommunications services,</li>
+</ul>
+<h2 id="en-what-security-measures-do-we-apply-to-the-processing-of-pers">WHAT SECURITY MEASURES DO WE APPLY TO THE PROCESSING OF PERSONAL DATA?</h2>
+<p>To protect our users’ personal data, at <strong>CERAPAL -estudi de cuines-</strong> we have security protocols in place and apply technical and organisational measures appropriate to the state of the art, taking into account the scope, context and purposes of the processing, as well as the risks of varying likelihood and severity for the rights and freedoms of data subjects, in order to ensure the confidentiality, integrity, availability and resilience of the processing systems and services.</p>
+<p>We also take care to choose our data processors correctly, in compliance with data protection regulations.</p>
+<p>In particular, <strong>CERAPAL -estudi de cuines-</strong> has the following measures in place:</p>
+<ol>
+<li><strong>Privacy and security risk assessment strategy</strong>, as well as a disaster recovery plan designed to safeguard the continuity of our services and to protect our staff and our data.</li>
+<li><strong>Implementation of Technical and Organisational Security Measures:</strong> we apply technical and organisational measures to the functions described in this privacy policy.</li>
+<li><strong>Incident log:</strong> the staff of <strong>CERAPAL -estudi de cuines-</strong> use the incident log to report any incident related to the security of the information and personal data included in the files with personal data they process.</li>
+<li><strong>Regular training and awareness</strong> for our staff and collaborators, to avoid errors in data management.</li>
+<li><strong>Identification and Authentication System:</strong> to give access only to the data needed and to the specific profile using them.</li>
+</ol>
+<h2 id="en-notification-of-personal-data-security-breaches">NOTIFICATION OF PERSONAL DATA SECURITY BREACHES</h2>
+<p>In the event of a personal data breach, unless it is unlikely to result in a risk to the rights and freedoms of natural persons, <strong>CERAPAL -estudi de cuines-</strong> will notify the Spanish Data Protection Agency within 72 hours of becoming aware of the incident, describing the nature of the breach, its possible consequences and the measures taken or proposed to remedy the security breach; and, where possible, it will state the categories and approximate number of data subjects and data affected.</p>
+<p>In addition, <strong>CERAPAL -estudi de cuines-</strong> will notify data subjects as soon as possible when the personal data breach is likely to result in a high risk to the rights and freedoms of natural persons, describing its possible consequences and the measures taken or proposed to remedy the security breach.</p>
+<h2 id="en-how-long-do-we-keep-the-data">HOW LONG DO WE KEEP THE DATA?</h2>
+<p>Personal data provided to <strong>CERAPAL -estudi de cuines-</strong> will be deleted once the relevant period for bringing claims has expired. Where processing is based on the consent of the data subject, the data will be kept until they ask to unsubscribe or have the data erased, withdraw their consent, or the data are no longer needed for the purpose for which they were collected.</p>
+<h2 id="en-cookie-policy">COOKIE POLICY</h2>
+<p>In the <strong>“Cookie Policy”</strong> link we inform you that this <strong>CERAPAL -estudi de cuines-</strong> website may use cookies (small information files that the server sends to the computer of the user accessing this website) to carry out certain functions considered essential for the correct operation and display of the site, for sharing on social networks and, in some cases, for statistical analysis, evaluation and improvement proposals.</p>
+<p>To obtain these analyses, this website may automatically store certain information in the server logs through the use of cookies that collect usage and browsing data relating to your use of this website as a user.</p>
+<p>IP addresses are considered personal data; <strong>CERAPAL -estudi de cuines-</strong> does not associate IP addresses, other data resulting from the use of cookies, or metrics results with information that identifies individuals, nor does it use them to collect personal information, although they may occasionally help us to target advertising or to segment the users to whom it is addressed.</p>
+<p>As a user, you should be aware that we use internet tools and platforms that install cookies that do not depend on us, so the owners of these tools may use such data for other purposes, <strong>for which we are not responsible</strong>.</p>
+<p>For this reason, we recommend that you read the cookie policy to find out which cookies are first-party and which are third-party, and which are permanent, temporary or session cookies, so that you can decide to remove those you consider appropriate, as this will hardly affect the result, convenience or browsing experience.</p>
+<h2 id="en-privacy-of-minors">PRIVACY OF MINORS</h2>
+<p>Following the instructions of the Spanish Data Protection Agency, minors under 14 should not provide their personal data to <strong>CERAPAL -estudi de cuines-</strong> without the prior consent of their parents or guardians. With the publication of the European General Data Protection Regulation, the age of consent for the disclosure of personal data is expected to be set between 16 and 13, a matter that is currently yet to be defined.</p>
+<p>If <strong>CERAPAL -estudi de cuines-</strong> detects users who may be under 16, it reserves the right to request a copy of their ID card or an equivalent document or, where applicable, the authorisation of their parents or guardians, and will remove them if compliance with this requirement is not proven or there is no response.</p>
+<h2 id="en-user-responsibility">USER RESPONSIBILITY</h2>
+<p>As a user, you accept and guarantee that the personal data you provide are true, and you are solely responsible for any direct or indirect damage or harm that may be caused to <strong>CERAPAL -estudi de cuines-</strong> as the controller of this website, or to third parties, if you fill in any form with false data or data belonging to third parties, causing deception, damage or harm.</p>
+<p>Please inform us of any change in the data provided by sending an email to <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>.</p>
+<p>At <strong>CERAPAL -estudi de cuines-</strong> we store users’ personal data on secure servers, protected against the most common types of attack and located in Spain. However, since no technology is invulnerable, users must also use the means at their disposal to maintain the security of their data, by using strong passwords, changing them regularly, avoiding using the same password for different accounts and avoiding writing them down on any physical or unencrypted medium.</p>
+<h2 id="en-prohibition-on-users-disclosing-third-party-data">PROHIBITION ON USERS DISCLOSING THIRD-PARTY DATA</h2>
+<p><strong>CERAPAL -estudi de cuines- expressly prohibits users from sharing, providing or disclosing third-party data to anyone</strong> that they may obtain as a result of contact, interaction, browsing or consultation through this website, unless they can prove the express authorisation of the user whose data they intend to disclose. Please remember that images are considered protected data and therefore no one may use them without the express consent of the person who appears in them.</p>
+<p>As a user, you acknowledge that you assume responsibility and undertake to hold <strong>CERAPAL -estudi de cuines-</strong> harmless from any possible claim, penalty, fine or sanction it may be obliged to bear as a result of the user’s breach of the duty described.</p>
+<p>If you provide us with personal data of other people, you must do so with their consent and after having informed them beforehand of the points contained in this Privacy Policy.</p>
+<h2 id="en-applicable-law-and-jurisdiction">APPLICABLE LAW AND JURISDICTION</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> is based in Spain, specifically in the city of Seville, and is therefore bound by Spanish and European data protection laws.</p>
+<p>Accordingly, the user agrees that any claims or complaints against <strong>CERAPAL -estudi de cuines-</strong> arising from or related to the use of this website, and more specifically to the processing of their personal data, will be resolved by the court of competent jurisdiction located in Seville.</p>
+<p>If the user accesses this site from a location outside Spain, they are responsible for complying with all local and international laws that apply to them.</p>
+<h2 id="en-changes">CHANGES</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> may modify this privacy policy at any time by publishing it on this Website, which will always show the date of the latest applicable update.</p>
+    </article>
   </div>
 </main>
 
@@ -574,25 +963,25 @@ a { color: inherit; }
   <div class="wrap footer-grid">
     <div class="footer-brand">
       <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FwYV8yIiBkYXRhLW5hbWU9IkNhcGEgMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTIwMCAzMjUiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICNmZmY7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnIGlkPSJDYXBhXzEtMiIgZGF0YS1uYW1lPSJDYXBhIDEiPgogICAgPGcgaWQ9IkxvZ290aXBvIj4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTEiIGRhdGEtbmFtZT0iVHJhemFkbyAxMSIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTIiIGRhdGEtbmFtZT0iVHJhemFkbyAxMiIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTMiIGRhdGEtbmFtZT0iVHJhemFkbyAxMyIgY2xhc3M9ImNscy0xIiBkPSJtNDcyLjQ5LDEzMy45NmMtMTEuOTMtMjEuNC0yOC41Ny0zMy43NC01My44OC0zMy43NC00MC4xNCwwLTYyLjU3LDMxLjkyLTYyLjU3LDY4LjJzMjQuMDUsNjguMjEsNjUuMDksNjguMjFjMjIuMDQtLjU2LDQxLjk5LTEzLjI1LDUxLjg5LTMzLjAxbC0yNS41LTEyLjMzYy00Ljg1LDEwLjQyLTE0Ljk2LDE3LjM3LTI2LjQsMTguMTMtMjUuMzIsMC0zMi45MS0yMi4xMy0zMi45MS00MSwwLTI5LjAyLDE0LjExLTQwLjk5LDMxLjgyLTQwLjk5LDEyLjA0LjMzLDIyLjY1LDguMDQsMjYuNzMsMTkuNDFsMjUuNzItMTIuODlabTExNi41Niw5OS4wNHYtMjUuMDNoLTY3Ljk5di0zMC40OGg1OC40di0yNS4wMmgtNTguNHYtMjMuNTZoNjIuNTd2LTI1LjAzaC05NC43NnYxMjkuMTlsMTAwLjE4LS4wNlptNDkuMTUtMTA1LjIxaDI5LjQ3YzkuNTkuMjEsMTcuMTksOC4xOCwxNi45OCwxNy43OS0uMiw5LjMyLTcuNjksMTYuODMtMTYuOTgsMTcuMDRoLTI5LjQ3di0zNC44M1ptLTMyLjE5LDEwNS4yMWgzMi4xOXYtNDYuNDNoMjAuNDNsMjUuMzEsNDYuNDNoMzUuOTlsLTI5LjQ3LTUxLjg4YzE1Ljc3LTQuMTMsMjYuNzItMTguNDgsMjYuNTgtMzQuODMsMC0yOS4wMi0xNy43Mi00Mi40NC00Ni42NS00Mi40NGgtNjQuMzd2MTI5LjE1Wm0xMjIuMTksMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptMTI2LjE3LTYwLjk0aDI2LjIyYzE0LjY0LDAsMjAuOCw3LjA4LDIwLjgsMTkuOTUuODUsOS45OS02LjU0LDE4Ljc3LTE2LjUsMTkuNjItMS4xMy4xLTIuMjcuMDktMy4zOS0uMDNoLTI3LjEydi0zOS41NFptLTMyLjE5LDEwNS4yMWgzMi41NXYtNDEuNzJoMjUuMTFjNDQuMTIsMCw1My43MS0yNi40OSw1My43MS00My43MSwwLTI1LjU4LTEyLjg0LTQzLjcyLTQ3LjU2LTQzLjcyaC02My44M2wuMDIsMTI5LjE2Wm0xMDQuNDgsMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptOTMuOTUsNDQuMjZoODIuNDV2LTI3LjIxaC01MC4yNnYtMTAxLjk1aC0zMi4xOXYxMjkuMTZaIi8+CiAgICAgIDxwYXRoIGlkPSJUcmF6YWRvXzE0IiBkYXRhLW5hbWU9IlRyYXphZG8gMTQiIGNsYXNzPSJjbHMtMSIgZD0ibTQ3Mi40OSwxMzMuOTZjLTExLjkzLTIxLjQtMjguNTctMzMuNzQtNTMuODgtMzMuNzQtNDAuMTQsMC02Mi41NywzMS45Mi02Mi41Nyw2OC4yczI0LjA1LDY4LjIxLDY1LjA5LDY4LjIxYzIyLjA0LS41Niw0MS45OS0xMy4yNSw1MS44OS0zMy4wMWwtMjUuNS0xMi4zM2MtNC44NSwxMC40Mi0xNC45NiwxNy4zNy0yNi40LDE4LjEzLTI1LjMyLDAtMzIuOTEtMjIuMTMtMzIuOTEtNDEsMC0yOS4wMiwxNC4xMS00MC45OSwzMS44Mi00MC45OSwxMi4wNC4zMywyMi42NSw4LjA0LDI2LjczLDE5LjQxbDI1LjcyLTEyLjg5Wm0xMTYuNTYsOTkuMDR2LTI1LjAzaC02Ny45OXYtMzAuNDhoNTguNHYtMjUuMDJoLTU4LjR2LTIzLjU2aDYyLjU3di0yNS4wM2gtOTQuNzZ2MTI5LjE5bDEwMC4xOC0uMDZabTQ5LjE1LTEwNS4yMWgyOS40N2M5LjU5LjIxLDE3LjE5LDguMTgsMTYuOTgsMTcuNzktLjIsOS4zMi03LjY5LDE2LjgzLTE2Ljk4LDE3LjA0aC0yOS40N3YtMzQuODNabS0zMi4xOSwxMDUuMjFoMzIuMTl2LTQ2LjQzaDIwLjQzbDI1LjMxLDQ2LjQzaDM1Ljk5bC0yOS40Ny01MS44OGMxNS43Ny00LjEzLDI2LjcyLTE4LjQ4LDI2LjU4LTM0LjgzLDAtMjkuMDItMTcuNzItNDIuNDQtNDYuNjUtNDIuNDRoLTY0LjM3djEyOS4xNVptMTIyLjE5LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTEyNi4xNy02MC45NGgyNi4yMmMxNC42NCwwLDIwLjgsNy4wOCwyMC44LDE5Ljk1Ljg1LDkuOTktNi41NCwxOC43Ny0xNi41LDE5LjYyLTEuMTMuMS0yLjI3LjA5LTMuMzktLjAzaC0yNy4xMnYtMzkuNTRabS0zMi4xOSwxMDUuMjFoMzIuNTV2LTQxLjcyaDI1LjExYzQ0LjEyLDAsNTMuNzEtMjYuNDksNTMuNzEtNDMuNzEsMC0yNS41OC0xMi44NC00My43Mi00Ny41Ni00My43MmgtNjMuODNsLjAyLDEyOS4xNlptMTA0LjQ4LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTkzLjk1LDQ0LjI2aDgyLjQ1di0yNy4yMWgtNTAuMjZ2LTEwMS45NWgtMzIuMTl2MTI5LjE2WiIvPgogICAgICA8cGF0aCBpZD0iVHJhemFkb18xNSIgZGF0YS1uYW1lPSJUcmF6YWRvIDE1IiBjbGFzcz0iY2xzLTEiIGQ9Im0wLDE2Mi41QzAsNzIuNzUsNzIuNTIsMCwxNjEuOTksMHMxNjEuOTksNzIuNzUsMTYxLjk5LDE2Mi41LTcyLjUyLDE2Mi41LTE2MS45OSwxNjIuNVMwLDI1Mi4yNSwwLDE2Mi41bTI0OC40NC01MS40MmMtMTcuODItMzEuOTMtNDIuNjItNTAuMzMtODAuMzgtNTAuMzMtNTkuODgsMC05My4zMyw0Ny42My05My4zMywxMDEuNzRzMzUuODgsMTAxLjc0LDk3LjEsMTAxLjc0YzMyLjg4LS44Myw2Mi42NC0xOS43Niw3Ny40MS00OS4yNWwtMzguMDctMTguMzljLTcuMjMsMTUuNTUtMjIuMzIsMjUuOTItMzkuMzksMjcuMDYtMzcuNzYsMC00OS4wOS0zMy00OS4wOS02MS4xNSwwLTQzLjI5LDIxLjA2LTYxLjE1LDQ3LjQ3LTYxLjE1LDE3Ljk4LjQ4LDMzLjgzLDExLjk3LDM5LjkyLDI4Ljk1bDM4LjM0LTE5LjIyWiIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+" alt="Cerapal · Estudi de cuines" width="196" height="53" loading="lazy">
-      <p>Cada proyecto es único, exclusivo y personalizado.</p>
+      <p><span data-l="es" lang="es">Cada proyecto es único, exclusivo y personalizado.</span><span data-l="ca" lang="ca">Cada projecte és únic, exclusiu i personalitzat.</span><span data-l="en" lang="en">Every project is unique, exclusive and tailor-made.</span></p>
     </div>
     <div class="footer-col">
-      <h3>Estudio</h3>
+      <h3><span data-l="es" lang="es">Estudio</span><span data-l="ca" lang="ca">Estudi</span><span data-l="en" lang="en">Studio</span></h3>
       <p>Carrer Ramon Turró, 4 · Local 1<br>08389 Palafolls (Barcelona)</p>
-      <a href="https://www.google.com/maps/search/?api=1&amp;query=Carrer%20Ramon%20Turr%C3%B3%204%2C%2008389%20Palafolls" target="_blank" rel="noopener">Cómo llegar</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Carrer%20Ramon%20Turr%C3%B3%204%2C%2008389%20Palafolls" target="_blank" rel="noopener"><span data-l="es" lang="es">Cómo llegar</span><span data-l="ca" lang="ca">Com arribar-hi</span><span data-l="en" lang="en">Get directions</span></a>
     </div>
     <div class="footer-col">
-      <h3>Contacto</h3>
+      <h3><span data-l="es" lang="es">Contacto</span><span data-l="ca" lang="ca">Contacte</span><span data-l="en" lang="en">Contact</span></h3>
       <a href="tel:+34937620832">937 620 832</a>
       <a href="tel:+34654628727">654 628 727</a>
       <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>
     </div>
     <div class="footer-col">
-      <h3>Horario</h3>
-      <p>Lunes a viernes<br>9:00–13:00<br>15:00–19:00</p>
+      <h3><span data-l="es" lang="es">Horario</span><span data-l="ca" lang="ca">Horari</span><span data-l="en" lang="en">Opening hours</span></h3>
+      <p><span data-l="es" lang="es">Lunes a viernes<br>9:00–13:00<br>15:00–19:00</span><span data-l="ca" lang="ca">De dilluns a divendres<br>9:00–13:00<br>15:00–19:00</span><span data-l="en" lang="en">Monday to Friday<br>9:00–13:00<br>15:00–19:00</span></p>
     </div>
     <div class="footer-col">
-      <h3>Síguenos</h3>
+      <h3><span data-l="es" lang="es">Síguenos</span><span data-l="ca" lang="ca">Segueix-nos</span><span data-l="en" lang="en">Follow us</span></h3>
       <a href="https://www.instagram.com/cuinescerapal/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.facebook.com/cuinescerapal/" target="_blank" rel="noopener">Facebook</a>
     </div>
@@ -600,15 +989,18 @@ a { color: inherit; }
   <div class="wrap footer-bottom">
     <p>© <span id="year">2026</span> Cerapal · Estudi de cuines</p>
     <nav aria-label="Legal">
-      <a href="aviso-legal.html">Aviso legal</a>
-      <a href="politica-privacidad.html" aria-current="page">Política de privacidad</a>
-      <a href="politica-cookies.html">Política de cookies</a>
+      <a href="aviso-legal.html" data-keep-lang><span data-l="es" lang="es">Aviso legal</span><span data-l="ca" lang="ca">Avís legal</span><span data-l="en" lang="en">Legal notice</span></a>
+      <a href="politica-privacidad.html" data-keep-lang aria-current="page"><span data-l="es" lang="es">Política de privacidad</span><span data-l="ca" lang="ca">Política de privacitat</span><span data-l="en" lang="en">Privacy policy</span></a>
+      <a href="politica-cookies.html" data-keep-lang><span data-l="es" lang="es">Política de cookies</span><span data-l="ca" lang="ca">Política de galetes</span><span data-l="en" lang="en">Cookie policy</span></a>
     </nav>
   </div>
 </footer>
 
 <script>
 (() => {
+  const T = {"es": {"title": "Política de privacidad · Cerapal", "desc": "Política de privacidad de Cerapal · Estudi de cuines: cómo tratamos y protegemos tus datos personales.", "logoHome": "Cerapal, ir al inicio", "navMain": "Principal", "langLabel": "Idioma", "legalTexts": "Textos legales", "table": "Tabla"}, "ca": {"title": "Política de privacitat · Cerapal", "desc": "Política de privacitat de Cerapal · Estudi de cuines: com tractem i protegim les teves dades personals.", "logoHome": "Cerapal, anar a l’inici", "navMain": "Principal", "langLabel": "Idioma", "legalTexts": "Textos legals", "table": "Taula"}, "en": {"title": "Privacy policy · Cerapal", "desc": "Privacy policy of Cerapal · Estudi de cuines: how we process and protect your personal data.", "logoHome": "Cerapal, go to the home page", "navMain": "Main", "langLabel": "Language", "legalTexts": "Legal texts", "table": "Table"}};
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const root = document.documentElement;
   document.getElementById('year').textContent = new Date().getFullYear();
 
   const nav = document.getElementById('nav');
@@ -620,11 +1012,11 @@ a { color: inherit; }
   const tocMobile = document.querySelector('.toc-mobile');
   tocMobile.addEventListener('click', e => { if (e.target.closest('a')) tocMobile.open = false; });
 
-  // marca en el índice el apartado que se está leyendo
+  // marca en el índice el apartado que se está leyendo (solo el índice del idioma visible)
   const toc = document.querySelector('.toc');
-  const links = [...toc.querySelectorAll('a')];
-  const heads = links.map(a => document.getElementById(a.hash.slice(1))).filter(Boolean);
+  let links = [], heads = [];
   const mark = () => {
+    if (!heads.length) return;
     const y = innerHeight * .3;
     let current = heads[0];
     for (const h of heads) if (h.getBoundingClientRect().top <= y) current = h;
@@ -643,7 +1035,33 @@ a { color: inherit; }
     ticking = true;
     requestAnimationFrame(() => { ticking = false; mark(); });
   }, { passive: true });
-  mark();
+
+  // idioma: textos (CSS), atributos, título y enlaces que lo conservan
+  $$('[data-keep-lang]').forEach(a => { a.dataset.base = a.getAttribute('href'); });
+  function setLang(l) {
+    root.dataset.lang = l;
+    root.lang = l;
+    document.title = T[l].title;
+    document.querySelector('meta[name="description"]').setAttribute('content', T[l].desc);
+    $$('[data-t-attr]').forEach(el => el.dataset.tAttr.split(',').forEach(p => { const [attr, key] = p.split(':'); el.setAttribute(attr, T[l][key]); }));
+    toc.setAttribute('aria-label', toc.querySelector(`.eyebrow [data-l="${l}"]`).textContent);
+    $$('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l));
+    $$('[data-keep-lang]').forEach(a => {
+      const [path, hash] = a.dataset.base.split('#');
+      a.setAttribute('href', `${path}?lang=${l}${hash ? '#' + hash : ''}`);
+    });
+    links = $$(`ol[data-l="${l}"] a`, toc);
+    heads = links.map(a => document.getElementById(a.hash.slice(1))).filter(Boolean);
+    mark();
+  }
+  $$('.lang button').forEach(b => b.addEventListener('click', () => {
+    const l = b.dataset.lang;
+    if (l === root.dataset.lang) return;
+    setLang(l);
+    try { localStorage.setItem('cerapal-lang', l); } catch (e) {}
+    try { const url = new URL(location.href); url.searchParams.set('lang', l); url.hash = ''; history.replaceState(null, '', url); } catch (e) {}
+  }));
+  setLang(root.dataset.lang);
 })();
 </script>
 </body>

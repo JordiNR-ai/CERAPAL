@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +10,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<script>
+// idioma antes de pintar: el del enlace (?lang=ca), el que eligió la última vez, o el del navegador
+(() => {
+  const L = ['ca', 'es', 'en'];
+  let l = new URLSearchParams(location.search).get('lang');
+  if (!L.includes(l)) { try { l = localStorage.getItem('cerapal-lang'); } catch (e) {} }
+  if (!L.includes(l)) l = (navigator.languages || [navigator.language || '']).map(x => x.slice(0, 2).toLowerCase()).find(x => L.includes(x)) || 'es';
+  document.documentElement.dataset.lang = l;
+  document.documentElement.lang = l;
+})();
+</script>
 <style>
 /* ============================================================
    Tokens — paleta Cerapal (los mismos que la landing)
@@ -353,24 +364,55 @@ a { color: inherit; }
   html { scroll-behavior: auto; }
   .btn::before, .nav-links a::after { transition: none; }
 }
+
+/* ============================================================
+   Idiomas: cada texto está en castellano, catalán e inglés y solo se ve el del idioma elegido
+   ============================================================ */
+[data-l]:not([data-l="es"]) { display: none; }
+html[data-lang="ca"] [data-l="es"], html[data-lang="en"] [data-l="es"] { display: none; }
+html[data-lang="ca"] [data-l="ca"], html[data-lang="en"] [data-l="en"] { display: revert; }
+.lang { display: flex; align-items: center; gap: 2px; }
+.lang button {
+  min-width: 34px; height: 34px; padding: 0 6px;
+  border: 0; border-radius: 2px; background: none;
+  font: inherit; font-size: 12px; font-weight: 700; font-stretch: 112%; letter-spacing: .08em;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .2s, box-shadow .2s;
+}
+@media (hover: hover) { .lang button:hover { color: var(--black); } }
+.lang button[aria-pressed="true"] { color: var(--black); box-shadow: inset 0 -2px 0 var(--black); }
+.legal-note { margin: 18px 0 0; font-size: 13px; color: var(--muted); }
+@media (max-width: 900px) {
+  .lang { margin-left: auto; }
+  .nav-cta { margin-left: 4px; }
+}
+@media (max-width: 520px) {
+  .nav-cta { display: none; }
+}
 </style>
 </head>
 <body>
-<a class="skip" href="#contenido">Saltar al contenido</a>
+<a class="skip" href="#contenido"><span data-l="es" lang="es">Saltar al contenido</span><span data-l="ca" lang="ca">Salta al contingut</span><span data-l="en" lang="en">Skip to content</span></a>
 
 <header class="nav" id="nav">
   <div class="nav-inner">
-    <a class="nav-logo" href="index.html" aria-label="Cerapal, ir al inicio">
+    <a class="nav-logo" href="index.html" data-keep-lang aria-label="Cerapal, ir al inicio" data-t-attr="aria-label:logoHome">
       <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FwYV8yIiBkYXRhLW5hbWU9IkNhcGEgMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTIwMCAzMjUiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICMxOTE5MTk7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnIGlkPSJDYXBhXzEtMiIgZGF0YS1uYW1lPSJDYXBhIDEiPgogICAgPGcgaWQ9IkxvZ290aXBvIj4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTEiIGRhdGEtbmFtZT0iVHJhemFkbyAxMSIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTIiIGRhdGEtbmFtZT0iVHJhemFkbyAxMiIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTMiIGRhdGEtbmFtZT0iVHJhemFkbyAxMyIgY2xhc3M9ImNscy0xIiBkPSJtNDcyLjQ5LDEzMy45NmMtMTEuOTMtMjEuNC0yOC41Ny0zMy43NC01My44OC0zMy43NC00MC4xNCwwLTYyLjU3LDMxLjkyLTYyLjU3LDY4LjJzMjQuMDUsNjguMjEsNjUuMDksNjguMjFjMjIuMDQtLjU2LDQxLjk5LTEzLjI1LDUxLjg5LTMzLjAxbC0yNS41LTEyLjMzYy00Ljg1LDEwLjQyLTE0Ljk2LDE3LjM3LTI2LjQsMTguMTMtMjUuMzIsMC0zMi45MS0yMi4xMy0zMi45MS00MSwwLTI5LjAyLDE0LjExLTQwLjk5LDMxLjgyLTQwLjk5LDEyLjA0LjMzLDIyLjY1LDguMDQsMjYuNzMsMTkuNDFsMjUuNzItMTIuODlabTExNi41Niw5OS4wNHYtMjUuMDNoLTY3Ljk5di0zMC40OGg1OC40di0yNS4wMmgtNTguNHYtMjMuNTZoNjIuNTd2LTI1LjAzaC05NC43NnYxMjkuMTlsMTAwLjE4LS4wNlptNDkuMTUtMTA1LjIxaDI5LjQ3YzkuNTkuMjEsMTcuMTksOC4xOCwxNi45OCwxNy43OS0uMiw5LjMyLTcuNjksMTYuODMtMTYuOTgsMTcuMDRoLTI5LjQ3di0zNC44M1ptLTMyLjE5LDEwNS4yMWgzMi4xOXYtNDYuNDNoMjAuNDNsMjUuMzEsNDYuNDNoMzUuOTlsLTI5LjQ3LTUxLjg4YzE1Ljc3LTQuMTMsMjYuNzItMTguNDgsMjYuNTgtMzQuODMsMC0yOS4wMi0xNy43Mi00Mi40NC00Ni42NS00Mi40NGgtNjQuMzd2MTI5LjE1Wm0xMjIuMTksMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptMTI2LjE3LTYwLjk0aDI2LjIyYzE0LjY0LDAsMjAuOCw3LjA4LDIwLjgsMTkuOTUuODUsOS45OS02LjU0LDE4Ljc3LTE2LjUsMTkuNjItMS4xMy4xLTIuMjcuMDktMy4zOS0uMDNoLTI3LjEydi0zOS41NFptLTMyLjE5LDEwNS4yMWgzMi41NXYtNDEuNzJoMjUuMTFjNDQuMTIsMCw1My43MS0yNi40OSw1My43MS00My43MSwwLTI1LjU4LTEyLjg0LTQzLjcyLTQ3LjU2LTQzLjcyaC02My44M2wuMDIsMTI5LjE2Wm0xMDQuNDgsMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptOTMuOTUsNDQuMjZoODIuNDV2LTI3LjIxaC01MC4yNnYtMTAxLjk1aC0zMi4xOXYxMjkuMTZaIi8+CiAgICAgIDxwYXRoIGlkPSJUcmF6YWRvXzE0IiBkYXRhLW5hbWU9IlRyYXphZG8gMTQiIGNsYXNzPSJjbHMtMSIgZD0ibTQ3Mi40OSwxMzMuOTZjLTExLjkzLTIxLjQtMjguNTctMzMuNzQtNTMuODgtMzMuNzQtNDAuMTQsMC02Mi41NywzMS45Mi02Mi41Nyw2OC4yczI0LjA1LDY4LjIxLDY1LjA5LDY4LjIxYzIyLjA0LS41Niw0MS45OS0xMy4yNSw1MS44OS0zMy4wMWwtMjUuNS0xMi4zM2MtNC44NSwxMC40Mi0xNC45NiwxNy4zNy0yNi40LDE4LjEzLTI1LjMyLDAtMzIuOTEtMjIuMTMtMzIuOTEtNDEsMC0yOS4wMiwxNC4xMS00MC45OSwzMS44Mi00MC45OSwxMi4wNC4zMywyMi42NSw4LjA0LDI2LjczLDE5LjQxbDI1LjcyLTEyLjg5Wm0xMTYuNTYsOTkuMDR2LTI1LjAzaC02Ny45OXYtMzAuNDhoNTguNHYtMjUuMDJoLTU4LjR2LTIzLjU2aDYyLjU3di0yNS4wM2gtOTQuNzZ2MTI5LjE5bDEwMC4xOC0uMDZabTQ5LjE1LTEwNS4yMWgyOS40N2M5LjU5LjIxLDE3LjE5LDguMTgsMTYuOTgsMTcuNzktLjIsOS4zMi03LjY5LDE2LjgzLTE2Ljk4LDE3LjA0aC0yOS40N3YtMzQuODNabS0zMi4xOSwxMDUuMjFoMzIuMTl2LTQ2LjQzaDIwLjQzbDI1LjMxLDQ2LjQzaDM1Ljk5bC0yOS40Ny01MS44OGMxNS43Ny00LjEzLDI2LjcyLTE4LjQ4LDI2LjU4LTM0LjgzLDAtMjkuMDItMTcuNzItNDIuNDQtNDYuNjUtNDIuNDRoLTY0LjM3djEyOS4xNVptMTIyLjE5LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTEyNi4xNy02MC45NGgyNi4yMmMxNC42NCwwLDIwLjgsNy4wOCwyMC44LDE5Ljk1Ljg1LDkuOTktNi41NCwxOC43Ny0xNi41LDE5LjYyLTEuMTMuMS0yLjI3LjA5LTMuMzktLjAzaC0yNy4xMnYtMzkuNTRabS0zMi4xOSwxMDUuMjFoMzIuNTV2LTQxLjcyaDI1LjExYzQ0LjEyLDAsNTMuNzEtMjYuNDksNTMuNzEtNDMuNzEsMC0yNS41OC0xMi44NC00My43Mi00Ny41Ni00My43MmgtNjMuODNsLjAyLDEyOS4xNlptMTA0LjQ4LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTkzLjk1LDQ0LjI2aDgyLjQ1di0yNy4yMWgtNTAuMjZ2LTEwMS45NWgtMzIuMTl2MTI5LjE2WiIvPgogICAgICA8cGF0aCBpZD0iVHJhemFkb18xNSIgZGF0YS1uYW1lPSJUcmF6YWRvIDE1IiBjbGFzcz0iY2xzLTEiIGQ9Im0wLDE2Mi41QzAsNzIuNzUsNzIuNTIsMCwxNjEuOTksMHMxNjEuOTksNzIuNzUsMTYxLjk5LDE2Mi41LTcyLjUyLDE2Mi41LTE2MS45OSwxNjIuNVMwLDI1Mi4yNSwwLDE2Mi41bTI0OC40NC01MS40MmMtMTcuODItMzEuOTMtNDIuNjItNTAuMzMtODAuMzgtNTAuMzMtNTkuODgsMC05My4zMyw0Ny42My05My4zMywxMDEuNzRzMzUuODgsMTAxLjc0LDk3LjEsMTAxLjc0YzMyLjg4LS44Myw2Mi42NC0xOS43Niw3Ny40MS00OS4yNWwtMzguMDctMTguMzljLTcuMjMsMTUuNTUtMjIuMzIsMjUuOTItMzkuMzksMjcuMDYtMzcuNzYsMC00OS4wOS0zMy00OS4wOS02MS4xNSwwLTQzLjI5LDIxLjA2LTYxLjE1LDQ3LjQ3LTYxLjE1LDE3Ljk4LjQ4LDMzLjgzLDExLjk3LDM5LjkyLDI4Ljk1bDM4LjM0LTE5LjIyWiIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+" alt="Cerapal · Estudi de cuines" width="141" height="38">
     </a>
-    <nav class="nav-links" aria-label="Principal">
-      <a href="index.html#proyectos">Proyectos</a>
-      <a href="index.html#opiniones">Opiniones</a>
-      <a href="index.html#financiacion">Financiación</a>
-      <a href="index.html#contacto">Contacto</a>
+    <nav class="nav-links" aria-label="Principal" data-t-attr="aria-label:navMain">
+      <a href="index.html#proyectos" data-keep-lang><span data-l="es" lang="es">Proyectos</span><span data-l="ca" lang="ca">Projectes</span><span data-l="en" lang="en">Projects</span></a>
+      <a href="index.html#opiniones" data-keep-lang><span data-l="es" lang="es">Opiniones</span><span data-l="ca" lang="ca">Opinions</span><span data-l="en" lang="en">Reviews</span></a>
+      <a href="index.html#financiacion" data-keep-lang><span data-l="es" lang="es">Financiación</span><span data-l="ca" lang="ca">Finançament</span><span data-l="en" lang="en">Financing</span></a>
+      <a href="index.html#contacto" data-keep-lang><span data-l="es" lang="es">Contacto</span><span data-l="ca" lang="ca">Contacte</span><span data-l="en" lang="en">Contact</span></a>
     </nav>
+    <div class="lang" role="group" aria-label="Idioma" data-t-attr="aria-label:langLabel">
+      <button type="button" data-lang="ca" lang="ca" aria-label="Català" aria-pressed="false">CA</button>
+      <button type="button" data-lang="es" lang="es" aria-label="Castellano" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+    </div>
     <a class="nav-tel" href="tel:+34937620832">937 620 832</a>
-    <a class="btn btn-dark nav-cta" href="index.html#contacto">Pedir mi presupuesto</a>
+    <a class="btn btn-dark nav-cta" href="index.html#contacto" data-keep-lang><span data-l="es" lang="es">Pedir mi presupuesto</span><span data-l="ca" lang="ca">Demanar pressupost</span><span data-l="en" lang="en">Get my quote</span></a>
   </div>
 </header>
 
@@ -378,51 +420,108 @@ a { color: inherit; }
   <section class="legal-hero">
     <div class="wrap">
       <p class="eyebrow">Legal</p>
-      <h1 class="legal-title">Aviso legal</h1>
-      <nav class="legal-tabs" aria-label="Textos legales">
-        <a href="aviso-legal.html" aria-current="page"><span class="tab-long">Aviso legal</span><span class="tab-short">Aviso legal</span></a>
-        <a href="politica-privacidad.html"><span class="tab-long">Política de privacidad</span><span class="tab-short">Privacidad</span></a>
-        <a href="politica-cookies.html"><span class="tab-long">Política de cookies</span><span class="tab-short">Cookies</span></a>
+      <h1 class="legal-title"><span data-l="es" lang="es">Aviso legal</span><span data-l="ca" lang="ca">Avís legal</span><span data-l="en" lang="en">Legal notice</span></h1>
+      <nav class="legal-tabs" aria-label="Textos legales" data-t-attr="aria-label:legalTexts">
+        <a href="aviso-legal.html" data-keep-lang aria-current="page"><span class="tab-long"><span data-l="es" lang="es">Aviso legal</span><span data-l="ca" lang="ca">Avís legal</span><span data-l="en" lang="en">Legal notice</span></span><span class="tab-short"><span data-l="es" lang="es">Aviso legal</span><span data-l="ca" lang="ca">Avís legal</span><span data-l="en" lang="en">Legal notice</span></span></a>
+        <a href="politica-privacidad.html" data-keep-lang><span class="tab-long"><span data-l="es" lang="es">Política de privacidad</span><span data-l="ca" lang="ca">Política de privacitat</span><span data-l="en" lang="en">Privacy policy</span></span><span class="tab-short"><span data-l="es" lang="es">Privacidad</span><span data-l="ca" lang="ca">Privacitat</span><span data-l="en" lang="en">Privacy</span></span></a>
+        <a href="politica-cookies.html" data-keep-lang><span class="tab-long"><span data-l="es" lang="es">Política de cookies</span><span data-l="ca" lang="ca">Política de galetes</span><span data-l="en" lang="en">Cookie policy</span></span><span class="tab-short"><span data-l="es" lang="es">Cookies</span><span data-l="ca" lang="ca">Galetes</span><span data-l="en" lang="en">Cookies</span></span></a>
       </nav>
+      <p class="legal-note" data-l="ca" lang="ca">Traducció de la versió original en castellà.</p><p class="legal-note" data-l="en" lang="en">Translated from the original Spanish version.</p>
     </div>
   </section>
 
   <div class="wrap legal-grid">
     <nav class="toc" aria-label="En esta página">
-      <p class="eyebrow">En esta página</p>
-      <ol>
-          <li class="toc-h2"><a href="#identidad-y-titular-de-la-web">IDENTIDAD Y TITULAR DE LA WEB</a></li>
-          <li class="toc-h3"><a href="#datos-de-contacto">Datos de contacto</a></li>
-          <li class="toc-h2"><a href="#conceptos">CONCEPTOS</a></li>
-          <li class="toc-h2"><a href="#condiciones-de-uso">CONDICIONES DE USO</a></li>
-          <li class="toc-h3"><a href="#1-propiedad-intelectual-e-industrial">1. Propiedad intelectual e industrial</a></li>
-          <li class="toc-h3"><a href="#2-limites-en-el-uso-del-contenido-web">2. Límites en el uso del contenido web</a></li>
-          <li class="toc-h3"><a href="#3-politica-de-enlaces-de-esta-web">3. Política de enlaces de esta web</a></li>
-          <li class="toc-h3"><a href="#4-normas-de-uso-derechos-y-exclusiones-de-responsabilidad">4. Normas de uso, derechos y exclusiones de responsabilidad</a></li>
-          <li class="toc-h3"><a href="#5-gestion-del-blog">5. Gestión del blog</a></li>
-          <li class="toc-h3"><a href="#6-politica-de-privacidad-y-cookies">6. Política de privacidad y cookies</a></li>
-          <li class="toc-h3"><a href="#7-legislacion-y-jurisdiccion-aplicable">7. Legislación y jurisdicción aplicable</a></li>
-          <li class="toc-h3"><a href="#8-modificacion">8. Modificación</a></li>
+      <p class="eyebrow"><span data-l="es" lang="es">En esta página</span><span data-l="ca" lang="ca">En aquesta pàgina</span><span data-l="en" lang="en">On this page</span></p>
+      <ol data-l="es">
+        <li class="toc-h2"><a href="#identidad-y-titular-de-la-web">IDENTIDAD Y TITULAR DE LA WEB</a></li>
+        <li class="toc-h3"><a href="#datos-de-contacto">Datos de contacto</a></li>
+        <li class="toc-h2"><a href="#conceptos">CONCEPTOS</a></li>
+        <li class="toc-h2"><a href="#condiciones-de-uso">CONDICIONES DE USO</a></li>
+        <li class="toc-h3"><a href="#1-propiedad-intelectual-e-industrial">1. Propiedad intelectual e industrial</a></li>
+        <li class="toc-h3"><a href="#2-limites-en-el-uso-del-contenido-web">2. Límites en el uso del contenido web</a></li>
+        <li class="toc-h3"><a href="#3-politica-de-enlaces-de-esta-web">3. Política de enlaces de esta web</a></li>
+        <li class="toc-h3"><a href="#4-normas-de-uso-derechos-y-exclusiones-de-responsabilidad">4. Normas de uso, derechos y exclusiones de responsabilidad</a></li>
+        <li class="toc-h3"><a href="#5-gestion-del-blog">5. Gestión del blog</a></li>
+        <li class="toc-h3"><a href="#6-politica-de-privacidad-y-cookies">6. Política de privacidad y cookies</a></li>
+        <li class="toc-h3"><a href="#7-legislacion-y-jurisdiccion-aplicable">7. Legislación y jurisdicción aplicable</a></li>
+        <li class="toc-h3"><a href="#8-modificacion">8. Modificación</a></li>
+      </ol>
+      <ol data-l="ca">
+        <li class="toc-h2"><a href="#ca-identitat-i-titular-del-web">IDENTITAT I TITULAR DEL WEB</a></li>
+        <li class="toc-h3"><a href="#ca-dades-de-contacte">Dades de contacte</a></li>
+        <li class="toc-h2"><a href="#ca-conceptes">CONCEPTES</a></li>
+        <li class="toc-h2"><a href="#ca-condicions-dus">CONDICIONS D’ÚS</a></li>
+        <li class="toc-h3"><a href="#ca-1-propietat-intellectual-i-industrial">1. Propietat intel·lectual i industrial</a></li>
+        <li class="toc-h3"><a href="#ca-2-limits-en-lus-del-contingut-web">2. Límits en l’ús del contingut web</a></li>
+        <li class="toc-h3"><a href="#ca-3-politica-denllacos-daquest-web">3. Política d’enllaços d’aquest web</a></li>
+        <li class="toc-h3"><a href="#ca-4-normes-dus-drets-i-exclusions-de-responsabilitat">4. Normes d’ús, drets i exclusions de responsabilitat</a></li>
+        <li class="toc-h3"><a href="#ca-5-gestio-del-blog">5. Gestió del blog</a></li>
+        <li class="toc-h3"><a href="#ca-6-politica-de-privacitat-i-galetes">6. Política de privacitat i galetes</a></li>
+        <li class="toc-h3"><a href="#ca-7-legislacio-i-jurisdiccio-aplicable">7. Legislació i jurisdicció aplicable</a></li>
+        <li class="toc-h3"><a href="#ca-8-modificacio">8. Modificació</a></li>
+      </ol>
+      <ol data-l="en">
+        <li class="toc-h2"><a href="#en-identity-and-owner-of-the-website">IDENTITY AND OWNER OF THE WEBSITE</a></li>
+        <li class="toc-h3"><a href="#en-contact-details">Contact details</a></li>
+        <li class="toc-h2"><a href="#en-definitions">DEFINITIONS</a></li>
+        <li class="toc-h2"><a href="#en-terms-of-use">TERMS OF USE</a></li>
+        <li class="toc-h3"><a href="#en-1-intellectual-and-industrial-property">1. Intellectual and industrial property</a></li>
+        <li class="toc-h3"><a href="#en-2-limits-on-the-use-of-web-content">2. Limits on the use of web content</a></li>
+        <li class="toc-h3"><a href="#en-3-link-policy-of-this-website">3. Link policy of this website</a></li>
+        <li class="toc-h3"><a href="#en-4-rules-of-use-rights-and-exclusions-of-liability">4. Rules of use, rights and exclusions of liability</a></li>
+        <li class="toc-h3"><a href="#en-5-blog-management">5. Blog management</a></li>
+        <li class="toc-h3"><a href="#en-6-privacy-and-cookie-policy">6. Privacy and cookie policy</a></li>
+        <li class="toc-h3"><a href="#en-7-applicable-law-and-jurisdiction">7. Applicable law and jurisdiction</a></li>
+        <li class="toc-h3"><a href="#en-8-changes">8. Changes</a></li>
       </ol>
     </nav>
     <details class="toc-mobile">
-      <summary>En esta página</summary>
-      <ol>
-          <li class="toc-h2"><a href="#identidad-y-titular-de-la-web">IDENTIDAD Y TITULAR DE LA WEB</a></li>
-          <li class="toc-h3"><a href="#datos-de-contacto">Datos de contacto</a></li>
-          <li class="toc-h2"><a href="#conceptos">CONCEPTOS</a></li>
-          <li class="toc-h2"><a href="#condiciones-de-uso">CONDICIONES DE USO</a></li>
-          <li class="toc-h3"><a href="#1-propiedad-intelectual-e-industrial">1. Propiedad intelectual e industrial</a></li>
-          <li class="toc-h3"><a href="#2-limites-en-el-uso-del-contenido-web">2. Límites en el uso del contenido web</a></li>
-          <li class="toc-h3"><a href="#3-politica-de-enlaces-de-esta-web">3. Política de enlaces de esta web</a></li>
-          <li class="toc-h3"><a href="#4-normas-de-uso-derechos-y-exclusiones-de-responsabilidad">4. Normas de uso, derechos y exclusiones de responsabilidad</a></li>
-          <li class="toc-h3"><a href="#5-gestion-del-blog">5. Gestión del blog</a></li>
-          <li class="toc-h3"><a href="#6-politica-de-privacidad-y-cookies">6. Política de privacidad y cookies</a></li>
-          <li class="toc-h3"><a href="#7-legislacion-y-jurisdiccion-aplicable">7. Legislación y jurisdicción aplicable</a></li>
-          <li class="toc-h3"><a href="#8-modificacion">8. Modificación</a></li>
+      <summary><span data-l="es" lang="es">En esta página</span><span data-l="ca" lang="ca">En aquesta pàgina</span><span data-l="en" lang="en">On this page</span></summary>
+      <ol data-l="es">
+        <li class="toc-h2"><a href="#identidad-y-titular-de-la-web">IDENTIDAD Y TITULAR DE LA WEB</a></li>
+        <li class="toc-h3"><a href="#datos-de-contacto">Datos de contacto</a></li>
+        <li class="toc-h2"><a href="#conceptos">CONCEPTOS</a></li>
+        <li class="toc-h2"><a href="#condiciones-de-uso">CONDICIONES DE USO</a></li>
+        <li class="toc-h3"><a href="#1-propiedad-intelectual-e-industrial">1. Propiedad intelectual e industrial</a></li>
+        <li class="toc-h3"><a href="#2-limites-en-el-uso-del-contenido-web">2. Límites en el uso del contenido web</a></li>
+        <li class="toc-h3"><a href="#3-politica-de-enlaces-de-esta-web">3. Política de enlaces de esta web</a></li>
+        <li class="toc-h3"><a href="#4-normas-de-uso-derechos-y-exclusiones-de-responsabilidad">4. Normas de uso, derechos y exclusiones de responsabilidad</a></li>
+        <li class="toc-h3"><a href="#5-gestion-del-blog">5. Gestión del blog</a></li>
+        <li class="toc-h3"><a href="#6-politica-de-privacidad-y-cookies">6. Política de privacidad y cookies</a></li>
+        <li class="toc-h3"><a href="#7-legislacion-y-jurisdiccion-aplicable">7. Legislación y jurisdicción aplicable</a></li>
+        <li class="toc-h3"><a href="#8-modificacion">8. Modificación</a></li>
+      </ol>
+      <ol data-l="ca">
+        <li class="toc-h2"><a href="#ca-identitat-i-titular-del-web">IDENTITAT I TITULAR DEL WEB</a></li>
+        <li class="toc-h3"><a href="#ca-dades-de-contacte">Dades de contacte</a></li>
+        <li class="toc-h2"><a href="#ca-conceptes">CONCEPTES</a></li>
+        <li class="toc-h2"><a href="#ca-condicions-dus">CONDICIONS D’ÚS</a></li>
+        <li class="toc-h3"><a href="#ca-1-propietat-intellectual-i-industrial">1. Propietat intel·lectual i industrial</a></li>
+        <li class="toc-h3"><a href="#ca-2-limits-en-lus-del-contingut-web">2. Límits en l’ús del contingut web</a></li>
+        <li class="toc-h3"><a href="#ca-3-politica-denllacos-daquest-web">3. Política d’enllaços d’aquest web</a></li>
+        <li class="toc-h3"><a href="#ca-4-normes-dus-drets-i-exclusions-de-responsabilitat">4. Normes d’ús, drets i exclusions de responsabilitat</a></li>
+        <li class="toc-h3"><a href="#ca-5-gestio-del-blog">5. Gestió del blog</a></li>
+        <li class="toc-h3"><a href="#ca-6-politica-de-privacitat-i-galetes">6. Política de privacitat i galetes</a></li>
+        <li class="toc-h3"><a href="#ca-7-legislacio-i-jurisdiccio-aplicable">7. Legislació i jurisdicció aplicable</a></li>
+        <li class="toc-h3"><a href="#ca-8-modificacio">8. Modificació</a></li>
+      </ol>
+      <ol data-l="en">
+        <li class="toc-h2"><a href="#en-identity-and-owner-of-the-website">IDENTITY AND OWNER OF THE WEBSITE</a></li>
+        <li class="toc-h3"><a href="#en-contact-details">Contact details</a></li>
+        <li class="toc-h2"><a href="#en-definitions">DEFINITIONS</a></li>
+        <li class="toc-h2"><a href="#en-terms-of-use">TERMS OF USE</a></li>
+        <li class="toc-h3"><a href="#en-1-intellectual-and-industrial-property">1. Intellectual and industrial property</a></li>
+        <li class="toc-h3"><a href="#en-2-limits-on-the-use-of-web-content">2. Limits on the use of web content</a></li>
+        <li class="toc-h3"><a href="#en-3-link-policy-of-this-website">3. Link policy of this website</a></li>
+        <li class="toc-h3"><a href="#en-4-rules-of-use-rights-and-exclusions-of-liability">4. Rules of use, rights and exclusions of liability</a></li>
+        <li class="toc-h3"><a href="#en-5-blog-management">5. Blog management</a></li>
+        <li class="toc-h3"><a href="#en-6-privacy-and-cookie-policy">6. Privacy and cookie policy</a></li>
+        <li class="toc-h3"><a href="#en-7-applicable-law-and-jurisdiction">7. Applicable law and jurisdiction</a></li>
+        <li class="toc-h3"><a href="#en-8-changes">8. Changes</a></li>
       </ol>
     </details>
-    <article class="legal-body">
+    <article class="legal-body" data-l="es" lang="es">
 <p><strong>Desde el equipo de CERAPAL -estudi de cuines-</strong> nos gustaría informar al usuario que si navega por esta web o usa cualquiera de los servicios que ofrecemos a través de la misma, adquiere desde el primer momento, la condición de usuario y, por tanto, <strong>estas normas constituyen un contrato entre CERAPAL, S.L. y el usuario respecto al uso de esta web, sus enlaces y cualquier descargable que se encuentre en ella</strong> ya que así lo establece la normativa aplicable de servicios de la sociedad de la información y de comercio electrónico (Ley 34/2002 LSSI-CE).</p>
 <p>El acceso y navegación por la web de cerapal.cat supone la aceptación expresa de las <strong>«Condiciones de Uso», la “Política de Privacidad y Protección de Datos y Política de Cookies”</strong> de conformidad con la Ley 24/2002 LSSI-CE). Igualmente, recomendamos encarecidamente al usuario la lectura exhaustiva de cada uno de los textos legales de la web.</p>
 <p>En caso de no estar de acuerdo con <strong>«Condiciones de Uso», la “Política de Privacidad y Protección de Datos” o “Política de Cookies”</strong> deberá abstenerse del uso de esta web. En caso de continuar en el sitio web es necesario que entienda que:</p>
@@ -543,6 +642,248 @@ a { color: inherit; }
 <h3 id="8-modificacion">8. Modificación</h3>
 <p><strong>CERAPAL -estudi de cuines-</strong> podrá modificar este aviso de legal en cualquier momento publicándose en esta Web, en el que constará siempre la fecha de la última actualización aplicable.</p>
     </article>
+    <article class="legal-body" data-l="ca" lang="ca">
+<p><strong>Des de l’equip de CERAPAL -estudi de cuines-</strong> ens agradaria informar l’usuari que, si navega per aquest web o fa servir qualsevol dels serveis que hi oferim, adquireix des del primer moment la condició d’usuari i, per tant, <strong>aquestes normes constitueixen un contracte entre CERAPAL, S.L. i l’usuari respecte a l’ús d’aquest web, els seus enllaços i qualsevol descarregable que s’hi trobi</strong>, ja que així ho estableix la normativa aplicable de serveis de la societat de la informació i de comerç electrònic (Llei 34/2002 LSSI-CE).</p>
+<p>L’accés i la navegació pel web de cerapal.cat suposen l’acceptació expressa de les <strong>«Condicions d’ús», la “Política de privacitat i protecció de dades i Política de galetes”</strong> de conformitat amb la Llei 24/2002 LSSI-CE). Igualment, recomanem encaridament a l’usuari la lectura exhaustiva de cadascun dels textos legals del web.</p>
+<p>En cas de no estar d’acord amb les <strong>«Condicions d’ús», la “Política de privacitat i protecció de dades” o la “Política de galetes”</strong>, s’haurà d’abstenir d’utilitzar aquest web. En cas de continuar al lloc web, cal que entengui que:</p>
+<ul>
+<li>L’usuari declara haver llegit, entès i comprès el que s’hi exposa.</li>
+<li>L’usuari es compromet a respectar les obligacions i normes contingudes en aquest web.</li>
+<li>L’usuari, en els termes exposats a la “Política de privacitat i protecció de dades”, declara haver estat informat dels seus drets.</li>
+<li>L’usuari declara que tota la informació que facilita és veritable i exacta, sense limitacions, reserves ni falsedats, i que és l’únic responsable de les manifestacions errònies, falses o inexactes.</li>
+</ul>
+<h2 id="ca-identitat-i-titular-del-web">IDENTITAT I TITULAR DEL WEB</h2>
+<p><strong>CERAPAL, S.L. amb CIF B64025430</strong> és la titular, propietària i gestora del web <a href="https://cerapal.cat" target="_blank" rel="noopener">https://cerapal.cat</a>. Per un compromís amb la transparència i amb els nostres usuaris, aportem les dades fiscals i de contacte de <strong>CERAPAL -estudi de cuines-</strong>:</p>
+<h3 id="ca-dades-de-contacte">Dades de contacte</h3>
+<ul>
+<li><strong>Denominació comercial:</strong> CERAPAL -estudi de cuines-</li>
+<li><strong>Denominació fiscal:</strong> CERAPAL, S.L.</li>
+<li><strong>CIF:</strong> B64025430</li>
+<li><strong>Adreça:</strong> Carrer Ramon Turró, 4 local-1 · 08389 · Palafolls · Barcelona · Catalunya · Espanya (ES)</li>
+<li><strong>Telèfon:</strong> 937 620 832</li>
+<li><strong>Correu electrònic:</strong> <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a></li>
+<li><strong>Lloc web:</strong> <a href="https://cerapal.cat" target="_blank" rel="noopener">https://cerapal.cat</a></li>
+</ul>
+<p>El web de <strong>CERAPAL -estudi de cuines-</strong> ofereix als usuaris, a més de l’accés al lloc web, informació sobre els serveis d’assessorament i consultoria en màrqueting en línia i publicitat que presta als seus clients.</p>
+<h2 id="ca-conceptes">CONCEPTES</h2>
+<p>Per a l’equip de <strong>CERAPAL -estudi de cuines-</strong> és fonamental que conegui i comprengui una terminologia bàsica que farem servir en els nostres textos legals:</p>
+<ul>
+<li><strong>Continguts:</strong> textos, gràfics, dibuixos, dissenys, codis, programari, fotografies, música, vídeos, sons, bases de dades, imatges, descarregables de qualsevol tipus, expressions i informacions que pertanyen a <strong>CERAPAL -estudi de cuines-</strong> o a tercers als quals l’usuari pot tenir accés a través de cerapal.cat.</li>
+<li><strong>Galetes:</strong> són petites quantitats d’informació que s’emmagatzemen al navegador que fa servir cada usuari perquè el servidor la recordi. Aquesta informació només la llegirà el servidor que la va implementar.</li>
+<li><strong>Serveis:</strong> conjunt de serveis oferts pel web, bé directament a través d’aquest o per informació.</li>
+<li><strong>Web:</strong> lloc d’internet accessible a l’adreça cerapal.cat.</li>
+<li><strong>Titular:</strong> persona (física o jurídica) propietària o responsable del web.</li>
+<li><strong>Usuari:</strong> qualsevol persona que navegui pel web.</li>
+<li><strong>Usuari registrat:</strong> navegant que registra les seves dades de manera voluntària al web, amb l’acceptació prèvia de les condicions d’ús i de la política de privacitat i protecció de dades personals.</li>
+</ul>
+<h2 id="ca-condicions-dus">CONDICIONS D’ÚS</h2>
+<p>Com ja anunciàvem, el contingut d’aquest avís legal i condicions d’ús té la figura jurídica de <strong>CONTRACTE i, per tant, suposa una obligació entre les parts (CERAPAL -estudi de cuines- i usuari)</strong>.</p>
+<p>La navegació per aquest web li atribueix, des del començament, la condició d’usuari, i aquesta es considerarà una <strong>acceptació lliure, específica, informada i inequívoca. Aprofitem per</strong> recordar-li que, si decideix no acceptar aquestes condicions, s’ha d’abstenir d’utilitzar el web de <strong>CERAPAL -estudi de cuines-</strong> o qualsevol enllaç o contingut al qual aquesta pàgina redirigeixi.</p>
+<p><strong>Pot confiar en la legalitat d’aquest web</strong>. En compliment de les normes europees i dels estàndards de qualitat en relació amb els consumidors, tots els textos legals de <strong>CERAPAL -estudi de cuines-</strong> han estat redactats per professionals experts en dret.</p>
+<h3 id="ca-1-propietat-intellectual-i-industrial">1. Propietat intel·lectual i industrial</h3>
+<p>El lloc web cerapal.cat, les pàgines que comprèn i la informació o els elements que contenen, d’ara endavant el CONTINGUT, estan protegits per drets de propietat intel·lectual o industrial, dels quals <strong>CERAPAL -estudi de cuines-</strong> és titular i/o en té llicència o autorització expressa per a la seva utilització i comunicació pública per part dels tercers titulars legítims per incloure’ls en aquest web.</p>
+<p>Concretament, <strong>l’usuari no està autoritzat a reproduir, reinterpretar totalment o parcialment, utilitzar, explotar, distribuir, alterar, difondre ni vendre amb finalitats comercials els continguts d’aquest web sense l’autorització prèvia i expressa de CERAPAL -estudi de cuines-</strong>.</p>
+<p>Qualsevol ús no autoritzat prèviament es considerarà un incompliment greu dels drets de propietat intel·lectual o industrial, i se’n podran arribar a reclamar indemnitzacions.</p>
+<h3 id="ca-2-limits-en-lus-del-contingut-web">2. Límits en l’ús del contingut web</h3>
+<p><strong>CERAPAL -estudi de cuines-</strong> autoritza l’usuari a visualitzar el contingut d’aquest web, així com a fer-ne reproduccions privades, sempre que els elements es destinin únicament a l’ús personal, i prohibeix de manera expressa qualsevol tipus d’utilització del CONTINGUT del web per a un ús professional i/o econòmic.</p>
+<p>Les reproduccions privades del contingut no estaran legitimades sempre que afectin drets relacionats amb la propietat industrial, ja sigui del titular o d’un tercer, o bé requereixin l’exercici d’algun tipus de contraprestació, econòmica o no.</p>
+<p><strong>L’usuari queda obligat a utilitzar el servei i els continguts de manera diligent i correcta</strong>, d’acord amb la llei, la moral, l’ordre públic i aquests termes i condicions.</p>
+<p><strong>CERAPAL -estudi de cuines-</strong> prohibeix expressament dur a terme activitats il·lícites o constitutives de delicte, que atemptin contra els drets de tercers o que infringeixin qualsevol norma de l’ordenament jurídic. En cas que no es compleixi aquesta prohibició, i sempre que <strong>CERAPAL -estudi de cuines-</strong> en tingui coneixement, es recorrerà als mecanismes legals pertinents per fer-la cessar i/o reclamar els danys ocasionats.</p>
+<p>En cap cas no s’entendrà que es concedeix cap autorització o llicència, ni que s’efectua cap renúncia, transmissió o cessió total o parcial d’aquests drets, ni que es confereix cap dret ni expectativa de dret sense el consentiment previ, explícit i per escrit de <strong>CERAPAL -estudi de cuines-</strong> i/o dels seus administradors o apoderats.</p>
+<h3 id="ca-3-politica-denllacos-daquest-web">3. Política d’enllaços d’aquest web</h3>
+<h4 id="ca-enllacos-publicats-al-web">Enllaços publicats al web</h4>
+<p>Aquest web pot contenir enllaços a altres llocs web o esmentar altres webs cooperatius, dels quals seran responsables els seus titulars.</p>
+<p><strong>CERAPAL -estudi de cuines- no és responsable de cap manera dels problemes o vulneracions de drets que els webs de titularitat aliena puguin suposar respecte a l’usuari</strong>.</p>
+<p><strong>CERAPAL -estudi de cuines-</strong> no recomana, promociona ni s’identifica, ni garanteix, representa, patrocina ni avala cap lloc web enllaçat o de titularitat de tercers que els usuaris puguin anomenar comercialment. <strong>CERAPAL -estudi de cuines-</strong> no coneix els continguts i serveis dels llocs enllaçats o de tercers que apareguin al nostre web i, per tant, no es fa responsable de manera directa o indirecta dels danys de qualsevol tipus produïts pel contingut i/o els serveis dels webs enllaçats ni de cap altre dany que no sigui directament imputable a aquest web.</p>
+<p>L’equip de <strong>CERAPAL -estudi de cuines-</strong> agraeix que, en cas que l’usuari consideri que hi ha un enllaç web amb continguts il·lícits o inadequats, ho comuniqui a l’adreça de correu electrònic <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>, i es compromet a eliminar el contingut o l’enllaç com més aviat millor, sense que en cap cas se’n pugui derivar responsabilitat per a <strong>CERAPAL -estudi de cuines-</strong>.</p>
+<h3 id="ca-4-normes-dus-drets-i-exclusions-de-responsabilitat">4. Normes d’ús, drets i exclusions de responsabilitat</h3>
+<h4 id="ca-a-drets-de-lusuari">A. Drets de l’usuari</h4>
+<p>Tots els visitants del web, pel simple fet d’adquirir la condició d’usuaris i de navegar pel web, tenen els drets següents:</p>
+<ul>
+<li>Té dret a una informació clara, concisa i actualitzada sobre els serveis oferts i la seva plasmació comercial.</li>
+<li>Té dret a no facilitar les dades personals que no siguin necessàries per a l’operació de què es tracti.</li>
+<li>Té dret a la protecció de les seves dades personals.</li>
+<li>Té dret a ser informat sobre la finalitat i les utilitzacions posteriors de les dades personals recopilades. I que aquesta informació sigui comprensible per al públic en general.</li>
+<li>Té la possibilitat d’exercir els seus drets d’accés, rectificació, cancel·lació, oposició, portabilitat i oblit de les seves dades personals. I que aquests drets es puguin exercir no només per mitjans electrònics, sinó també físics. Igualment, l’usuari té dret a obtenir resposta. Per a més informació sobre aquests drets i el seu exercici o el termini de resposta, consulti l’enllaç de la <strong>“Política de privacitat i protecció de dades”</strong>.</li>
+<li>Té dret a rebre atenció personalitzada per mitjans alternatius al correu electrònic, en atenció als seus drets. En cas que l’atenció estigui relacionada amb informació de serveis o comercial, s’haurà d’atenir a l’horari d’atenció al client.</li>
+<li>Té dret a ser informat de la recepció d’informació comercial o publicitat i a atorgar-hi lliurement el seu consentiment.</li>
+<li>Té dret a ser informat de la utilització i la finalitat de galetes o altres dispositius d’emmagatzematge de dades, en cas que n’hi hagi. Per a més informació, recomanem consultar l’enllaç de la <strong>“Política de galetes”</strong>.</li>
+</ul>
+<h4 id="ca-b-obligacions-de-lusuari-i-incompliment-de-les-condicions-de">B. Obligacions de l’usuari i incompliment de les condicions de l’usuari</h4>
+<p>Com a usuari, es compromet a fer un <strong>ús adequat</strong> dels continguts, serveis i eines accessibles a través d’aquest web, amb subjecció a la llei, la moral i l’ordre públic, així com a aquestes condicions d’ús, i a respectar en tot moment els altres usuaris.</p>
+<p>Per aquest motiu, accepta expressament mantenir indemne <strong>CERAPAL -estudi de cuines-</strong> davant de qualsevol responsabilitat envers qualsevol persona que es pugui derivar d’un ús inadequat del contingut web per part seva, ja sigui respecte a les condicions d’ús o a la legalitat.</p>
+<p>En cas d’incompliment total o parcial per part de l’usuari d’aquestes condicions d’ús, <strong>CERAPAL -estudi de cuines-</strong> tindrà dret a denegar l’accés a cerapal.cat sense necessitat d’avís previ a l’usuari i a reclamar, si ho considera oportú, els danys ocasionats per l’incompliment.</p>
+<h4 id="ca-c-autoritzacions-i-condicions">C. Autoritzacions i condicions</h4>
+<p>Com a usuari, haurà de respectar la temàtica i la dinàmica del web i fer un ús adequat dels serveis i continguts, en especial: <strong>CERAPAL -estudi de cuines- l’autoritza a visualitzar, descarregar i imprimir el contingut</strong> del WEB, sempre en les CONDICIONS següents:</p>
+<ul>
+<li>Ho ha de fer exclusivament per al seu <strong>ús personal i no comercial</strong>.</li>
+<li>No ha de difondre, transmetre ni posar a disposició de tercers cap tipus d’informació, element o contingut sense autorització dels titulars dels drets de propietat intel·lectual i industrial que puguin recaure sobre aquesta informació, element o contingut; ni informació, element o contingut que atempti contra els drets fonamentals i les llibertats públiques reconeguts constitucionalment i en els tractats internacionals; ni que constitueixi publicitat il·lícita o deslleial, ni que suposi una violació del secret de les comunicacions i de la legislació de dades de caràcter personal, ni fotografies o qualsevol altre tipus de representació o imatge de persones menors d’edat;</li>
+<li>No ha d’introduir ni difondre informació i continguts falsos, enganyosos, ambigus o inexactes de manera que indueixin o puguin induir a error els altres usuaris receptors de la informació;</li>
+<li>No ha de difondre contingut o propaganda racista, xenòfoba, pornogràfica, d’apologia del terrorisme o que atempti contra els drets humans;</li>
+<li>No ha d’utilitzar aquest web per enviar publicitat no sol·licitada o no consentida expressament;</li>
+<li>No ha de suplantar altres usuaris;</li>
+<li>No ha d’emprar el contingut del web per dur a terme activitats il·lícites, il·legals o contràries a la bona fe i a l’ordre públic;</li>
+<li>No ha de modificar el contingut del lloc web;</li>
+<li>No ha d’eliminar ni modificar cap menció o notificació relativa a la titularitat dels drets d’autor o de les marques, ni cap altra disposició sobre propietat intel·lectual inclosa en el contingut del web.</li>
+</ul>
+<p>L’usuari s’obliga a mantenir indemne <strong>CERAPAL -estudi de cuines-</strong> davant de qualsevol possible reclamació, multa, pena o sanció que es pugui veure obligada a suportar com a conseqüència de l’incompliment per part de l’usuari de les normes d’utilització indicades; i es reserva, a més, el dret a sol·licitar la indemnització per danys i perjudicis que, si escau, correspongui.</p>
+<h4 id="ca-d-responsabilitats">D. Responsabilitats</h4>
+<p><strong>CERAPAL -estudi de cuines-</strong> no pot garantir el funcionament correcte del seu web, de les descàrregues o del blog contingut a cerapal.cat, ja que es poden veure impedits per circumstàncies alienes a la voluntat del seu equip.</p>
+<p>Concretament, no assumeix cap responsabilitat per danys, perjudicis, pèrdues, reclamacions o despeses produïts per:</p>
+<ul>
+<li>Interferències, interrupcions, errors, omissions, retards, bloquejos o desconnexions motivats per errors en les línies i xarxes de telecomunicacions o per qualsevol altra causa aliena.</li>
+<li>Intromissions il·legítimes mitjançant l’ús de programari maliciós de qualsevol tipus i a través de qualsevol mitjà de comunicació, com ara virus informàtics o qualssevol altres.</li>
+<li>No veure complertes les expectatives dels usuaris en relació amb el web i/o les seves prestacions o continguts.</li>
+<li>L’accés de menors d’edat als continguts inclosos al web.</li>
+</ul>
+<p>Concretament, i sense caràcter limitatiu, <strong>CERAPAL -estudi de cuines-</strong> no serà responsable dels danys i perjudicis de qualsevol naturalesa derivats de:</p>
+<ul>
+<li>Els continguts, informacions, opinions i manifestacions de qualsevol usuari o de terceres persones o entitats que es comuniquin a través del servei.</li>
+<li>La utilització que els usuaris puguin fer dels materials inclosos al web, ja siguin prohibits o permesos, en infracció dels drets de propietat intel·lectual i/o industrial, d’informació confidencial, de continguts del servei o de tercers.</li>
+<li>La realització d’actes de competència deslleial i publicitat il·lícita o la infracció dels drets de propietat intel·lectual i industrial, dels secrets empresarials, de compromisos contractuals de qualsevol tipus, dels drets a l’honor, a la intimitat personal i familiar i a la pròpia imatge, dels drets de propietat i de qualsevol altra naturalesa que pertanyin a un tercer per raó de la transmissió, difusió, emmagatzematge, posada a disposició, recepció, obtenció o accés als continguts.</li>
+<li>La pèrdua eventual de dades dels usuaris per una causa no atribuïble al servei.</li>
+</ul>
+<p>D’aquesta manera, <strong>CERAPAL -estudi de cuines- no es fa responsable de la informació i els continguts emmagatzemats</strong> en plataformes, fòrums, xats, blogs, comentaris, xarxes socials o qualssevol altres mitjans que permetin a tercers publicar continguts de manera independent en aquesta pàgina web.</p>
+<p>No obstant això, i en compliment del que disposen els articles 11 i 16 de la LSSI-CE, <strong>CERAPAL -estudi de cuines-</strong> es posa a disposició de tots els usuaris, autoritats i forces de seguretat per col·laborar de manera activa en la retirada o, si escau, el bloqueig de tots els continguts que puguin afectar o contravenir la legislació nacional o internacional, els drets de tercers o la moral i l’ordre públic.</p>
+<p>D’aquesta manera, en cas que l’usuari consideri que hi pot haver algun contingut il·legítim, li agrairem que ens ho notifiqui immediatament a través del correu electrònic següent: <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>.</p>
+<h3 id="ca-5-gestio-del-blog">5. Gestió del blog</h3>
+<p><strong>CERAPAL -estudi de cuines-</strong> es reserva el dret d’esborrar qualsevol comentari o aportació que atempti contra les normes d’ús d’aquest web, la llei, la moral o l’ordre públic.</p>
+<p>Queda totalment prohibit l’ús del blog per incloure-hi comentaris promocionals, destructius, insultants o que vagin contra el bon to del web o de qualsevol dels seus usuaris.</p>
+<p>Des de l’equip de <strong>CERAPAL -estudi de cuines-</strong> ens comprometem a controlar l’ús que fan tercers del nostre blog i procurem esborrar, anul·lar o eliminar qualsevol comentari nociu, però en cap cas no es podrà fer responsable <strong>CERAPAL -estudi de cuines-</strong> de les opinions que puguin donar els usuaris. Això no obstant, estarem encantats de col·laborar amb qualsevol usuari o autoritat que consideri que s’ha inclòs un comentari nociu al nostre blog, i per a això facilitem el correu electrònic següent: <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>.</p>
+<h3 id="ca-6-politica-de-privacitat-i-galetes">6. Política de privacitat i galetes</h3>
+<p><strong>CERAPAL -estudi de cuines-</strong>, en compliment de la normativa espanyola de protecció de dades de caràcter personal, garanteix el compliment íntegre de les obligacions que s’hi descriuen, així com la implementació de les mesures de seguretat previstes a la Llei de protecció de dades de caràcter personal (Llei 15/1999, d’ara endavant LOPD) i al nou Reglament europeu (UE) 2016/679, d’ara endavant RGPD.</p>
+<p>Per a més informació sobre el tractament de les seves dades, és important que llegeixi i conegui la <strong>“Política de protecció de dades i privacitat”</strong> i la <strong>“Política de galetes”</strong> d’aquest web. Per això, l’equip de <strong>CERAPAL -estudi de cuines-</strong> en recomana de nou la lectura i la comprensió, i que s’abstingui d’utilitzar el web o qualsevol dels seus continguts o serveis en cas de no estar-hi d’acord.</p>
+<p>Cal que sàpiga que a <strong>CERAPAL -estudi de cuines-</strong> recollim dades de caràcter personal mitjançant els formularis de contacte d’aquest web i dels de la mateixa titularitat als quals redirigeixi.</p>
+<p>L’ús de les seves dades personals serà l’oferiment comercial dels nostres serveis, la informació sobre promocions i la gestió i resposta de consultes en línia.</p>
+<p>Tot i que cal que accepti la <strong>“Política de privacitat i protecció de dades”</strong>, en què se l’informa de manera més detallada de l’ús i el tractament de les seves dades, tot usuari té la possibilitat d’exercir els seus drets d’accés, rectificació, limitació, portabilitat, cancel·lació o oposició a través del correu següent: <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>, o a l’adreça postal: Carrer Ramon Turró, 4 local-1 · 08389 · Palafolls · Barcelona · Catalunya.</p>
+<p>A la <strong>“Política de galetes”</strong> l’informem que el web <strong>CERAPAL -estudi de cuines-</strong> té galetes per donar més validesa als seus serveis. Tenim galetes pròpies, per la qual cosa li preguem que consulti l’apartat de Privacitat i Galetes.</p>
+<h3 id="ca-7-legislacio-i-jurisdiccio-aplicable">7. Legislació i jurisdicció aplicable</h3>
+<p><strong>CERAPAL -estudi de cuines-</strong> té la seu a Espanya, per la qual cosa està subjecta a les lleis espanyoles i europees en matèria de protecció de dades. L’usuari accepta que les reclamacions o queixes contra <strong>CERAPAL -estudi de cuines-</strong> que provinguin o estiguin relacionades amb l’ús d’aquest web i, més concretament, amb el tractament de les seves dades personals, les resoldrà el tribunal de la jurisdicció competent situat a Sevilla.</p>
+<p>Si l’usuari accedeix a aquest lloc des d’una ubicació fora d’Espanya, és responsable de complir totes les lleis locals i internacionals que li siguin aplicables.</p>
+<h3 id="ca-8-modificacio">8. Modificació</h3>
+<p><strong>CERAPAL -estudi de cuines-</strong> podrà modificar aquest avís legal en qualsevol moment publicant-lo en aquest web, en què sempre hi constarà la data de l’última actualització aplicable.</p>
+    </article>
+    <article class="legal-body" data-l="en" lang="en">
+<p><strong>The CERAPAL -estudi de cuines- team</strong> would like to inform users that, if you browse this website or use any of the services we offer through it, you acquire the status of user from the very first moment and, therefore, <strong>these rules constitute a contract between CERAPAL, S.L. and the user regarding the use of this website, its links and any downloadable content found on it</strong>, as established by the applicable regulations on information society services and electronic commerce (Law 34/2002 LSSI-CE).</p>
+<p>Accessing and browsing the cerapal.cat website implies express acceptance of the <strong>“Terms of Use”, the “Privacy and Data Protection Policy and Cookie Policy”</strong> in accordance with Law 24/2002 LSSI-CE). Likewise, we strongly recommend that users read each of the website’s legal texts thoroughly.</p>
+<p>If you do not agree with the <strong>“Terms of Use”, the “Privacy and Data Protection Policy” or the “Cookie Policy”</strong>, you must refrain from using this website. If you continue on the website, you must understand that:</p>
+<ul>
+<li>The user declares that they have read, understood and comprehended what is set out here.</li>
+<li>The user undertakes to respect the obligations and rules contained on this website.</li>
+<li>The user, under the terms set out in the “Privacy and Data Protection Policy”, declares that they have been informed of their rights.</li>
+<li>The user declares that all the information they provide is true and accurate, without limitations, reservations or falsehoods, and that they are solely responsible for any erroneous, false or inaccurate statements.</li>
+</ul>
+<h2 id="en-identity-and-owner-of-the-website">IDENTITY AND OWNER OF THE WEBSITE</h2>
+<p><strong>CERAPAL, S.L. with tax ID (CIF) B64025430</strong> is the holder, owner and manager of the website <a href="https://cerapal.cat" target="_blank" rel="noopener">https://cerapal.cat</a>. Out of a commitment to transparency and to our users, we provide the tax and contact details of <strong>CERAPAL -estudi de cuines-</strong>:</p>
+<h3 id="en-contact-details">Contact details</h3>
+<ul>
+<li><strong>Trade name:</strong> CERAPAL -estudi de cuines-</li>
+<li><strong>Registered name:</strong> CERAPAL, S.L.</li>
+<li><strong>Tax ID (CIF):</strong> B64025430</li>
+<li><strong>Address:</strong> Carrer Ramon Turró, 4 local-1 · 08389 · Palafolls · Barcelona · Catalonia · Spain (ES)</li>
+<li><strong>Phone:</strong> 937 620 832</li>
+<li><strong>Email:</strong> <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a></li>
+<li><strong>Website:</strong> <a href="https://cerapal.cat" target="_blank" rel="noopener">https://cerapal.cat</a></li>
+</ul>
+<p>In addition to access to the website, the <strong>CERAPAL -estudi de cuines-</strong> website offers users information about the online marketing and advertising advisory and consultancy services it provides to its clients.</p>
+<h2 id="en-definitions">DEFINITIONS</h2>
+<p>For the <strong>CERAPAL -estudi de cuines-</strong> team, it is essential that you know and understand some basic terminology that we will use in our legal texts:</p>
+<ul>
+<li><strong>Content:</strong> texts, graphics, drawings, designs, code, software, photographs, music, videos, sounds, databases, images, downloadable files of any kind, expressions and information belonging to <strong>CERAPAL -estudi de cuines-</strong> or to third parties, which the user can access through cerapal.cat.</li>
+<li><strong>Cookies:</strong> small amounts of information stored in the browser used by each user so that the server can remember it. This information will only be read by the server that implemented it.</li>
+<li><strong>Services:</strong> the set of services offered by the website, either directly through it or by way of information.</li>
+<li><strong>Website:</strong> internet site accessible at the address cerapal.cat.</li>
+<li><strong>Owner:</strong> the person (natural or legal) who owns or is responsible for the website.</li>
+<li><strong>User:</strong> any person who browses the website.</li>
+<li><strong>Registered user:</strong> a visitor who voluntarily registers their details on the website, after accepting the terms of use and the privacy and personal data protection policy.</li>
+</ul>
+<h2 id="en-terms-of-use">TERMS OF USE</h2>
+<p>As already stated, the content of this legal notice and terms of use has the legal status of a <strong>CONTRACT and therefore constitutes an obligation between the parties (CERAPAL -estudi de cuines- and the user)</strong>.</p>
+<p>Browsing this website grants you, from the outset, the status of user, and this will be considered a <strong>free, specific, informed and unequivocal acceptance. We take this opportunity to</strong> remind you that, if you decide not to accept these terms, you must refrain from using the <strong>CERAPAL -estudi de cuines-</strong> website or any link or content to which this page redirects.</p>
+<p><strong>You can trust the legality of this website</strong>. In compliance with European regulations and quality standards relating to consumers, all the legal texts of <strong>CERAPAL -estudi de cuines-</strong> have been drafted by professional legal experts.</p>
+<h3 id="en-1-intellectual-and-industrial-property">1. Intellectual and industrial property</h3>
+<p>The website cerapal.cat, the pages it comprises and the information or elements contained in them, hereinafter the CONTENT, are protected by intellectual or industrial property rights, of which <strong>CERAPAL -estudi de cuines-</strong> is the holder and/or has a licence or express authorisation for their use and public communication from the legitimate third-party holders for their inclusion on this website.</p>
+<p>Specifically, <strong>the user is not authorised to reproduce, reinterpret in whole or in part, use, exploit, distribute, alter, disseminate or sell for commercial purposes the contents of this website without the prior express authorisation of CERAPAL -estudi de cuines-</strong>.</p>
+<p>Any use not previously authorised will be considered a serious breach of intellectual or industrial property rights, and compensation may be claimed in this regard.</p>
+<h3 id="en-2-limits-on-the-use-of-web-content">2. Limits on the use of web content</h3>
+<p><strong>CERAPAL -estudi de cuines-</strong> authorises the user to view the content of this website and to make private reproductions, provided that the elements are intended solely for personal use, and expressly prohibits any type of use of the website’s CONTENT for professional and/or economic purposes.</p>
+<p>Private reproductions of the content will not be legitimate where they involve rights related to industrial property, whether of the Owner or of a third party, or where they require any kind of consideration, financial or otherwise.</p>
+<p><strong>The user is obliged to use the service and the contents diligently and correctly</strong>, in accordance with the law, morality, public order and these terms and conditions.</p>
+<p><strong>CERAPAL -estudi de cuines-</strong> expressly prohibits carrying out unlawful or criminal activities, activities that infringe the rights of third parties or that breach any rule of the legal system. If this prohibition is not complied with, and provided that <strong>CERAPAL -estudi de cuines-</strong> becomes aware of it, the relevant legal mechanisms will be used to stop it and/or claim for the damage caused.</p>
+<p>Under no circumstances shall it be understood that any authorisation or licence is granted, that any waiver, transfer or total or partial assignment of these rights is made, or that any right or expectation of a right is conferred, without the prior, explicit and written consent of <strong>CERAPAL -estudi de cuines-</strong> and/or its directors or attorneys.</p>
+<h3 id="en-3-link-policy-of-this-website">3. Link policy of this website</h3>
+<h4 id="en-links-published-on-the-website">Links published on the website</h4>
+<p>This website may contain links to other websites or mention other cooperating websites, for which their owners will be responsible.</p>
+<p><strong>CERAPAL -estudi de cuines- is in no way responsible for the problems or infringements of rights that third-party websites may cause the user</strong>.</p>
+<p><strong>CERAPAL -estudi de cuines-</strong> does not recommend, promote or identify with, nor guarantee, represent, sponsor or endorse, any linked or third-party website that users may name commercially. <strong>CERAPAL -estudi de cuines-</strong> is not aware of the contents and services of the linked or third-party sites that appear on our website and, therefore, is not directly or indirectly responsible for damage of any kind caused by the content and/or services of the linked websites, or for any other damage not directly attributable to this website.</p>
+<p>The <strong>CERAPAL -estudi de cuines-</strong> team would be grateful if, should the user consider that there is a web link with unlawful or inappropriate content, they would report it to the email address <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>; we undertake to remove the content or the link as soon as possible, without this giving rise under any circumstances to any liability for <strong>CERAPAL -estudi de cuines-</strong>.</p>
+<h3 id="en-4-rules-of-use-rights-and-exclusions-of-liability">4. Rules of use, rights and exclusions of liability</h3>
+<h4 id="en-a-user-rights">A. User rights</h4>
+<p>All visitors to the website, by the mere fact of acquiring the status of users and browsing the website, have the following rights:</p>
+<ul>
+<li>The right to clear, concise and up-to-date information about the services offered and how they are marketed.</li>
+<li>The right not to provide personal data that is not necessary for the operation in question.</li>
+<li>The right to the protection of their personal data.</li>
+<li>The right to be informed about the purpose and subsequent uses of the personal data collected. And for this information to be understandable to the general public.</li>
+<li>The possibility of exercising their rights of access, rectification, cancellation, objection, portability and erasure of their personal data. And for these rights to be exercised not only electronically but also physically. Likewise, the user has the right to receive a response. For more information about these rights and how to exercise them, or the response time, please see the <strong>“Privacy and Data Protection Policy”</strong> link.</li>
+<li>The right to receive personalised attention through means other than email, in relation to their rights. Where the enquiry relates to service or commercial information, it must be made within customer service hours.</li>
+<li>The right to be informed when receiving commercial information or advertising, and to give their consent freely.</li>
+<li>The right to be informed of the use and purpose of cookies or other data storage devices, if any. For more information, we recommend visiting the <strong>“Cookie Policy”</strong> link.</li>
+</ul>
+<h4 id="en-b-user-obligations-and-breach-of-the-user-conditions">B. User obligations and breach of the user conditions</h4>
+<p>As a user, you undertake to make <strong>appropriate use</strong> of the contents, services and tools accessible through this website, in accordance with the law, morality and public order, as well as with these Terms of Use, respecting the other users at all times.</p>
+<p>For this reason, you expressly agree to hold <strong>CERAPAL -estudi de cuines-</strong> harmless from any liability towards any person that may arise from your inappropriate use of the Web Content, whether with respect to the Terms of Use or to the law.</p>
+<p>In the event of total or partial breach of these Terms of Use by the user, <strong>CERAPAL -estudi de cuines-</strong> will have the right to deny access to cerapal.cat without prior notice to the user and to claim, if it deems appropriate, for the damage caused by the breach.</p>
+<h4 id="en-c-authorisations-and-their-conditions">C. Authorisations and their conditions</h4>
+<p>As a user, you must respect the theme and dynamics of the website, making appropriate use of the services and contents; in particular: <strong>CERAPAL -estudi de cuines- authorises you to view, download and print the Content</strong> of the WEBSITE, always under the following CONDITIONS:</p>
+<ul>
+<li>You must do so exclusively for your <strong>personal, non-commercial use</strong>.</li>
+<li>You must not disseminate, transmit or make available to third parties any type of information, element or content without the authorisation of the holders of the intellectual and industrial property rights that may apply to such information, element or content; nor information, elements or content that infringe the fundamental rights and public freedoms recognised in the Constitution and in international treaties; nor anything that constitutes unlawful or unfair advertising, or involves a violation of the secrecy of communications and of personal data legislation; nor photographs or any other type of representation or image of minors;</li>
+<li>You must not introduce or disseminate any false, misleading, ambiguous or inaccurate information and content in a way that misleads or may mislead other users receiving the information;</li>
+<li>You must not disseminate racist, xenophobic or pornographic content or propaganda, content that glorifies terrorism or that violates human rights;</li>
+<li>You must not use this website to send unsolicited advertising or advertising not expressly consented to;</li>
+<li>You must not impersonate other users;</li>
+<li>You must not use the website’s Content to carry out unlawful or illegal activities, or activities contrary to good faith and public order;</li>
+<li>You must not modify the Content of the Website;</li>
+<li>You must not remove or modify any mention or notice relating to the ownership of copyright or trademarks, or any other provision on intellectual property included in the Content of the Website.</li>
+</ul>
+<p>The user undertakes to hold <strong>CERAPAL -estudi de cuines-</strong> harmless from any possible claim, fine, penalty or sanction it may be obliged to bear as a result of the user’s breach of the above rules of use; it also reserves the right to claim compensation for any damages that may apply.</p>
+<h4 id="en-d-liability">D. Liability</h4>
+<p><strong>CERAPAL -estudi de cuines-</strong> cannot guarantee the correct operation of its website, downloads or blog on cerapal.cat, as these may be prevented by circumstances beyond its team’s control.</p>
+<p>Specifically, it accepts no liability for damages, losses, claims or expenses caused by:</p>
+<ul>
+<li>Interference, interruptions, failures, omissions, delays, blockages or disconnections caused by errors in telecommunication lines and networks or by any other external cause.</li>
+<li>Unlawful intrusions through the use of malware of any kind and through any means of communication, such as computer viruses or any others.</li>
+<li>Users’ expectations regarding the website and/or its features or contents not being met.</li>
+<li>Access by minors to the contents included on the website.</li>
+</ul>
+<p>Specifically, and without limitation, <strong>CERAPAL -estudi de cuines-</strong> will not be liable for damages of any nature arising from:</p>
+<ul>
+<li>The contents, information, opinions and statements of any User or of third parties or entities communicated through the Service.</li>
+<li>The use that users may make of the materials included on the website, whether prohibited or permitted, in breach of intellectual and/or industrial property rights, confidential information, or contents of the Service or of third parties.</li>
+<li>Acts of unfair competition and unlawful advertising, or the infringement of intellectual and industrial property rights, trade secrets, contractual commitments of any kind, the rights to honour, to personal and family privacy and to one’s own image, property rights and rights of any other nature belonging to a third party, by reason of the transmission, dissemination, storage, making available, reception, obtaining of or access to the contents.</li>
+<li>Any loss of user data for reasons not attributable to the Service.</li>
+</ul>
+<p>Accordingly, <strong>CERAPAL -estudi de cuines- is not responsible for the information and content stored</strong> on platforms, forums, chats, blogs, comments, social networks or any other means that allow third parties to publish content independently on this website.</p>
+<p>However, in compliance with articles 11 and 16 of the LSSI-CE, <strong>CERAPAL -estudi de cuines-</strong> makes itself available to all users, authorities and security forces to collaborate actively in removing or, where appropriate, blocking any content that may affect or contravene national or international legislation, the rights of third parties, or morality and public order.</p>
+<p>Accordingly, if the user considers that there may be any illegitimate content, we would be grateful if they would notify us immediately at the following email address: <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>.</p>
+<h3 id="en-5-blog-management">5. Blog management</h3>
+<p><strong>CERAPAL -estudi de cuines-</strong> reserves the right to delete any comment or contribution that violates the rules of use of this website, the law, morality or public order.</p>
+<p>The use of the blog to post promotional, destructive or insulting comments, or comments that go against the good tone of the website or of any of its users, is strictly prohibited.</p>
+<p>The <strong>CERAPAL -estudi de cuines-</strong> team undertakes to monitor the use of our blog by third parties and endeavours to delete, cancel or remove any harmful comment, but under no circumstances can <strong>CERAPAL -estudi de cuines-</strong> be held responsible for the opinions users may give. That said, we will be happy to collaborate with any user or authority who considers that a harmful comment has been posted on our blog, and for this purpose we provide the following email address: <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>.</p>
+<h3 id="en-6-privacy-and-cookie-policy">6. Privacy and cookie policy</h3>
+<p>In compliance with Spanish personal data protection regulations, <strong>CERAPAL -estudi de cuines-</strong> guarantees full compliance with the obligations described therein, as well as the implementation of the security measures provided for in the Personal Data Protection Law (Law 15/1999, hereinafter LOPD) and the new European Regulation (EU) 2016/679, hereinafter GDPR.</p>
+<p>For more information about how your data is processed, it is important that you read and understand this website’s <strong>“Data Protection and Privacy Policy”</strong> and <strong>“Cookie Policy”</strong>. For this reason, the <strong>CERAPAL -estudi de cuines-</strong> team once again recommends reading and understanding them, and refraining from using the website or any of its content/services if you do not agree with them.</p>
+<p>You should know that at <strong>CERAPAL -estudi de cuines-</strong> we collect personal data through the contact forms on this website and on those of the same ownership to which it redirects.</p>
+<p>Your personal data will be used to offer our services commercially, to provide information about promotions and to manage and answer online enquiries.</p>
+<p>Although you must accept the <strong>“Privacy and Data Protection Policy”</strong>, which informs you in more detail about the use and processing of your data, every user may exercise their rights of access, rectification, restriction, portability, cancellation or objection by writing to the following email address: <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>, or to the postal address: Carrer Ramon Turró, 4 local-1 · 08389 · Palafolls · Barcelona · Catalonia.</p>
+<p>In the <strong>“Cookie Policy”</strong> we inform you that the <strong>CERAPAL -estudi de cuines-</strong> website uses cookies in order to make its services more effective. We use first-party cookies, so please consult the Privacy and Cookies section.</p>
+<h3 id="en-7-applicable-law-and-jurisdiction">7. Applicable law and jurisdiction</h3>
+<p><strong>CERAPAL -estudi de cuines-</strong> is based in Spain and is therefore bound by Spanish and European data protection laws. The User agrees that any claims or complaints against <strong>CERAPAL -estudi de cuines-</strong> arising from or related to the use of this website, and more specifically to the processing of their personal data, will be resolved by the court of competent jurisdiction located in Seville.</p>
+<p>If the User accesses this site from a location outside Spain, they are responsible for complying with all local and international laws that apply to them.</p>
+<h3 id="en-8-changes">8. Changes</h3>
+<p><strong>CERAPAL -estudi de cuines-</strong> may modify this legal notice at any time by publishing it on this Website, which will always show the date of the latest applicable update.</p>
+    </article>
   </div>
 </main>
 
@@ -550,25 +891,25 @@ a { color: inherit; }
   <div class="wrap footer-grid">
     <div class="footer-brand">
       <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FwYV8yIiBkYXRhLW5hbWU9IkNhcGEgMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTIwMCAzMjUiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICNmZmY7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnIGlkPSJDYXBhXzEtMiIgZGF0YS1uYW1lPSJDYXBhIDEiPgogICAgPGcgaWQ9IkxvZ290aXBvIj4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTEiIGRhdGEtbmFtZT0iVHJhemFkbyAxMSIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTIiIGRhdGEtbmFtZT0iVHJhemFkbyAxMiIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTMiIGRhdGEtbmFtZT0iVHJhemFkbyAxMyIgY2xhc3M9ImNscy0xIiBkPSJtNDcyLjQ5LDEzMy45NmMtMTEuOTMtMjEuNC0yOC41Ny0zMy43NC01My44OC0zMy43NC00MC4xNCwwLTYyLjU3LDMxLjkyLTYyLjU3LDY4LjJzMjQuMDUsNjguMjEsNjUuMDksNjguMjFjMjIuMDQtLjU2LDQxLjk5LTEzLjI1LDUxLjg5LTMzLjAxbC0yNS41LTEyLjMzYy00Ljg1LDEwLjQyLTE0Ljk2LDE3LjM3LTI2LjQsMTguMTMtMjUuMzIsMC0zMi45MS0yMi4xMy0zMi45MS00MSwwLTI5LjAyLDE0LjExLTQwLjk5LDMxLjgyLTQwLjk5LDEyLjA0LjMzLDIyLjY1LDguMDQsMjYuNzMsMTkuNDFsMjUuNzItMTIuODlabTExNi41Niw5OS4wNHYtMjUuMDNoLTY3Ljk5di0zMC40OGg1OC40di0yNS4wMmgtNTguNHYtMjMuNTZoNjIuNTd2LTI1LjAzaC05NC43NnYxMjkuMTlsMTAwLjE4LS4wNlptNDkuMTUtMTA1LjIxaDI5LjQ3YzkuNTkuMjEsMTcuMTksOC4xOCwxNi45OCwxNy43OS0uMiw5LjMyLTcuNjksMTYuODMtMTYuOTgsMTcuMDRoLTI5LjQ3di0zNC44M1ptLTMyLjE5LDEwNS4yMWgzMi4xOXYtNDYuNDNoMjAuNDNsMjUuMzEsNDYuNDNoMzUuOTlsLTI5LjQ3LTUxLjg4YzE1Ljc3LTQuMTMsMjYuNzItMTguNDgsMjYuNTgtMzQuODMsMC0yOS4wMi0xNy43Mi00Mi40NC00Ni42NS00Mi40NGgtNjQuMzd2MTI5LjE1Wm0xMjIuMTksMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptMTI2LjE3LTYwLjk0aDI2LjIyYzE0LjY0LDAsMjAuOCw3LjA4LDIwLjgsMTkuOTUuODUsOS45OS02LjU0LDE4Ljc3LTE2LjUsMTkuNjItMS4xMy4xLTIuMjcuMDktMy4zOS0uMDNoLTI3LjEydi0zOS41NFptLTMyLjE5LDEwNS4yMWgzMi41NXYtNDEuNzJoMjUuMTFjNDQuMTIsMCw1My43MS0yNi40OSw1My43MS00My43MSwwLTI1LjU4LTEyLjg0LTQzLjcyLTQ3LjU2LTQzLjcyaC02My44M2wuMDIsMTI5LjE2Wm0xMDQuNDgsMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptOTMuOTUsNDQuMjZoODIuNDV2LTI3LjIxaC01MC4yNnYtMTAxLjk1aC0zMi4xOXYxMjkuMTZaIi8+CiAgICAgIDxwYXRoIGlkPSJUcmF6YWRvXzE0IiBkYXRhLW5hbWU9IlRyYXphZG8gMTQiIGNsYXNzPSJjbHMtMSIgZD0ibTQ3Mi40OSwxMzMuOTZjLTExLjkzLTIxLjQtMjguNTctMzMuNzQtNTMuODgtMzMuNzQtNDAuMTQsMC02Mi41NywzMS45Mi02Mi41Nyw2OC4yczI0LjA1LDY4LjIxLDY1LjA5LDY4LjIxYzIyLjA0LS41Niw0MS45OS0xMy4yNSw1MS44OS0zMy4wMWwtMjUuNS0xMi4zM2MtNC44NSwxMC40Mi0xNC45NiwxNy4zNy0yNi40LDE4LjEzLTI1LjMyLDAtMzIuOTEtMjIuMTMtMzIuOTEtNDEsMC0yOS4wMiwxNC4xMS00MC45OSwzMS44Mi00MC45OSwxMi4wNC4zMywyMi42NSw4LjA0LDI2LjczLDE5LjQxbDI1LjcyLTEyLjg5Wm0xMTYuNTYsOTkuMDR2LTI1LjAzaC02Ny45OXYtMzAuNDhoNTguNHYtMjUuMDJoLTU4LjR2LTIzLjU2aDYyLjU3di0yNS4wM2gtOTQuNzZ2MTI5LjE5bDEwMC4xOC0uMDZabTQ5LjE1LTEwNS4yMWgyOS40N2M5LjU5LjIxLDE3LjE5LDguMTgsMTYuOTgsMTcuNzktLjIsOS4zMi03LjY5LDE2LjgzLTE2Ljk4LDE3LjA0aC0yOS40N3YtMzQuODNabS0zMi4xOSwxMDUuMjFoMzIuMTl2LTQ2LjQzaDIwLjQzbDI1LjMxLDQ2LjQzaDM1Ljk5bC0yOS40Ny01MS44OGMxNS43Ny00LjEzLDI2LjcyLTE4LjQ4LDI2LjU4LTM0LjgzLDAtMjkuMDItMTcuNzItNDIuNDQtNDYuNjUtNDIuNDRoLTY0LjM3djEyOS4xNVptMTIyLjE5LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTEyNi4xNy02MC45NGgyNi4yMmMxNC42NCwwLDIwLjgsNy4wOCwyMC44LDE5Ljk1Ljg1LDkuOTktNi41NCwxOC43Ny0xNi41LDE5LjYyLTEuMTMuMS0yLjI3LjA5LTMuMzktLjAzaC0yNy4xMnYtMzkuNTRabS0zMi4xOSwxMDUuMjFoMzIuNTV2LTQxLjcyaDI1LjExYzQ0LjEyLDAsNTMuNzEtMjYuNDksNTMuNzEtNDMuNzEsMC0yNS41OC0xMi44NC00My43Mi00Ny41Ni00My43MmgtNjMuODNsLjAyLDEyOS4xNlptMTA0LjQ4LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTkzLjk1LDQ0LjI2aDgyLjQ1di0yNy4yMWgtNTAuMjZ2LTEwMS45NWgtMzIuMTl2MTI5LjE2WiIvPgogICAgICA8cGF0aCBpZD0iVHJhemFkb18xNSIgZGF0YS1uYW1lPSJUcmF6YWRvIDE1IiBjbGFzcz0iY2xzLTEiIGQ9Im0wLDE2Mi41QzAsNzIuNzUsNzIuNTIsMCwxNjEuOTksMHMxNjEuOTksNzIuNzUsMTYxLjk5LDE2Mi41LTcyLjUyLDE2Mi41LTE2MS45OSwxNjIuNVMwLDI1Mi4yNSwwLDE2Mi41bTI0OC40NC01MS40MmMtMTcuODItMzEuOTMtNDIuNjItNTAuMzMtODAuMzgtNTAuMzMtNTkuODgsMC05My4zMyw0Ny42My05My4zMywxMDEuNzRzMzUuODgsMTAxLjc0LDk3LjEsMTAxLjc0YzMyLjg4LS44Myw2Mi42NC0xOS43Niw3Ny40MS00OS4yNWwtMzguMDctMTguMzljLTcuMjMsMTUuNTUtMjIuMzIsMjUuOTItMzkuMzksMjcuMDYtMzcuNzYsMC00OS4wOS0zMy00OS4wOS02MS4xNSwwLTQzLjI5LDIxLjA2LTYxLjE1LDQ3LjQ3LTYxLjE1LDE3Ljk4LjQ4LDMzLjgzLDExLjk3LDM5LjkyLDI4Ljk1bDM4LjM0LTE5LjIyWiIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+" alt="Cerapal · Estudi de cuines" width="196" height="53" loading="lazy">
-      <p>Cada proyecto es único, exclusivo y personalizado.</p>
+      <p><span data-l="es" lang="es">Cada proyecto es único, exclusivo y personalizado.</span><span data-l="ca" lang="ca">Cada projecte és únic, exclusiu i personalitzat.</span><span data-l="en" lang="en">Every project is unique, exclusive and tailor-made.</span></p>
     </div>
     <div class="footer-col">
-      <h3>Estudio</h3>
+      <h3><span data-l="es" lang="es">Estudio</span><span data-l="ca" lang="ca">Estudi</span><span data-l="en" lang="en">Studio</span></h3>
       <p>Carrer Ramon Turró, 4 · Local 1<br>08389 Palafolls (Barcelona)</p>
-      <a href="https://www.google.com/maps/search/?api=1&amp;query=Carrer%20Ramon%20Turr%C3%B3%204%2C%2008389%20Palafolls" target="_blank" rel="noopener">Cómo llegar</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Carrer%20Ramon%20Turr%C3%B3%204%2C%2008389%20Palafolls" target="_blank" rel="noopener"><span data-l="es" lang="es">Cómo llegar</span><span data-l="ca" lang="ca">Com arribar-hi</span><span data-l="en" lang="en">Get directions</span></a>
     </div>
     <div class="footer-col">
-      <h3>Contacto</h3>
+      <h3><span data-l="es" lang="es">Contacto</span><span data-l="ca" lang="ca">Contacte</span><span data-l="en" lang="en">Contact</span></h3>
       <a href="tel:+34937620832">937 620 832</a>
       <a href="tel:+34654628727">654 628 727</a>
       <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>
     </div>
     <div class="footer-col">
-      <h3>Horario</h3>
-      <p>Lunes a viernes<br>9:00–13:00<br>15:00–19:00</p>
+      <h3><span data-l="es" lang="es">Horario</span><span data-l="ca" lang="ca">Horari</span><span data-l="en" lang="en">Opening hours</span></h3>
+      <p><span data-l="es" lang="es">Lunes a viernes<br>9:00–13:00<br>15:00–19:00</span><span data-l="ca" lang="ca">De dilluns a divendres<br>9:00–13:00<br>15:00–19:00</span><span data-l="en" lang="en">Monday to Friday<br>9:00–13:00<br>15:00–19:00</span></p>
     </div>
     <div class="footer-col">
-      <h3>Síguenos</h3>
+      <h3><span data-l="es" lang="es">Síguenos</span><span data-l="ca" lang="ca">Segueix-nos</span><span data-l="en" lang="en">Follow us</span></h3>
       <a href="https://www.instagram.com/cuinescerapal/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.facebook.com/cuinescerapal/" target="_blank" rel="noopener">Facebook</a>
     </div>
@@ -576,15 +917,18 @@ a { color: inherit; }
   <div class="wrap footer-bottom">
     <p>© <span id="year">2026</span> Cerapal · Estudi de cuines</p>
     <nav aria-label="Legal">
-      <a href="aviso-legal.html" aria-current="page">Aviso legal</a>
-      <a href="politica-privacidad.html">Política de privacidad</a>
-      <a href="politica-cookies.html">Política de cookies</a>
+      <a href="aviso-legal.html" data-keep-lang aria-current="page"><span data-l="es" lang="es">Aviso legal</span><span data-l="ca" lang="ca">Avís legal</span><span data-l="en" lang="en">Legal notice</span></a>
+      <a href="politica-privacidad.html" data-keep-lang><span data-l="es" lang="es">Política de privacidad</span><span data-l="ca" lang="ca">Política de privacitat</span><span data-l="en" lang="en">Privacy policy</span></a>
+      <a href="politica-cookies.html" data-keep-lang><span data-l="es" lang="es">Política de cookies</span><span data-l="ca" lang="ca">Política de galetes</span><span data-l="en" lang="en">Cookie policy</span></a>
     </nav>
   </div>
 </footer>
 
 <script>
 (() => {
+  const T = {"es": {"title": "Aviso legal · Cerapal", "desc": "Aviso legal de Cerapal · Estudi de cuines: titular de la web, condiciones de uso y responsabilidades.", "logoHome": "Cerapal, ir al inicio", "navMain": "Principal", "langLabel": "Idioma", "legalTexts": "Textos legales", "table": "Tabla"}, "ca": {"title": "Avís legal · Cerapal", "desc": "Avís legal de Cerapal · Estudi de cuines: titular del web, condicions d’ús i responsabilitats.", "logoHome": "Cerapal, anar a l’inici", "navMain": "Principal", "langLabel": "Idioma", "legalTexts": "Textos legals", "table": "Taula"}, "en": {"title": "Legal notice · Cerapal", "desc": "Legal notice of Cerapal · Estudi de cuines: website owner, terms of use and liability.", "logoHome": "Cerapal, go to the home page", "navMain": "Main", "langLabel": "Language", "legalTexts": "Legal texts", "table": "Table"}};
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const root = document.documentElement;
   document.getElementById('year').textContent = new Date().getFullYear();
 
   const nav = document.getElementById('nav');
@@ -596,11 +940,11 @@ a { color: inherit; }
   const tocMobile = document.querySelector('.toc-mobile');
   tocMobile.addEventListener('click', e => { if (e.target.closest('a')) tocMobile.open = false; });
 
-  // marca en el índice el apartado que se está leyendo
+  // marca en el índice el apartado que se está leyendo (solo el índice del idioma visible)
   const toc = document.querySelector('.toc');
-  const links = [...toc.querySelectorAll('a')];
-  const heads = links.map(a => document.getElementById(a.hash.slice(1))).filter(Boolean);
+  let links = [], heads = [];
   const mark = () => {
+    if (!heads.length) return;
     const y = innerHeight * .3;
     let current = heads[0];
     for (const h of heads) if (h.getBoundingClientRect().top <= y) current = h;
@@ -619,7 +963,33 @@ a { color: inherit; }
     ticking = true;
     requestAnimationFrame(() => { ticking = false; mark(); });
   }, { passive: true });
-  mark();
+
+  // idioma: textos (CSS), atributos, título y enlaces que lo conservan
+  $$('[data-keep-lang]').forEach(a => { a.dataset.base = a.getAttribute('href'); });
+  function setLang(l) {
+    root.dataset.lang = l;
+    root.lang = l;
+    document.title = T[l].title;
+    document.querySelector('meta[name="description"]').setAttribute('content', T[l].desc);
+    $$('[data-t-attr]').forEach(el => el.dataset.tAttr.split(',').forEach(p => { const [attr, key] = p.split(':'); el.setAttribute(attr, T[l][key]); }));
+    toc.setAttribute('aria-label', toc.querySelector(`.eyebrow [data-l="${l}"]`).textContent);
+    $$('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l));
+    $$('[data-keep-lang]').forEach(a => {
+      const [path, hash] = a.dataset.base.split('#');
+      a.setAttribute('href', `${path}?lang=${l}${hash ? '#' + hash : ''}`);
+    });
+    links = $$(`ol[data-l="${l}"] a`, toc);
+    heads = links.map(a => document.getElementById(a.hash.slice(1))).filter(Boolean);
+    mark();
+  }
+  $$('.lang button').forEach(b => b.addEventListener('click', () => {
+    const l = b.dataset.lang;
+    if (l === root.dataset.lang) return;
+    setLang(l);
+    try { localStorage.setItem('cerapal-lang', l); } catch (e) {}
+    try { const url = new URL(location.href); url.searchParams.set('lang', l); url.hash = ''; history.replaceState(null, '', url); } catch (e) {}
+  }));
+  setLang(root.dataset.lang);
 })();
 </script>
 </body>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +10,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<script>
+// idioma antes de pintar: el del enlace (?lang=ca), el que eligió la última vez, o el del navegador
+(() => {
+  const L = ['ca', 'es', 'en'];
+  let l = new URLSearchParams(location.search).get('lang');
+  if (!L.includes(l)) { try { l = localStorage.getItem('cerapal-lang'); } catch (e) {} }
+  if (!L.includes(l)) l = (navigator.languages || [navigator.language || '']).map(x => x.slice(0, 2).toLowerCase()).find(x => L.includes(x)) || 'es';
+  document.documentElement.dataset.lang = l;
+  document.documentElement.lang = l;
+})();
+</script>
 <style>
 /* ============================================================
    Tokens — paleta Cerapal (los mismos que la landing)
@@ -353,24 +364,55 @@ a { color: inherit; }
   html { scroll-behavior: auto; }
   .btn::before, .nav-links a::after { transition: none; }
 }
+
+/* ============================================================
+   Idiomas: cada texto está en castellano, catalán e inglés y solo se ve el del idioma elegido
+   ============================================================ */
+[data-l]:not([data-l="es"]) { display: none; }
+html[data-lang="ca"] [data-l="es"], html[data-lang="en"] [data-l="es"] { display: none; }
+html[data-lang="ca"] [data-l="ca"], html[data-lang="en"] [data-l="en"] { display: revert; }
+.lang { display: flex; align-items: center; gap: 2px; }
+.lang button {
+  min-width: 34px; height: 34px; padding: 0 6px;
+  border: 0; border-radius: 2px; background: none;
+  font: inherit; font-size: 12px; font-weight: 700; font-stretch: 112%; letter-spacing: .08em;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .2s, box-shadow .2s;
+}
+@media (hover: hover) { .lang button:hover { color: var(--black); } }
+.lang button[aria-pressed="true"] { color: var(--black); box-shadow: inset 0 -2px 0 var(--black); }
+.legal-note { margin: 18px 0 0; font-size: 13px; color: var(--muted); }
+@media (max-width: 900px) {
+  .lang { margin-left: auto; }
+  .nav-cta { margin-left: 4px; }
+}
+@media (max-width: 520px) {
+  .nav-cta { display: none; }
+}
 </style>
 </head>
 <body>
-<a class="skip" href="#contenido">Saltar al contenido</a>
+<a class="skip" href="#contenido"><span data-l="es" lang="es">Saltar al contenido</span><span data-l="ca" lang="ca">Salta al contingut</span><span data-l="en" lang="en">Skip to content</span></a>
 
 <header class="nav" id="nav">
   <div class="nav-inner">
-    <a class="nav-logo" href="index.html" aria-label="Cerapal, ir al inicio">
+    <a class="nav-logo" href="index.html" data-keep-lang aria-label="Cerapal, ir al inicio" data-t-attr="aria-label:logoHome">
       <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FwYV8yIiBkYXRhLW5hbWU9IkNhcGEgMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTIwMCAzMjUiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICMxOTE5MTk7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnIGlkPSJDYXBhXzEtMiIgZGF0YS1uYW1lPSJDYXBhIDEiPgogICAgPGcgaWQ9IkxvZ290aXBvIj4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTEiIGRhdGEtbmFtZT0iVHJhemFkbyAxMSIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTIiIGRhdGEtbmFtZT0iVHJhemFkbyAxMiIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTMiIGRhdGEtbmFtZT0iVHJhemFkbyAxMyIgY2xhc3M9ImNscy0xIiBkPSJtNDcyLjQ5LDEzMy45NmMtMTEuOTMtMjEuNC0yOC41Ny0zMy43NC01My44OC0zMy43NC00MC4xNCwwLTYyLjU3LDMxLjkyLTYyLjU3LDY4LjJzMjQuMDUsNjguMjEsNjUuMDksNjguMjFjMjIuMDQtLjU2LDQxLjk5LTEzLjI1LDUxLjg5LTMzLjAxbC0yNS41LTEyLjMzYy00Ljg1LDEwLjQyLTE0Ljk2LDE3LjM3LTI2LjQsMTguMTMtMjUuMzIsMC0zMi45MS0yMi4xMy0zMi45MS00MSwwLTI5LjAyLDE0LjExLTQwLjk5LDMxLjgyLTQwLjk5LDEyLjA0LjMzLDIyLjY1LDguMDQsMjYuNzMsMTkuNDFsMjUuNzItMTIuODlabTExNi41Niw5OS4wNHYtMjUuMDNoLTY3Ljk5di0zMC40OGg1OC40di0yNS4wMmgtNTguNHYtMjMuNTZoNjIuNTd2LTI1LjAzaC05NC43NnYxMjkuMTlsMTAwLjE4LS4wNlptNDkuMTUtMTA1LjIxaDI5LjQ3YzkuNTkuMjEsMTcuMTksOC4xOCwxNi45OCwxNy43OS0uMiw5LjMyLTcuNjksMTYuODMtMTYuOTgsMTcuMDRoLTI5LjQ3di0zNC44M1ptLTMyLjE5LDEwNS4yMWgzMi4xOXYtNDYuNDNoMjAuNDNsMjUuMzEsNDYuNDNoMzUuOTlsLTI5LjQ3LTUxLjg4YzE1Ljc3LTQuMTMsMjYuNzItMTguNDgsMjYuNTgtMzQuODMsMC0yOS4wMi0xNy43Mi00Mi40NC00Ni42NS00Mi40NGgtNjQuMzd2MTI5LjE1Wm0xMjIuMTksMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptMTI2LjE3LTYwLjk0aDI2LjIyYzE0LjY0LDAsMjAuOCw3LjA4LDIwLjgsMTkuOTUuODUsOS45OS02LjU0LDE4Ljc3LTE2LjUsMTkuNjItMS4xMy4xLTIuMjcuMDktMy4zOS0uMDNoLTI3LjEydi0zOS41NFptLTMyLjE5LDEwNS4yMWgzMi41NXYtNDEuNzJoMjUuMTFjNDQuMTIsMCw1My43MS0yNi40OSw1My43MS00My43MSwwLTI1LjU4LTEyLjg0LTQzLjcyLTQ3LjU2LTQzLjcyaC02My44M2wuMDIsMTI5LjE2Wm0xMDQuNDgsMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptOTMuOTUsNDQuMjZoODIuNDV2LTI3LjIxaC01MC4yNnYtMTAxLjk1aC0zMi4xOXYxMjkuMTZaIi8+CiAgICAgIDxwYXRoIGlkPSJUcmF6YWRvXzE0IiBkYXRhLW5hbWU9IlRyYXphZG8gMTQiIGNsYXNzPSJjbHMtMSIgZD0ibTQ3Mi40OSwxMzMuOTZjLTExLjkzLTIxLjQtMjguNTctMzMuNzQtNTMuODgtMzMuNzQtNDAuMTQsMC02Mi41NywzMS45Mi02Mi41Nyw2OC4yczI0LjA1LDY4LjIxLDY1LjA5LDY4LjIxYzIyLjA0LS41Niw0MS45OS0xMy4yNSw1MS44OS0zMy4wMWwtMjUuNS0xMi4zM2MtNC44NSwxMC40Mi0xNC45NiwxNy4zNy0yNi40LDE4LjEzLTI1LjMyLDAtMzIuOTEtMjIuMTMtMzIuOTEtNDEsMC0yOS4wMiwxNC4xMS00MC45OSwzMS44Mi00MC45OSwxMi4wNC4zMywyMi42NSw4LjA0LDI2LjczLDE5LjQxbDI1LjcyLTEyLjg5Wm0xMTYuNTYsOTkuMDR2LTI1LjAzaC02Ny45OXYtMzAuNDhoNTguNHYtMjUuMDJoLTU4LjR2LTIzLjU2aDYyLjU3di0yNS4wM2gtOTQuNzZ2MTI5LjE5bDEwMC4xOC0uMDZabTQ5LjE1LTEwNS4yMWgyOS40N2M5LjU5LjIxLDE3LjE5LDguMTgsMTYuOTgsMTcuNzktLjIsOS4zMi03LjY5LDE2LjgzLTE2Ljk4LDE3LjA0aC0yOS40N3YtMzQuODNabS0zMi4xOSwxMDUuMjFoMzIuMTl2LTQ2LjQzaDIwLjQzbDI1LjMxLDQ2LjQzaDM1Ljk5bC0yOS40Ny01MS44OGMxNS43Ny00LjEzLDI2LjcyLTE4LjQ4LDI2LjU4LTM0LjgzLDAtMjkuMDItMTcuNzItNDIuNDQtNDYuNjUtNDIuNDRoLTY0LjM3djEyOS4xNVptMTIyLjE5LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTEyNi4xNy02MC45NGgyNi4yMmMxNC42NCwwLDIwLjgsNy4wOCwyMC44LDE5Ljk1Ljg1LDkuOTktNi41NCwxOC43Ny0xNi41LDE5LjYyLTEuMTMuMS0yLjI3LjA5LTMuMzktLjAzaC0yNy4xMnYtMzkuNTRabS0zMi4xOSwxMDUuMjFoMzIuNTV2LTQxLjcyaDI1LjExYzQ0LjEyLDAsNTMuNzEtMjYuNDksNTMuNzEtNDMuNzEsMC0yNS41OC0xMi44NC00My43Mi00Ny41Ni00My43MmgtNjMuODNsLjAyLDEyOS4xNlptMTA0LjQ4LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTkzLjk1LDQ0LjI2aDgyLjQ1di0yNy4yMWgtNTAuMjZ2LTEwMS45NWgtMzIuMTl2MTI5LjE2WiIvPgogICAgICA8cGF0aCBpZD0iVHJhemFkb18xNSIgZGF0YS1uYW1lPSJUcmF6YWRvIDE1IiBjbGFzcz0iY2xzLTEiIGQ9Im0wLDE2Mi41QzAsNzIuNzUsNzIuNTIsMCwxNjEuOTksMHMxNjEuOTksNzIuNzUsMTYxLjk5LDE2Mi41LTcyLjUyLDE2Mi41LTE2MS45OSwxNjIuNVMwLDI1Mi4yNSwwLDE2Mi41bTI0OC40NC01MS40MmMtMTcuODItMzEuOTMtNDIuNjItNTAuMzMtODAuMzgtNTAuMzMtNTkuODgsMC05My4zMyw0Ny42My05My4zMywxMDEuNzRzMzUuODgsMTAxLjc0LDk3LjEsMTAxLjc0YzMyLjg4LS44Myw2Mi42NC0xOS43Niw3Ny40MS00OS4yNWwtMzguMDctMTguMzljLTcuMjMsMTUuNTUtMjIuMzIsMjUuOTItMzkuMzksMjcuMDYtMzcuNzYsMC00OS4wOS0zMy00OS4wOS02MS4xNSwwLTQzLjI5LDIxLjA2LTYxLjE1LDQ3LjQ3LTYxLjE1LDE3Ljk4LjQ4LDMzLjgzLDExLjk3LDM5LjkyLDI4Ljk1bDM4LjM0LTE5LjIyWiIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+" alt="Cerapal · Estudi de cuines" width="141" height="38">
     </a>
-    <nav class="nav-links" aria-label="Principal">
-      <a href="index.html#proyectos">Proyectos</a>
-      <a href="index.html#opiniones">Opiniones</a>
-      <a href="index.html#financiacion">Financiación</a>
-      <a href="index.html#contacto">Contacto</a>
+    <nav class="nav-links" aria-label="Principal" data-t-attr="aria-label:navMain">
+      <a href="index.html#proyectos" data-keep-lang><span data-l="es" lang="es">Proyectos</span><span data-l="ca" lang="ca">Projectes</span><span data-l="en" lang="en">Projects</span></a>
+      <a href="index.html#opiniones" data-keep-lang><span data-l="es" lang="es">Opiniones</span><span data-l="ca" lang="ca">Opinions</span><span data-l="en" lang="en">Reviews</span></a>
+      <a href="index.html#financiacion" data-keep-lang><span data-l="es" lang="es">Financiación</span><span data-l="ca" lang="ca">Finançament</span><span data-l="en" lang="en">Financing</span></a>
+      <a href="index.html#contacto" data-keep-lang><span data-l="es" lang="es">Contacto</span><span data-l="ca" lang="ca">Contacte</span><span data-l="en" lang="en">Contact</span></a>
     </nav>
+    <div class="lang" role="group" aria-label="Idioma" data-t-attr="aria-label:langLabel">
+      <button type="button" data-lang="ca" lang="ca" aria-label="Català" aria-pressed="false">CA</button>
+      <button type="button" data-lang="es" lang="es" aria-label="Castellano" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+    </div>
     <a class="nav-tel" href="tel:+34937620832">937 620 832</a>
-    <a class="btn btn-dark nav-cta" href="index.html#contacto">Pedir mi presupuesto</a>
+    <a class="btn btn-dark nav-cta" href="index.html#contacto" data-keep-lang><span data-l="es" lang="es">Pedir mi presupuesto</span><span data-l="ca" lang="ca">Demanar pressupost</span><span data-l="en" lang="en">Get my quote</span></a>
   </div>
 </header>
 
@@ -378,47 +420,96 @@ a { color: inherit; }
   <section class="legal-hero">
     <div class="wrap">
       <p class="eyebrow">Legal</p>
-      <h1 class="legal-title">Política de cookies</h1>
-      <nav class="legal-tabs" aria-label="Textos legales">
-        <a href="aviso-legal.html"><span class="tab-long">Aviso legal</span><span class="tab-short">Aviso legal</span></a>
-        <a href="politica-privacidad.html"><span class="tab-long">Política de privacidad</span><span class="tab-short">Privacidad</span></a>
-        <a href="politica-cookies.html" aria-current="page"><span class="tab-long">Política de cookies</span><span class="tab-short">Cookies</span></a>
+      <h1 class="legal-title"><span data-l="es" lang="es">Política de cookies</span><span data-l="ca" lang="ca">Política de galetes</span><span data-l="en" lang="en">Cookie policy</span></h1>
+      <nav class="legal-tabs" aria-label="Textos legales" data-t-attr="aria-label:legalTexts">
+        <a href="aviso-legal.html" data-keep-lang><span class="tab-long"><span data-l="es" lang="es">Aviso legal</span><span data-l="ca" lang="ca">Avís legal</span><span data-l="en" lang="en">Legal notice</span></span><span class="tab-short"><span data-l="es" lang="es">Aviso legal</span><span data-l="ca" lang="ca">Avís legal</span><span data-l="en" lang="en">Legal notice</span></span></a>
+        <a href="politica-privacidad.html" data-keep-lang><span class="tab-long"><span data-l="es" lang="es">Política de privacidad</span><span data-l="ca" lang="ca">Política de privacitat</span><span data-l="en" lang="en">Privacy policy</span></span><span class="tab-short"><span data-l="es" lang="es">Privacidad</span><span data-l="ca" lang="ca">Privacitat</span><span data-l="en" lang="en">Privacy</span></span></a>
+        <a href="politica-cookies.html" data-keep-lang aria-current="page"><span class="tab-long"><span data-l="es" lang="es">Política de cookies</span><span data-l="ca" lang="ca">Política de galetes</span><span data-l="en" lang="en">Cookie policy</span></span><span class="tab-short"><span data-l="es" lang="es">Cookies</span><span data-l="ca" lang="ca">Galetes</span><span data-l="en" lang="en">Cookies</span></span></a>
       </nav>
+      <p class="legal-note" data-l="ca" lang="ca">Traducció de la versió original en castellà.</p><p class="legal-note" data-l="en" lang="en">Translated from the original Spanish version.</p>
     </div>
   </section>
 
   <div class="wrap legal-grid">
     <nav class="toc" aria-label="En esta página">
-      <p class="eyebrow">En esta página</p>
-      <ol>
-          <li class="toc-h2"><a href="#que-son-las-cookies">¿QUÉ SON LAS COOKIES?</a></li>
-          <li class="toc-h2"><a href="#tipos-de-cookies">TIPOS DE COOKIES</a></li>
-          <li class="toc-h3"><a href="#cookies-exentas">Cookies exentas</a></li>
-          <li class="toc-h3"><a href="#en-atencion-a-su-finalidad">En atención a su finalidad:</a></li>
-          <li class="toc-h3"><a href="#por-su-gestion">Por su gestión:</a></li>
-          <li class="toc-h3"><a href="#que-cookies-utilizamos">¿Qué cookies utilizamos?</a></li>
-          <li class="toc-h3"><a href="#cookies-de-analisis">Cookies de Análisis:</a></li>
-          <li class="toc-h2"><a href="#desactivacion-de-cookies">DESACTIVACIÓN DE COOKIES</a></li>
-          <li class="toc-h2"><a href="#exenciones-de-responsabilidad">EXENCIONES DE RESPONSABILIDAD</a></li>
-          <li class="toc-h2"><a href="#derecho-a-modificar-la-politica-de-cookies">DERECHO A MODIFICAR LA POLÍTICA DE COOKIES</a></li>
+      <p class="eyebrow"><span data-l="es" lang="es">En esta página</span><span data-l="ca" lang="ca">En aquesta pàgina</span><span data-l="en" lang="en">On this page</span></p>
+      <ol data-l="es">
+        <li class="toc-h2"><a href="#que-son-las-cookies">¿QUÉ SON LAS COOKIES?</a></li>
+        <li class="toc-h2"><a href="#tipos-de-cookies">TIPOS DE COOKIES</a></li>
+        <li class="toc-h3"><a href="#cookies-exentas">Cookies exentas</a></li>
+        <li class="toc-h3"><a href="#en-atencion-a-su-finalidad">En atención a su finalidad:</a></li>
+        <li class="toc-h3"><a href="#por-su-gestion">Por su gestión:</a></li>
+        <li class="toc-h3"><a href="#que-cookies-utilizamos">¿Qué cookies utilizamos?</a></li>
+        <li class="toc-h3"><a href="#cookies-de-analisis">Cookies de Análisis:</a></li>
+        <li class="toc-h2"><a href="#desactivacion-de-cookies">DESACTIVACIÓN DE COOKIES</a></li>
+        <li class="toc-h2"><a href="#exenciones-de-responsabilidad">EXENCIONES DE RESPONSABILIDAD</a></li>
+        <li class="toc-h2"><a href="#derecho-a-modificar-la-politica-de-cookies">DERECHO A MODIFICAR LA POLÍTICA DE COOKIES</a></li>
+      </ol>
+      <ol data-l="ca">
+        <li class="toc-h2"><a href="#ca-que-son-les-galetes">QUÈ SÓN LES GALETES?</a></li>
+        <li class="toc-h2"><a href="#ca-tipus-de-galetes">TIPUS DE GALETES</a></li>
+        <li class="toc-h3"><a href="#ca-galetes-exemptes">Galetes exemptes</a></li>
+        <li class="toc-h3"><a href="#ca-segons-la-seva-finalitat">Segons la seva finalitat:</a></li>
+        <li class="toc-h3"><a href="#ca-segons-la-seva-gestio">Segons la seva gestió:</a></li>
+        <li class="toc-h3"><a href="#ca-quines-galetes-fem-servir">Quines galetes fem servir?</a></li>
+        <li class="toc-h3"><a href="#ca-galetes-danalisi">Galetes d’anàlisi:</a></li>
+        <li class="toc-h2"><a href="#ca-desactivacio-de-galetes">DESACTIVACIÓ DE GALETES</a></li>
+        <li class="toc-h2"><a href="#ca-exempcions-de-responsabilitat">EXEMPCIONS DE RESPONSABILITAT</a></li>
+        <li class="toc-h2"><a href="#ca-dret-a-modificar-la-politica-de-galetes">DRET A MODIFICAR LA POLÍTICA DE GALETES</a></li>
+      </ol>
+      <ol data-l="en">
+        <li class="toc-h2"><a href="#en-what-are-cookies">WHAT ARE COOKIES?</a></li>
+        <li class="toc-h2"><a href="#en-types-of-cookies">TYPES OF COOKIES</a></li>
+        <li class="toc-h3"><a href="#en-exempt-cookies">Exempt cookies</a></li>
+        <li class="toc-h3"><a href="#en-by-purpose">By purpose:</a></li>
+        <li class="toc-h3"><a href="#en-by-management">By management:</a></li>
+        <li class="toc-h3"><a href="#en-which-cookies-do-we-use">Which cookies do we use?</a></li>
+        <li class="toc-h3"><a href="#en-analytics-cookies">Analytics cookies:</a></li>
+        <li class="toc-h2"><a href="#en-disabling-cookies">DISABLING COOKIES</a></li>
+        <li class="toc-h2"><a href="#en-disclaimers">DISCLAIMERS</a></li>
+        <li class="toc-h2"><a href="#en-right-to-modify-the-cookie-policy">RIGHT TO MODIFY THE COOKIE POLICY</a></li>
       </ol>
     </nav>
     <details class="toc-mobile">
-      <summary>En esta página</summary>
-      <ol>
-          <li class="toc-h2"><a href="#que-son-las-cookies">¿QUÉ SON LAS COOKIES?</a></li>
-          <li class="toc-h2"><a href="#tipos-de-cookies">TIPOS DE COOKIES</a></li>
-          <li class="toc-h3"><a href="#cookies-exentas">Cookies exentas</a></li>
-          <li class="toc-h3"><a href="#en-atencion-a-su-finalidad">En atención a su finalidad:</a></li>
-          <li class="toc-h3"><a href="#por-su-gestion">Por su gestión:</a></li>
-          <li class="toc-h3"><a href="#que-cookies-utilizamos">¿Qué cookies utilizamos?</a></li>
-          <li class="toc-h3"><a href="#cookies-de-analisis">Cookies de Análisis:</a></li>
-          <li class="toc-h2"><a href="#desactivacion-de-cookies">DESACTIVACIÓN DE COOKIES</a></li>
-          <li class="toc-h2"><a href="#exenciones-de-responsabilidad">EXENCIONES DE RESPONSABILIDAD</a></li>
-          <li class="toc-h2"><a href="#derecho-a-modificar-la-politica-de-cookies">DERECHO A MODIFICAR LA POLÍTICA DE COOKIES</a></li>
+      <summary><span data-l="es" lang="es">En esta página</span><span data-l="ca" lang="ca">En aquesta pàgina</span><span data-l="en" lang="en">On this page</span></summary>
+      <ol data-l="es">
+        <li class="toc-h2"><a href="#que-son-las-cookies">¿QUÉ SON LAS COOKIES?</a></li>
+        <li class="toc-h2"><a href="#tipos-de-cookies">TIPOS DE COOKIES</a></li>
+        <li class="toc-h3"><a href="#cookies-exentas">Cookies exentas</a></li>
+        <li class="toc-h3"><a href="#en-atencion-a-su-finalidad">En atención a su finalidad:</a></li>
+        <li class="toc-h3"><a href="#por-su-gestion">Por su gestión:</a></li>
+        <li class="toc-h3"><a href="#que-cookies-utilizamos">¿Qué cookies utilizamos?</a></li>
+        <li class="toc-h3"><a href="#cookies-de-analisis">Cookies de Análisis:</a></li>
+        <li class="toc-h2"><a href="#desactivacion-de-cookies">DESACTIVACIÓN DE COOKIES</a></li>
+        <li class="toc-h2"><a href="#exenciones-de-responsabilidad">EXENCIONES DE RESPONSABILIDAD</a></li>
+        <li class="toc-h2"><a href="#derecho-a-modificar-la-politica-de-cookies">DERECHO A MODIFICAR LA POLÍTICA DE COOKIES</a></li>
+      </ol>
+      <ol data-l="ca">
+        <li class="toc-h2"><a href="#ca-que-son-les-galetes">QUÈ SÓN LES GALETES?</a></li>
+        <li class="toc-h2"><a href="#ca-tipus-de-galetes">TIPUS DE GALETES</a></li>
+        <li class="toc-h3"><a href="#ca-galetes-exemptes">Galetes exemptes</a></li>
+        <li class="toc-h3"><a href="#ca-segons-la-seva-finalitat">Segons la seva finalitat:</a></li>
+        <li class="toc-h3"><a href="#ca-segons-la-seva-gestio">Segons la seva gestió:</a></li>
+        <li class="toc-h3"><a href="#ca-quines-galetes-fem-servir">Quines galetes fem servir?</a></li>
+        <li class="toc-h3"><a href="#ca-galetes-danalisi">Galetes d’anàlisi:</a></li>
+        <li class="toc-h2"><a href="#ca-desactivacio-de-galetes">DESACTIVACIÓ DE GALETES</a></li>
+        <li class="toc-h2"><a href="#ca-exempcions-de-responsabilitat">EXEMPCIONS DE RESPONSABILITAT</a></li>
+        <li class="toc-h2"><a href="#ca-dret-a-modificar-la-politica-de-galetes">DRET A MODIFICAR LA POLÍTICA DE GALETES</a></li>
+      </ol>
+      <ol data-l="en">
+        <li class="toc-h2"><a href="#en-what-are-cookies">WHAT ARE COOKIES?</a></li>
+        <li class="toc-h2"><a href="#en-types-of-cookies">TYPES OF COOKIES</a></li>
+        <li class="toc-h3"><a href="#en-exempt-cookies">Exempt cookies</a></li>
+        <li class="toc-h3"><a href="#en-by-purpose">By purpose:</a></li>
+        <li class="toc-h3"><a href="#en-by-management">By management:</a></li>
+        <li class="toc-h3"><a href="#en-which-cookies-do-we-use">Which cookies do we use?</a></li>
+        <li class="toc-h3"><a href="#en-analytics-cookies">Analytics cookies:</a></li>
+        <li class="toc-h2"><a href="#en-disabling-cookies">DISABLING COOKIES</a></li>
+        <li class="toc-h2"><a href="#en-disclaimers">DISCLAIMERS</a></li>
+        <li class="toc-h2"><a href="#en-right-to-modify-the-cookie-policy">RIGHT TO MODIFY THE COOKIE POLICY</a></li>
       </ol>
     </details>
-    <article class="legal-body">
+    <article class="legal-body" data-l="es" lang="es">
 <p>El equipo de <strong>CERAPAL, S.L.</strong>, le quiere recordar que con el uso y navegación de esta web usted ha adquirido la <strong>condición de usuario</strong> y por tanto, avisamos que si prosigue su navegación por este sitio web sin haber configurado los navegadores para impedir la instalación de las cookies, <strong>estará prestando su consentimiento para el empleo de las cookies</strong>, en aplicación de términos incluidos en el artículo 22.2 de la Ley 34/2002 de Servicios de la Sociedad de la Información y Comercio Electrónico.</p>
 <h2 id="que-son-las-cookies">¿QUÉ SON LAS COOKIES?</h2>
 <p>Una cookie es un archivo que se descarga en el ordenador o dispositivo del usuario al acceder a una página web con el objeto de permitir almacenar y recuperar información sobre los hábitos de navegación del usuario o de su equipo.</p>
@@ -443,6 +534,7 @@ a { color: inherit; }
 <h3 id="que-cookies-utilizamos">¿Qué cookies utilizamos?</h3>
 <p>En <strong>CERAPAL -estudi de cuines- (cerapal.cat)</strong> utilizamos únicamente cookies de análisis, técnicas y de personalización, que nos permiten la analítica sistemática de nuestra web y flujos de entrada de manera anónima, así como la mejora de la experiencia del usuario en nuestra web. Usamos cookies propias y cookies de terceros.</p>
 <p>Las cookies con las que cuenta <strong>esta web</strong> son las siguientes:</p>
+<p class="table-hint">Desliza la tabla hacia los lados para verla entera →</p>
 <div class="table-wrap wrap-table-cookies" role="region" aria-label="Tabla" tabindex="0"><table class="table-cookies"><thead>
 <tr>
 <th>Cookie</th><th>Receptor</th><th>Categoría</th><th>Finalidad</th><th>Información adicional</th><th>Duración</th></tr></thead><tbody>
@@ -501,6 +593,174 @@ a { color: inherit; }
 <h2 id="derecho-a-modificar-la-politica-de-cookies">DERECHO A MODIFICAR LA POLÍTICA DE COOKIES</h2>
 <p><strong>CERAPAL -estudi de cuines-</strong> se guarda todos los derechos a modificar su política de privacidad sin el previo aviso de la misma.</p>
     </article>
+    <article class="legal-body" data-l="ca" lang="ca">
+<p>L’equip de <strong>CERAPAL, S.L.</strong> li vol recordar que, amb l’ús i la navegació d’aquest web, vostè ha adquirit la <strong>condició d’usuari</strong> i, per tant, l’avisem que si continua navegant per aquest lloc web sense haver configurat els navegadors per impedir la instal·lació de les galetes, <strong>estarà donant el seu consentiment per a l’ús de les galetes</strong>, en aplicació dels termes inclosos a l’article 22.2 de la Llei 34/2002 de serveis de la societat de la informació i de comerç electrònic.</p>
+<h2 id="ca-que-son-les-galetes">QUÈ SÓN LES GALETES?</h2>
+<p>Una galeta és un arxiu que es descarrega a l’ordinador o al dispositiu de l’usuari quan accedeix a una pàgina web, amb l’objectiu de permetre emmagatzemar i recuperar informació sobre els hàbits de navegació de l’usuari o del seu equip.</p>
+<p>Les galetes no només beneficien les empreses, sinó que també permeten establir nivells de protecció i seguretat, recopilar dades estadístiques i normalment anònimes, així com fer publicitat adaptada als interessos dels usuaris.</p>
+<h2 id="ca-tipus-de-galetes">TIPUS DE GALETES</h2>
+<p>Les galetes es poden classificar segons diferents funcionaments i paràmetres; algunes de les classificacions més habituals són aquestes:</p>
+<h3 id="ca-galetes-exemptes">Galetes exemptes</h3>
+<p>Són les galetes sobre les quals legalment <strong>no cal informar ni obtenir el consentiment per al seu ús</strong>. Es tracta de galetes que permeten la comunicació entre l’equip de l’usuari i la xarxa, així com les que estrictament presten un servei sol·licitat expressament per l’usuari.</p>
+<h3 id="ca-segons-la-seva-finalitat">Segons la seva finalitat:</h3>
+<ul>
+<li><strong>Analítiques:</strong> recullen informació de l’ús que es fa del lloc web.</li>
+<li><strong>Socials:</strong> són les necessàries per a xarxes socials externes.</li>
+<li><strong>Afiliats:</strong> permeten fer un seguiment de les visites procedents d’altres webs amb què el lloc web té un contracte d’afiliació.</li>
+<li><strong>Publicitat i comportamentals:</strong> recullen informació sobre les preferències i eleccions personals de l’usuari.</li>
+<li><strong>Tècniques i funcionals:</strong> són les estrictament necessàries per a l’ús del lloc web i per a la prestació del servei contractat.</li>
+</ul>
+<h3 id="ca-segons-la-seva-gestio">Segons la seva gestió:</h3>
+<ul>
+<li><strong>Galetes pròpies:</strong> són les que s’envien a l’equip terminal de l’usuari des d’un equip o domini gestionat pel mateix editor i des del qual es presta el servei sol·licitat per l’usuari.</li>
+<li><strong>Galetes de tercers:</strong> són les que s’envien a l’equip terminal de l’usuari des d’un equip o domini que no gestiona l’editor, sinó una altra entitat que tracta les dades obtingudes a través de les galetes.</li>
+</ul>
+<h3 id="ca-quines-galetes-fem-servir">Quines galetes fem servir?</h3>
+<p>A <strong>CERAPAL -estudi de cuines- (cerapal.cat)</strong> fem servir únicament galetes d’anàlisi, tècniques i de personalització, que ens permeten analitzar de manera sistemàtica i anònima el nostre web i els fluxos d’entrada, així com millorar l’experiència de l’usuari al nostre web. Fem servir galetes pròpies i galetes de tercers.</p>
+<p>Les galetes que fa servir <strong>aquest web</strong> són les següents:</p>
+<p class="table-hint">Llisca la taula cap als costats per veure-la sencera →</p>
+<div class="table-wrap wrap-table-cookies" role="region" aria-label="Taula" tabindex="0"><table class="table-cookies"><thead>
+<tr>
+<th>Galeta</th><th>Receptor</th><th>Categoria</th><th>Finalitat</th><th>Informació addicional</th><th>Durada</th></tr></thead><tbody>
+<tr>
+<td data-label="Galeta">PHPSESSID</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Conserva els estats dels usuaris en totes les peticions de la pàgina</td><td data-label="Informació addicional"></td><td data-label="Durada">Sessió</td></tr><tr>
+<td data-label="Galeta">pll_language</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Utilitzada per emmagatzemar l’idioma actual del lloc web</td><td data-label="Informació addicional"></td><td data-label="Durada">1 any</td></tr><tr>
+<td data-label="Galeta">wordpress_[hash]</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Emmagatzemar detalls d’autenticació</td><td data-label="Informació addicional"></td><td data-label="Durada">Persistent</td></tr><tr>
+<td data-label="Galeta">wordpress_logged_in_[hash]</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Indica quan has iniciat la sessió i qui ets</td><td data-label="Informació addicional"></td><td data-label="Durada">Persistent</td></tr><tr>
+<td data-label="Galeta">wp-settings-{time}-[UID]</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Emmagatzema configuracions personals del tauler i de la interfície de l’administrador</td><td data-label="Informació addicional"></td><td data-label="Durada">Persistent</td></tr><tr>
+<td data-label="Galeta">woocommerce_cart_hash</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Conté informació del carretó de l’usuari</td><td data-label="Informació addicional"></td><td data-label="Durada">Sessió</td></tr><tr>
+<td data-label="Galeta">woocommerce_items_in_cart</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Conté informació del carretó de l’usuari</td><td data-label="Informació addicional"></td><td data-label="Durada">Sessió</td></tr><tr>
+<td data-label="Galeta">wp_woocommerce_session</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Conté un codi únic per a cada client per gestionar les dades de compra</td><td data-label="Informació addicional"></td><td data-label="Durada">2 dies</td></tr><tr>
+<td data-label="Galeta">comment_author_[hash]</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Emmagatzema el nom de l’usuari que fa el comentari.</td><td data-label="Informació addicional"></td><td data-label="Durada">1 any</td></tr><tr>
+<td data-label="Galeta">comment_author_email_[hash]</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Emmagatzema el correu electrònic de l’usuari que fa el comentari.</td><td data-label="Informació addicional"></td><td data-label="Durada">1 any</td></tr><tr>
+<td data-label="Galeta">comment_author_url_[hash]</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Emmagatzema l’URL de l’usuari que fa el comentari.</td><td data-label="Informació addicional"></td><td data-label="Durada">1 any</td></tr><tr>
+<td data-label="Galeta">cli_user_preference</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Emmagatzema l’estat del consentiment de galetes de l’usuari</td><td data-label="Informació addicional"></td><td data-label="Durada">1 any</td></tr><tr>
+<td data-label="Galeta">CookieLawInfoConsent</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Emmagatzema l’estat del consentiment de galetes de l’usuari</td><td data-label="Informació addicional"></td><td data-label="Durada">1 any</td></tr><tr>
+<td data-label="Galeta">cookielawinfo-checkbox-necesarias</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Emmagatzema el consentiment de l’usuari per a les galetes de la categoria necessàries</td><td data-label="Informació addicional"></td><td data-label="Durada">1 any</td></tr><tr>
+<td data-label="Galeta">cookielawinfo-checkbox-analiticas</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Emmagatzema el consentiment de l’usuari per a les galetes de la categoria analítiques</td><td data-label="Informació addicional"></td><td data-label="Durada">1 any</td></tr><tr>
+<td data-label="Galeta">cookielawinfo-checkbox-publicitarias</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Emmagatzema el consentiment de l’usuari per a les galetes de la categoria publicitàries</td><td data-label="Informació addicional"></td><td data-label="Durada">1 any</td></tr><tr>
+<td data-label="Galeta">elementor</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoria">Necessàries</td><td data-label="Finalitat">Permet al propietari del lloc web implementar o canviar el contingut del lloc web en temps real</td><td data-label="Informació addicional"></td><td data-label="Durada">Persistent</td></tr><tr>
+<td data-label="Galeta">1P_JAR</td><td data-label="Receptor">Google</td><td data-label="Categoria">Analítiques</td><td data-label="Finalitat">Anàlisi i millora de publicitat</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">Persistent</td></tr><tr>
+<td data-label="Galeta">NID, IDE</td><td data-label="Receptor">Google</td><td data-label="Categoria">Analítiques</td><td data-label="Finalitat">Permet visualitzar mapes per mitjà de Google Maps. Registra un ID</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">6 mesos</td></tr><tr>
+<td data-label="Galeta">CONSENT</td><td data-label="Receptor">Google</td><td data-label="Categoria">Analítiques</td><td data-label="Finalitat">Identificació d’usuaris</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">Persistent</td></tr><tr>
+<td data-label="Galeta">DV</td><td data-label="Receptor">Google</td><td data-label="Categoria">Analítiques</td><td data-label="Finalitat">Anàlisi i millora de la publicitat</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">Persistent</td></tr><tr>
+<td data-label="Galeta">_Secure-3PAPIDSIDE, _Secure-3PSIDE, _Secure-3APISIDI, _Secure-HSID, _Secure-SSIDI</td><td data-label="Receptor">Google</td><td data-label="Categoria">Publicitàries</td><td data-label="Finalitat">Adaptació dels anuncis per a rellevància i interès</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">2 anys</td></tr><tr>
+<td data-label="Galeta">SIDCC</td><td data-label="Receptor">Google</td><td data-label="Categoria">Analítiques</td><td data-label="Finalitat">Proporciona serveis i extreu informació anònima sobre la navegació</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">3 mesos</td></tr><tr>
+<td data-label="Galeta">SSID</td><td data-label="Receptor">Google</td><td data-label="Categoria">Publicitàries</td><td data-label="Finalitat">Mesura el rendiment dels anuncis i proporciona recomanacions</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">3 mesos</td></tr><tr>
+<td data-label="Galeta">SID</td><td data-label="Receptor">Google</td><td data-label="Categoria">Analítiques</td><td data-label="Finalitat">Recull informació per al cercador de Google</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">Sessió</td></tr><tr>
+<td data-label="Galeta">HSID</td><td data-label="Receptor">Google</td><td data-label="Categoria">Publicitàries</td><td data-label="Finalitat">Mesura el rendiment dels anuncis i proporciona recomanacions</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">Persistent</td></tr><tr>
+<td data-label="Galeta">ANID</td><td data-label="Receptor">Google</td><td data-label="Categoria">Publicitàries</td><td data-label="Finalitat">Mesura el rendiment dels anuncis i proporciona recomanacions</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">Persistent</td></tr><tr>
+<td data-label="Galeta">SAPISID, APISID</td><td data-label="Receptor">Google</td><td data-label="Categoria">Publicitàries</td><td data-label="Finalitat">Mesura el rendiment dels anuncis i proporciona recomanacions</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">Persistent</td></tr><tr>
+<td data-label="Galeta">SEARCH_SAMESITE</td><td data-label="Receptor">Google</td><td data-label="Categoria">Analítiques</td><td data-label="Finalitat">Enviament correcte de dades</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">6 mesos</td></tr><tr>
+<td data-label="Galeta">OGP, OGPC</td><td data-label="Receptor">Google</td><td data-label="Categoria">Actuacions</td><td data-label="Finalitat">Serveix per emmagatzemar les preferències i la informació de l’usuari quan visualitza pàgines amb mapes de Google</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">1 dia</td></tr><tr>
+<td data-label="Galeta">OTZ</td><td data-label="Receptor">Google</td><td data-label="Categoria">Publicitàries</td><td data-label="Finalitat">Utilitzada per personalitzar els anuncis que es mostren als serveis de Google</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">1 mes</td></tr><tr>
+<td data-label="Galeta">UULE</td><td data-label="Receptor">Google</td><td data-label="Categoria">Actuacions</td><td data-label="Finalitat">Habilita la geolocalització de Google Maps</td><td data-label="Informació addicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Durada">1 dia</td></tr><tr>
+<td data-label="Galeta">_fbc, _fbp</td><td data-label="Receptor">Facebook</td><td data-label="Categoria">Publicitàries</td><td data-label="Finalitat">Anàlisi i millora de la publicitat a Facebook</td><td data-label="Informació addicional"><a href="https://es-es.facebook.com/policies/cookies/" target="_blank" rel="noopener">Facebook</a></td><td data-label="Durada">12 mesos</td></tr></tbody></table></div>
+<h3 id="ca-galetes-danalisi">Galetes d’anàlisi:</h3>
+<p>La majoria de les galetes d’anàlisi són propietat de Google Analytics i Google Adwords, i ens permeten analitzar i adaptar el web als comportaments derivats del trànsit, amb dades estadístiques absolutament abstractes per a <strong>CERAPAL -estudi de cuines-</strong>.</p>
+<p>Si en volen més informació sobre la política de galetes, la poden consultar a l’enllaç següent: <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener">https://policies.google.com/privacy?hl=en</a>.</p>
+<h2 id="ca-desactivacio-de-galetes">DESACTIVACIÓ DE GALETES</h2>
+<p>Les galetes es poden deshabilitar, esborrar i desactivar segons el navegador utilitzat; a continuació, poden consultar les instruccions per als principals navegadors.</p>
+<ul>
+<li><a href="https://support.google.com/chrome/answer/95647?hl=es" target="_blank" rel="noopener">Google Chrome</a></li>
+<li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias?redirectlocale=es&amp;redirectslug=habilitar-y-deshabilitar-cookies-que-los-sitios-we" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+<li><a href="https://support.microsoft.com/es-es/help/17442/windows-internet-explorer-delete-manage-cookies#ie=ie-11" target="_blank" rel="noopener">Microsoft Internet Explorer</a></li>
+<li><a href="https://support.apple.com/es-es/HT201265" target="_blank" rel="noopener">Apple Safari a l’iPhone, l’iPad o l’iPod Touch</a></li>
+<li><a href="https://help.opera.com/es/Windows/11.50/es-ES/cookies.html" target="_blank" rel="noopener">Opera</a></li>
+<li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari per a Mac</a></li>
+<li><a href="https://support.microsoft.com/es-es/help/4468242/microsoft-edge-browsing-data-and-privacy-microsoft-privacy" target="_blank" rel="noopener">Microsoft Edge (Windows 10)</a></li>
+</ul>
+<p>També es poden desactivar les galetes de Google Analytics instal·lant el complement següent: <a href="https://tools.google.com/dlpage/gaoptout/?hl=es" target="_blank" rel="noopener">https://tools.google.com/dlpage/gaoptout/?hl=es</a></p>
+<h2 id="ca-exempcions-de-responsabilitat">EXEMPCIONS DE RESPONSABILITAT</h2>
+<p>A <strong>CERAPAL -estudi de cuines-</strong> no podem ni ens fem responsables del contingut, ni de la veracitat, ni de l’actualització de les polítiques de privacitat que puguin tenir els tercers esmentats en aquesta política de galetes.</p>
+<p>Són els navegadors web els encarregats d’emmagatzemar les galetes, i és des d’aquests on ha d’exercir el seu dret a eliminar-les o desactivar-les; per tant, no en podem garantir el comportament correcte.</p>
+<h2 id="ca-dret-a-modificar-la-politica-de-galetes">DRET A MODIFICAR LA POLÍTICA DE GALETES</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> es reserva tots els drets a modificar la seva política de privacitat sense avís previ.</p>
+    </article>
+    <article class="legal-body" data-l="en" lang="en">
+<p>The <strong>CERAPAL, S.L.</strong> team would like to remind you that, by using and browsing this website, you have acquired the <strong>status of user</strong>; we therefore inform you that if you continue browsing this website without having configured your browser to prevent cookies from being installed, <strong>you will be giving your consent to the use of cookies</strong>, under the terms of article 22.2 of Law 34/2002 on Information Society Services and Electronic Commerce.</p>
+<h2 id="en-what-are-cookies">WHAT ARE COOKIES?</h2>
+<p>A cookie is a file that is downloaded to the user’s computer or device when they access a web page, in order to store and retrieve information about the browsing habits of the user or of their device.</p>
+<p>Cookies do not only benefit companies; they also make it possible to establish levels of protection and security, to collect statistical and usually anonymous data, and to show advertising tailored to users’ interests.</p>
+<h2 id="en-types-of-cookies">TYPES OF COOKIES</h2>
+<p>Cookies can be classified according to different functions and parameters; some of the most common classifications are these:</p>
+<h3 id="en-exempt-cookies">Exempt cookies</h3>
+<p>These are the cookies for which it is legally <strong>not necessary to inform users or obtain their consent</strong>. They are cookies that allow communication between the user’s device and the network, as well as those that strictly provide a service expressly requested by the user.</p>
+<h3 id="en-by-purpose">By purpose:</h3>
+<ul>
+<li><strong>Analytics:</strong> they collect information about how the website is used.</li>
+<li><strong>Social:</strong> those needed for external social networks.</li>
+<li><strong>Affiliates:</strong> they make it possible to track visits coming from other websites with which the website has an affiliate agreement.</li>
+<li><strong>Advertising and behavioural:</strong> they collect information about the user’s personal preferences and choices.</li>
+<li><strong>Technical and functional:</strong> those strictly necessary to use the website and to provide the contracted service.</li>
+</ul>
+<h3 id="en-by-management">By management:</h3>
+<ul>
+<li><strong>First-party cookies:</strong> those sent to the user’s terminal from a device or domain managed by the publisher itself, from which the service requested by the user is provided.</li>
+<li><strong>Third-party cookies:</strong> those sent to the user’s terminal from a device or domain that is not managed by the publisher but by another entity that processes the data obtained through the cookies.</li>
+</ul>
+<h3 id="en-which-cookies-do-we-use">Which cookies do we use?</h3>
+<p>At <strong>CERAPAL -estudi de cuines- (cerapal.cat)</strong> we only use analytics, technical and personalisation cookies, which allow us to analyse our website and incoming traffic systematically and anonymously, and to improve the user experience on our website. We use first-party and third-party cookies.</p>
+<p>The cookies used by <strong>this website</strong> are the following:</p>
+<p class="table-hint">Swipe the table sideways to see all of it →</p>
+<div class="table-wrap wrap-table-cookies" role="region" aria-label="Table" tabindex="0"><table class="table-cookies"><thead>
+<tr>
+<th>Cookie</th><th>Recipient</th><th>Category</th><th>Purpose</th><th>Additional information</th><th>Duration</th></tr></thead><tbody>
+<tr>
+<td data-label="Cookie">PHPSESSID</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Keeps users’ state across all page requests</td><td data-label="Additional information"></td><td data-label="Duration">Session</td></tr><tr>
+<td data-label="Cookie">pll_language</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Used to store the current language of the website</td><td data-label="Additional information"></td><td data-label="Duration">1 year</td></tr><tr>
+<td data-label="Cookie">wordpress_[hash]</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Stores authentication details</td><td data-label="Additional information"></td><td data-label="Duration">Persistent</td></tr><tr>
+<td data-label="Cookie">wordpress_logged_in_[hash]</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Indicates when you are logged in and who you are</td><td data-label="Additional information"></td><td data-label="Duration">Persistent</td></tr><tr>
+<td data-label="Cookie">wp-settings-{time}-[UID]</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Stores personal settings for the dashboard and the admin interface</td><td data-label="Additional information"></td><td data-label="Duration">Persistent</td></tr><tr>
+<td data-label="Cookie">woocommerce_cart_hash</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Contains information about the user’s cart</td><td data-label="Additional information"></td><td data-label="Duration">Session</td></tr><tr>
+<td data-label="Cookie">woocommerce_items_in_cart</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Contains information about the user’s cart</td><td data-label="Additional information"></td><td data-label="Duration">Session</td></tr><tr>
+<td data-label="Cookie">wp_woocommerce_session</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Contains a unique code for each customer to manage purchase data</td><td data-label="Additional information"></td><td data-label="Duration">2 days</td></tr><tr>
+<td data-label="Cookie">comment_author_[hash]</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Stores the name of the user who posts the comment.</td><td data-label="Additional information"></td><td data-label="Duration">1 year</td></tr><tr>
+<td data-label="Cookie">comment_author_email_[hash]</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Stores the email address of the user who posts the comment.</td><td data-label="Additional information"></td><td data-label="Duration">1 year</td></tr><tr>
+<td data-label="Cookie">comment_author_url_[hash]</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Stores the URL of the user who posts the comment.</td><td data-label="Additional information"></td><td data-label="Duration">1 year</td></tr><tr>
+<td data-label="Cookie">cli_user_preference</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Stores the user’s cookie consent status</td><td data-label="Additional information"></td><td data-label="Duration">1 year</td></tr><tr>
+<td data-label="Cookie">CookieLawInfoConsent</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Stores the user’s cookie consent status</td><td data-label="Additional information"></td><td data-label="Duration">1 year</td></tr><tr>
+<td data-label="Cookie">cookielawinfo-checkbox-necesarias</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Stores the user’s consent for cookies in the necessary category</td><td data-label="Additional information"></td><td data-label="Duration">1 year</td></tr><tr>
+<td data-label="Cookie">cookielawinfo-checkbox-analiticas</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Stores the user’s consent for cookies in the analytics category</td><td data-label="Additional information"></td><td data-label="Duration">1 year</td></tr><tr>
+<td data-label="Cookie">cookielawinfo-checkbox-publicitarias</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Stores the user’s consent for cookies in the advertising category</td><td data-label="Additional information"></td><td data-label="Duration">1 year</td></tr><tr>
+<td data-label="Cookie">elementor</td><td data-label="Recipient">CERAPAL -estudi de cuines-</td><td data-label="Category">Necessary</td><td data-label="Purpose">Allows the website owner to implement or change the website’s content in real time</td><td data-label="Additional information"></td><td data-label="Duration">Persistent</td></tr><tr>
+<td data-label="Cookie">1P_JAR</td><td data-label="Recipient">Google</td><td data-label="Category">Analytics</td><td data-label="Purpose">Analysis and improvement of advertising</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">Persistent</td></tr><tr>
+<td data-label="Cookie">NID, IDE</td><td data-label="Recipient">Google</td><td data-label="Category">Analytics</td><td data-label="Purpose">Allows maps to be displayed through Google Maps. Registers an ID</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">6 months</td></tr><tr>
+<td data-label="Cookie">CONSENT</td><td data-label="Recipient">Google</td><td data-label="Category">Analytics</td><td data-label="Purpose">User identification</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">Persistent</td></tr><tr>
+<td data-label="Cookie">DV</td><td data-label="Recipient">Google</td><td data-label="Category">Analytics</td><td data-label="Purpose">Analysis and improvement of advertising</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">Persistent</td></tr><tr>
+<td data-label="Cookie">_Secure-3PAPIDSIDE, _Secure-3PSIDE, _Secure-3APISIDI, _Secure-HSID, _Secure-SSIDI</td><td data-label="Recipient">Google</td><td data-label="Category">Advertising</td><td data-label="Purpose">Tailors ads for relevance and interest</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">2 years</td></tr><tr>
+<td data-label="Cookie">SIDCC</td><td data-label="Recipient">Google</td><td data-label="Category">Analytics</td><td data-label="Purpose">Provides services and extracts anonymous information about browsing</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">3 months</td></tr><tr>
+<td data-label="Cookie">SSID</td><td data-label="Recipient">Google</td><td data-label="Category">Advertising</td><td data-label="Purpose">Measures ad performance and provides recommendations</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">3 months</td></tr><tr>
+<td data-label="Cookie">SID</td><td data-label="Recipient">Google</td><td data-label="Category">Analytics</td><td data-label="Purpose">Collects information for the Google search engine</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">Session</td></tr><tr>
+<td data-label="Cookie">HSID</td><td data-label="Recipient">Google</td><td data-label="Category">Advertising</td><td data-label="Purpose">Measures ad performance and provides recommendations</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">Persistent</td></tr><tr>
+<td data-label="Cookie">ANID</td><td data-label="Recipient">Google</td><td data-label="Category">Advertising</td><td data-label="Purpose">Measures ad performance and provides recommendations</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">Persistent</td></tr><tr>
+<td data-label="Cookie">SAPISID, APISID</td><td data-label="Recipient">Google</td><td data-label="Category">Advertising</td><td data-label="Purpose">Measures ad performance and provides recommendations</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">Persistent</td></tr><tr>
+<td data-label="Cookie">SEARCH_SAMESITE</td><td data-label="Recipient">Google</td><td data-label="Category">Analytics</td><td data-label="Purpose">Correct sending of data</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">6 months</td></tr><tr>
+<td data-label="Cookie">OGP, OGPC</td><td data-label="Recipient">Google</td><td data-label="Category">Performance</td><td data-label="Purpose">Stores the user’s preferences and information when viewing pages with Google maps</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">1 day</td></tr><tr>
+<td data-label="Cookie">OTZ</td><td data-label="Recipient">Google</td><td data-label="Category">Advertising</td><td data-label="Purpose">Used to personalise the ads shown on Google services</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">1 month</td></tr><tr>
+<td data-label="Cookie">UULE</td><td data-label="Recipient">Google</td><td data-label="Category">Performance</td><td data-label="Purpose">Enables Google Maps geolocation</td><td data-label="Additional information"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duration">1 day</td></tr><tr>
+<td data-label="Cookie">_fbc, _fbp</td><td data-label="Recipient">Facebook</td><td data-label="Category">Advertising</td><td data-label="Purpose">Analysis and improvement of advertising on Facebook</td><td data-label="Additional information"><a href="https://es-es.facebook.com/policies/cookies/" target="_blank" rel="noopener">Facebook</a></td><td data-label="Duration">12 months</td></tr></tbody></table></div>
+<h3 id="en-analytics-cookies">Analytics cookies:</h3>
+<p>Most analytics cookies belong to Google Analytics and Google Adwords; they allow us to analyse and adapt the website to the behaviour derived from traffic, with completely abstract statistical data for <strong>CERAPAL -estudi de cuines-</strong>.</p>
+<p>If you would like more information about the cookie policy, you can find it at the following link: <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener">https://policies.google.com/privacy?hl=en</a>.</p>
+<h2 id="en-disabling-cookies">DISABLING COOKIES</h2>
+<p>Cookies can be disabled, deleted and deactivated depending on the browser used; below you can find the instructions for the main browsers.</p>
+<ul>
+<li><a href="https://support.google.com/chrome/answer/95647?hl=es" target="_blank" rel="noopener">Google Chrome</a></li>
+<li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias?redirectlocale=es&amp;redirectslug=habilitar-y-deshabilitar-cookies-que-los-sitios-we" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+<li><a href="https://support.microsoft.com/es-es/help/17442/windows-internet-explorer-delete-manage-cookies#ie=ie-11" target="_blank" rel="noopener">Microsoft Internet Explorer</a></li>
+<li><a href="https://support.apple.com/es-es/HT201265" target="_blank" rel="noopener">Apple Safari on iPhone, iPad or iPod Touch</a></li>
+<li><a href="https://help.opera.com/es/Windows/11.50/es-ES/cookies.html" target="_blank" rel="noopener">Opera</a></li>
+<li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari for Mac</a></li>
+<li><a href="https://support.microsoft.com/es-es/help/4468242/microsoft-edge-browsing-data-and-privacy-microsoft-privacy" target="_blank" rel="noopener">Microsoft Edge (Windows 10)</a></li>
+</ul>
+<p>It is also possible to disable Google Analytics cookies by installing the following add-on: <a href="https://tools.google.com/dlpage/gaoptout/?hl=es" target="_blank" rel="noopener">https://tools.google.com/dlpage/gaoptout/?hl=es</a></p>
+<h2 id="en-disclaimers">DISCLAIMERS</h2>
+<p>At <strong>CERAPAL -estudi de cuines-</strong> we cannot be, and are not, responsible for the content, accuracy or updating of the privacy policies that the third parties mentioned in this cookie policy may have.</p>
+<p>Web browsers are responsible for storing cookies, and it is from them that you must exercise your right to delete or disable them; therefore, we cannot guarantee their correct behaviour.</p>
+<h2 id="en-right-to-modify-the-cookie-policy">RIGHT TO MODIFY THE COOKIE POLICY</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> reserves all rights to modify its privacy policy without prior notice.</p>
+    </article>
   </div>
 </main>
 
@@ -508,25 +768,25 @@ a { color: inherit; }
   <div class="wrap footer-grid">
     <div class="footer-brand">
       <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FwYV8yIiBkYXRhLW5hbWU9IkNhcGEgMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTIwMCAzMjUiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICNmZmY7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnIGlkPSJDYXBhXzEtMiIgZGF0YS1uYW1lPSJDYXBhIDEiPgogICAgPGcgaWQ9IkxvZ290aXBvIj4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTEiIGRhdGEtbmFtZT0iVHJhemFkbyAxMSIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTIiIGRhdGEtbmFtZT0iVHJhemFkbyAxMiIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTMiIGRhdGEtbmFtZT0iVHJhemFkbyAxMyIgY2xhc3M9ImNscy0xIiBkPSJtNDcyLjQ5LDEzMy45NmMtMTEuOTMtMjEuNC0yOC41Ny0zMy43NC01My44OC0zMy43NC00MC4xNCwwLTYyLjU3LDMxLjkyLTYyLjU3LDY4LjJzMjQuMDUsNjguMjEsNjUuMDksNjguMjFjMjIuMDQtLjU2LDQxLjk5LTEzLjI1LDUxLjg5LTMzLjAxbC0yNS41LTEyLjMzYy00Ljg1LDEwLjQyLTE0Ljk2LDE3LjM3LTI2LjQsMTguMTMtMjUuMzIsMC0zMi45MS0yMi4xMy0zMi45MS00MSwwLTI5LjAyLDE0LjExLTQwLjk5LDMxLjgyLTQwLjk5LDEyLjA0LjMzLDIyLjY1LDguMDQsMjYuNzMsMTkuNDFsMjUuNzItMTIuODlabTExNi41Niw5OS4wNHYtMjUuMDNoLTY3Ljk5di0zMC40OGg1OC40di0yNS4wMmgtNTguNHYtMjMuNTZoNjIuNTd2LTI1LjAzaC05NC43NnYxMjkuMTlsMTAwLjE4LS4wNlptNDkuMTUtMTA1LjIxaDI5LjQ3YzkuNTkuMjEsMTcuMTksOC4xOCwxNi45OCwxNy43OS0uMiw5LjMyLTcuNjksMTYuODMtMTYuOTgsMTcuMDRoLTI5LjQ3di0zNC44M1ptLTMyLjE5LDEwNS4yMWgzMi4xOXYtNDYuNDNoMjAuNDNsMjUuMzEsNDYuNDNoMzUuOTlsLTI5LjQ3LTUxLjg4YzE1Ljc3LTQuMTMsMjYuNzItMTguNDgsMjYuNTgtMzQuODMsMC0yOS4wMi0xNy43Mi00Mi40NC00Ni42NS00Mi40NGgtNjQuMzd2MTI5LjE1Wm0xMjIuMTksMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptMTI2LjE3LTYwLjk0aDI2LjIyYzE0LjY0LDAsMjAuOCw3LjA4LDIwLjgsMTkuOTUuODUsOS45OS02LjU0LDE4Ljc3LTE2LjUsMTkuNjItMS4xMy4xLTIuMjcuMDktMy4zOS0uMDNoLTI3LjEydi0zOS41NFptLTMyLjE5LDEwNS4yMWgzMi41NXYtNDEuNzJoMjUuMTFjNDQuMTIsMCw1My43MS0yNi40OSw1My43MS00My43MSwwLTI1LjU4LTEyLjg0LTQzLjcyLTQ3LjU2LTQzLjcyaC02My44M2wuMDIsMTI5LjE2Wm0xMDQuNDgsMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptOTMuOTUsNDQuMjZoODIuNDV2LTI3LjIxaC01MC4yNnYtMTAxLjk1aC0zMi4xOXYxMjkuMTZaIi8+CiAgICAgIDxwYXRoIGlkPSJUcmF6YWRvXzE0IiBkYXRhLW5hbWU9IlRyYXphZG8gMTQiIGNsYXNzPSJjbHMtMSIgZD0ibTQ3Mi40OSwxMzMuOTZjLTExLjkzLTIxLjQtMjguNTctMzMuNzQtNTMuODgtMzMuNzQtNDAuMTQsMC02Mi41NywzMS45Mi02Mi41Nyw2OC4yczI0LjA1LDY4LjIxLDY1LjA5LDY4LjIxYzIyLjA0LS41Niw0MS45OS0xMy4yNSw1MS44OS0zMy4wMWwtMjUuNS0xMi4zM2MtNC44NSwxMC40Mi0xNC45NiwxNy4zNy0yNi40LDE4LjEzLTI1LjMyLDAtMzIuOTEtMjIuMTMtMzIuOTEtNDEsMC0yOS4wMiwxNC4xMS00MC45OSwzMS44Mi00MC45OSwxMi4wNC4zMywyMi42NSw4LjA0LDI2LjczLDE5LjQxbDI1LjcyLTEyLjg5Wm0xMTYuNTYsOTkuMDR2LTI1LjAzaC02Ny45OXYtMzAuNDhoNTguNHYtMjUuMDJoLTU4LjR2LTIzLjU2aDYyLjU3di0yNS4wM2gtOTQuNzZ2MTI5LjE5bDEwMC4xOC0uMDZabTQ5LjE1LTEwNS4yMWgyOS40N2M5LjU5LjIxLDE3LjE5LDguMTgsMTYuOTgsMTcuNzktLjIsOS4zMi03LjY5LDE2LjgzLTE2Ljk4LDE3LjA0aC0yOS40N3YtMzQuODNabS0zMi4xOSwxMDUuMjFoMzIuMTl2LTQ2LjQzaDIwLjQzbDI1LjMxLDQ2LjQzaDM1Ljk5bC0yOS40Ny01MS44OGMxNS43Ny00LjEzLDI2LjcyLTE4LjQ4LDI2LjU4LTM0LjgzLDAtMjkuMDItMTcuNzItNDIuNDQtNDYuNjUtNDIuNDRoLTY0LjM3djEyOS4xNVptMTIyLjE5LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTEyNi4xNy02MC45NGgyNi4yMmMxNC42NCwwLDIwLjgsNy4wOCwyMC44LDE5Ljk1Ljg1LDkuOTktNi41NCwxOC43Ny0xNi41LDE5LjYyLTEuMTMuMS0yLjI3LjA5LTMuMzktLjAzaC0yNy4xMnYtMzkuNTRabS0zMi4xOSwxMDUuMjFoMzIuNTV2LTQxLjcyaDI1LjExYzQ0LjEyLDAsNTMuNzEtMjYuNDksNTMuNzEtNDMuNzEsMC0yNS41OC0xMi44NC00My43Mi00Ny41Ni00My43MmgtNjMuODNsLjAyLDEyOS4xNlptMTA0LjQ4LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTkzLjk1LDQ0LjI2aDgyLjQ1di0yNy4yMWgtNTAuMjZ2LTEwMS45NWgtMzIuMTl2MTI5LjE2WiIvPgogICAgICA8cGF0aCBpZD0iVHJhemFkb18xNSIgZGF0YS1uYW1lPSJUcmF6YWRvIDE1IiBjbGFzcz0iY2xzLTEiIGQ9Im0wLDE2Mi41QzAsNzIuNzUsNzIuNTIsMCwxNjEuOTksMHMxNjEuOTksNzIuNzUsMTYxLjk5LDE2Mi41LTcyLjUyLDE2Mi41LTE2MS45OSwxNjIuNVMwLDI1Mi4yNSwwLDE2Mi41bTI0OC40NC01MS40MmMtMTcuODItMzEuOTMtNDIuNjItNTAuMzMtODAuMzgtNTAuMzMtNTkuODgsMC05My4zMyw0Ny42My05My4zMywxMDEuNzRzMzUuODgsMTAxLjc0LDk3LjEsMTAxLjc0YzMyLjg4LS44Myw2Mi42NC0xOS43Niw3Ny40MS00OS4yNWwtMzguMDctMTguMzljLTcuMjMsMTUuNTUtMjIuMzIsMjUuOTItMzkuMzksMjcuMDYtMzcuNzYsMC00OS4wOS0zMy00OS4wOS02MS4xNSwwLTQzLjI5LDIxLjA2LTYxLjE1LDQ3LjQ3LTYxLjE1LDE3Ljk4LjQ4LDMzLjgzLDExLjk3LDM5LjkyLDI4Ljk1bDM4LjM0LTE5LjIyWiIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+" alt="Cerapal · Estudi de cuines" width="196" height="53" loading="lazy">
-      <p>Cada proyecto es único, exclusivo y personalizado.</p>
+      <p><span data-l="es" lang="es">Cada proyecto es único, exclusivo y personalizado.</span><span data-l="ca" lang="ca">Cada projecte és únic, exclusiu i personalitzat.</span><span data-l="en" lang="en">Every project is unique, exclusive and tailor-made.</span></p>
     </div>
     <div class="footer-col">
-      <h3>Estudio</h3>
+      <h3><span data-l="es" lang="es">Estudio</span><span data-l="ca" lang="ca">Estudi</span><span data-l="en" lang="en">Studio</span></h3>
       <p>Carrer Ramon Turró, 4 · Local 1<br>08389 Palafolls (Barcelona)</p>
-      <a href="https://www.google.com/maps/search/?api=1&amp;query=Carrer%20Ramon%20Turr%C3%B3%204%2C%2008389%20Palafolls" target="_blank" rel="noopener">Cómo llegar</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Carrer%20Ramon%20Turr%C3%B3%204%2C%2008389%20Palafolls" target="_blank" rel="noopener"><span data-l="es" lang="es">Cómo llegar</span><span data-l="ca" lang="ca">Com arribar-hi</span><span data-l="en" lang="en">Get directions</span></a>
     </div>
     <div class="footer-col">
-      <h3>Contacto</h3>
+      <h3><span data-l="es" lang="es">Contacto</span><span data-l="ca" lang="ca">Contacte</span><span data-l="en" lang="en">Contact</span></h3>
       <a href="tel:+34937620832">937 620 832</a>
       <a href="tel:+34654628727">654 628 727</a>
       <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>
     </div>
     <div class="footer-col">
-      <h3>Horario</h3>
-      <p>Lunes a viernes<br>9:00–13:00<br>15:00–19:00</p>
+      <h3><span data-l="es" lang="es">Horario</span><span data-l="ca" lang="ca">Horari</span><span data-l="en" lang="en">Opening hours</span></h3>
+      <p><span data-l="es" lang="es">Lunes a viernes<br>9:00–13:00<br>15:00–19:00</span><span data-l="ca" lang="ca">De dilluns a divendres<br>9:00–13:00<br>15:00–19:00</span><span data-l="en" lang="en">Monday to Friday<br>9:00–13:00<br>15:00–19:00</span></p>
     </div>
     <div class="footer-col">
-      <h3>Síguenos</h3>
+      <h3><span data-l="es" lang="es">Síguenos</span><span data-l="ca" lang="ca">Segueix-nos</span><span data-l="en" lang="en">Follow us</span></h3>
       <a href="https://www.instagram.com/cuinescerapal/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.facebook.com/cuinescerapal/" target="_blank" rel="noopener">Facebook</a>
     </div>
@@ -534,15 +794,18 @@ a { color: inherit; }
   <div class="wrap footer-bottom">
     <p>© <span id="year">2026</span> Cerapal · Estudi de cuines</p>
     <nav aria-label="Legal">
-      <a href="aviso-legal.html">Aviso legal</a>
-      <a href="politica-privacidad.html">Política de privacidad</a>
-      <a href="politica-cookies.html" aria-current="page">Política de cookies</a>
+      <a href="aviso-legal.html" data-keep-lang><span data-l="es" lang="es">Aviso legal</span><span data-l="ca" lang="ca">Avís legal</span><span data-l="en" lang="en">Legal notice</span></a>
+      <a href="politica-privacidad.html" data-keep-lang><span data-l="es" lang="es">Política de privacidad</span><span data-l="ca" lang="ca">Política de privacitat</span><span data-l="en" lang="en">Privacy policy</span></a>
+      <a href="politica-cookies.html" data-keep-lang aria-current="page"><span data-l="es" lang="es">Política de cookies</span><span data-l="ca" lang="ca">Política de galetes</span><span data-l="en" lang="en">Cookie policy</span></a>
     </nav>
   </div>
 </footer>
 
 <script>
 (() => {
+  const T = {"es": {"title": "Política de cookies · Cerapal", "desc": "Política de cookies de Cerapal · Estudi de cuines: qué cookies usa la web y cómo desactivarlas.", "logoHome": "Cerapal, ir al inicio", "navMain": "Principal", "langLabel": "Idioma", "legalTexts": "Textos legales", "table": "Tabla"}, "ca": {"title": "Política de galetes · Cerapal", "desc": "Política de galetes de Cerapal · Estudi de cuines: quines galetes fa servir el web i com desactivar-les.", "logoHome": "Cerapal, anar a l’inici", "navMain": "Principal", "langLabel": "Idioma", "legalTexts": "Textos legals", "table": "Taula"}, "en": {"title": "Cookie policy · Cerapal", "desc": "Cookie policy of Cerapal · Estudi de cuines: which cookies the website uses and how to disable them.", "logoHome": "Cerapal, go to the home page", "navMain": "Main", "langLabel": "Language", "legalTexts": "Legal texts", "table": "Table"}};
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const root = document.documentElement;
   document.getElementById('year').textContent = new Date().getFullYear();
 
   const nav = document.getElementById('nav');
@@ -554,11 +817,11 @@ a { color: inherit; }
   const tocMobile = document.querySelector('.toc-mobile');
   tocMobile.addEventListener('click', e => { if (e.target.closest('a')) tocMobile.open = false; });
 
-  // marca en el índice el apartado que se está leyendo
+  // marca en el índice el apartado que se está leyendo (solo el índice del idioma visible)
   const toc = document.querySelector('.toc');
-  const links = [...toc.querySelectorAll('a')];
-  const heads = links.map(a => document.getElementById(a.hash.slice(1))).filter(Boolean);
+  let links = [], heads = [];
   const mark = () => {
+    if (!heads.length) return;
     const y = innerHeight * .3;
     let current = heads[0];
     for (const h of heads) if (h.getBoundingClientRect().top <= y) current = h;
@@ -577,7 +840,33 @@ a { color: inherit; }
     ticking = true;
     requestAnimationFrame(() => { ticking = false; mark(); });
   }, { passive: true });
-  mark();
+
+  // idioma: textos (CSS), atributos, título y enlaces que lo conservan
+  $$('[data-keep-lang]').forEach(a => { a.dataset.base = a.getAttribute('href'); });
+  function setLang(l) {
+    root.dataset.lang = l;
+    root.lang = l;
+    document.title = T[l].title;
+    document.querySelector('meta[name="description"]').setAttribute('content', T[l].desc);
+    $$('[data-t-attr]').forEach(el => el.dataset.tAttr.split(',').forEach(p => { const [attr, key] = p.split(':'); el.setAttribute(attr, T[l][key]); }));
+    toc.setAttribute('aria-label', toc.querySelector(`.eyebrow [data-l="${l}"]`).textContent);
+    $$('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l));
+    $$('[data-keep-lang]').forEach(a => {
+      const [path, hash] = a.dataset.base.split('#');
+      a.setAttribute('href', `${path}?lang=${l}${hash ? '#' + hash : ''}`);
+    });
+    links = $$(`ol[data-l="${l}"] a`, toc);
+    heads = links.map(a => document.getElementById(a.hash.slice(1))).filter(Boolean);
+    mark();
+  }
+  $$('.lang button').forEach(b => b.addEventListener('click', () => {
+    const l = b.dataset.lang;
+    if (l === root.dataset.lang) return;
+    setLang(l);
+    try { localStorage.setItem('cerapal-lang', l); } catch (e) {}
+    try { const url = new URL(location.href); url.searchParams.set('lang', l); url.hash = ''; history.replaceState(null, '', url); } catch (e) {}
+  }));
+  setLang(root.dataset.lang);
 })();
 </script>
 </body>
