@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de cookies · Cerapal</title>
+<meta name="description" content="Política de cookies de Cerapal · Estudi de cuines: qué cookies usa la web y cómo desactivarlas.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJDYXBhXzIiIGRhdGEtbmFtZT0iQ2FwYSAyIiB2aWV3Qm94PSIwIDAgMzIzLjk4IDMyNSI+PGRlZnM+PHN0eWxlPiAgICAgIC5jbHMtMSB7ICAgICAgICBmaWxsOiAjMTkxOTE5OyAgICAgIH0gICAgPC9zdHlsZT48L2RlZnM+PGcgaWQ9IkNhcGFfMi0yIiBkYXRhLW5hbWU9IkNhcGEgMiI+PGcgaWQ9IkNhcGFfMS0yIiBkYXRhLW5hbWU9IkNhcGEgMS0yIj48ZyBpZD0iTG9nb3RpcG8iPjxwYXRoIGlkPSJUcmF6YWRvXzE1IiBkYXRhLW5hbWU9IlRyYXphZG8gMTUiIGNsYXNzPSJjbHMtMSIgZD0ibTAsMTYyLjVDMCw3Mi43NSw3Mi41MiwwLDE2MS45OSwwczE2MS45OSw3Mi43NSwxNjEuOTksMTYyLjUtNzIuNTIsMTYyLjUtMTYxLjk5LDE2Mi41UzAsMjUyLjI1LDAsMTYyLjVtMjQ4LjQ0LTUxLjQyYy0xNy44Mi0zMS45My00Mi42Mi01MC4zMy04MC4zOC01MC4zMy01OS44OCwwLTkzLjMzLDQ3LjYzLTkzLjMzLDEwMS43NHMzNS44OCwxMDEuNzQsOTcuMSwxMDEuNzRjMzIuODgtLjgzLDYyLjY0LTE5Ljc2LDc3LjQxLTQ5LjI1bC0zOC4wNy0xOC4zOWMtNy4yMywxNS41NS0yMi4zMiwyNS45Mi0zOS4zOSwyNy4wNi0zNy43NiwwLTQ5LjA5LTMzLTQ5LjA5LTYxLjE1LDAtNDMuMjksMjEuMDYtNjEuMTUsNDcuNDctNjEuMTUsMTcuOTguNDgsMzMuODMsMTEuOTcsMzkuOTIsMjguOTVsMzguMzQtMTkuMjJoLjAyWiI+PC9wYXRoPjwvZz48L2c+PC9nPjwvc3ZnPg==" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Tokens — paleta Cerapal (los mismos que la landing)
+   ============================================================ */
+:root {
+  --black: #000000;
+  --ink: #191919;
+  --muted: #5B5B5B;
+  --grey: #EDEDED;
+  --white: #FFFFFF;
+  --line: #D4D4D4;
+
+  --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --gutter: clamp(16px, 4.2vw, 64px);
+  --col-gap: clamp(12px, 2.2vw, 32px);
+  --max: 1280px;
+  --nav-h: 76px;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, .06);
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 24px);
+  -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--ink) var(--grey);
+  scrollbar-width: thin;
+}
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+::selection { background: var(--black); color: var(--white); }
+:focus-visible { outline: 2px solid var(--black); outline-offset: 3px; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--grey); }
+::-webkit-scrollbar-thumb { background: var(--ink); border: 3px solid var(--grey); border-radius: 10px; }
+
+.skip {
+  position: fixed; left: 16px; top: -60px; z-index: 100;
+  background: var(--black); color: var(--white);
+  padding: 12px 18px; text-decoration: none; font-weight: 600;
+  transition: top .2s;
+}
+.skip:focus { top: 16px; }
+.wrap {
+  width: 100%;
+  max-width: calc(var(--max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.eyebrow {
+  margin: 0 0 20px;
+  font-size: 12px; font-weight: 600; font-stretch: 112%; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ============================================================
+   Botones y navegación
+   ============================================================ */
+.btn {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center; gap: 14px;
+  height: 54px; padding: 0 26px;
+  border: 1px solid transparent; border-radius: 2px;
+  font-size: 15px; font-weight: 600; font-stretch: 108%; letter-spacing: .01em; line-height: 1;
+  text-decoration: none; white-space: nowrap;
+  overflow: hidden; isolation: isolate;
+  transition: color .45s var(--ease-out), border-color .45s var(--ease-out);
+}
+.btn::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform .5s var(--ease-out);
+}
+@media (hover: hover) { .btn:hover::before { transform: scaleY(1); } }
+.btn-dark { background: var(--black); color: var(--white); }
+.btn-dark::before { background: var(--ink); }
+
+.nav {
+  position: fixed; inset: 0 0 auto; z-index: 50;
+  height: var(--nav-h);
+  border-bottom: 1px solid transparent;
+  transition: background-color .4s, border-color .4s;
+}
+.nav.is-scrolled {
+  background: rgba(255, 255, 255, .93);
+  -webkit-backdrop-filter: saturate(1.4) blur(16px);
+  backdrop-filter: saturate(1.4) blur(16px);
+  border-bottom-color: var(--line);
+}
+.nav-inner {
+  height: 100%;
+  display: flex; align-items: center; gap: clamp(20px, 2.6vw, 36px);
+  padding-inline: var(--gutter);
+}
+.nav-logo { flex: none; }
+.nav-logo img { height: 38px; width: auto; }
+.nav-links { display: flex; gap: clamp(20px, 2.4vw, 34px); margin-left: auto; }
+.nav-links a, .nav-tel {
+  position: relative;
+  font-size: 15px; font-weight: 500;
+  text-decoration: none; color: var(--ink);
+}
+.nav-links a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -5px; height: 1px;
+  background: currentColor;
+  transform: scaleX(0); transform-origin: right;
+  transition: transform .45s var(--ease-out);
+}
+@media (hover: hover) { .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; } }
+.nav-tel {
+  padding-left: clamp(20px, 2.6vw, 36px);
+  border-left: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+.nav-cta { height: 44px; padding: 0 20px; font-size: 14px; }
+
+/* ============================================================
+   Cabecera de la página legal
+   ============================================================ */
+.legal-hero { padding: calc(var(--nav-h) + clamp(48px, 7vw, 104px)) 0 0; }
+.legal-title {
+  margin: 0;
+  font-size: clamp(40px, 6.4vw, 92px);
+  line-height: .98;
+  font-weight: 750; font-stretch: 118%; letter-spacing: -.032em;
+  color: var(--black);
+  text-wrap: balance;
+}
+.legal-tabs {
+  display: flex; flex-wrap: wrap; gap: 4px 28px;
+  margin-top: clamp(32px, 4vw, 52px);
+  border-bottom: 1px solid var(--line);
+}
+.legal-tabs a {
+  padding: 14px 0 16px;
+  font-size: 15px; font-weight: 600; font-stretch: 108%;
+  text-decoration: none; color: var(--muted);
+  box-shadow: inset 0 -2px 0 transparent;
+  transition: color .25s, box-shadow .25s;
+}
+@media (hover: hover) { .legal-tabs a:hover { color: var(--black); } }
+.legal-tabs a[aria-current="page"] { color: var(--black); box-shadow: inset 0 -2px 0 var(--black); }
+.tab-short { display: none; }
+
+/* ============================================================
+   Índice + texto
+   ============================================================ */
+.legal-grid {
+  display: grid; grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 112px);
+  padding-block: clamp(48px, 6vw, 88px) clamp(96px, 12vw, 160px);
+}
+.toc { position: sticky; top: calc(var(--nav-h) + 32px); align-self: start; max-height: calc(100vh - var(--nav-h) - 64px); overflow-y: auto; scrollbar-width: none; }
+.toc::-webkit-scrollbar { display: none; }
+.toc ol { margin: 0; padding: 0; list-style: none; border-left: 1px solid var(--line); }
+.toc a {
+  display: block;
+  margin-left: -1px; padding: 7px 0 7px 18px;
+  border-left: 2px solid transparent;
+  font-size: 13px; line-height: 1.4; letter-spacing: .03em;
+  text-decoration: none; color: var(--muted);
+  transition: color .2s, border-color .2s;
+}
+.toc .toc-h3 a { padding-left: 32px; letter-spacing: 0; font-size: 13.5px; }
+@media (hover: hover) { .toc a:hover { color: var(--black); } }
+.toc a.is-active { color: var(--black); border-left-color: var(--black); font-weight: 600; }
+.toc-mobile { display: none; }
+
+.legal-body > :not(.table-wrap) { max-width: 46rem; } /* misma medida para títulos y párrafos */
+.legal-body > :first-child { margin-top: 0; }
+.legal-body p { margin: 0 0 1.15em; }
+.legal-body strong { font-weight: 650; color: var(--black); }
+.legal-body a { color: var(--black); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; }
+@media (hover: hover) { .legal-body a:hover { text-decoration-thickness: 2px; } }
+.legal-body h2 {
+  margin: clamp(56px, 6vw, 80px) 0 24px; padding-top: 28px;
+  border-top: 1px solid var(--black);
+  font-size: clamp(17px, 1.5vw, 20px); line-height: 1.3;
+  font-weight: 750; font-stretch: 112%; letter-spacing: .04em;
+  color: var(--black);
+}
+.legal-body h3 {
+  margin: 44px 0 14px;
+  font-size: clamp(20px, 1.8vw, 24px); line-height: 1.25;
+  font-weight: 700; font-stretch: 108%; letter-spacing: -.01em;
+  color: var(--black);
+}
+.legal-body h4 { margin: 32px 0 10px; font-size: 17px; font-weight: 700; color: var(--black); }
+.legal-body h2 + h3 { margin-top: 0; }
+.legal-body ul, .legal-body ol { margin: 0 0 1.4em; padding: 0; list-style: none; }
+.legal-body li { position: relative; margin: 0 0 .7em; padding-left: 28px; }
+.legal-body ul > li::before {
+  content: ""; position: absolute; left: 4px; top: .78em;
+  width: 10px; height: 1px; background: var(--black);
+}
+.legal-body ol { counter-reset: n; }
+.legal-body ol > li { counter-increment: n; }
+.legal-body ol > li::before {
+  content: counter(n); position: absolute; left: 0; top: 0;
+  font-weight: 700; font-stretch: 112%; font-variant-numeric: tabular-nums; color: var(--black);
+}
+
+.table-wrap {
+  margin: 28px 0 36px;
+  overflow-x: auto;
+  border: 1px solid var(--line); border-radius: 2px;
+  -webkit-overflow-scrolling: touch;
+}
+.legal-body table { width: 100%; border-collapse: collapse; font-size: 14.5px; line-height: 1.5; }
+.legal-body th {
+  padding: 14px 16px;
+  background: var(--grey);
+  font-size: 11.5px; font-weight: 700; font-stretch: 112%; letter-spacing: .14em; text-transform: uppercase; text-align: left;
+  color: var(--black);
+}
+.legal-body td { padding: 14px 16px; border-top: 1px solid var(--line); vertical-align: top; }
+.legal-body td :last-child { margin-bottom: 0; }
+.legal-body td li { margin-bottom: .4em; padding-left: 22px; }
+.legal-body td ul > li::before { left: 2px; width: 8px; }
+.table-cookies { min-width: 820px; table-layout: fixed; }
+.table-cookies th:nth-child(1) { width: 21%; }
+.table-cookies th:nth-child(2) { width: 15%; }
+.table-cookies th:nth-child(3) { width: 13%; }
+.table-cookies th:nth-child(4) { width: 25%; }
+.table-cookies th:nth-child(5) { width: 13%; }
+.table-cookies th:nth-child(6) { width: 13%; }
+.table-cookies th { letter-spacing: .1em; }
+.table-cookies td:first-child { font-weight: 600; color: var(--black); overflow-wrap: anywhere; }
+.table-cookies tbody tr:nth-child(even) td { background: #F7F7F7; }
+.table-summary td:first-child { width: 28%; }
+.table-hint { display: none; margin: 28px 0 -16px; font-size: 13px; color: var(--muted); }
+
+/* ============================================================
+   Pie (el mismo que la landing)
+   ============================================================ */
+.footer { background: var(--ink); color: var(--line); padding: clamp(64px, 8vw, 104px) 0 32px; font-size: 15px; }
+.footer :focus-visible { outline-color: var(--white); }
+.footer-grid { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 40px var(--col-gap); }
+.footer-brand img { width: 196px; height: auto; }
+.footer-brand p { margin: 24px 0 0; max-width: 30ch; }
+.footer h3 {
+  margin: 0 0 16px;
+  font-size: 12px; font-weight: 600; font-stretch: 112%; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--white);
+}
+.footer p { margin: 0; }
+.footer-col a { display: block; width: fit-content; text-decoration: none; color: var(--line); padding: 2px 0; }
+@media (hover: hover) { .footer-col a:hover { color: var(--white); text-decoration: underline; text-underline-offset: 4px; } }
+.footer-col p + a { margin-top: 10px; }
+.footer-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px;
+  position: relative;
+  margin-top: clamp(56px, 7vw, 96px); padding-top: 24px;
+  font-size: 13px;
+}
+.footer-bottom::before {
+  content: ""; position: absolute; top: 0; left: var(--gutter); right: var(--gutter); height: 1px;
+  background: var(--muted);
+}
+.footer-bottom nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.footer-bottom a { text-decoration: none; color: var(--line); }
+.footer-bottom a[aria-current="page"] { color: var(--white); }
+@media (hover: hover) { .footer-bottom a:hover { color: var(--white); text-decoration: underline; text-underline-offset: 4px; } }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1080px) {
+  .nav-tel { display: none; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 900px) {
+  :root { --nav-h: 68px; }
+  .nav.is-scrolled { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--white); }
+  .nav-links { display: none; }
+  .nav-cta { margin-left: auto; }
+  .nav-logo img { height: 32px; }
+
+  .legal-grid { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 32px; }
+  .toc { display: none; }
+  .toc-mobile { display: block; margin-bottom: 40px; border: 1px solid var(--line); border-radius: 2px; }
+  .toc-mobile summary {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 18px;
+    font-size: 12px; font-weight: 700; font-stretch: 112%; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--black);
+    cursor: pointer; list-style: none;
+  }
+  .toc-mobile summary::-webkit-details-marker { display: none; }
+  .toc-mobile summary::after { content: "+"; font-size: 20px; font-weight: 400; letter-spacing: 0; line-height: 1; }
+  .toc-mobile[open] summary::after { content: "–"; }
+  .toc-mobile ol { margin: 0; padding: 4px 0 12px; list-style: none; border-top: 1px solid var(--line); }
+  .toc-mobile a { display: block; padding: 9px 18px; font-size: 14px; line-height: 1.4; text-decoration: none; color: var(--ink); }
+  .toc-mobile .toc-h3 a { padding-left: 34px; color: var(--muted); }
+}
+@media (min-width: 761px) and (max-width: 900px) {
+  .table-hint { display: block; }
+}
+@media (max-width: 760px) {
+  .wrap-table-cookies { overflow: visible; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; }
+  .table-cookies, .table-cookies tbody, .table-cookies tr, .table-cookies td { display: block; width: 100%; min-width: 0; }
+  .table-cookies thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .table-cookies tr { padding: 18px 0 14px; border-top: 1px solid var(--line); }
+  .legal-body .table-cookies td { display: grid; grid-template-columns: 34% minmax(0, 1fr); gap: 12px; padding: 4px 0; border: 0; background: none; }
+  .legal-body .table-cookies td::before {
+    content: attr(data-label);
+    padding-top: 2px;
+    font-size: 11px; font-weight: 700; font-stretch: 112%; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .legal-body .table-cookies td:first-child { display: block; padding-bottom: 8px; font-size: 16px; }
+  .legal-body .table-cookies td:first-child::before { content: none; }
+  .legal-body .table-cookies td:empty { display: none; }
+  .legal-body .table-cookies tbody tr:nth-child(even) td { background: none; }
+}
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .legal-tabs { flex-wrap: nowrap; gap: 0 24px; }
+  .tab-long { display: none; }
+  .tab-short { display: inline; }
+  .legal-body th, .legal-body td { padding: 12px; }
+  .table-summary td:first-child { width: 34%; }
+}
+@media (max-width: 380px) {
+  .nav-cta { padding: 0 14px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn::before, .nav-links a::after { transition: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html" aria-label="Cerapal, ir al inicio">
+      <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FwYV8yIiBkYXRhLW5hbWU9IkNhcGEgMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTIwMCAzMjUiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICMxOTE5MTk7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnIGlkPSJDYXBhXzEtMiIgZGF0YS1uYW1lPSJDYXBhIDEiPgogICAgPGcgaWQ9IkxvZ290aXBvIj4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTEiIGRhdGEtbmFtZT0iVHJhemFkbyAxMSIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTIiIGRhdGEtbmFtZT0iVHJhemFkbyAxMiIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTMiIGRhdGEtbmFtZT0iVHJhemFkbyAxMyIgY2xhc3M9ImNscy0xIiBkPSJtNDcyLjQ5LDEzMy45NmMtMTEuOTMtMjEuNC0yOC41Ny0zMy43NC01My44OC0zMy43NC00MC4xNCwwLTYyLjU3LDMxLjkyLTYyLjU3LDY4LjJzMjQuMDUsNjguMjEsNjUuMDksNjguMjFjMjIuMDQtLjU2LDQxLjk5LTEzLjI1LDUxLjg5LTMzLjAxbC0yNS41LTEyLjMzYy00Ljg1LDEwLjQyLTE0Ljk2LDE3LjM3LTI2LjQsMTguMTMtMjUuMzIsMC0zMi45MS0yMi4xMy0zMi45MS00MSwwLTI5LjAyLDE0LjExLTQwLjk5LDMxLjgyLTQwLjk5LDEyLjA0LjMzLDIyLjY1LDguMDQsMjYuNzMsMTkuNDFsMjUuNzItMTIuODlabTExNi41Niw5OS4wNHYtMjUuMDNoLTY3Ljk5di0zMC40OGg1OC40di0yNS4wMmgtNTguNHYtMjMuNTZoNjIuNTd2LTI1LjAzaC05NC43NnYxMjkuMTlsMTAwLjE4LS4wNlptNDkuMTUtMTA1LjIxaDI5LjQ3YzkuNTkuMjEsMTcuMTksOC4xOCwxNi45OCwxNy43OS0uMiw5LjMyLTcuNjksMTYuODMtMTYuOTgsMTcuMDRoLTI5LjQ3di0zNC44M1ptLTMyLjE5LDEwNS4yMWgzMi4xOXYtNDYuNDNoMjAuNDNsMjUuMzEsNDYuNDNoMzUuOTlsLTI5LjQ3LTUxLjg4YzE1Ljc3LTQuMTMsMjYuNzItMTguNDgsMjYuNTgtMzQuODMsMC0yOS4wMi0xNy43Mi00Mi40NC00Ni42NS00Mi40NGgtNjQuMzd2MTI5LjE1Wm0xMjIuMTksMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptMTI2LjE3LTYwLjk0aDI2LjIyYzE0LjY0LDAsMjAuOCw3LjA4LDIwLjgsMTkuOTUuODUsOS45OS02LjU0LDE4Ljc3LTE2LjUsMTkuNjItMS4xMy4xLTIuMjcuMDktMy4zOS0uMDNoLTI3LjEydi0zOS41NFptLTMyLjE5LDEwNS4yMWgzMi41NXYtNDEuNzJoMjUuMTFjNDQuMTIsMCw1My43MS0yNi40OSw1My43MS00My43MSwwLTI1LjU4LTEyLjg0LTQzLjcyLTQ3LjU2LTQzLjcyaC02My44M2wuMDIsMTI5LjE2Wm0xMDQuNDgsMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptOTMuOTUsNDQuMjZoODIuNDV2LTI3LjIxaC01MC4yNnYtMTAxLjk1aC0zMi4xOXYxMjkuMTZaIi8+CiAgICAgIDxwYXRoIGlkPSJUcmF6YWRvXzE0IiBkYXRhLW5hbWU9IlRyYXphZG8gMTQiIGNsYXNzPSJjbHMtMSIgZD0ibTQ3Mi40OSwxMzMuOTZjLTExLjkzLTIxLjQtMjguNTctMzMuNzQtNTMuODgtMzMuNzQtNDAuMTQsMC02Mi41NywzMS45Mi02Mi41Nyw2OC4yczI0LjA1LDY4LjIxLDY1LjA5LDY4LjIxYzIyLjA0LS41Niw0MS45OS0xMy4yNSw1MS44OS0zMy4wMWwtMjUuNS0xMi4zM2MtNC44NSwxMC40Mi0xNC45NiwxNy4zNy0yNi40LDE4LjEzLTI1LjMyLDAtMzIuOTEtMjIuMTMtMzIuOTEtNDEsMC0yOS4wMiwxNC4xMS00MC45OSwzMS44Mi00MC45OSwxMi4wNC4zMywyMi42NSw4LjA0LDI2LjczLDE5LjQxbDI1LjcyLTEyLjg5Wm0xMTYuNTYsOTkuMDR2LTI1LjAzaC02Ny45OXYtMzAuNDhoNTguNHYtMjUuMDJoLTU4LjR2LTIzLjU2aDYyLjU3di0yNS4wM2gtOTQuNzZ2MTI5LjE5bDEwMC4xOC0uMDZabTQ5LjE1LTEwNS4yMWgyOS40N2M5LjU5LjIxLDE3LjE5LDguMTgsMTYuOTgsMTcuNzktLjIsOS4zMi03LjY5LDE2LjgzLTE2Ljk4LDE3LjA0aC0yOS40N3YtMzQuODNabS0zMi4xOSwxMDUuMjFoMzIuMTl2LTQ2LjQzaDIwLjQzbDI1LjMxLDQ2LjQzaDM1Ljk5bC0yOS40Ny01MS44OGMxNS43Ny00LjEzLDI2LjcyLTE4LjQ4LDI2LjU4LTM0LjgzLDAtMjkuMDItMTcuNzItNDIuNDQtNDYuNjUtNDIuNDRoLTY0LjM3djEyOS4xNVptMTIyLjE5LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTEyNi4xNy02MC45NGgyNi4yMmMxNC42NCwwLDIwLjgsNy4wOCwyMC44LDE5Ljk1Ljg1LDkuOTktNi41NCwxOC43Ny0xNi41LDE5LjYyLTEuMTMuMS0yLjI3LjA5LTMuMzktLjAzaC0yNy4xMnYtMzkuNTRabS0zMi4xOSwxMDUuMjFoMzIuNTV2LTQxLjcyaDI1LjExYzQ0LjEyLDAsNTMuNzEtMjYuNDksNTMuNzEtNDMuNzEsMC0yNS41OC0xMi44NC00My43Mi00Ny41Ni00My43MmgtNjMuODNsLjAyLDEyOS4xNlptMTA0LjQ4LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTkzLjk1LDQ0LjI2aDgyLjQ1di0yNy4yMWgtNTAuMjZ2LTEwMS45NWgtMzIuMTl2MTI5LjE2WiIvPgogICAgICA8cGF0aCBpZD0iVHJhemFkb18xNSIgZGF0YS1uYW1lPSJUcmF6YWRvIDE1IiBjbGFzcz0iY2xzLTEiIGQ9Im0wLDE2Mi41QzAsNzIuNzUsNzIuNTIsMCwxNjEuOTksMHMxNjEuOTksNzIuNzUsMTYxLjk5LDE2Mi41LTcyLjUyLDE2Mi41LTE2MS45OSwxNjIuNVMwLDI1Mi4yNSwwLDE2Mi41bTI0OC40NC01MS40MmMtMTcuODItMzEuOTMtNDIuNjItNTAuMzMtODAuMzgtNTAuMzMtNTkuODgsMC05My4zMyw0Ny42My05My4zMywxMDEuNzRzMzUuODgsMTAxLjc0LDk3LjEsMTAxLjc0YzMyLjg4LS44Myw2Mi42NC0xOS43Niw3Ny40MS00OS4yNWwtMzguMDctMTguMzljLTcuMjMsMTUuNTUtMjIuMzIsMjUuOTItMzkuMzksMjcuMDYtMzcuNzYsMC00OS4wOS0zMy00OS4wOS02MS4xNSwwLTQzLjI5LDIxLjA2LTYxLjE1LDQ3LjQ3LTYxLjE1LDE3Ljk4LjQ4LDMzLjgzLDExLjk3LDM5LjkyLDI4Ljk1bDM4LjM0LTE5LjIyWiIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+" alt="Cerapal · Estudi de cuines" width="141" height="38">
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="index.html#proyectos">Proyectos</a>
+      <a href="index.html#opiniones">Opiniones</a>
+      <a href="index.html#financiacion">Financiación</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+    <a class="nav-tel" href="tel:+34937620832">937 620 832</a>
+    <a class="btn btn-dark nav-cta" href="index.html#contacto">Pedir mi presupuesto</a>
+  </div>
+</header>
+
+<main id="contenido">
+  <section class="legal-hero">
+    <div class="wrap">
+      <p class="eyebrow">Legal</p>
+      <h1 class="legal-title">Política de cookies</h1>
+      <nav class="legal-tabs" aria-label="Textos legales">
+        <a href="aviso-legal.html"><span class="tab-long">Aviso legal</span><span class="tab-short">Aviso legal</span></a>
+        <a href="politica-privacidad.html"><span class="tab-long">Política de privacidad</span><span class="tab-short">Privacidad</span></a>
+        <a href="politica-cookies.html" aria-current="page"><span class="tab-long">Política de cookies</span><span class="tab-short">Cookies</span></a>
+      </nav>
+    </div>
+  </section>
+
+  <div class="wrap legal-grid">
+    <nav class="toc" aria-label="En esta página">
+      <p class="eyebrow">En esta página</p>
+      <ol>
+          <li class="toc-h2"><a href="#que-son-las-cookies">¿QUÉ SON LAS COOKIES?</a></li>
+          <li class="toc-h2"><a href="#tipos-de-cookies">TIPOS DE COOKIES</a></li>
+          <li class="toc-h3"><a href="#cookies-exentas">Cookies exentas</a></li>
+          <li class="toc-h3"><a href="#en-atencion-a-su-finalidad">En atención a su finalidad:</a></li>
+          <li class="toc-h3"><a href="#por-su-gestion">Por su gestión:</a></li>
+          <li class="toc-h3"><a href="#que-cookies-utilizamos">¿Qué cookies utilizamos?</a></li>
+          <li class="toc-h3"><a href="#cookies-de-analisis">Cookies de Análisis:</a></li>
+          <li class="toc-h2"><a href="#desactivacion-de-cookies">DESACTIVACIÓN DE COOKIES</a></li>
+          <li class="toc-h2"><a href="#exenciones-de-responsabilidad">EXENCIONES DE RESPONSABILIDAD</a></li>
+          <li class="toc-h2"><a href="#derecho-a-modificar-la-politica-de-cookies">DERECHO A MODIFICAR LA POLÍTICA DE COOKIES</a></li>
+      </ol>
+    </nav>
+    <details class="toc-mobile">
+      <summary>En esta página</summary>
+      <ol>
+          <li class="toc-h2"><a href="#que-son-las-cookies">¿QUÉ SON LAS COOKIES?</a></li>
+          <li class="toc-h2"><a href="#tipos-de-cookies">TIPOS DE COOKIES</a></li>
+          <li class="toc-h3"><a href="#cookies-exentas">Cookies exentas</a></li>
+          <li class="toc-h3"><a href="#en-atencion-a-su-finalidad">En atención a su finalidad:</a></li>
+          <li class="toc-h3"><a href="#por-su-gestion">Por su gestión:</a></li>
+          <li class="toc-h3"><a href="#que-cookies-utilizamos">¿Qué cookies utilizamos?</a></li>
+          <li class="toc-h3"><a href="#cookies-de-analisis">Cookies de Análisis:</a></li>
+          <li class="toc-h2"><a href="#desactivacion-de-cookies">DESACTIVACIÓN DE COOKIES</a></li>
+          <li class="toc-h2"><a href="#exenciones-de-responsabilidad">EXENCIONES DE RESPONSABILIDAD</a></li>
+          <li class="toc-h2"><a href="#derecho-a-modificar-la-politica-de-cookies">DERECHO A MODIFICAR LA POLÍTICA DE COOKIES</a></li>
+      </ol>
+    </details>
+    <article class="legal-body">
+<p>El equipo de <strong>CERAPAL, S.L.</strong>, le quiere recordar que con el uso y navegación de esta web usted ha adquirido la <strong>condición de usuario</strong> y por tanto, avisamos que si prosigue su navegación por este sitio web sin haber configurado los navegadores para impedir la instalación de las cookies, <strong>estará prestando su consentimiento para el empleo de las cookies</strong>, en aplicación de términos incluidos en el artículo 22.2 de la Ley 34/2002 de Servicios de la Sociedad de la Información y Comercio Electrónico.</p>
+<h2 id="que-son-las-cookies">¿QUÉ SON LAS COOKIES?</h2>
+<p>Una cookie es un archivo que se descarga en el ordenador o dispositivo del usuario al acceder a una página web con el objeto de permitir almacenar y recuperar información sobre los hábitos de navegación del usuario o de su equipo.</p>
+<p>Las cookies, no sólo van en beneficio de las empresas, sino que también permiten establecer niveles de protección y seguridad, recopilar datos estadísticos y normalmente anónimos; así como realizar publicidad adaptadas a los intereses de los usuarios.</p>
+<h2 id="tipos-de-cookies">TIPOS DE COOKIES</h2>
+<p>Las cookies pueden clasificarse en atención a distintos funcionamientos y parámetros, algunas de las clasificaciones más usuales son estas:</p>
+<h3 id="cookies-exentas">Cookies exentas</h3>
+<p>Son las cookies sobre las que legalmente <strong>no es necesario informar u obtener el consentimiento para su uso</strong>. Se trata de cookies que permiten la comunicación entre el equipo del usuario y la red, así como las que estrictamente prestan un servicio expresamente solicitado por el usuario.</p>
+<h3 id="en-atencion-a-su-finalidad">En atención a su finalidad:</h3>
+<ul>
+<li><strong>Analíticas:</strong> recogen información del uso que se realiza del sitio web.</li>
+<li><strong>Sociales:</strong> son aquellas necesarias para redes sociales externas.</li>
+<li><strong>Afiliados:</strong> permiten hacer un seguimiento de las visitas procedentes de otras webs con las que el sitio web establece un contrato de afiliación.</li>
+<li><strong>Publicidad y comportamentales:</strong> recogen información sobre las preferencias y elecciones personales del usuario.</li>
+<li><strong>Técnicas y funcionales:</strong> son las estrictamente necesarias para el uso del sitio web y para la prestación del servicio contratado.</li>
+</ul>
+<h3 id="por-su-gestion">Por su gestión:</h3>
+<ul>
+<li><strong>Cookies propias:</strong> Son aquéllas que se envían al equipo terminal del usuario desde un equipo o dominio gestionado por el propio editor y desde el que se presta el servicio solicitado por el usuario.</li>
+<li><strong>Cookies de tercero:</strong> Son aquéllas que se envían al equipo terminal del usuario desde un equipo o dominio que no es gestionado por el editor, sino por otra entidad que trata los datos obtenidos través de las cookies.</li>
+</ul>
+<h3 id="que-cookies-utilizamos">¿Qué cookies utilizamos?</h3>
+<p>En <strong>CERAPAL -estudi de cuines- (cerapal.cat)</strong> utilizamos únicamente cookies de análisis, técnicas y de personalización, que nos permiten la analítica sistemática de nuestra web y flujos de entrada de manera anónima, así como la mejora de la experiencia del usuario en nuestra web. Usamos cookies propias y cookies de terceros.</p>
+<p>Las cookies con las que cuenta <strong>esta web</strong> son las siguientes:</p>
+<div class="table-wrap wrap-table-cookies" role="region" aria-label="Tabla" tabindex="0"><table class="table-cookies"><thead>
+<tr>
+<th>Cookie</th><th>Receptor</th><th>Categoría</th><th>Finalidad</th><th>Información adicional</th><th>Duración</th></tr></thead><tbody>
+<tr>
+<td data-label="Cookie">PHPSESSID</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Conserva los estados de los usuarios en todas las peticiones de la página</td><td data-label="Información adicional"></td><td data-label="Duración">Sesión</td></tr><tr>
+<td data-label="Cookie">pll_language</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Utilizada para almacenar el idioma actual en el sitio web</td><td data-label="Información adicional"></td><td data-label="Duración">1 año</td></tr><tr>
+<td data-label="Cookie">wordpress_[hash]</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Almacenar detalles de autentificación</td><td data-label="Información adicional"></td><td data-label="Duración">Persistente</td></tr><tr>
+<td data-label="Cookie">wordpress_logged_in_[hash]</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Indica cuándo has iniciado sesión y quién eres</td><td data-label="Información adicional"></td><td data-label="Duración">Persistente</td></tr><tr>
+<td data-label="Cookie">wp-settings-{time}-[UID]</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Almacena configuraciones personales del dashboard y de la interfaz del admin</td><td data-label="Información adicional"></td><td data-label="Duración">Persistente</td></tr><tr>
+<td data-label="Cookie">woocommerce_cart_hash</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Contiene información del carrito del usuario</td><td data-label="Información adicional"></td><td data-label="Duración">Sesión</td></tr><tr>
+<td data-label="Cookie">woocommerce_items_in_cart</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Contiene información del carrito del usuario</td><td data-label="Información adicional"></td><td data-label="Duración">Sesión</td></tr><tr>
+<td data-label="Cookie">wp_woocommerce_session</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Contiene un código único para cada cliente para gestionar los datos de compra</td><td data-label="Información adicional"></td><td data-label="Duración">2 días</td></tr><tr>
+<td data-label="Cookie">comment_author_[hash]</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Almacena el nombre del usuario que realiza el comentario.</td><td data-label="Información adicional"></td><td data-label="Duración">1 año</td></tr><tr>
+<td data-label="Cookie">comment_author_email_[hash]</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Almacena el email del usuario que realiza el comentario.</td><td data-label="Información adicional"></td><td data-label="Duración">1 año</td></tr><tr>
+<td data-label="Cookie">comment_author_url_[hash]</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Almacena la url del usuario que realiza el comentario.</td><td data-label="Información adicional"></td><td data-label="Duración">1 año</td></tr><tr>
+<td data-label="Cookie">cli_user_preference</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Almacena el estado de consentimiento de cookies del usuario</td><td data-label="Información adicional"></td><td data-label="Duración">1 año</td></tr><tr>
+<td data-label="Cookie">CookieLawInfoConsent</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Almacena el estado de consentimiento de cookies del usuario</td><td data-label="Información adicional"></td><td data-label="Duración">1 año</td></tr><tr>
+<td data-label="Cookie">cookielawinfo-checkbox-necesarias</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Almacena el consentimiento del usuario para las cookies de la categoría necesarias</td><td data-label="Información adicional"></td><td data-label="Duración">1 año</td></tr><tr>
+<td data-label="Cookie">cookielawinfo-checkbox-analiticas</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Almacena el consentimiento del usuario para las cookies de la categoría analíticas</td><td data-label="Información adicional"></td><td data-label="Duración">1 año</td></tr><tr>
+<td data-label="Cookie">cookielawinfo-checkbox-publicitarias</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Almacena el consentimiento del usuario para las cookies de la categoría publicitarias</td><td data-label="Información adicional"></td><td data-label="Duración">1 año</td></tr><tr>
+<td data-label="Cookie">elementor</td><td data-label="Receptor">CERAPAL -estudi de cuines-</td><td data-label="Categoría">Necesarias</td><td data-label="Finalidad">Permite al propietario del sitio web implementar o cambiar el contenido del sitio web en tiempo real</td><td data-label="Información adicional"></td><td data-label="Duración">Persistente</td></tr><tr>
+<td data-label="Cookie">1P_JAR</td><td data-label="Receptor">Google</td><td data-label="Categoría">Analíticas</td><td data-label="Finalidad">Análisis y mejora de publicidad</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">Persistente</td></tr><tr>
+<td data-label="Cookie">NID, IDE</td><td data-label="Receptor">Google</td><td data-label="Categoría">Analíticas</td><td data-label="Finalidad">Permite visualizar mapas por medio de Google Maps. Registra ID</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">6 meses</td></tr><tr>
+<td data-label="Cookie">CONSENT</td><td data-label="Receptor">Google</td><td data-label="Categoría">Analíticas</td><td data-label="Finalidad">Identificación de usuarios</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">Persistente</td></tr><tr>
+<td data-label="Cookie">DV</td><td data-label="Receptor">Google</td><td data-label="Categoría">Analíticas</td><td data-label="Finalidad">Análisis y mejora de la publicidad</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">Persistente</td></tr><tr>
+<td data-label="Cookie">_Secure-3PAPIDSIDE, _Secure-3PSIDE, _Secure-3APISIDI, _Secure-HSID, _Secure-SSIDI</td><td data-label="Receptor">Google</td><td data-label="Categoría">Publicitarias</td><td data-label="Finalidad">Adaptación de los anuncios para relevancia e interés</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">2 años</td></tr><tr>
+<td data-label="Cookie">SIDCC</td><td data-label="Receptor">Google</td><td data-label="Categoría">Analíticas</td><td data-label="Finalidad">Provee servicios y extrae información anónima sobre la navegación</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">3 meses</td></tr><tr>
+<td data-label="Cookie">SSID</td><td data-label="Receptor">Google</td><td data-label="Categoría">Publicitarias</td><td data-label="Finalidad">Mide el rendimiento de los anuncios y proporciona recomendaciones</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">3 meses</td></tr><tr>
+<td data-label="Cookie">SID</td><td data-label="Receptor">Google</td><td data-label="Categoría">Analíticas</td><td data-label="Finalidad">Recoge información para el buscador de google</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">Sesión</td></tr><tr>
+<td data-label="Cookie">HSID</td><td data-label="Receptor">Google</td><td data-label="Categoría">Publicitarias</td><td data-label="Finalidad">Mide el rendimiento de los anuncios y proporciona recomendaciones</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">Persistente</td></tr><tr>
+<td data-label="Cookie">ANID</td><td data-label="Receptor">Google</td><td data-label="Categoría">Publicitarias</td><td data-label="Finalidad">Mide el rendimiento de los anuncios y proporciona recomendaciones</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">Persistente</td></tr><tr>
+<td data-label="Cookie">SAPISID, APISID</td><td data-label="Receptor">Google</td><td data-label="Categoría">Publicitarias</td><td data-label="Finalidad">Mide el rendimiento de los anuncios y proporciona recomendaciones</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">Persistente</td></tr><tr>
+<td data-label="Cookie">SEARCH_SAMESITE</td><td data-label="Receptor">Google</td><td data-label="Categoría">Analíticas</td><td data-label="Finalidad">Correcto envío de datos</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">6 meses</td></tr><tr>
+<td data-label="Cookie">OGP, OGPC</td><td data-label="Receptor">Google</td><td data-label="Categoría">Actuaciones</td><td data-label="Finalidad">Sirve para almacenar las preferencias y la información del usuario cuando visualiza páginas con mapas de Google</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">1 día</td></tr><tr>
+<td data-label="Cookie">OTZ</td><td data-label="Receptor">Google</td><td data-label="Categoría">Publicitarias</td><td data-label="Finalidad">Utilizada para personalizar los anuncio que se muestran en los servicios de Google</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">1 mes</td></tr><tr>
+<td data-label="Cookie">UULE</td><td data-label="Receptor">Google</td><td data-label="Categoría">Actuaciones</td><td data-label="Finalidad">Habilita el geolocalizados de Google Map</td><td data-label="Información adicional"><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank" rel="noopener">Google</a></td><td data-label="Duración">1 día</td></tr><tr>
+<td data-label="Cookie">_fbc, _fbp</td><td data-label="Receptor">Facebook</td><td data-label="Categoría">Publicitarias</td><td data-label="Finalidad">Análisis y mejora de la publicidad en Facebook</td><td data-label="Información adicional"><a href="https://es-es.facebook.com/policies/cookies/" target="_blank" rel="noopener">Facebook</a></td><td data-label="Duración">12 meses</td></tr></tbody></table></div>
+<h3 id="cookies-de-analisis">Cookies de Análisis:</h3>
+<p>La mayoría de las cookies de análisis son propiedad de Google Analytics y Google Adwords, nos permiten analizar y adaptar la web a los comportamientos derivados del tráfico, con datos estadísticos absolutamente abstractos para <strong>CERAPAL -estudi de cuines-</strong>.</p>
+<p>Si desean más información sobre la política de cookies, pueden hacerlo en el siguiente enlace: <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener">https://policies.google.com/privacy?hl=en</a>.</p>
+<h2 id="desactivacion-de-cookies">DESACTIVACIÓN DE COOKIES</h2>
+<p>Las cookies pueden ser deshabilitadas, borradas y desactivadas, según el navegador utilizados, a continuación, pueden consultar las instrucciones para los principales navegadores.</p>
+<ul>
+<li><a href="https://support.google.com/chrome/answer/95647?hl=es" target="_blank" rel="noopener">Google Chrome</a></li>
+<li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias?redirectlocale=es&amp;redirectslug=habilitar-y-deshabilitar-cookies-que-los-sitios-we" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+<li><a href="https://support.microsoft.com/es-es/help/17442/windows-internet-explorer-delete-manage-cookies#ie=ie-11" target="_blank" rel="noopener">Microsoft Internet Explorer</a></li>
+<li><a href="https://support.apple.com/es-es/HT201265" target="_blank" rel="noopener">Apple Safari en el iPhone, iPad o iPod Touch</a></li>
+<li><a href="https://help.opera.com/es/Windows/11.50/es-ES/cookies.html" target="_blank" rel="noopener">Opera</a></li>
+<li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari para MAC</a></li>
+<li><a href="https://support.microsoft.com/es-es/help/4468242/microsoft-edge-browsing-data-and-privacy-microsoft-privacy" target="_blank" rel="noopener">Microsoft Edge (Windows 10)</a></li>
+</ul>
+<p>También, existe la posibilidad de desactivar las cookies de Google Analytics, instalando el complemento siguiente: <a href="https://tools.google.com/dlpage/gaoptout/?hl=es" target="_blank" rel="noopener">https://tools.google.com/dlpage/gaoptout/?hl=es</a></p>
+<h2 id="exenciones-de-responsabilidad">EXENCIONES DE RESPONSABILIDAD</h2>
+<p>En <strong>CERAPAL -estudi de cuines-</strong> no nos podemos y no nos hacemos responsables del contenido, ni de la veracidad, ni de la actualización de las políticas de privacidad que puedan tener los terceros mencionados en esta política de cookies.</p>
+<p>Son los navegadores web los encargados de almacenar las cookies y, es desde estos sitios desde donde debe efectuar su derecho a eliminación o desactivación de las mismas, por tanto, no podemos garantizar el correcto comportamiento.</p>
+<h2 id="derecho-a-modificar-la-politica-de-cookies">DERECHO A MODIFICAR LA POLÍTICA DE COOKIES</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> se guarda todos los derechos a modificar su política de privacidad sin el previo aviso de la misma.</p>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FwYV8yIiBkYXRhLW5hbWU9IkNhcGEgMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTIwMCAzMjUiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICNmZmY7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnIGlkPSJDYXBhXzEtMiIgZGF0YS1uYW1lPSJDYXBhIDEiPgogICAgPGcgaWQ9IkxvZ290aXBvIj4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTEiIGRhdGEtbmFtZT0iVHJhemFkbyAxMSIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTIiIGRhdGEtbmFtZT0iVHJhemFkbyAxMiIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTMiIGRhdGEtbmFtZT0iVHJhemFkbyAxMyIgY2xhc3M9ImNscy0xIiBkPSJtNDcyLjQ5LDEzMy45NmMtMTEuOTMtMjEuNC0yOC41Ny0zMy43NC01My44OC0zMy43NC00MC4xNCwwLTYyLjU3LDMxLjkyLTYyLjU3LDY4LjJzMjQuMDUsNjguMjEsNjUuMDksNjguMjFjMjIuMDQtLjU2LDQxLjk5LTEzLjI1LDUxLjg5LTMzLjAxbC0yNS41LTEyLjMzYy00Ljg1LDEwLjQyLTE0Ljk2LDE3LjM3LTI2LjQsMTguMTMtMjUuMzIsMC0zMi45MS0yMi4xMy0zMi45MS00MSwwLTI5LjAyLDE0LjExLTQwLjk5LDMxLjgyLTQwLjk5LDEyLjA0LjMzLDIyLjY1LDguMDQsMjYuNzMsMTkuNDFsMjUuNzItMTIuODlabTExNi41Niw5OS4wNHYtMjUuMDNoLTY3Ljk5di0zMC40OGg1OC40di0yNS4wMmgtNTguNHYtMjMuNTZoNjIuNTd2LTI1LjAzaC05NC43NnYxMjkuMTlsMTAwLjE4LS4wNlptNDkuMTUtMTA1LjIxaDI5LjQ3YzkuNTkuMjEsMTcuMTksOC4xOCwxNi45OCwxNy43OS0uMiw5LjMyLTcuNjksMTYuODMtMTYuOTgsMTcuMDRoLTI5LjQ3di0zNC44M1ptLTMyLjE5LDEwNS4yMWgzMi4xOXYtNDYuNDNoMjAuNDNsMjUuMzEsNDYuNDNoMzUuOTlsLTI5LjQ3LTUxLjg4YzE1Ljc3LTQuMTMsMjYuNzItMTguNDgsMjYuNTgtMzQuODMsMC0yOS4wMi0xNy43Mi00Mi40NC00Ni42NS00Mi40NGgtNjQuMzd2MTI5LjE1Wm0xMjIuMTksMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptMTI2LjE3LTYwLjk0aDI2LjIyYzE0LjY0LDAsMjAuOCw3LjA4LDIwLjgsMTkuOTUuODUsOS45OS02LjU0LDE4Ljc3LTE2LjUsMTkuNjItMS4xMy4xLTIuMjcuMDktMy4zOS0uMDNoLTI3LjEydi0zOS41NFptLTMyLjE5LDEwNS4yMWgzMi41NXYtNDEuNzJoMjUuMTFjNDQuMTIsMCw1My43MS0yNi40OSw1My43MS00My43MSwwLTI1LjU4LTEyLjg0LTQzLjcyLTQ3LjU2LTQzLjcyaC02My44M2wuMDIsMTI5LjE2Wm0xMDQuNDgsMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptOTMuOTUsNDQuMjZoODIuNDV2LTI3LjIxaC01MC4yNnYtMTAxLjk1aC0zMi4xOXYxMjkuMTZaIi8+CiAgICAgIDxwYXRoIGlkPSJUcmF6YWRvXzE0IiBkYXRhLW5hbWU9IlRyYXphZG8gMTQiIGNsYXNzPSJjbHMtMSIgZD0ibTQ3Mi40OSwxMzMuOTZjLTExLjkzLTIxLjQtMjguNTctMzMuNzQtNTMuODgtMzMuNzQtNDAuMTQsMC02Mi41NywzMS45Mi02Mi41Nyw2OC4yczI0LjA1LDY4LjIxLDY1LjA5LDY4LjIxYzIyLjA0LS41Niw0MS45OS0xMy4yNSw1MS44OS0zMy4wMWwtMjUuNS0xMi4zM2MtNC44NSwxMC40Mi0xNC45NiwxNy4zNy0yNi40LDE4LjEzLTI1LjMyLDAtMzIuOTEtMjIuMTMtMzIuOTEtNDEsMC0yOS4wMiwxNC4xMS00MC45OSwzMS44Mi00MC45OSwxMi4wNC4zMywyMi42NSw4LjA0LDI2LjczLDE5LjQxbDI1LjcyLTEyLjg5Wm0xMTYuNTYsOTkuMDR2LTI1LjAzaC02Ny45OXYtMzAuNDhoNTguNHYtMjUuMDJoLTU4LjR2LTIzLjU2aDYyLjU3di0yNS4wM2gtOTQuNzZ2MTI5LjE5bDEwMC4xOC0uMDZabTQ5LjE1LTEwNS4yMWgyOS40N2M5LjU5LjIxLDE3LjE5LDguMTgsMTYuOTgsMTcuNzktLjIsOS4zMi03LjY5LDE2LjgzLTE2Ljk4LDE3LjA0aC0yOS40N3YtMzQuODNabS0zMi4xOSwxMDUuMjFoMzIuMTl2LTQ2LjQzaDIwLjQzbDI1LjMxLDQ2LjQzaDM1Ljk5bC0yOS40Ny01MS44OGMxNS43Ny00LjEzLDI2LjcyLTE4LjQ4LDI2LjU4LTM0LjgzLDAtMjkuMDItMTcuNzItNDIuNDQtNDYuNjUtNDIuNDRoLTY0LjM3djEyOS4xNVptMTIyLjE5LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTEyNi4xNy02MC45NGgyNi4yMmMxNC42NCwwLDIwLjgsNy4wOCwyMC44LDE5Ljk1Ljg1LDkuOTktNi41NCwxOC43Ny0xNi41LDE5LjYyLTEuMTMuMS0yLjI3LjA5LTMuMzktLjAzaC0yNy4xMnYtMzkuNTRabS0zMi4xOSwxMDUuMjFoMzIuNTV2LTQxLjcyaDI1LjExYzQ0LjEyLDAsNTMuNzEtMjYuNDksNTMuNzEtNDMuNzEsMC0yNS41OC0xMi44NC00My43Mi00Ny41Ni00My43MmgtNjMuODNsLjAyLDEyOS4xNlptMTA0LjQ4LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTkzLjk1LDQ0LjI2aDgyLjQ1di0yNy4yMWgtNTAuMjZ2LTEwMS45NWgtMzIuMTl2MTI5LjE2WiIvPgogICAgICA8cGF0aCBpZD0iVHJhemFkb18xNSIgZGF0YS1uYW1lPSJUcmF6YWRvIDE1IiBjbGFzcz0iY2xzLTEiIGQ9Im0wLDE2Mi41QzAsNzIuNzUsNzIuNTIsMCwxNjEuOTksMHMxNjEuOTksNzIuNzUsMTYxLjk5LDE2Mi41LTcyLjUyLDE2Mi41LTE2MS45OSwxNjIuNVMwLDI1Mi4yNSwwLDE2Mi41bTI0OC40NC01MS40MmMtMTcuODItMzEuOTMtNDIuNjItNTAuMzMtODAuMzgtNTAuMzMtNTkuODgsMC05My4zMyw0Ny42My05My4zMywxMDEuNzRzMzUuODgsMTAxLjc0LDk3LjEsMTAxLjc0YzMyLjg4LS44Myw2Mi42NC0xOS43Niw3Ny40MS00OS4yNWwtMzguMDctMTguMzljLTcuMjMsMTUuNTUtMjIuMzIsMjUuOTItMzkuMzksMjcuMDYtMzcuNzYsMC00OS4wOS0zMy00OS4wOS02MS4xNSwwLTQzLjI5LDIxLjA2LTYxLjE1LDQ3LjQ3LTYxLjE1LDE3Ljk4LjQ4LDMzLjgzLDExLjk3LDM5LjkyLDI4Ljk1bDM4LjM0LTE5LjIyWiIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+" alt="Cerapal · Estudi de cuines" width="196" height="53" loading="lazy">
+      <p>Cada proyecto es único, exclusivo y personalizado.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Estudio</h3>
+      <p>Carrer Ramon Turró, 4 · Local 1<br>08389 Palafolls (Barcelona)</p>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Carrer%20Ramon%20Turr%C3%B3%204%2C%2008389%20Palafolls" target="_blank" rel="noopener">Cómo llegar</a>
+    </div>
+    <div class="footer-col">
+      <h3>Contacto</h3>
+      <a href="tel:+34937620832">937 620 832</a>
+      <a href="tel:+34654628727">654 628 727</a>
+      <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>
+    </div>
+    <div class="footer-col">
+      <h3>Horario</h3>
+      <p>Lunes a viernes<br>9:00–13:00<br>15:00–19:00</p>
+    </div>
+    <div class="footer-col">
+      <h3>Síguenos</h3>
+      <a href="https://www.instagram.com/cuinescerapal/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/cuinescerapal/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <p>© <span id="year">2026</span> Cerapal · Estudi de cuines</p>
+    <nav aria-label="Legal">
+      <a href="aviso-legal.html">Aviso legal</a>
+      <a href="politica-privacidad.html">Política de privacidad</a>
+      <a href="politica-cookies.html" aria-current="page">Política de cookies</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(() => {
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('is-scrolled', scrollY > 8);
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // en móvil, el índice se cierra al elegir un apartado
+  const tocMobile = document.querySelector('.toc-mobile');
+  tocMobile.addEventListener('click', e => { if (e.target.closest('a')) tocMobile.open = false; });
+
+  // marca en el índice el apartado que se está leyendo
+  const toc = document.querySelector('.toc');
+  const links = [...toc.querySelectorAll('a')];
+  const heads = links.map(a => document.getElementById(a.hash.slice(1))).filter(Boolean);
+  const mark = () => {
+    const y = innerHeight * .3;
+    let current = heads[0];
+    for (const h of heads) if (h.getBoundingClientRect().top <= y) current = h;
+    links.forEach(a => {
+      const on = a.hash === '#' + current.id;
+      a.classList.toggle('is-active', on);
+      if (on && toc.scrollHeight > toc.clientHeight) {
+        const top = a.offsetTop, bottom = top + a.offsetHeight;
+        if (top < toc.scrollTop || bottom > toc.scrollTop + toc.clientHeight) toc.scrollTop = top - toc.clientHeight / 3;
+      }
+    });
+  };
+  let ticking = false;
+  addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { ticking = false; mark(); });
+  }, { passive: true });
+  mark();
+})();
+</script>
+</body>
+</html>

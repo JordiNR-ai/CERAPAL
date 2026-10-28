@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de privacidad · Cerapal</title>
+<meta name="description" content="Política de privacidad de Cerapal · Estudi de cuines: cómo tratamos y protegemos tus datos personales.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJDYXBhXzIiIGRhdGEtbmFtZT0iQ2FwYSAyIiB2aWV3Qm94PSIwIDAgMzIzLjk4IDMyNSI+PGRlZnM+PHN0eWxlPiAgICAgIC5jbHMtMSB7ICAgICAgICBmaWxsOiAjMTkxOTE5OyAgICAgIH0gICAgPC9zdHlsZT48L2RlZnM+PGcgaWQ9IkNhcGFfMi0yIiBkYXRhLW5hbWU9IkNhcGEgMiI+PGcgaWQ9IkNhcGFfMS0yIiBkYXRhLW5hbWU9IkNhcGEgMS0yIj48ZyBpZD0iTG9nb3RpcG8iPjxwYXRoIGlkPSJUcmF6YWRvXzE1IiBkYXRhLW5hbWU9IlRyYXphZG8gMTUiIGNsYXNzPSJjbHMtMSIgZD0ibTAsMTYyLjVDMCw3Mi43NSw3Mi41MiwwLDE2MS45OSwwczE2MS45OSw3Mi43NSwxNjEuOTksMTYyLjUtNzIuNTIsMTYyLjUtMTYxLjk5LDE2Mi41UzAsMjUyLjI1LDAsMTYyLjVtMjQ4LjQ0LTUxLjQyYy0xNy44Mi0zMS45My00Mi42Mi01MC4zMy04MC4zOC01MC4zMy01OS44OCwwLTkzLjMzLDQ3LjYzLTkzLjMzLDEwMS43NHMzNS44OCwxMDEuNzQsOTcuMSwxMDEuNzRjMzIuODgtLjgzLDYyLjY0LTE5Ljc2LDc3LjQxLTQ5LjI1bC0zOC4wNy0xOC4zOWMtNy4yMywxNS41NS0yMi4zMiwyNS45Mi0zOS4zOSwyNy4wNi0zNy43NiwwLTQ5LjA5LTMzLTQ5LjA5LTYxLjE1LDAtNDMuMjksMjEuMDYtNjEuMTUsNDcuNDctNjEuMTUsMTcuOTguNDgsMzMuODMsMTEuOTcsMzkuOTIsMjguOTVsMzguMzQtMTkuMjJoLjAyWiI+PC9wYXRoPjwvZz48L2c+PC9nPjwvc3ZnPg==" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Tokens — paleta Cerapal (los mismos que la landing)
+   ============================================================ */
+:root {
+  --black: #000000;
+  --ink: #191919;
+  --muted: #5B5B5B;
+  --grey: #EDEDED;
+  --white: #FFFFFF;
+  --line: #D4D4D4;
+
+  --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --gutter: clamp(16px, 4.2vw, 64px);
+  --col-gap: clamp(12px, 2.2vw, 32px);
+  --max: 1280px;
+  --nav-h: 76px;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, .06);
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 24px);
+  -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--ink) var(--grey);
+  scrollbar-width: thin;
+}
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+::selection { background: var(--black); color: var(--white); }
+:focus-visible { outline: 2px solid var(--black); outline-offset: 3px; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--grey); }
+::-webkit-scrollbar-thumb { background: var(--ink); border: 3px solid var(--grey); border-radius: 10px; }
+
+.skip {
+  position: fixed; left: 16px; top: -60px; z-index: 100;
+  background: var(--black); color: var(--white);
+  padding: 12px 18px; text-decoration: none; font-weight: 600;
+  transition: top .2s;
+}
+.skip:focus { top: 16px; }
+.wrap {
+  width: 100%;
+  max-width: calc(var(--max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.eyebrow {
+  margin: 0 0 20px;
+  font-size: 12px; font-weight: 600; font-stretch: 112%; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ============================================================
+   Botones y navegación
+   ============================================================ */
+.btn {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center; gap: 14px;
+  height: 54px; padding: 0 26px;
+  border: 1px solid transparent; border-radius: 2px;
+  font-size: 15px; font-weight: 600; font-stretch: 108%; letter-spacing: .01em; line-height: 1;
+  text-decoration: none; white-space: nowrap;
+  overflow: hidden; isolation: isolate;
+  transition: color .45s var(--ease-out), border-color .45s var(--ease-out);
+}
+.btn::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform .5s var(--ease-out);
+}
+@media (hover: hover) { .btn:hover::before { transform: scaleY(1); } }
+.btn-dark { background: var(--black); color: var(--white); }
+.btn-dark::before { background: var(--ink); }
+
+.nav {
+  position: fixed; inset: 0 0 auto; z-index: 50;
+  height: var(--nav-h);
+  border-bottom: 1px solid transparent;
+  transition: background-color .4s, border-color .4s;
+}
+.nav.is-scrolled {
+  background: rgba(255, 255, 255, .93);
+  -webkit-backdrop-filter: saturate(1.4) blur(16px);
+  backdrop-filter: saturate(1.4) blur(16px);
+  border-bottom-color: var(--line);
+}
+.nav-inner {
+  height: 100%;
+  display: flex; align-items: center; gap: clamp(20px, 2.6vw, 36px);
+  padding-inline: var(--gutter);
+}
+.nav-logo { flex: none; }
+.nav-logo img { height: 38px; width: auto; }
+.nav-links { display: flex; gap: clamp(20px, 2.4vw, 34px); margin-left: auto; }
+.nav-links a, .nav-tel {
+  position: relative;
+  font-size: 15px; font-weight: 500;
+  text-decoration: none; color: var(--ink);
+}
+.nav-links a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -5px; height: 1px;
+  background: currentColor;
+  transform: scaleX(0); transform-origin: right;
+  transition: transform .45s var(--ease-out);
+}
+@media (hover: hover) { .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; } }
+.nav-tel {
+  padding-left: clamp(20px, 2.6vw, 36px);
+  border-left: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+.nav-cta { height: 44px; padding: 0 20px; font-size: 14px; }
+
+/* ============================================================
+   Cabecera de la página legal
+   ============================================================ */
+.legal-hero { padding: calc(var(--nav-h) + clamp(48px, 7vw, 104px)) 0 0; }
+.legal-title {
+  margin: 0;
+  font-size: clamp(40px, 6.4vw, 92px);
+  line-height: .98;
+  font-weight: 750; font-stretch: 118%; letter-spacing: -.032em;
+  color: var(--black);
+  text-wrap: balance;
+}
+.legal-tabs {
+  display: flex; flex-wrap: wrap; gap: 4px 28px;
+  margin-top: clamp(32px, 4vw, 52px);
+  border-bottom: 1px solid var(--line);
+}
+.legal-tabs a {
+  padding: 14px 0 16px;
+  font-size: 15px; font-weight: 600; font-stretch: 108%;
+  text-decoration: none; color: var(--muted);
+  box-shadow: inset 0 -2px 0 transparent;
+  transition: color .25s, box-shadow .25s;
+}
+@media (hover: hover) { .legal-tabs a:hover { color: var(--black); } }
+.legal-tabs a[aria-current="page"] { color: var(--black); box-shadow: inset 0 -2px 0 var(--black); }
+.tab-short { display: none; }
+
+/* ============================================================
+   Índice + texto
+   ============================================================ */
+.legal-grid {
+  display: grid; grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 112px);
+  padding-block: clamp(48px, 6vw, 88px) clamp(96px, 12vw, 160px);
+}
+.toc { position: sticky; top: calc(var(--nav-h) + 32px); align-self: start; max-height: calc(100vh - var(--nav-h) - 64px); overflow-y: auto; scrollbar-width: none; }
+.toc::-webkit-scrollbar { display: none; }
+.toc ol { margin: 0; padding: 0; list-style: none; border-left: 1px solid var(--line); }
+.toc a {
+  display: block;
+  margin-left: -1px; padding: 7px 0 7px 18px;
+  border-left: 2px solid transparent;
+  font-size: 13px; line-height: 1.4; letter-spacing: .03em;
+  text-decoration: none; color: var(--muted);
+  transition: color .2s, border-color .2s;
+}
+.toc .toc-h3 a { padding-left: 32px; letter-spacing: 0; font-size: 13.5px; }
+@media (hover: hover) { .toc a:hover { color: var(--black); } }
+.toc a.is-active { color: var(--black); border-left-color: var(--black); font-weight: 600; }
+.toc-mobile { display: none; }
+
+.legal-body > :not(.table-wrap) { max-width: 46rem; } /* misma medida para títulos y párrafos */
+.legal-body > :first-child { margin-top: 0; }
+.legal-body p { margin: 0 0 1.15em; }
+.legal-body strong { font-weight: 650; color: var(--black); }
+.legal-body a { color: var(--black); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; }
+@media (hover: hover) { .legal-body a:hover { text-decoration-thickness: 2px; } }
+.legal-body h2 {
+  margin: clamp(56px, 6vw, 80px) 0 24px; padding-top: 28px;
+  border-top: 1px solid var(--black);
+  font-size: clamp(17px, 1.5vw, 20px); line-height: 1.3;
+  font-weight: 750; font-stretch: 112%; letter-spacing: .04em;
+  color: var(--black);
+}
+.legal-body h3 {
+  margin: 44px 0 14px;
+  font-size: clamp(20px, 1.8vw, 24px); line-height: 1.25;
+  font-weight: 700; font-stretch: 108%; letter-spacing: -.01em;
+  color: var(--black);
+}
+.legal-body h4 { margin: 32px 0 10px; font-size: 17px; font-weight: 700; color: var(--black); }
+.legal-body h2 + h3 { margin-top: 0; }
+.legal-body ul, .legal-body ol { margin: 0 0 1.4em; padding: 0; list-style: none; }
+.legal-body li { position: relative; margin: 0 0 .7em; padding-left: 28px; }
+.legal-body ul > li::before {
+  content: ""; position: absolute; left: 4px; top: .78em;
+  width: 10px; height: 1px; background: var(--black);
+}
+.legal-body ol { counter-reset: n; }
+.legal-body ol > li { counter-increment: n; }
+.legal-body ol > li::before {
+  content: counter(n); position: absolute; left: 0; top: 0;
+  font-weight: 700; font-stretch: 112%; font-variant-numeric: tabular-nums; color: var(--black);
+}
+
+.table-wrap {
+  margin: 28px 0 36px;
+  overflow-x: auto;
+  border: 1px solid var(--line); border-radius: 2px;
+  -webkit-overflow-scrolling: touch;
+}
+.legal-body table { width: 100%; border-collapse: collapse; font-size: 14.5px; line-height: 1.5; }
+.legal-body th {
+  padding: 14px 16px;
+  background: var(--grey);
+  font-size: 11.5px; font-weight: 700; font-stretch: 112%; letter-spacing: .14em; text-transform: uppercase; text-align: left;
+  color: var(--black);
+}
+.legal-body td { padding: 14px 16px; border-top: 1px solid var(--line); vertical-align: top; }
+.legal-body td :last-child { margin-bottom: 0; }
+.legal-body td li { margin-bottom: .4em; padding-left: 22px; }
+.legal-body td ul > li::before { left: 2px; width: 8px; }
+.table-cookies { min-width: 820px; table-layout: fixed; }
+.table-cookies th:nth-child(1) { width: 21%; }
+.table-cookies th:nth-child(2) { width: 15%; }
+.table-cookies th:nth-child(3) { width: 13%; }
+.table-cookies th:nth-child(4) { width: 25%; }
+.table-cookies th:nth-child(5) { width: 13%; }
+.table-cookies th:nth-child(6) { width: 13%; }
+.table-cookies th { letter-spacing: .1em; }
+.table-cookies td:first-child { font-weight: 600; color: var(--black); overflow-wrap: anywhere; }
+.table-cookies tbody tr:nth-child(even) td { background: #F7F7F7; }
+.table-summary td:first-child { width: 28%; }
+.table-hint { display: none; margin: 28px 0 -16px; font-size: 13px; color: var(--muted); }
+
+/* ============================================================
+   Pie (el mismo que la landing)
+   ============================================================ */
+.footer { background: var(--ink); color: var(--line); padding: clamp(64px, 8vw, 104px) 0 32px; font-size: 15px; }
+.footer :focus-visible { outline-color: var(--white); }
+.footer-grid { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 40px var(--col-gap); }
+.footer-brand img { width: 196px; height: auto; }
+.footer-brand p { margin: 24px 0 0; max-width: 30ch; }
+.footer h3 {
+  margin: 0 0 16px;
+  font-size: 12px; font-weight: 600; font-stretch: 112%; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--white);
+}
+.footer p { margin: 0; }
+.footer-col a { display: block; width: fit-content; text-decoration: none; color: var(--line); padding: 2px 0; }
+@media (hover: hover) { .footer-col a:hover { color: var(--white); text-decoration: underline; text-underline-offset: 4px; } }
+.footer-col p + a { margin-top: 10px; }
+.footer-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px;
+  position: relative;
+  margin-top: clamp(56px, 7vw, 96px); padding-top: 24px;
+  font-size: 13px;
+}
+.footer-bottom::before {
+  content: ""; position: absolute; top: 0; left: var(--gutter); right: var(--gutter); height: 1px;
+  background: var(--muted);
+}
+.footer-bottom nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.footer-bottom a { text-decoration: none; color: var(--line); }
+.footer-bottom a[aria-current="page"] { color: var(--white); }
+@media (hover: hover) { .footer-bottom a:hover { color: var(--white); text-decoration: underline; text-underline-offset: 4px; } }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1080px) {
+  .nav-tel { display: none; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 900px) {
+  :root { --nav-h: 68px; }
+  .nav.is-scrolled { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--white); }
+  .nav-links { display: none; }
+  .nav-cta { margin-left: auto; }
+  .nav-logo img { height: 32px; }
+
+  .legal-grid { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 32px; }
+  .toc { display: none; }
+  .toc-mobile { display: block; margin-bottom: 40px; border: 1px solid var(--line); border-radius: 2px; }
+  .toc-mobile summary {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 18px;
+    font-size: 12px; font-weight: 700; font-stretch: 112%; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--black);
+    cursor: pointer; list-style: none;
+  }
+  .toc-mobile summary::-webkit-details-marker { display: none; }
+  .toc-mobile summary::after { content: "+"; font-size: 20px; font-weight: 400; letter-spacing: 0; line-height: 1; }
+  .toc-mobile[open] summary::after { content: "–"; }
+  .toc-mobile ol { margin: 0; padding: 4px 0 12px; list-style: none; border-top: 1px solid var(--line); }
+  .toc-mobile a { display: block; padding: 9px 18px; font-size: 14px; line-height: 1.4; text-decoration: none; color: var(--ink); }
+  .toc-mobile .toc-h3 a { padding-left: 34px; color: var(--muted); }
+}
+@media (min-width: 761px) and (max-width: 900px) {
+  .table-hint { display: block; }
+}
+@media (max-width: 760px) {
+  .wrap-table-cookies { overflow: visible; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; }
+  .table-cookies, .table-cookies tbody, .table-cookies tr, .table-cookies td { display: block; width: 100%; min-width: 0; }
+  .table-cookies thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .table-cookies tr { padding: 18px 0 14px; border-top: 1px solid var(--line); }
+  .legal-body .table-cookies td { display: grid; grid-template-columns: 34% minmax(0, 1fr); gap: 12px; padding: 4px 0; border: 0; background: none; }
+  .legal-body .table-cookies td::before {
+    content: attr(data-label);
+    padding-top: 2px;
+    font-size: 11px; font-weight: 700; font-stretch: 112%; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .legal-body .table-cookies td:first-child { display: block; padding-bottom: 8px; font-size: 16px; }
+  .legal-body .table-cookies td:first-child::before { content: none; }
+  .legal-body .table-cookies td:empty { display: none; }
+  .legal-body .table-cookies tbody tr:nth-child(even) td { background: none; }
+}
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .legal-tabs { flex-wrap: nowrap; gap: 0 24px; }
+  .tab-long { display: none; }
+  .tab-short { display: inline; }
+  .legal-body th, .legal-body td { padding: 12px; }
+  .table-summary td:first-child { width: 34%; }
+}
+@media (max-width: 380px) {
+  .nav-cta { padding: 0 14px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn::before, .nav-links a::after { transition: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html" aria-label="Cerapal, ir al inicio">
+      <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FwYV8yIiBkYXRhLW5hbWU9IkNhcGEgMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTIwMCAzMjUiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICMxOTE5MTk7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnIGlkPSJDYXBhXzEtMiIgZGF0YS1uYW1lPSJDYXBhIDEiPgogICAgPGcgaWQ9IkxvZ290aXBvIj4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTEiIGRhdGEtbmFtZT0iVHJhemFkbyAxMSIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTIiIGRhdGEtbmFtZT0iVHJhemFkbyAxMiIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTMiIGRhdGEtbmFtZT0iVHJhemFkbyAxMyIgY2xhc3M9ImNscy0xIiBkPSJtNDcyLjQ5LDEzMy45NmMtMTEuOTMtMjEuNC0yOC41Ny0zMy43NC01My44OC0zMy43NC00MC4xNCwwLTYyLjU3LDMxLjkyLTYyLjU3LDY4LjJzMjQuMDUsNjguMjEsNjUuMDksNjguMjFjMjIuMDQtLjU2LDQxLjk5LTEzLjI1LDUxLjg5LTMzLjAxbC0yNS41LTEyLjMzYy00Ljg1LDEwLjQyLTE0Ljk2LDE3LjM3LTI2LjQsMTguMTMtMjUuMzIsMC0zMi45MS0yMi4xMy0zMi45MS00MSwwLTI5LjAyLDE0LjExLTQwLjk5LDMxLjgyLTQwLjk5LDEyLjA0LjMzLDIyLjY1LDguMDQsMjYuNzMsMTkuNDFsMjUuNzItMTIuODlabTExNi41Niw5OS4wNHYtMjUuMDNoLTY3Ljk5di0zMC40OGg1OC40di0yNS4wMmgtNTguNHYtMjMuNTZoNjIuNTd2LTI1LjAzaC05NC43NnYxMjkuMTlsMTAwLjE4LS4wNlptNDkuMTUtMTA1LjIxaDI5LjQ3YzkuNTkuMjEsMTcuMTksOC4xOCwxNi45OCwxNy43OS0uMiw5LjMyLTcuNjksMTYuODMtMTYuOTgsMTcuMDRoLTI5LjQ3di0zNC44M1ptLTMyLjE5LDEwNS4yMWgzMi4xOXYtNDYuNDNoMjAuNDNsMjUuMzEsNDYuNDNoMzUuOTlsLTI5LjQ3LTUxLjg4YzE1Ljc3LTQuMTMsMjYuNzItMTguNDgsMjYuNTgtMzQuODMsMC0yOS4wMi0xNy43Mi00Mi40NC00Ni42NS00Mi40NGgtNjQuMzd2MTI5LjE1Wm0xMjIuMTksMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptMTI2LjE3LTYwLjk0aDI2LjIyYzE0LjY0LDAsMjAuOCw3LjA4LDIwLjgsMTkuOTUuODUsOS45OS02LjU0LDE4Ljc3LTE2LjUsMTkuNjItMS4xMy4xLTIuMjcuMDktMy4zOS0uMDNoLTI3LjEydi0zOS41NFptLTMyLjE5LDEwNS4yMWgzMi41NXYtNDEuNzJoMjUuMTFjNDQuMTIsMCw1My43MS0yNi40OSw1My43MS00My43MSwwLTI1LjU4LTEyLjg0LTQzLjcyLTQ3LjU2LTQzLjcyaC02My44M2wuMDIsMTI5LjE2Wm0xMDQuNDgsMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptOTMuOTUsNDQuMjZoODIuNDV2LTI3LjIxaC01MC4yNnYtMTAxLjk1aC0zMi4xOXYxMjkuMTZaIi8+CiAgICAgIDxwYXRoIGlkPSJUcmF6YWRvXzE0IiBkYXRhLW5hbWU9IlRyYXphZG8gMTQiIGNsYXNzPSJjbHMtMSIgZD0ibTQ3Mi40OSwxMzMuOTZjLTExLjkzLTIxLjQtMjguNTctMzMuNzQtNTMuODgtMzMuNzQtNDAuMTQsMC02Mi41NywzMS45Mi02Mi41Nyw2OC4yczI0LjA1LDY4LjIxLDY1LjA5LDY4LjIxYzIyLjA0LS41Niw0MS45OS0xMy4yNSw1MS44OS0zMy4wMWwtMjUuNS0xMi4zM2MtNC44NSwxMC40Mi0xNC45NiwxNy4zNy0yNi40LDE4LjEzLTI1LjMyLDAtMzIuOTEtMjIuMTMtMzIuOTEtNDEsMC0yOS4wMiwxNC4xMS00MC45OSwzMS44Mi00MC45OSwxMi4wNC4zMywyMi42NSw4LjA0LDI2LjczLDE5LjQxbDI1LjcyLTEyLjg5Wm0xMTYuNTYsOTkuMDR2LTI1LjAzaC02Ny45OXYtMzAuNDhoNTguNHYtMjUuMDJoLTU4LjR2LTIzLjU2aDYyLjU3di0yNS4wM2gtOTQuNzZ2MTI5LjE5bDEwMC4xOC0uMDZabTQ5LjE1LTEwNS4yMWgyOS40N2M5LjU5LjIxLDE3LjE5LDguMTgsMTYuOTgsMTcuNzktLjIsOS4zMi03LjY5LDE2LjgzLTE2Ljk4LDE3LjA0aC0yOS40N3YtMzQuODNabS0zMi4xOSwxMDUuMjFoMzIuMTl2LTQ2LjQzaDIwLjQzbDI1LjMxLDQ2LjQzaDM1Ljk5bC0yOS40Ny01MS44OGMxNS43Ny00LjEzLDI2LjcyLTE4LjQ4LDI2LjU4LTM0LjgzLDAtMjkuMDItMTcuNzItNDIuNDQtNDYuNjUtNDIuNDRoLTY0LjM3djEyOS4xNVptMTIyLjE5LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTEyNi4xNy02MC45NGgyNi4yMmMxNC42NCwwLDIwLjgsNy4wOCwyMC44LDE5Ljk1Ljg1LDkuOTktNi41NCwxOC43Ny0xNi41LDE5LjYyLTEuMTMuMS0yLjI3LjA5LTMuMzktLjAzaC0yNy4xMnYtMzkuNTRabS0zMi4xOSwxMDUuMjFoMzIuNTV2LTQxLjcyaDI1LjExYzQ0LjEyLDAsNTMuNzEtMjYuNDksNTMuNzEtNDMuNzEsMC0yNS41OC0xMi44NC00My43Mi00Ny41Ni00My43MmgtNjMuODNsLjAyLDEyOS4xNlptMTA0LjQ4LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTkzLjk1LDQ0LjI2aDgyLjQ1di0yNy4yMWgtNTAuMjZ2LTEwMS45NWgtMzIuMTl2MTI5LjE2WiIvPgogICAgICA8cGF0aCBpZD0iVHJhemFkb18xNSIgZGF0YS1uYW1lPSJUcmF6YWRvIDE1IiBjbGFzcz0iY2xzLTEiIGQ9Im0wLDE2Mi41QzAsNzIuNzUsNzIuNTIsMCwxNjEuOTksMHMxNjEuOTksNzIuNzUsMTYxLjk5LDE2Mi41LTcyLjUyLDE2Mi41LTE2MS45OSwxNjIuNVMwLDI1Mi4yNSwwLDE2Mi41bTI0OC40NC01MS40MmMtMTcuODItMzEuOTMtNDIuNjItNTAuMzMtODAuMzgtNTAuMzMtNTkuODgsMC05My4zMyw0Ny42My05My4zMywxMDEuNzRzMzUuODgsMTAxLjc0LDk3LjEsMTAxLjc0YzMyLjg4LS44Myw2Mi42NC0xOS43Niw3Ny40MS00OS4yNWwtMzguMDctMTguMzljLTcuMjMsMTUuNTUtMjIuMzIsMjUuOTItMzkuMzksMjcuMDYtMzcuNzYsMC00OS4wOS0zMy00OS4wOS02MS4xNSwwLTQzLjI5LDIxLjA2LTYxLjE1LDQ3LjQ3LTYxLjE1LDE3Ljk4LjQ4LDMzLjgzLDExLjk3LDM5LjkyLDI4Ljk1bDM4LjM0LTE5LjIyWiIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+" alt="Cerapal · Estudi de cuines" width="141" height="38">
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="index.html#proyectos">Proyectos</a>
+      <a href="index.html#opiniones">Opiniones</a>
+      <a href="index.html#financiacion">Financiación</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+    <a class="nav-tel" href="tel:+34937620832">937 620 832</a>
+    <a class="btn btn-dark nav-cta" href="index.html#contacto">Pedir mi presupuesto</a>
+  </div>
+</header>
+
+<main id="contenido">
+  <section class="legal-hero">
+    <div class="wrap">
+      <p class="eyebrow">Legal</p>
+      <h1 class="legal-title">Política de privacidad</h1>
+      <nav class="legal-tabs" aria-label="Textos legales">
+        <a href="aviso-legal.html"><span class="tab-long">Aviso legal</span><span class="tab-short">Aviso legal</span></a>
+        <a href="politica-privacidad.html" aria-current="page"><span class="tab-long">Política de privacidad</span><span class="tab-short">Privacidad</span></a>
+        <a href="politica-cookies.html"><span class="tab-long">Política de cookies</span><span class="tab-short">Cookies</span></a>
+      </nav>
+    </div>
+  </section>
+
+  <div class="wrap legal-grid">
+    <nav class="toc" aria-label="En esta página">
+      <p class="eyebrow">En esta página</p>
+      <ol>
+          <li class="toc-h2"><a href="#cuadro-resumen-de-informacion">CUADRO RESUMEN DE INFORMACIÓN</a></li>
+          <li class="toc-h2"><a href="#que-significa-el-tratamiento-de-datos-personales">¿QUÉ SIGNIFICA EL TRATAMIENTO DE DATOS PERSONALES?</a></li>
+          <li class="toc-h2"><a href="#que-supone-el-uso-de-la-web">¿QUÉ SUPONE EL USO DE LA WEB?</a></li>
+          <li class="toc-h2"><a href="#quien-es-el-responsable-del-tratamiento">¿QUIÉN ES EL RESPONSABLE DEL TRATAMIENTO?</a></li>
+          <li class="toc-h2"><a href="#con-que-finalidad-utilizaremos-los-datos-recabados">¿CON QUÉ FINALIDAD UTILIZAREMOS LOS DATOS RECABADOS?</a></li>
+          <li class="toc-h2"><a href="#cual-es-la-legitimacion-del-tratamiento">¿CUÁL ES LA LEGITIMACIÓN DEL TRATAMIENTO?</a></li>
+          <li class="toc-h2"><a href="#cedemos-los-datos">¿CEDEMOS LOS DATOS?</a></li>
+          <li class="toc-h2"><a href="#cual-es-nuestra-politica-con-los-encargados-de-tratamientos">¿CUÁL ES NUESTRA POLÍTICA CON LOS ENCARGADOS DE TRATAMIENTOS?</a></li>
+          <li class="toc-h2"><a href="#que-hacemos-con-los-datos-en-redes-sociales">¿QUÉ HACEMOS CON LOS DATOS EN REDES SOCIALES?</a></li>
+          <li class="toc-h2"><a href="#que-derechos-tiene-el-usuario-como-se-ejercitan-los-derechos">¿QUÉ DERECHOS TIENE EL USUARIO? ¿CÓMO SE EJERCITAN LOS DERECHOS?</a></li>
+          <li class="toc-h2"><a href="#en-que-consisten-estos-derechos">¿EN QUÉ CONSISTEN ESTOS DERECHOS?</a></li>
+          <li class="toc-h2"><a href="#otros-derechos">OTROS DERECHOS</a></li>
+          <li class="toc-h2"><a href="#que-medidas-de-seguridad-tenemos-aplicadas-al-tratamiento-de">¿QUÉ MEDIDAS DE SEGURIDAD TENEMOS APLICADAS AL TRATAMIENTO DE DATOS PERSONALES?</a></li>
+          <li class="toc-h2"><a href="#notificacion-de-brechas-de-la-seguridad-de-los-datos-persona">NOTIFICACIÓN DE BRECHAS DE LA SEGURIDAD DE LOS DATOS PERSONALES</a></li>
+          <li class="toc-h2"><a href="#durante-cuanto-tiempo-guardamos-los-datos">¿DURANTE CUÁNTO TIEMPO GUARDAMOS LOS DATOS?</a></li>
+          <li class="toc-h2"><a href="#politica-de-cookies">POLÍTICA DE COOKIES</a></li>
+          <li class="toc-h2"><a href="#privacidad-de-menores">PRIVACIDAD DE MENORES</a></li>
+          <li class="toc-h2"><a href="#responsabilidad-del-usuario">RESPONSABILIDAD DEL USUARIO</a></li>
+          <li class="toc-h2"><a href="#prohibicion-a-los-usuarios-de-ceder-datos-de-terceros">PROHIBICIÓN A LOS USUARIOS DE CEDER DATOS DE TERCEROS</a></li>
+          <li class="toc-h2"><a href="#legislacion-y-jurisdiccion-aplicable">LEGISLACIÓN Y JURISDICCIÓN APLICABLE</a></li>
+          <li class="toc-h2"><a href="#modificacion">MODIFICACIÓN</a></li>
+      </ol>
+    </nav>
+    <details class="toc-mobile">
+      <summary>En esta página</summary>
+      <ol>
+          <li class="toc-h2"><a href="#cuadro-resumen-de-informacion">CUADRO RESUMEN DE INFORMACIÓN</a></li>
+          <li class="toc-h2"><a href="#que-significa-el-tratamiento-de-datos-personales">¿QUÉ SIGNIFICA EL TRATAMIENTO DE DATOS PERSONALES?</a></li>
+          <li class="toc-h2"><a href="#que-supone-el-uso-de-la-web">¿QUÉ SUPONE EL USO DE LA WEB?</a></li>
+          <li class="toc-h2"><a href="#quien-es-el-responsable-del-tratamiento">¿QUIÉN ES EL RESPONSABLE DEL TRATAMIENTO?</a></li>
+          <li class="toc-h2"><a href="#con-que-finalidad-utilizaremos-los-datos-recabados">¿CON QUÉ FINALIDAD UTILIZAREMOS LOS DATOS RECABADOS?</a></li>
+          <li class="toc-h2"><a href="#cual-es-la-legitimacion-del-tratamiento">¿CUÁL ES LA LEGITIMACIÓN DEL TRATAMIENTO?</a></li>
+          <li class="toc-h2"><a href="#cedemos-los-datos">¿CEDEMOS LOS DATOS?</a></li>
+          <li class="toc-h2"><a href="#cual-es-nuestra-politica-con-los-encargados-de-tratamientos">¿CUÁL ES NUESTRA POLÍTICA CON LOS ENCARGADOS DE TRATAMIENTOS?</a></li>
+          <li class="toc-h2"><a href="#que-hacemos-con-los-datos-en-redes-sociales">¿QUÉ HACEMOS CON LOS DATOS EN REDES SOCIALES?</a></li>
+          <li class="toc-h2"><a href="#que-derechos-tiene-el-usuario-como-se-ejercitan-los-derechos">¿QUÉ DERECHOS TIENE EL USUARIO? ¿CÓMO SE EJERCITAN LOS DERECHOS?</a></li>
+          <li class="toc-h2"><a href="#en-que-consisten-estos-derechos">¿EN QUÉ CONSISTEN ESTOS DERECHOS?</a></li>
+          <li class="toc-h2"><a href="#otros-derechos">OTROS DERECHOS</a></li>
+          <li class="toc-h2"><a href="#que-medidas-de-seguridad-tenemos-aplicadas-al-tratamiento-de">¿QUÉ MEDIDAS DE SEGURIDAD TENEMOS APLICADAS AL TRATAMIENTO DE DATOS PERSONALES?</a></li>
+          <li class="toc-h2"><a href="#notificacion-de-brechas-de-la-seguridad-de-los-datos-persona">NOTIFICACIÓN DE BRECHAS DE LA SEGURIDAD DE LOS DATOS PERSONALES</a></li>
+          <li class="toc-h2"><a href="#durante-cuanto-tiempo-guardamos-los-datos">¿DURANTE CUÁNTO TIEMPO GUARDAMOS LOS DATOS?</a></li>
+          <li class="toc-h2"><a href="#politica-de-cookies">POLÍTICA DE COOKIES</a></li>
+          <li class="toc-h2"><a href="#privacidad-de-menores">PRIVACIDAD DE MENORES</a></li>
+          <li class="toc-h2"><a href="#responsabilidad-del-usuario">RESPONSABILIDAD DEL USUARIO</a></li>
+          <li class="toc-h2"><a href="#prohibicion-a-los-usuarios-de-ceder-datos-de-terceros">PROHIBICIÓN A LOS USUARIOS DE CEDER DATOS DE TERCEROS</a></li>
+          <li class="toc-h2"><a href="#legislacion-y-jurisdiccion-aplicable">LEGISLACIÓN Y JURISDICCIÓN APLICABLE</a></li>
+          <li class="toc-h2"><a href="#modificacion">MODIFICACIÓN</a></li>
+      </ol>
+    </details>
+    <article class="legal-body">
+<p>Para el equipo de <strong>CERAPAL, S.L.</strong>, propietario de esta página web y de la marca <strong>CERAPAL -estudi de cuines-</strong>, es de extrema importancia la protección de la información personal, su seguridad y confidencialidad. Por ello, les recomendamos que lean atentamente el siguiente Aviso de Privacidad, ya que la información que como usuario proporcione a través de esta web (<a href="https://cerapal.cat/" target="_blank" rel="noopener">cerapal.cat</a>) queda protegida en los términos de esta Política de Privacidad. <strong>Les recordamos que el uso de esta web implica la aceptación de esta Política de Privacidad</strong>.</p>
+<h2 id="cuadro-resumen-de-informacion">CUADRO RESUMEN DE INFORMACIÓN</h2>
+<div class="table-wrap wrap-table-summary" role="region" aria-label="Tabla" tabindex="0"><table class="table-summary"><thead>
+<tr>
+<th colspan="2">Información básica sobre protección de datos</th></tr></thead><tbody>
+<tr>
+<td><strong>Responsable</strong></td><td>CERAPAL, S.L.</td></tr><tr>
+<td><strong>Finalidades</strong></td><td><ul>
+<li>Mostrar los servicios desarrollados por CERAPAL -estudi de cuines-.</li>
+<li>Gestión y respuesta a consultas online.</li>
+<li>Envío de promociones, publicidad e información de eventos.</li>
+</ul>
+<p>Para más información continúe la lectura.</p>
+</td></tr><tr>
+<td><strong>Legitimación</strong></td><td>Consentimiento del interesado. Para más información continúe la lectura.</td></tr><tr>
+<td><strong>Destinatarios</strong></td><td>No se cederán datos a terceros, salvo obligación legal. Podrán ceder resultados analíticos por petición de herramientas instaladas. Para más información consultar política de Cookies.</td></tr><tr>
+<td><strong>Derechos</strong></td><td>Acceder, rectificar y suprimir los datos, limitar y oponerse al tratamiento, a la portabilidad de los datos y a retirar el consentimiento.</td></tr><tr>
+<td><strong>Información adicional</strong></td><td>Puede consultar la información adicional y detallada sobre Protección de Datos continuando con la lectura del presente aviso.</td></tr></tbody></table></div>
+<h2 id="que-significa-el-tratamiento-de-datos-personales">¿QUÉ SIGNIFICA EL TRATAMIENTO DE DATOS PERSONALES?</h2>
+<p>Las operaciones, gestiones y procedimientos técnicos que se realicen de forma automatizada o no automatizada y que posibiliten la recogida, el almacenamiento, la modificación, la transferencia y otras acciones sobre datos de carácter personal, tienen la consideración <strong>de tratamiento de datos personales</strong>.</p>
+<h2 id="que-supone-el-uso-de-la-web">¿QUÉ SUPONE EL USO DE LA WEB?</h2>
+<p>Previamente al envío de cualquier solicitud de información a través de cualquier dirección de correo electrónico de la web cerapal.cat, <strong>el usuario acepta leer esta Política de Privacidad</strong>, por lo que presta su <strong>consentimiento inequívoco, libre, específico e informado</strong>, al tratamiento de sus datos personales con las finalidades indicadas.</p>
+<p>El citado consentimiento expreso implica la autorización del tratamiento de sus datos por <strong>CERAPAL -estudi de cuines-</strong> en los términos establecidos en esta Política de Privacidad, así como por los corresponsables y encargados del tratamiento con los que <strong>CERAPAL -estudi de cuines-</strong> mantiene obligada relación contractual y de control de cumplimiento.</p>
+<h2 id="quien-es-el-responsable-del-tratamiento">¿QUIÉN ES EL RESPONSABLE DEL TRATAMIENTO?</h2>
+<ul>
+<li><strong>Denominación comercial:</strong> CERAPAL -estudi de cuines-</li>
+<li><strong>Denominación fiscal:</strong> CERAPAL, S.L.</li>
+<li><strong>CIF:</strong> B64025430</li>
+<li><strong>Dirección:</strong> Calle Ramón Turró, 4 local-1 · 08389 · Palafolls · Barcelona · Catalunya · España (ES)</li>
+<li><strong>Teléfono:</strong> 937 620 832</li>
+<li><strong>Email:</strong> <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a></li>
+<li><strong>Sitio web</strong> <a href="https://cerapal.cat" target="_blank" rel="noopener">https://cerapal.cat</a></li>
+</ul>
+<p><strong>CERAPAL -estudi de cuines-</strong> garantiza la confidencialidad y privacidad de los datos personales recogidos, teniendo adoptadas medidas de seguridad para evitar la alteración, pérdida, tratamiento o acceso no autorizado y garantizar la integridad y seguridad de los datos de carácter personal, conforme a lo previsto en el Reglamento 2016/679 del Parlamento Europeo y del Consejo de 27 de abril de 2016, el cual desarrolla la Ley Orgánica 3/2018 de 5 de diciembre de Protección de Datos Personales y Garantías de Derechos Digitales, poniendo para ello los medios técnicos necesarios para impedir cualquier alteración, pérdida, acceso sin autorización o mala utilización de los datos tratados, con arreglo a la naturaleza de los datos, el estado de la tecnología, y los riesgos a los que están expuestos.</p>
+<h2 id="con-que-finalidad-utilizaremos-los-datos-recabados">¿CON QUÉ FINALIDAD UTILIZAREMOS LOS DATOS RECABADOS?</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> le informa que los datos personales que faciliten a través de esta web, incluyendo la dirección IP, serán tratados respondiendo a las siguientes finalidades:</p>
+<ol>
+<li>Prestar adecuadamente y con todas las garantías el producto o servicio solicitado.</li>
+<li>Enviar comunicaciones informativas a la solicitud de alta como usuario o inscripción en el boletín de noticias y eventos, ya sea a través del correo electrónico proporcionado en el sitio web o a través de los formularios de contacto o registros de usuarios.</li>
+<li>Gestionar y ofertar promociones, descuentos, y nuevos servicios con finalidades publicitarias y comerciales.</li>
+<li>Responder y enviar información al interesado sobre nuestra política de privacidad o solicitud de ejercicio de los derechos en materia de Protección de Datos.</li>
+<li>Gestionar nuestras redes sociales respecto de los datos de las personas que se hagan seguidoras. Al respecto, el tratamiento de los datos se rige por lo dispuesto en esta Política de Privacidad y por los términos y condiciones, políticas de privacidad y normativas de acceso específicas de cada red social.</li>
+<li>Realizar estudios periódicos de análisis de la web con fines estadísticos en base a los datos facilitados.</li>
+<li>Analizar el comportamiento del usuario durante su navegación web.</li>
+</ol>
+<p>Con el consentimiento expreso e informado, queda legalizado el acceso por <strong>CERAPAL -estudi de cuines-</strong> a los datos que, de acuerdo con la infraestructura de esta web, se precisen para contactar con usuario, administrar comentarios en el blog, validaciones o recomendaciones en redes sociales y/o enviarle el boletín de noticias de <strong>CERAPAL -estudi de cuines-</strong>.</p>
+<p><strong>No utilizaremos sus datos para ninguna otra finalidad no expresada en esta política de privacidad, ni enviaremos información adicional no solicitada mediante su consentimiento expreso</strong>.</p>
+<h2 id="cual-es-la-legitimacion-del-tratamiento">¿CUÁL ES LA LEGITIMACIÓN DEL TRATAMIENTO?</h2>
+<p>La legitimación de las diferentes actividades de tratamiento llevadas a cabo por <strong>CERAPAL -estudi de cuines-</strong> son:</p>
+<ul>
+<li><strong>Para la finalidad de prestación de servicio</strong>, el tratamiento se basa en la ejecución de un contrato entre las partes.</li>
+<li><strong>Para las finalidades de marketing y gestión comercial</strong>, el tratamiento se basa en el consentimiento del propio interesado.</li>
+<li><strong>Para las finalidades relacionadas con el análisis del comportamiento de los usuarios en la web</strong>, el tratamiento se basa en el interés legítimo de <strong>CERAPAL -estudi de cuines-</strong>, el cual se fundamenta en la búsqueda de mejora de la plataforma, su funcionalidad, su adaptación a los usuarios y la prestación de un servicio más individualizado para los propios interesados.</li>
+</ul>
+<h2 id="cedemos-los-datos">¿CEDEMOS LOS DATOS?</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> se compromete a no ceder datos a terceros sin haber recabado el consentimiento expreso de los usuarios. Sin embargo, sí que puede ceder métricas y analíticas solicitadas por herramientas informáticas instaladas en el sitio web de titularidad distintas a la de <strong>CERAPAL -estudi de cuines-</strong>. Algunos de dichos servicios pueden ser titularidad de terceros residentes fuera de la Unión Europea (Google, WordPress, etc).</p>
+<p><strong>CERAPAL -estudi de cuines-</strong> intenta y suele utilizar herramientas seguras cuyos servidores se encuentren preferiblemente en España, o en su defecto, en algún estado miembro de la Unión Europea, o bien que cumplan la legalidad europea a tenor de las guías y recomendaciones de la Agencia Española de Protección de Datos, la Comisión Europea y los acuerdos comunitarios de referencia en materia de transferencia internacional de datos, incluida la obtención de certificación en la lista Privacy Shield.</p>
+<h2 id="cual-es-nuestra-politica-con-los-encargados-de-tratamientos">¿CUÁL ES NUESTRA POLÍTICA CON LOS ENCARGADOS DE TRATAMIENTOS?</h2>
+<p>En <strong>CERAPAL -estudi de cuines-</strong> sólo compartimos la información personal con terceros con el fin de prestar servicios o realizar operaciones comerciales en los términos que se describen en esta Política de Privacidad o cuando consideramos que la ley lo permite o lo exige. La mayor parte de las ocasiones lo que compartimos con terceros son datos no personales, anónimos o estadísticos. Cuando compartimos información personal, lo hacemos de conformidad con los requisitos de privacidad y seguridad de datos informados previamente en cada caso y bajo la firma de contratos privados de encargado de tratamientos, en los que se aseguran de que nuestros proveedores cumplen con las medidas de seguridad adecuadas para una completa protección de los datos y cumplimiento legal.</p>
+<h2 id="que-hacemos-con-los-datos-en-redes-sociales">¿QUÉ HACEMOS CON LOS DATOS EN REDES SOCIALES?</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> cuenta con canales en las redes sociales de Facebook, Youtube, Linkedin y Twitter con la finalidad principal de publicar y difundir información sobre los productos ofertados a través de la web de <strong>CERAPAL -estudi de cuines-</strong>, interactuar con los usuarios y servir de canal de atención e interacción social.</p>
+<p>En el caso de que acceda a esta web utilizando alguna aplicación que conecte una red social con esta web, estará autorizando que la red social comparta algunos datos con <strong>CERAPAL -estudi de cuines-</strong>.</p>
+<p>Es importante que conozca que si tiene geolocalizadas sus cuentas en redes sociales dicha información de su localización al compartir en redes será visible a terceros con los que comparta o compartan su información.</p>
+<p>Puede obtener más información sobre el uso de sus datos en estas redes sociales consultando la política de privacidad de cada una de ellas.</p>
+<h2 id="que-derechos-tiene-el-usuario-como-se-ejercitan-los-derechos">¿QUÉ DERECHOS TIENE EL USUARIO? ¿CÓMO SE EJERCITAN LOS DERECHOS?</h2>
+<p><strong>¿Cómo puede ejercitar los derechos?</strong> En cualquier momento el usuario puede retirar su consentimiento y ejercer sus derechos de acceso, rectificación, supresión, limitación, oposición y portabilidad previstos en el Reglamento de Protección de Datos 679/2016 y la LO 3/2018 sobre Protección de Datos y Garantía de Derechos digitales, enviando un correo electrónico a <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a> o mediante envío de correo postal dirigiéndose a Calle Ramón Turró, 4 local-1 · 08389 · Palafolls · Barcelona · Catalunya · España (ES).</p>
+<p><strong>¿Qué necesitamos para verificar su identidad?</strong> En ambos casos, el usuario deberá acompañar una copia de su documento nacional de identidad, pasaporte u otro documento válido que le identifique.</p>
+<p><strong>¿Hay algún modelo para el ejercicio de derechos?</strong> Puede solicitar nuestro modelo a través del correo electrónico o acudiendo a nuestra sede (ambas direcciones previamente descritas).</p>
+<p>También puede hacer uso de los modelos y formularios que para el ejercicio de estos derechos pone a su disposición el portal de la Agencia Española de Protección de Datos, que pueden encontrarlos en la siguiente dirección:</p>
+<p><a href="http://www.agpd.es/portalwebAGPD/CanalDelCiudadano/derechos/principales_derchos/index-ides-idphp.php" target="_blank" rel="noopener">http://www.agpd.es/portalwebAGPD/CanalDelCiudadano/derechos/principales_derchos/index-ides-idphp.php</a>.</p>
+<h2 id="en-que-consisten-estos-derechos">¿EN QUÉ CONSISTEN ESTOS DERECHOS?</h2>
+<ul>
+<li><strong>Derecho de información:</strong> interesado debe ser informado previamente de modo expreso, preciso e inequívoco de, entre otros, la existencia de un fichero, de la posibilidad de ejercitar sus derechos y del responsable del tratamiento.</li>
+<li><strong>Derecho de acceso:</strong> permite al ciudadano conocer y obtener gratuitamente información sobre sus datos de carácter personal sometidos a tratamiento.</li>
+<li><strong>Derecho de rectificación:</strong> Este derecho se caracteriza porque permite corregir errores, modificar los datos que resulten ser inexactos o incompletos y garantizar la certeza de la información objeto de tratamiento.</li>
+<li><strong>Derecho de cancelación:</strong> permite suprimir los datos que resulten ser inadecuados o excesivos sin perjuicio del deber de bloqueo recogido en la LOPD.</li>
+<li><strong>Derecho de oposición:</strong> El derecho de oposición es el derecho del afectado a que no se lleve a cabo el tratamiento de sus datos de carácter personal o se cese en el mismo.</li>
+<li><strong>Derecho de limitación:</strong> el usuario tiene derecho a decidir qué datos personales no quiere que en un futuro vuelvan a ser tratados, pudiendo ejercitar este derecho cuando haya impugnado previamente la exactitud de los mismos; cuando el tratamiento sea ilícito y en lugar de ejercitar la supresión de los mismos decida limitarlos para futuros tratamientos. En caso de limitación del tratamiento, se podrá levantar la restricción si existe consentimiento del interesado; posibilidad que el tratamiento afecte a la protección de los derechos de otra persona física o jurídica; procedimiento judicial que lo justifique; o exista un motivo importante de interés público fundamentado en la legislación vigente.</li>
+<li><strong>Derecho de portabilidad:</strong> tiene derecho a recibir los datos personales facilitados o que <strong>CERAPAL -estudi de cuines-</strong> los transmita a otro responsable, en un formato estructurado de uso común y lectura mecánica, siempre y cuando, el tratamiento se efectúe por medios automatizados y el tratamiento esté basado en el consentimiento que un día el Usuario prestó para uno o varios fines específicos, o para la ejecución de un contrato en el que fue parte. El derecho a la portabilidad no se aplicará cuando sea técnicamente imposible la transmisión; ni cuando pueda afectar negativamente a los derechos y libertades de terceros; ni cuando el tratamiento tenga una misión de interés público fundamentado en la legislación vigente.</li>
+<li><strong>Derecho a presentar una reclamación ante la Autoridad de Control:</strong> tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (autoridad de control en España) a través del siguiente enlace: <a href="https://www.aepd.es/" target="_blank" rel="noopener">aepd.es</a>.</li>
+</ul>
+<h2 id="otros-derechos">OTROS DERECHOS</h2>
+<ul>
+<li><strong>Derecho al olvido:</strong> Eliminación de nombres en lista de resultados del buscador.</li>
+<li><strong>Derechos publicitarios:</strong> Derecho de exclusión de guías de teléfonos, Derecho a no recibir publicidad no deseada, Derechos de los abonados y usuarios de servicios de telecomunicaciones,</li>
+</ul>
+<h2 id="que-medidas-de-seguridad-tenemos-aplicadas-al-tratamiento-de">¿QUÉ MEDIDAS DE SEGURIDAD TENEMOS APLICADAS AL TRATAMIENTO DE DATOS PERSONALES?</h2>
+<p>En <strong>CERAPAL -estudi de cuines-</strong> para la protección de los datos personales de sus usuarios disponemos de protocolos de seguridad y aplicación de las medidas técnicas y organizativas adecuadas al estado de la técnica teniendo en cuenta el alcance, el contexto y las finalidades del tratamiento, así como los riesgos de probabilidad y gravedad variables para los derechos y libertades de los interesados, procurando estar en capacidad de asegurar la confidencialidad, integridad, disponibilidad y resiliencia de los sistemas y servicios del tratamiento.</p>
+<p>Además, nos preocupamos de velar por una elección correcta de sus encargados de tratamiento, en el cumplimiento de la normativa sobre Protección de Datos.</p>
+<p>En especial <strong>CERAPAL -estudi de cuines-</strong> cuenta con las siguientes medidas:</p>
+<ol>
+<li><strong>Estrategia de evaluación de riesgos de privacidad y seguridad</strong>, así como de un plan recuperación de desastres diseñada para salvaguardar la continuidad de nuestros servicios y para proteger a nuestro personal y nuestros datos.</li>
+<li><strong>Implementación de las Medidas Técnicas y Organizativas de Seguridad:</strong> Aplicamos las medidas técnicas y organizativas a las funciones descritas en esta política de privacidad.</li>
+<li><strong>Registro de Incidencias:</strong> el personal de <strong>CERAPAL -estudi de cuines-</strong> utiliza el registro de incidencias para el reporte de cualquier incidencia relacionada con la seguridad de la información y datos personales incluidos en los ficheros con datos personales que tratan.</li>
+<li><strong>Formación y sensibilización periódica</strong>, de nuestro personal y colaboradores para evitar errores en la gestión de los datos.</li>
+<li><strong>Sistema de Identificación y Autenticación:</strong> para dar acceso únicamente a los datos necesarios y al perfil concreto que los utilice.</li>
+</ol>
+<h2 id="notificacion-de-brechas-de-la-seguridad-de-los-datos-persona">NOTIFICACIÓN DE BRECHAS DE LA SEGURIDAD DE LOS DATOS PERSONALES</h2>
+<p>En caso de vulneración de la seguridad de los datos personales, siempre que no sea improbable que dicha violación de la seguridad constituya un riesgo para los derechos y las libertades de las personas físicas, <strong>CERAPAL -estudi de cuines-</strong>, notificará a la Agencia Española de Protección de Datos antes de transcurridas 72 horas a contar desde que se ha constancia del incidente, describiendo la naturaleza de la violación, las posibles consecuencias que pudieran derivarse y las medidas adoptadas o propuestas para poner remedio a la brecha de seguridad; y si fuera posible, se hará saber cuáles son las categorías y el número aproximado de interesados y datos afectados.</p>
+<p>Además, <strong>CERAPAL -estudi de cuines-</strong> notificará a los interesados, a la mayor brevedad posible, cuando sea probable que la violación de la seguridad de los datos personales entrañe un alto riesgo para los derechos y libertades de las personas físicas, describiendo las posibles consecuencias que pudieran derivarse y las medidas adoptadas o propuestas para poner remedio a la brecha de seguridad.</p>
+<h2 id="durante-cuanto-tiempo-guardamos-los-datos">¿DURANTE CUÁNTO TIEMPO GUARDAMOS LOS DATOS?</h2>
+<p>Los datos personales proporcionados a <strong>CERAPAL -estudi de cuines-</strong> se eliminarán una vez haya transcurrido el plazo pertinente para el ejercicio de reclamaciones. En los casos en los que el tratamiento se fundamente en el consentimiento del interesado, los datos se conservarán hasta que solicite su baja o supresión, o retire su propio consentimiento, o no sean necesarios para atender a la finalidad para la que se recabo.</p>
+<h2 id="politica-de-cookies">POLÍTICA DE COOKIES</h2>
+<p>En el enlace <strong>“Política de Cookies”</strong> le informamos que esta web de <strong>CERAPAL -estudi de cuines-</strong> puede utilizar cookies (pequeños archivos de información que el servidor envía al ordenador del usuario que accede a esta web) para llevar a cabo determinadas funciones que son consideradas imprescindibles para el correcto funcionamiento y visualización del sitio, para compartir en redes sociales y, en algunos casos, para realizar análisis de estadísticas de evaluación y propuestas de mejora.</p>
+<p>Para obtener estos análisis esta web puede almacenar determinada información en los registros del servidor de forma automática mediante el uso de cookies que recogen datos de uso y navegación relativos a la utilización de esta web por tu parte como usuario.</p>
+<p>La IP está considerado un dato personal, <strong>CERAPAL -estudi de cuines-</strong> no asocia direcciones IP, ni otros datos que arroje la utilización de cookies, ni los resultados de métricas, con información identificable de las personas, ni para recoger información de carácter personal, aunque puntualmente pueda servirnos para dirigir publicidad o segmentar usuarios a quien dirigirla.</p>
+<p>Es conveniente que como usuario conozca que utilizamos herramientas y plataformas de Internet que instalan cookies que no dependen de nosotros, por lo que es posible que los titulares de dichas herramientas utilicen tales datos para otros usos, <strong>de los que no nos hacemos responsable</strong>.</p>
+<p>Por esta razón, es conveniente que lea la política de Cookies para conocer cuales tienen carácter de propias, cuales son de terceros, cuales son permanentes, temporales o de sesión; y pueda decidir desinstalar las que considere oportunas, ya que no va a afectar en mucho el resultado, comodidad o experiencia de navegación.</p>
+<h2 id="privacidad-de-menores">PRIVACIDAD DE MENORES</h2>
+<p>Siguiendo las instrucciones de la Agencia Española de Protección de Datos, los menores de 14 años no deben ceder sus datos personales a <strong>CERAPAL -estudi de cuines-</strong> sin el previo consentimiento de sus padres o tutores. Con la publicación del Reglamento General Europeo de Protección de Datos se prevé la determinación de la edad para consentir la cesión de datos personales entre los 16 y 13 años, cuestión que en la actualidad se haya por definir.</p>
+<p>En caso de que <strong>CERAPAL -estudi de cuines-</strong> detecte usuarios que pudieran ser menores de 16 años, se reserva el derecho a solicitarle una copia de su DNI o documento equivalente, o, en su caso, la autorización de sus padres o tutores, causando su baja en caso de no acreditar el cumplimiento de este requisito o falta de respuesta.</p>
+<h2 id="responsabilidad-del-usuario">RESPONSABILIDAD DEL USUARIO</h2>
+<p>Como usuario acepta y garantiza que los datos personales que facilite son veraces, siendo el único responsable de cualquier daño o perjuicio, directo o indirecto, que pudiera ocasionarse a <strong>CERAPAL -estudi de cuines-</strong> como responsable de esta web o a tercero, si cumplimenta cualquier formulario con datos falsos o de terceras personas causando engaño, daño o perjuicio.</p>
+<p>Rogamos nos comunique cualquier variación que pueda darse en los datos facilitados enviando un correo electrónico a <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>.</p>
+<p>En <strong>CERAPAL -estudi de cuines-</strong> almacenamos los datos personales del usuario en servidores seguros, protegidos contra los tipos de ataques más habituales y ubicados en España. Sin embargo y, dado que no existe tecnología invulnerable, el usuario debe también poner los medios a su alcance para mantener el nivel de seguridad de sus datos, mediante el uso de contraseñas robustas, la periódica modificación de sus contraseñas, evitando usar la misma en cuentas diversas, así como evitando tomar nota de ellas en ningún soporte físico o no cifrado.</p>
+<h2 id="prohibicion-a-los-usuarios-de-ceder-datos-de-terceros">PROHIBICIÓN A LOS USUARIOS DE CEDER DATOS DE TERCEROS</h2>
+<p><strong>CERAPAL -estudi de cuines- prohíbe expresamente al usuario compartir, facilitar o ceder a nadie datos de terceros</strong>, que pudiera obtener como consecuencia del contacto, interacción o realización de navegación o consulta a través de esta web, excepto si pudiera acreditar la expresa autorización del usuario cuyos datos pretende ceder. Le recordamos que las imágenes son consideradas como dato protegido y por ello nadie puede utilizarla sin el consentimiento expreso de la persona que aparece en ella.</p>
+<p>Como usuario reconoce asumir su responsabilidad obligándose a mantener indemne a <strong>CERAPAL -estudi de cuines-</strong> ante cualquier posible reclamación, pena, multa o sanción a que pudiera venir obligada a soportar como consecuencia del incumplimiento por parte del usuario del deber descrito.</p>
+<p>En caso de facilitarnos datos de carácter personal de otras personas, deberá hacerlo con su consentimiento y habiéndole informado, con carácter previo, de los extremos contenidos en esta Política de Privacidad.</p>
+<h2 id="legislacion-y-jurisdiccion-aplicable">LEGISLACIÓN Y JURISDICCIÓN APLICABLE</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> tiene su sede en España, concretamente en la ciudad de Sevilla por lo que queda obligada a las leyes españolas y europeas en materia de Protección de Datos.</p>
+<p>Por ello, el usuario acepta que las reclamaciones o quejas contra <strong>CERAPAL -estudi de cuines-</strong> que provengan o estén relacionadas con el uso de este sitio web y más concretamente con el tratamiento de sus datos personales serán resueltas por el tribunal de la jurisdicción competente situado en Sevilla.</p>
+<p>Si el usuario accede a este sitio desde una ubicación fuera de España, es responsable de cumplir con todas las leyes locales e internacionales que te resulten de aplicación.</p>
+<h2 id="modificacion">MODIFICACIÓN</h2>
+<p><strong>CERAPAL -estudi de cuines-</strong> podrá modificar esta política de privacidad en cualquier momento publicándola en este sitio Web, en el que constará siempre la fecha de la última actualización aplicable.</p>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FwYV8yIiBkYXRhLW5hbWU9IkNhcGEgMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTIwMCAzMjUiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICNmZmY7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnIGlkPSJDYXBhXzEtMiIgZGF0YS1uYW1lPSJDYXBhIDEiPgogICAgPGcgaWQ9IkxvZ290aXBvIj4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTEiIGRhdGEtbmFtZT0iVHJhemFkbyAxMSIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTIiIGRhdGEtbmFtZT0iVHJhemFkbyAxMiIgY2xhc3M9ImNscy0xIiBkPSJtMTA5MC41MiwyOTUuNWgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjQsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk0LDMuMDctMTEuOTQsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY3LS4wMlptLTc1My4xOCwxMC45M2gyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTUwLjc3LTEwLjkzYy4xNCw4LjEyLDYuMTgsMTEuNzEsMTMuNjMsMTEuNzEsNi40OCwwLDEyLjk2LTIuOTQsMTIuOTYtMTAuMjgsMC0zLjktMi42MS03LjMyLTYuMzYtOC4zNS0xLjY5LS41LTguOTEtMi4zOS05LjQzLTIuNTMtMi4zMy0uNjQtMy44OS0xLjkzLTMuODktNC4yMywwLTMuMzEsMy4zNC00LjI3LDUuOTktNC4yNywzLjk0LDAsNi43NywxLjU2LDcuMDUsNS43OGg1LjcyYzAtNi44NC01LjcyLTEwLjQ3LTEyLjU0LTEwLjQ3LTUuOSwwLTExLjk1LDMuMDctMTEuOTUsOS42NC0uMDMsNC4yMSwzLjA3LDcuNzcsNy4yMyw4LjMxLDQuNDksMS4yMyw3LjQ2LDEuODQsOS43MiwyLjcxLDEuNzQuNTUsMi44NiwyLjI0LDIuNyw0LjA2LDAsMi40OC0xLjg4LDQuOTYtNi45MSw0Ljk2LTQuNTgsMC04LjI4LTEuOTctOC4yOC03LjAybC01LjY1LS4wMlptNTIuNDItMTYuODloMTAuMzR2MjcuODJoNS43MnYtMjcuODJoMTAuMzl2LTQuOTZoLTI2LjQ0djQuOTZabTUzLjc5LDE2LjAyYy40OCw3LjQzLDYuODcsMTMuMDYsMTQuMjgsMTIuNTgsNi43NC0uNDQsMTIuMS01LjgyLDEyLjU0LTEyLjU4di0yMC45OGgtNS43MnYxOS4wOWMwLDQuNC0uMjgsOS41LTcuNjksOS41cy03LjY5LTUuMDktNy42OS05LjV2LTE5LjA5aC01LjcydjIwLjk4Wm02My4wMy0xNi4yOWg1LjYzYzguOTcsMCwxMC44OSw1LjE0LDEwLjg5LDExLjcxcy0xLjkyLDExLjctMTAuODksMTEuN2gtNS42M3YtMjMuNDFabS01LjcyLDI4LjA5aDEzLjU0YzEwLjA3LDAsMTQuNDItNy4zMSwxNC40Mi0xNi4zOXMtNC4zNS0xNi4zOS0xNC40Mi0xNi4zOWgtMTMuNTR2MzIuNzhabTU2Ljk1LDBoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTgzLjE2LTI4LjA5aDUuNjNjOC45NywwLDEwLjg5LDUuMTQsMTAuODksMTEuNzFzLTEuOTIsMTEuNy0xMC44OSwxMS43aC01LjYzdi0yMy40MVptLTUuNzIsMjguMDloMTMuNTRjMTAuMDcsMCwxNC40Mi03LjMxLDE0LjQyLTE2LjM5cy00LjM1LTE2LjM5LTE0LjQyLTE2LjM5aC0xMy41NHYzMi43OFptNTYuOTUsMGgyMy44NHYtNC45NmgtMTguMTJ2LTkuNmgxNi40N3YtNC42OWgtMTYuNDd2LTguNThoMTcuODJ2LTQuOTZoLTIzLjQ5bC0uMDUsMzIuNzhabTEyMS4zNC0yMi4zNWMtLjgzLTYuODktNi45OC0xMS44NS0xMy44Ny0xMS4yLTkuNDUuODMtMTYuNDUsOS4xOC0xNS42MiwxOC42Ni43Miw4LjM0LDcuMzEsMTQuOTUsMTUuNjIsMTUuNjcsNy4zOS4yOSwxMy42MS01LjQ4LDEzLjktMTIuODksMC0uMTMsMC0uMjUsMC0uMzhoLTUuNThjLjA4LDQuNjYtMy42Miw4LjUtOC4yNiw4LjU4LS4wMiwwLS4wNCwwLS4wNywwLTcsMC05LjkzLTYuMi05LjkzLTEyLjQ4czIuOTItMTIuNDksOS45My0xMi40OWMzLjk3LS4yMyw3LjQ4LDIuNTcsOC4xNSw2LjVsNS43MS4wMlptMjguOCwxMC41NmMuNTEsNy40Myw2LjkzLDEzLjAzLDE0LjMzLDEyLjUyLDYuNjktLjQ3LDEyLjAxLTUuODEsMTIuNDgtMTIuNTJ2LTIwLjk4aC01LjcydjE5LjA5YzAsNC40LS4yOCw5LjUtNy42OSw5LjVzLTcuNjktNS4wOS03LjY5LTkuNXYtMTkuMDloLTUuNzJ2MjAuOThabTU3LjMxLDExLjhoNS43MnYtMzIuNzhoLTUuNzJ2MzIuNzhabTM2LjQsMGg1LjQ0di0yNC4xaC4xNGwxNC44NywyNC4xaDYuMDR2LTMyLjc4aC01LjQ0djI0LjE0aC0uMTFsLTE0LjkyLTI0LjE0aC02LjAzbC4wMiwzMi43OFoiLz4KICAgICAgPHBhdGggaWQ9IlRyYXphZG9fMTMiIGRhdGEtbmFtZT0iVHJhemFkbyAxMyIgY2xhc3M9ImNscy0xIiBkPSJtNDcyLjQ5LDEzMy45NmMtMTEuOTMtMjEuNC0yOC41Ny0zMy43NC01My44OC0zMy43NC00MC4xNCwwLTYyLjU3LDMxLjkyLTYyLjU3LDY4LjJzMjQuMDUsNjguMjEsNjUuMDksNjguMjFjMjIuMDQtLjU2LDQxLjk5LTEzLjI1LDUxLjg5LTMzLjAxbC0yNS41LTEyLjMzYy00Ljg1LDEwLjQyLTE0Ljk2LDE3LjM3LTI2LjQsMTguMTMtMjUuMzIsMC0zMi45MS0yMi4xMy0zMi45MS00MSwwLTI5LjAyLDE0LjExLTQwLjk5LDMxLjgyLTQwLjk5LDEyLjA0LjMzLDIyLjY1LDguMDQsMjYuNzMsMTkuNDFsMjUuNzItMTIuODlabTExNi41Niw5OS4wNHYtMjUuMDNoLTY3Ljk5di0zMC40OGg1OC40di0yNS4wMmgtNTguNHYtMjMuNTZoNjIuNTd2LTI1LjAzaC05NC43NnYxMjkuMTlsMTAwLjE4LS4wNlptNDkuMTUtMTA1LjIxaDI5LjQ3YzkuNTkuMjEsMTcuMTksOC4xOCwxNi45OCwxNy43OS0uMiw5LjMyLTcuNjksMTYuODMtMTYuOTgsMTcuMDRoLTI5LjQ3di0zNC44M1ptLTMyLjE5LDEwNS4yMWgzMi4xOXYtNDYuNDNoMjAuNDNsMjUuMzEsNDYuNDNoMzUuOTlsLTI5LjQ3LTUxLjg4YzE1Ljc3LTQuMTMsMjYuNzItMTguNDgsMjYuNTgtMzQuODMsMC0yOS4wMi0xNy43Mi00Mi40NC00Ni42NS00Mi40NGgtNjQuMzd2MTI5LjE1Wm0xMjIuMTksMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptMTI2LjE3LTYwLjk0aDI2LjIyYzE0LjY0LDAsMjAuOCw3LjA4LDIwLjgsMTkuOTUuODUsOS45OS02LjU0LDE4Ljc3LTE2LjUsMTkuNjItMS4xMy4xLTIuMjcuMDktMy4zOS0uMDNoLTI3LjEydi0zOS41NFptLTMyLjE5LDEwNS4yMWgzMi41NXYtNDEuNzJoMjUuMTFjNDQuMTIsMCw1My43MS0yNi40OSw1My43MS00My43MSwwLTI1LjU4LTEyLjg0LTQzLjcyLTQ3LjU2LTQzLjcyaC02My44M2wuMDIsMTI5LjE2Wm0xMDQuNDgsMGgzNC4zNWw2LjQ4LTIwLjMxaDQ3LjU2bDYuNDgsMjAuMzFoMzQuNTRsLTQ4LjY0LTEyOS4xOWgtMzMuMjdsLTQ3LjQ5LDEyOS4xOVptNDguNDYtNDQuMjZsMTUuOTEtNTMuMzJoLjM2bDE1LjkxLDUzLjMyaC0zMi4xOVptOTMuOTUsNDQuMjZoODIuNDV2LTI3LjIxaC01MC4yNnYtMTAxLjk1aC0zMi4xOXYxMjkuMTZaIi8+CiAgICAgIDxwYXRoIGlkPSJUcmF6YWRvXzE0IiBkYXRhLW5hbWU9IlRyYXphZG8gMTQiIGNsYXNzPSJjbHMtMSIgZD0ibTQ3Mi40OSwxMzMuOTZjLTExLjkzLTIxLjQtMjguNTctMzMuNzQtNTMuODgtMzMuNzQtNDAuMTQsMC02Mi41NywzMS45Mi02Mi41Nyw2OC4yczI0LjA1LDY4LjIxLDY1LjA5LDY4LjIxYzIyLjA0LS41Niw0MS45OS0xMy4yNSw1MS44OS0zMy4wMWwtMjUuNS0xMi4zM2MtNC44NSwxMC40Mi0xNC45NiwxNy4zNy0yNi40LDE4LjEzLTI1LjMyLDAtMzIuOTEtMjIuMTMtMzIuOTEtNDEsMC0yOS4wMiwxNC4xMS00MC45OSwzMS44Mi00MC45OSwxMi4wNC4zMywyMi42NSw4LjA0LDI2LjczLDE5LjQxbDI1LjcyLTEyLjg5Wm0xMTYuNTYsOTkuMDR2LTI1LjAzaC02Ny45OXYtMzAuNDhoNTguNHYtMjUuMDJoLTU4LjR2LTIzLjU2aDYyLjU3di0yNS4wM2gtOTQuNzZ2MTI5LjE5bDEwMC4xOC0uMDZabTQ5LjE1LTEwNS4yMWgyOS40N2M5LjU5LjIxLDE3LjE5LDguMTgsMTYuOTgsMTcuNzktLjIsOS4zMi03LjY5LDE2LjgzLTE2Ljk4LDE3LjA0aC0yOS40N3YtMzQuODNabS0zMi4xOSwxMDUuMjFoMzIuMTl2LTQ2LjQzaDIwLjQzbDI1LjMxLDQ2LjQzaDM1Ljk5bC0yOS40Ny01MS44OGMxNS43Ny00LjEzLDI2LjcyLTE4LjQ4LDI2LjU4LTM0LjgzLDAtMjkuMDItMTcuNzItNDIuNDQtNDYuNjUtNDIuNDRoLTY0LjM3djEyOS4xNVptMTIyLjE5LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTEyNi4xNy02MC45NGgyNi4yMmMxNC42NCwwLDIwLjgsNy4wOCwyMC44LDE5Ljk1Ljg1LDkuOTktNi41NCwxOC43Ny0xNi41LDE5LjYyLTEuMTMuMS0yLjI3LjA5LTMuMzktLjAzaC0yNy4xMnYtMzkuNTRabS0zMi4xOSwxMDUuMjFoMzIuNTV2LTQxLjcyaDI1LjExYzQ0LjEyLDAsNTMuNzEtMjYuNDksNTMuNzEtNDMuNzEsMC0yNS41OC0xMi44NC00My43Mi00Ny41Ni00My43MmgtNjMuODNsLjAyLDEyOS4xNlptMTA0LjQ4LDBoMzQuMzVsNi40OC0yMC4zMWg0Ny41Nmw2LjQ4LDIwLjMxaDM0LjU0bC00OC42NC0xMjkuMTloLTMzLjI3bC00Ny40OSwxMjkuMTlabTQ4LjQ2LTQ0LjI2bDE1LjkxLTUzLjMyaC4zNmwxNS45MSw1My4zMmgtMzIuMTlabTkzLjk1LDQ0LjI2aDgyLjQ1di0yNy4yMWgtNTAuMjZ2LTEwMS45NWgtMzIuMTl2MTI5LjE2WiIvPgogICAgICA8cGF0aCBpZD0iVHJhemFkb18xNSIgZGF0YS1uYW1lPSJUcmF6YWRvIDE1IiBjbGFzcz0iY2xzLTEiIGQ9Im0wLDE2Mi41QzAsNzIuNzUsNzIuNTIsMCwxNjEuOTksMHMxNjEuOTksNzIuNzUsMTYxLjk5LDE2Mi41LTcyLjUyLDE2Mi41LTE2MS45OSwxNjIuNVMwLDI1Mi4yNSwwLDE2Mi41bTI0OC40NC01MS40MmMtMTcuODItMzEuOTMtNDIuNjItNTAuMzMtODAuMzgtNTAuMzMtNTkuODgsMC05My4zMyw0Ny42My05My4zMywxMDEuNzRzMzUuODgsMTAxLjc0LDk3LjEsMTAxLjc0YzMyLjg4LS44Myw2Mi42NC0xOS43Niw3Ny40MS00OS4yNWwtMzguMDctMTguMzljLTcuMjMsMTUuNTUtMjIuMzIsMjUuOTItMzkuMzksMjcuMDYtMzcuNzYsMC00OS4wOS0zMy00OS4wOS02MS4xNSwwLTQzLjI5LDIxLjA2LTYxLjE1LDQ3LjQ3LTYxLjE1LDE3Ljk4LjQ4LDMzLjgzLDExLjk3LDM5LjkyLDI4Ljk1bDM4LjM0LTE5LjIyWiIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+" alt="Cerapal · Estudi de cuines" width="196" height="53" loading="lazy">
+      <p>Cada proyecto es único, exclusivo y personalizado.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Estudio</h3>
+      <p>Carrer Ramon Turró, 4 · Local 1<br>08389 Palafolls (Barcelona)</p>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Carrer%20Ramon%20Turr%C3%B3%204%2C%2008389%20Palafolls" target="_blank" rel="noopener">Cómo llegar</a>
+    </div>
+    <div class="footer-col">
+      <h3>Contacto</h3>
+      <a href="tel:+34937620832">937 620 832</a>
+      <a href="tel:+34654628727">654 628 727</a>
+      <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>
+    </div>
+    <div class="footer-col">
+      <h3>Horario</h3>
+      <p>Lunes a viernes<br>9:00–13:00<br>15:00–19:00</p>
+    </div>
+    <div class="footer-col">
+      <h3>Síguenos</h3>
+      <a href="https://www.instagram.com/cuinescerapal/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/cuinescerapal/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <p>© <span id="year">2026</span> Cerapal · Estudi de cuines</p>
+    <nav aria-label="Legal">
+      <a href="aviso-legal.html">Aviso legal</a>
+      <a href="politica-privacidad.html" aria-current="page">Política de privacidad</a>
+      <a href="politica-cookies.html">Política de cookies</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(() => {
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('is-scrolled', scrollY > 8);
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // en móvil, el índice se cierra al elegir un apartado
+  const tocMobile = document.querySelector('.toc-mobile');
+  tocMobile.addEventListener('click', e => { if (e.target.closest('a')) tocMobile.open = false; });
+
+  // marca en el índice el apartado que se está leyendo
+  const toc = document.querySelector('.toc');
+  const links = [...toc.querySelectorAll('a')];
+  const heads = links.map(a => document.getElementById(a.hash.slice(1))).filter(Boolean);
+  const mark = () => {
+    const y = innerHeight * .3;
+    let current = heads[0];
+    for (const h of heads) if (h.getBoundingClientRect().top <= y) current = h;
+    links.forEach(a => {
+      const on = a.hash === '#' + current.id;
+      a.classList.toggle('is-active', on);
+      if (on && toc.scrollHeight > toc.clientHeight) {
+        const top = a.offsetTop, bottom = top + a.offsetHeight;
+        if (top < toc.scrollTop || bottom > toc.scrollTop + toc.clientHeight) toc.scrollTop = top - toc.clientHeight / 3;
+      }
+    });
+  };
+  let ticking = false;
+  addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { ticking = false; mark(); });
+  }, { passive: true });
+  mark();
+})();
+</script>
+</body>
+</html>
