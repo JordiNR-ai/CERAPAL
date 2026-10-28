@@ -1121,7 +1121,8 @@ html.lb-open, html.menu-open { overflow: hidden; }
       </div>
 
       <div class="contact-form" data-reveal style="--i:1">
-        <form id="form" name="contacto" novalidate>
+        <form id="form" name="contacto" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <input type="hidden" name="access_key" value="27a49877-bb47-4b5b-bd65-98dfc9c18395">
           <div class="form-grid">
             <div class="field">
               <label for="f-nombre" data-i18n="fName">Nombre</label>
@@ -1482,8 +1483,8 @@ html.lb-open, html.menu-open { overflow: hidden; }
 (() => {
   /* Si conectas un servicio de formularios (Formspree, Getform...), pega aquí su URL.
      Mientras esté vacío, el formulario abre el programa de correo con el mensaje preparado.
-     PRUEBA: ahora las solicitudes van por FormSubmit a este correo. Para publicar la web, cámbialo por el de Cerapal. */
-  const FORM_ENDPOINT = 'https://formsubmit.co/ajax/nicolau.retamero.jordi@gmail.com';
+     Ahora va por Web3Forms: la clave (access_key) está en el propio formulario y decide a qué correo llegan las solicitudes. */
+  const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
   const EMAIL = 'cuines@cerapal.cat';
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1771,15 +1772,14 @@ html.lb-open, html.menu-open { overflow: hidden; }
       submitBtn.disabled = true;
       submitBtn.textContent = S().sending;
       try {
-        const payload = { ...d, _subject: `${S().mailSubject} · ${d.nombre}`, _template: 'table' };
+        const payload = { ...d, subject: `${S().mailSubject} · ${d.nombre}`, from_name: 'Web Cerapal' };
         const res = await fetch(FORM_ENDPOINT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify(payload)
         });
         const data = await res.json().catch(() => ({}));
-        // FormSubmit responde 200 con success "false" si falta activar el formulario
-        if (!res.ok || String(data.success) === 'false') throw new Error(data.message || res.status);
+        if (!res.ok || data.success === false) throw new Error(data.message || res.status);
         form.reset();
         statusEl.textContent = S().sent;
       } catch (err) {
