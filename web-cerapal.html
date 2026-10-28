@@ -1,0 +1,2025 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cerapal · Estudio de cocinas en Palafolls</title>
+<meta name="description" content="Cocinas exclusivas y personalizadas. Diseño y reforma de cocinas a medida en Palafolls (Barcelona) desde 1996.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="assets/logo/cerapal-isotipo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* ============================================================
+   Tokens — paleta Cerapal
+   ============================================================ */
+:root {
+  --black: #000000;
+  --ink: #191919;
+  --muted: #5B5B5B;
+  --grey: #EDEDED;
+  --white: #FFFFFF;
+  --line: #D4D4D4;
+
+  --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --gutter: clamp(16px, 4.2vw, 64px);
+  --col-gap: clamp(12px, 2.2vw, 32px);
+  --max: 1280px;
+  --nav-h: 76px;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, .06);
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+  -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--ink) var(--grey);
+  scrollbar-width: thin;
+}
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 400;
+  font-stretch: 100%;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+::selection { background: var(--black); color: var(--white); }
+:focus-visible { outline: 2px solid var(--black); outline-offset: 3px; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--grey); }
+::-webkit-scrollbar-thumb { background: var(--ink); border: 3px solid var(--grey); border-radius: 10px; }
+html.lb-open, html.menu-open { overflow: hidden; }
+
+.skip {
+  position: fixed; left: 16px; top: -60px; z-index: 100;
+  background: var(--black); color: var(--white);
+  padding: 12px 18px; text-decoration: none; font-weight: 600;
+  transition: top .2s;
+}
+.skip:focus { top: 16px; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+.wrap {
+  width: 100%;
+  max-width: calc(var(--max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.section { padding-block: clamp(96px, 12vw, 176px); }
+
+/* ============================================================
+   Tipografía
+   ============================================================ */
+.eyebrow {
+  margin: 0 0 20px;
+  font-size: 12px;
+  font-weight: 600;
+  font-stretch: 112%;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.h2 {
+  margin: 0;
+  font-size: clamp(34px, 4.6vw, 66px);
+  line-height: 1.02;
+  font-weight: 750;
+  font-stretch: 118%;
+  letter-spacing: -.028em;
+  color: var(--black);
+  text-wrap: balance;
+}
+.lead {
+  margin: 20px 0 0;
+  max-width: 44ch;
+  font-size: clamp(17px, 1.35vw, 20px);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* ============================================================
+   Botones y enlaces
+   ============================================================ */
+.btn {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center; gap: 14px;
+  height: 54px; padding: 0 26px;
+  border: 1px solid transparent; border-radius: 2px;
+  font-size: 15px; font-weight: 600; font-stretch: 108%; letter-spacing: .01em; line-height: 1;
+  text-decoration: none; white-space: nowrap;
+  cursor: pointer;
+  overflow: hidden; isolation: isolate;
+  transition: color .45s var(--ease-out), border-color .45s var(--ease-out);
+}
+.btn::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform .5s var(--ease-out);
+}
+@media (hover: hover) { .btn:hover::before { transform: scaleY(1); } }
+.btn .arrow { width: 16px; height: 16px; transition: transform .45s var(--ease-out); }
+@media (hover: hover) { .btn:hover .arrow { transform: translateX(4px); } }
+
+.btn-dark { background: var(--black); color: var(--white); }
+.btn-dark::before { background: var(--ink); }
+@media (hover: hover) { .btn-dark:hover { border-color: var(--ink); } }
+
+.btn-light { background: var(--white); color: var(--black); }
+.btn-light::before { background: var(--grey); }
+
+.btn-outline { background: transparent; color: var(--black); border-color: var(--line); }
+.btn-outline::before { background: var(--grey); }
+.btn .tel-icon { width: 18px; height: 18px; }
+
+.btn-outline-light { background: transparent; color: var(--white); border-color: var(--muted); }
+.btn-outline-light::before { background: var(--white); }
+@media (hover: hover) { .btn-outline-light:hover { color: var(--black); border-color: var(--white); } }
+
+.link-line {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 15px; font-weight: 600; font-stretch: 108%;
+  text-decoration: none; color: var(--black);
+  padding-block: 6px;
+}
+.link-line::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: currentColor;
+  transform-origin: right;
+  transition: transform .5s var(--ease-out);
+}
+@media (hover: hover) { .link-line:hover::after { transform: scaleX(0); } }
+
+/* ============================================================
+   Navegación
+   ============================================================ */
+.nav {
+  position: fixed; inset: 0 0 auto; z-index: 50;
+  height: var(--nav-h);
+  border-bottom: 1px solid transparent;
+  transition: background-color .4s, border-color .4s, backdrop-filter .4s;
+}
+.nav.is-scrolled, .nav.is-menu {
+  background: rgba(255, 255, 255, .93);
+  -webkit-backdrop-filter: saturate(1.4) blur(16px);
+  backdrop-filter: saturate(1.4) blur(16px);
+  border-bottom-color: var(--line);
+}
+.nav-inner {
+  height: 100%;
+  display: flex; align-items: center; gap: clamp(20px, 2.6vw, 36px);
+  padding-inline: var(--gutter);
+}
+.nav-logo { flex: none; }
+.nav-logo img { height: 38px; width: auto; }
+.nav-links { display: flex; gap: clamp(20px, 2.4vw, 34px); margin-left: auto; }
+.nav-links a, .nav-tel {
+  position: relative;
+  font-size: 15px; font-weight: 500;
+  text-decoration: none; color: var(--ink);
+}
+.nav-links a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -5px; height: 1px;
+  background: currentColor;
+  transform: scaleX(0); transform-origin: right;
+  transition: transform .45s var(--ease-out);
+}
+@media (hover: hover) { .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; } }
+.nav-tel {
+  padding-left: clamp(20px, 2.6vw, 36px);
+  border-left: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+.nav-cta { height: 44px; padding: 0 20px; font-size: 14px; }
+.lang { display: flex; align-items: center; gap: 2px; }
+.lang button {
+  min-width: 34px; height: 34px; padding: 0 6px;
+  border: 0; border-radius: 2px; background: none;
+  font-size: 12px; font-weight: 700; font-stretch: 112%; letter-spacing: .08em;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .2s, box-shadow .2s;
+}
+@media (hover: hover) { .lang button:hover { color: var(--black); } }
+.lang button[aria-pressed="true"] { color: var(--black); box-shadow: inset 0 -2px 0 var(--black); }
+.nav-toggle {
+  display: none;
+  margin-left: auto;
+  height: 44px; padding: 0 18px;
+  background: var(--black); color: var(--white);
+  border: 0; border-radius: 2px;
+  font-size: 14px; font-weight: 600; font-stretch: 108%;
+  cursor: pointer;
+}
+
+.menu {
+  position: fixed; inset: var(--nav-h) 0 0; z-index: 49;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 40px var(--gutter) 32px;
+  background: var(--white);
+  visibility: hidden; opacity: 0; transform: translate3d(0, -12px, 0);
+  transition: opacity .3s var(--ease-out), transform .4s var(--ease-out), visibility 0s linear .4s;
+}
+.menu.is-open { visibility: visible; opacity: 1; transform: none; transition: opacity .3s var(--ease-out), transform .4s var(--ease-out), visibility 0s; }
+.menu nav { display: flex; flex-direction: column; }
+.menu nav a {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(32px, 9vw, 48px); font-weight: 750; font-stretch: 118%; letter-spacing: -.02em;
+  text-decoration: none; color: var(--black);
+  opacity: 0; transform: translate3d(0, 10px, 0);
+  transition: opacity .35s var(--ease-out), transform .45s var(--ease-out);
+}
+.menu.is-open nav a { opacity: 1; transform: none; transition-delay: calc(.05s + var(--k, 0) * 45ms); }
+.menu nav a:nth-child(2) { --k: 1; }
+.menu nav a:nth-child(3) { --k: 2; }
+.menu nav a:nth-child(4) { --k: 3; }
+@media (min-width: 901px) { .menu { display: none; } }
+.menu-foot { display: flex; flex-direction: column; gap: 6px; font-size: 17px; }
+.menu-foot a { text-decoration: none; }
+
+/* ============================================================
+   Hero — corto y directo: titular, frase, dos acciones y la foto.
+   Al hacer scroll, la foto crece hasta ocupar su lado del hero (en móvil, todo el ancho).
+   ============================================================ */
+.hero {
+  position: relative;
+  overflow: clip; /* lo que crece la foto no se sale del hero */
+  padding: calc(var(--nav-h) + clamp(24px, 5vw, 64px)) 0 clamp(36px, 5vw, 72px);
+  background: var(--white);
+}
+.hero-grid {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  align-items: center;
+}
+.hero-copy { grid-column: 1 / span 6; }
+.hero-title {
+  margin: 0;
+  font-size: clamp(38px, 5.2vw, 84px);
+  line-height: 1;
+  font-weight: 800; font-stretch: 112%; letter-spacing: -.035em;
+  color: var(--black);
+  text-wrap: balance;
+}
+/* cada palabra sube desde detrás de una máscara */
+.hero-title .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .14em; margin-bottom: -.14em; }
+.hero-title .w > span { display: inline-block; }
+.hero-title .keep { white-space: nowrap; }
+.hero-title .mark { position: relative; display: inline-block; }
+.hero-title .mark::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: .02em; height: .085em;
+  background: var(--black);
+  transform-origin: left;
+}
+.hero-sub {
+  margin: clamp(18px, 2vw, 28px) 0 0; max-width: 36ch;
+  font-size: clamp(17px, 1.35vw, 20px); line-height: 1.5;
+  color: var(--muted);
+}
+.hero-sub strong { font-weight: 600; color: var(--ink); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(24px, 2.6vw, 36px); }
+.hero-photo {
+  grid-column: 7 / span 6;
+  position: relative;
+  margin: 0;
+  aspect-ratio: 5 / 4;
+}
+.hero-frame {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--grey);
+  transform-origin: 0% 50%; /* en ordenador crece hacia la derecha y de arriba abajo */
+}
+.hero-frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+/* Al hacer scroll la foto crece y la cocina se acerca. Son animaciones de CSS ligadas al scroll:
+   las mueve la tarjeta gráfica al ritmo del dedo, así que en móvil no dan tirones. */
+@keyframes hero-grow { to { transform: scale(1.2); } }
+@keyframes hero-grow-mobile { to { transform: scale(1.1); } }
+@keyframes hero-zoom { to { transform: scale(1.06); } }
+@keyframes hero-zoom-mobile { to { transform: scale(1.12); } }
+@supports (animation-timeline: scroll()) {
+  .hero-frame, .hero-frame img {
+    animation: hero-grow linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 85vh;
+  }
+  .hero-frame img { animation-name: hero-zoom; }
+}
+.hero-badge {
+  position: absolute; left: 16px; bottom: 16px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 10px 16px 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .86);
+  -webkit-backdrop-filter: blur(10px) saturate(1.4); backdrop-filter: blur(10px) saturate(1.4);
+  box-shadow: 0 12px 30px -14px rgba(0, 0, 0, .4);
+  color: var(--black); text-decoration: none;
+  font-size: 13px; font-weight: 600; font-stretch: 108%;
+  transition: background-color .3s;
+}
+@media (hover: hover) { .hero-badge:hover { background: var(--white); } }
+.hero-badge .stars { gap: 3px; }
+.hero-badge .stars svg { width: 13px; height: 13px; }
+.only-mobile { display: none; }
+
+/* entrada al cargar (≈1,5 s en total): nada espera a nada y el botón se puede pulsar desde el principio */
+.js .hero-title .w > span { transform: translateY(110%); transition: transform .8s var(--ease-out); transition-delay: calc(var(--i, 0) * 60ms); }
+.js.is-loaded .hero-title .w > span { transform: none; }
+.js .hero-title .mark::after { transform: scaleX(0); transition: transform .7s var(--ease-io) .75s; }
+.js.is-loaded .hero-title .mark::after { transform: scaleX(1); }
+.js .hero-fade { opacity: 0; transform: translateY(12px); transition: opacity .6s var(--ease-out) .35s, transform .7s var(--ease-out) .35s; }
+.js.is-loaded .hero-fade { opacity: 1; transform: none; }
+.js .hero-badge { opacity: 0; transform: translateY(12px); transition: opacity .6s var(--ease-out) 1.05s, transform .7s var(--ease-out) 1.05s, background-color .3s; }
+.js.is-loaded .hero-badge { opacity: 1; transform: none; }
+
+/* ============================================================
+   Franja de marcas
+   ============================================================ */
+.brands { background: var(--grey); padding-block: clamp(28px, 3.2vw, 44px); }
+.marquee {
+  --g: clamp(36px, 4.4vw, 72px);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.marquee-track { display: flex; width: max-content; animation: marquee 42s linear infinite; }
+@media (hover: hover) { .marquee:hover .marquee-track { animation-play-state: paused; } }
+.marquee-list {
+  display: flex; align-items: center; gap: var(--g);
+  margin: 0; padding: 0 calc(var(--g) / 2);
+  list-style: none;
+}
+.marquee-list img {
+  height: clamp(48px, 4.2vw, 58px); width: auto;
+  filter: grayscale(1) brightness(0);
+  opacity: .62;
+  transition: opacity .4s;
+}
+@media (hover: hover) { .marquee-list li:hover img { opacity: 1; } }
+@keyframes marquee { to { transform: translate3d(-50%, 0, 0); } }
+
+/* ============================================================
+   Cabecera de sección (con línea que se dibuja)
+   ============================================================ */
+.section-head {
+  position: relative;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap);
+  padding-top: 28px;
+}
+.section-head::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: var(--ink);
+  transform-origin: left;
+  transition: transform 1.4s var(--ease-io);
+}
+.js .section-head::before { transform: scaleX(0); }
+.js .section-head.in::before { transform: scaleX(1); }
+.section-head .eyebrow { grid-column: 1 / span 3; }
+.section-head .h2, .section-head .lead { grid-column: 4 / span 9; }
+
+/* ============================================================
+   Proyectos — tarjetas con foto
+   ============================================================ */
+#proyectos, #opiniones { background: var(--grey); }
+#proyectos {
+  /* efecto neumórfico (Uiverse.io, adamgiebl): la tarjeta tiene el mismo gris que el fondo,
+     con luz arriba a la izquierda y sombra abajo a la derecha */
+  --neu-dark: #c9c9c9; /* el gris de fondo, un 15 % más oscuro */
+  --neu-light: #ffffff;
+  --neu: 15px 15px 30px var(--neu-dark), -15px -15px 30px var(--neu-light);
+  --neu-up: 20px 20px 40px var(--neu-dark), -20px -20px 40px var(--neu-light);
+  padding-block: clamp(24px, 3vw, 48px) clamp(48px, 5vw, 80px);
+}
+.projects-head { max-width: 780px; margin: 0 auto; text-align: center; }
+.projects-head .lead { margin-inline: auto; text-wrap: balance; }
+
+.carousel { margin-top: clamp(4px, 1vw, 12px); }
+.carousel-track {
+  --gap: clamp(24px, 2.4vw, 36px);
+  --edge: max(var(--gutter), calc((100% - var(--max)) / 2)); /* alinea la primera tarjeta con el contenido */
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 2 * var(--gap)) / 3);
+  gap: var(--gap);
+  padding: 44px var(--edge) 60px; /* hueco para que las sombras no se corten */
+  scroll-padding-inline: var(--edge);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-track > * { scroll-snap-align: start; }
+.carousel-track img { -webkit-user-drag: none; user-select: none; }
+.carousel-track.is-dragging { scroll-snap-type: none; scroll-behavior: auto; cursor: grabbing; }
+.carousel-track.is-dragging .pc-link { cursor: grabbing; }
+
+.carousel-nav { display: flex; align-items: center; justify-content: center; gap: 24px; }
+.cn-btn {
+  width: 52px; height: 52px;
+  display: grid; place-items: center;
+  border: 0; border-radius: 50%;
+  background: var(--grey); color: var(--black);
+  box-shadow: 6px 6px 14px var(--neu-dark), -6px -6px 14px var(--neu-light);
+  cursor: pointer;
+  transition: box-shadow .3s, opacity .3s;
+}
+.cn-btn svg { width: 18px; height: 18px; }
+@media (hover: hover) { .cn-btn:hover { box-shadow: 8px 8px 18px var(--neu-dark), -8px -8px 18px var(--neu-light); } }
+.cn-btn:active { box-shadow: inset 4px 4px 10px var(--neu-dark), inset -4px -4px 10px var(--neu-light); }
+.cn-btn:disabled { opacity: .35; box-shadow: none; cursor: default; }
+.cn-progress { position: relative; width: min(220px, 36vw); height: 2px; overflow: hidden; border-radius: 2px; background: var(--line); }
+.cn-progress span { position: absolute; inset: 0 auto 0 0; width: 50%; border-radius: 2px; background: var(--black); }
+
+.project-card {
+  position: relative;
+  display: flex; flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: var(--grey);
+  border-radius: 30px;
+  box-shadow: var(--neu);
+  transition: transform .55s var(--ease-out), box-shadow .55s var(--ease-out);
+}
+.pc-media { position: relative; aspect-ratio: 5 / 4; overflow: hidden; background: var(--grey); }
+.pc-move { position: absolute; inset: -8% 0; }
+/* la foto se desplaza un poco dentro de su tarjeta mientras la sección pasa por la pantalla (también en CSS) */
+@keyframes pc-parallax { from { transform: translate3d(0, 6%, 0); } to { transform: translate3d(0, -6%, 0); } }
+@supports (animation-timeline: view()) {
+  #proyectos { view-timeline: --proyectos block; }
+  .pc-move { animation: pc-parallax linear both; animation-timeline: --proyectos; }
+}
+.pc-media img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%;
+  transition: transform 1.2s var(--ease-out);
+}
+.pc-badge {
+  position: absolute; top: 18px; left: 18px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(25, 25, 25, .55);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  color: var(--white);
+  font-size: 11px; font-weight: 600; font-stretch: 112%; letter-spacing: .12em; text-transform: uppercase; line-height: 1;
+}
+.pc-arrow {
+  position: absolute; right: 18px; bottom: 18px;
+  width: 48px; height: 48px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--white); color: var(--black);
+  box-shadow: 0 6px 16px -6px rgba(0, 0, 0, .3);
+  transition: background .35s, color .35s, transform .45s var(--ease-out);
+}
+.pc-arrow svg { width: 18px; height: 18px; }
+.pc-body { display: flex; flex-direction: column; flex: 1; padding: 24px 24px 26px; }
+.pc-meta {
+  margin: 0 0 10px;
+  font-size: 12px; font-weight: 600; font-stretch: 112%; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ink);
+}
+.pc-title {
+  margin: 0;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(18px, 1.5vw, 21px); line-height: 1.2;
+  font-weight: 700; font-stretch: 106%; letter-spacing: -.01em;
+  color: var(--black);
+  text-wrap: balance;
+}
+.pc-desc { margin: 18px 0 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
+.pc-link {
+  align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 14px;
+  margin-top: auto; padding: 28px 0 0;
+  border: 0; background: none;
+  font-size: 13px; font-weight: 600; font-stretch: 112%; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--black);
+  cursor: pointer;
+}
+.pc-link .arrow { width: 16px; height: 16px; transition: transform .45s var(--ease-out); }
+.pc-link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.pc-link:focus-visible { outline: none; }
+
+/* al pasar el ratón: la tarjeta sube, la foto se acerca y la flecha se invierte */
+@media (hover: hover) { .project-card:hover { transform: translateY(-6px); box-shadow: var(--neu-up); } }
+@media (hover: hover) { .project-card:hover .pc-media img { transform: scale(1.05); } }
+@media (hover: hover) { .project-card:hover .pc-arrow { background: var(--black); color: var(--white); transform: scale(1.06); } }
+@media (hover: hover) { .project-card:hover .pc-link .arrow { transform: translateX(5px); } }
+/* lo mismo con el teclado, más el contorno de foco */
+.project-card:has(.pc-link:focus-visible) { transform: translateY(-6px); box-shadow: var(--neu-up); outline: 2px solid var(--black); outline-offset: 4px; }
+.project-card:has(.pc-link:focus-visible) .pc-media img { transform: scale(1.05); }
+.project-card:has(.pc-link:focus-visible) .pc-arrow { background: var(--black); color: var(--white); }
+.project-card:has(.pc-link:focus-visible) .pc-link .arrow { transform: translateX(5px); }
+@media (hover: none) {
+  .project-card:active { transform: scale(.985); transition-duration: .15s; }
+  .btn:active { transform: scale(.98); }
+}
+
+/* ============================================================
+   Formulario
+   ============================================================ */
+.contact { background: var(--white); }
+.contact-grid {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+}
+.contact-head { grid-column: 1 / span 7; grid-row: 1; }
+.contact-head .lead strong { font-weight: 600; color: var(--ink); }
+/* en ordenador: el título arriba y, debajo, los datos de contacto y el formulario empezando a la misma altura */
+.contact-info { grid-column: 1 / span 5; grid-row: 2; align-self: start; margin-top: clamp(40px, 5vw, 64px); }
+.contact-form { grid-column: 7 / span 6; grid-row: 2; align-self: start; margin-top: clamp(40px, 5vw, 64px); }
+.contact-list { margin: 0; display: grid; gap: 0; }
+.contact-list > div {
+  display: grid; grid-template-columns: 110px 1fr; gap: 16px;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+}
+.contact-list > div:last-child { border-bottom: 1px solid var(--line); }
+.contact-list dt {
+  font-size: 12px; font-weight: 600; font-stretch: 112%; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--muted); padding-top: 3px;
+}
+.contact-list dd { margin: 0; color: var(--ink); }
+.contact-list a { text-decoration: none; }
+@media (hover: hover) { .contact-list a:hover { text-decoration: underline; text-underline-offset: 4px; } }
+.contact-list .tel { font-size: 20px; font-weight: 600; font-stretch: 108%; font-variant-numeric: tabular-nums; }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+.field { margin-bottom: 24px; }
+.field.full { grid-column: 1 / -1; }
+.field label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 600; color: var(--ink); }
+.field label .opt { font-weight: 400; color: var(--muted); }
+.field input[type="text"], .field input[type="tel"], .field input[type="email"], .field textarea {
+  width: 100%;
+  padding: 15px 16px;
+  font: 400 17px/1.4 var(--font);
+  color: var(--black);
+  background: var(--white);
+  border: 1px solid var(--line); border-bottom-color: var(--muted);
+  border-radius: 2px;
+  transition: border-color .25s, box-shadow .25s;
+  -webkit-appearance: none; appearance: none;
+}
+.field textarea { min-height: 140px; resize: vertical; }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--black); box-shadow: inset 0 -2px 0 var(--black); }
+.field ::placeholder { color: var(--muted); opacity: 1; }
+.field.has-error input, .field.has-error textarea { border-color: var(--black); box-shadow: inset 0 -2px 0 var(--black); }
+.field-error { margin: 8px 0 0; font-size: 14px; font-weight: 600; color: var(--black); }
+.field-error:empty { display: none; }
+.field-error::before { content: "— "; }
+
+.check { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--ink); cursor: pointer; }
+.check input {
+  flex: none; width: 22px; height: 22px; margin: 1px 0 0;
+  accent-color: var(--black);
+  cursor: pointer;
+}
+.check a { text-underline-offset: 3px; }
+.form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 8px; }
+.form-status { margin: 0; font-size: 15px; color: var(--ink); max-width: 44ch; }
+.form-status:empty { display: none; }
+.btn[disabled] { opacity: .6; pointer-events: none; }
+
+/* ============================================================
+   Opiniones — cinta infinita: se para con el cursor encima (o al tocar una reseña en móvil)
+   ============================================================ */
+#opiniones { padding-block: clamp(64px, 7vw, 112px); }
+.reviews-marquee {
+  --gap: clamp(32px, 3.4vw, 56px);
+  margin-top: clamp(40px, 5vw, 72px);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.reviews-track { display: flex; width: max-content; animation: marquee 220s linear infinite; }
+@media (hover: hover) { .reviews-marquee:hover .reviews-track { animation-play-state: paused; } }
+.reviews-marquee:focus-visible .reviews-track,
+.reviews-marquee.is-paused .reviews-track { animation-play-state: paused; }
+.reviews-list { display: flex; align-items: stretch; gap: var(--gap); padding: 0 calc(var(--gap) / 2); }
+.review {
+  width: clamp(280px, 28vw, 380px);
+  margin: 0;
+  display: flex; flex-direction: column; gap: 22px;
+  padding-top: 28px;
+  border-top: 2px solid var(--black);
+}
+.stars { display: flex; gap: 4px; color: var(--black); }
+.stars svg { width: 16px; height: 16px; }
+.review blockquote { margin: 0; }
+.review blockquote p { margin: 0; font-size: clamp(17px, 1.35vw, 19px); line-height: 1.6; color: var(--ink); }
+.review figcaption {
+  margin-top: auto;
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  padding-top: 18px; border-top: 1px solid var(--line);
+}
+.review figcaption strong { font-weight: 700; font-stretch: 112%; color: var(--black); }
+.review figcaption span { font-size: 13px; color: var(--muted); white-space: nowrap; }
+
+/* ============================================================
+   Cierre
+   ============================================================ */
+.closing { background: var(--black); color: var(--white); }
+.closing :focus-visible { outline-color: var(--white); }
+.closing-title {
+  margin: 0; max-width: 15ch;
+  font-size: clamp(42px, 7.2vw, 124px);
+  line-height: .94;
+  font-weight: 800; font-stretch: 116%; letter-spacing: -.035em;
+  text-wrap: balance;
+}
+.closing-lead { margin: 32px 0 0; max-width: 46ch; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; color: var(--line); }
+.closing-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 44px; }
+.stats {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: clamp(80px, 10vw, 140px) 0 0;
+  border-top: 1px solid var(--muted);
+}
+.stats > div {
+  display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 10px;
+  padding: 28px 24px 0 0;
+}
+.stats > div + div { padding-left: clamp(16px, 2.4vw, 32px); border-left: 1px solid var(--muted); }
+.stats dt { font-size: 14px; color: var(--line); }
+.stats dd {
+  margin: 0;
+  font-size: clamp(44px, 6vw, 96px); line-height: 1;
+  font-weight: 800; font-stretch: 125%; letter-spacing: -.035em;
+  font-variant-numeric: tabular-nums;
+}
+.stats dd small { font-size: .32em; font-weight: 600; font-stretch: 108%; letter-spacing: 0; margin-left: .3em; }
+.stats dd .pre { font-size: .32em; font-weight: 600; font-stretch: 108%; letter-spacing: 0; margin-right: .3em; vertical-align: .9em; }
+
+/* ============================================================
+   Pie
+   ============================================================ */
+.footer { background: var(--ink); color: var(--line); padding: clamp(64px, 8vw, 104px) 0 32px; font-size: 15px; }
+.footer :focus-visible { outline-color: var(--white); }
+.footer-grid {
+  display: grid; grid-template-columns: 1.6fr repeat(4, 1fr);
+  gap: 40px var(--col-gap);
+}
+.footer-brand img { width: 196px; height: auto; }
+.footer-brand p { margin: 24px 0 0; max-width: 30ch; }
+.footer h3 {
+  margin: 0 0 16px;
+  font-size: 12px; font-weight: 600; font-stretch: 112%; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--white);
+}
+.footer p { margin: 0; }
+.footer-col a { display: block; width: fit-content; text-decoration: none; color: var(--line); padding: 2px 0; }
+@media (hover: hover) { .footer-col a:hover { color: var(--white); text-decoration: underline; text-underline-offset: 4px; } }
+.footer-col p + a { margin-top: 10px; }
+.footer-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px;
+  position: relative;
+  margin-top: clamp(56px, 7vw, 96px); padding-top: 24px;
+  font-size: 13px;
+}
+.footer-bottom::before {
+  content: ""; position: absolute; top: 0; left: var(--gutter); right: var(--gutter); height: 1px;
+  background: var(--muted);
+}
+.footer-bottom nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.footer-bottom a { text-decoration: none; color: var(--line); }
+@media (hover: hover) { .footer-bottom a:hover { color: var(--white); text-decoration: underline; text-underline-offset: 4px; } }
+
+/* ============================================================
+   Galería (lightbox)
+   ============================================================ */
+.lightbox {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%; max-width: 100%; max-height: 100%;
+  margin: 0; padding: 0; border: 0;
+  background: var(--white); color: var(--ink);
+  overflow: hidden;
+}
+.lightbox[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; animation: lb-in .5s var(--ease-out); }
+.lightbox::backdrop { background: rgba(0, 0, 0, .4); }
+@keyframes lb-in { from { opacity: 0; transform: translateY(16px); } }
+.lb-top {
+  display: flex; align-items: center; gap: 20px;
+  padding: 14px var(--gutter);
+  border-bottom: 1px solid var(--line);
+}
+.lb-title { margin: 0; font-size: 18px; font-weight: 700; font-stretch: 118%; color: var(--black); }
+.lb-count { margin: 0; color: var(--muted); font-variant-numeric: tabular-nums; }
+.lb-close { margin-left: auto; height: 44px; padding: 0 18px; font-size: 14px; }
+.lb-stage {
+  position: relative; min-height: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px clamp(16px, 8vw, 128px);
+}
+.lb-stage img {
+  max-width: 100%; max-height: 100%;
+  width: auto; height: auto;
+  object-fit: contain;
+  transition: opacity .35s var(--ease-out);
+}
+.lb-stage img.is-loading { opacity: 0; }
+.lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 52px; height: 52px;
+  display: grid; place-items: center;
+  background: var(--white); color: var(--black);
+  border: 1px solid var(--line); border-radius: 50%;
+  cursor: pointer;
+  transition: background .3s, color .3s, border-color .3s;
+}
+@media (hover: hover) { .lb-nav:hover { background: var(--black); color: var(--white); border-color: var(--black); } }
+.lb-nav svg { width: 18px; height: 18px; }
+.lb-prev { left: var(--gutter); }
+.lb-next { right: var(--gutter); }
+.lb-thumbs {
+  display: flex; justify-content: center; gap: 8px;
+  padding: 12px var(--gutter) 18px;
+  overflow-x: auto;
+}
+.lb-thumbs button {
+  flex: none; width: 54px; height: 70px;
+  padding: 0; border: 0; border-radius: 2px; background: var(--grey);
+  opacity: .45; cursor: pointer;
+  transition: opacity .3s;
+}
+@media (hover: hover) { .lb-thumbs button:hover { opacity: .8; } }
+.lb-thumbs button[aria-current="true"] { opacity: 1; box-shadow: 0 0 0 2px var(--white), 0 0 0 3px var(--black); }
+.lb-thumbs img { width: 100%; height: 100%; object-fit: cover; border-radius: 2px; }
+
+/* ============================================================
+   Animaciones de entrada
+   ============================================================ */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 36px, 0);
+  transition: opacity 1s var(--ease-out), transform 1.2s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 110ms);
+}
+.js [data-reveal].in { opacity: 1; transform: none; }
+/* cada elemento se prepara para la tarjeta gráfica antes de aparecer y se libera al terminar (así la aparición no recae en el móvil) */
+.js [data-reveal]:not(.is-done) { will-change: opacity, transform; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1080px) {
+  .nav-tel { display: none; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 900px) {
+  :root { --nav-h: 68px; }
+  /* en móvil la cabecera no desenfoca lo que pasa por debajo: es caro de pintar en cada movimiento */
+  .nav.is-scrolled { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--white); }
+  /* lo mismo con las etiquetas sobre las fotos: encima de una foto que se mueve, el desenfoque se recalcula en cada fotograma */
+  .hero-badge { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(255, 255, 255, .95); }
+  .pc-badge { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(25, 25, 25, .74); }
+  .nav-links, .nav-cta { display: none; }
+  .nav-toggle { display: inline-flex; align-items: center; margin-left: 4px; }
+  .lang { margin-left: auto; }
+  .nav-logo img { height: 32px; }
+
+  .section-head .eyebrow, .section-head .h2, .section-head .lead { grid-column: 1 / -1; }
+
+  .carousel-track { grid-auto-columns: calc((100% - var(--gap)) / 2); }
+
+  /* en móvil: primero el formulario y después los datos de contacto */
+  .contact-grid { grid-template-rows: none; }
+  .contact-head, .contact-form, .contact-info { grid-column: 1 / -1; grid-row: auto; }
+  .contact-form { margin-top: clamp(32px, 4vw, 48px); }
+  .contact-info { margin-top: 56px; }
+}
+@media (max-width: 760px) {
+  .hero { padding: calc(var(--nav-h) + 20px) 0 48px; }
+  .hero-grid { row-gap: 26px; }
+  .hero-copy, .hero-photo { grid-column: 1 / -1; }
+  .hero-title { font-size: clamp(34px, 10.4vw, 60px); }
+  .hero-sub { margin-top: 16px; font-size: 16px; }
+  .hero-actions { gap: 10px; margin-top: 22px; }
+  .hero-actions .btn { padding: 0 16px; gap: 8px; }
+  .hero-actions .btn-dark { flex: 1 1 auto; }
+  .hero-actions .btn-dark .arrow { display: none; }
+  .hero-photo { aspect-ratio: 4 / 3; }
+  .hero-frame { border-radius: 20px; transform-origin: 50% 0%; }
+  @supports (animation-timeline: scroll()) {
+    .hero-frame, .hero-frame img { animation-range: 0 70vh; } /* lineal y con más recorrido: crece poco a poco */
+    .hero-frame { animation-name: hero-grow-mobile; }
+    .hero-frame img { animation-name: hero-zoom-mobile; }
+  }
+  .hero-badge { left: 12px; bottom: 12px; padding: 8px 14px 8px 12px; font-size: 12px; gap: 10px; }
+  .only-mobile { display: inline; }
+  .only-desktop { display: none; }
+  .marquee-list img { height: 58px; }
+
+  .form-grid { grid-template-columns: 1fr; }
+  .contact-list > div { grid-template-columns: 1fr; gap: 4px; }
+
+  /* en móvil, las apariciones recorren menos distancia y son más cortas */
+  .js [data-reveal] { transform: translate3d(0, 16px, 0); transition-duration: .7s, .8s; transition-delay: calc(var(--i, 0) * 70ms); }
+  .stats { grid-template-columns: 1fr; }
+  .stats > div, .stats > div + div { padding: 24px 0; border-left: 0; border-bottom: 1px solid var(--muted); }
+
+  .lb-nav { top: auto; bottom: 12px; transform: none; width: 46px; height: 46px; }
+  .lb-stage { padding: 12px 12px 72px; }
+}
+@media (max-width: 600px) {
+  #proyectos {
+    --neu: 10px 10px 20px var(--neu-dark), -10px -10px 20px var(--neu-light);
+    --neu-up: var(--neu);
+  }
+  .carousel-track { --gap: 24px; grid-auto-columns: 85%; padding-block: 28px 44px; }
+  .cn-btn { width: 46px; height: 46px; }
+  .reviews-marquee { --gap: 28px; }
+  .review { width: 80vw; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee-track { animation: none; flex-wrap: wrap; width: 100%; justify-content: center; }
+  .marquee-list { flex-wrap: wrap; justify-content: center; row-gap: 16px; }
+  .marquee-list[aria-hidden="true"] { display: none; }
+  .marquee { -webkit-mask-image: none; mask-image: none; }
+  .reviews-track { animation: none; }
+  .reviews-marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .reviews-list[aria-hidden="true"] { display: none; }
+  .js [data-reveal], .js .hero-fade, .js .hero-badge, .js .hero-title .w > span {
+    opacity: 1 !important; transform: none !important; transition: none !important;
+  }
+  .js .section-head::before { transform: none; transition: none; }
+  .js [data-reveal] { will-change: auto; }
+  .js .hero-title .mark::after { transform: none; transition: none; }
+  .hero-frame, .hero-frame img, .pc-move { animation: none !important; }
+  .carousel-track { scroll-behavior: auto; }
+  .project-card, .pc-media img, .pc-arrow, .pc-link .arrow, .cn-btn, .btn::before, .btn .arrow { transition: none; }
+  .lightbox[open] { animation: none; }
+  .menu, .menu nav a { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido" data-i18n="skip">Saltar al contenido</a>
+
+<!-- ============ NAVEGACIÓN ============ -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#inicio" aria-label="Cerapal, ir al inicio" data-i18n-attr="aria-label:logoHome">
+      <img src="assets/logo/cerapal-logo-negro.svg" alt="Cerapal · Estudi de cuines" width="141" height="38">
+    </a>
+    <nav class="nav-links" aria-label="Principal" data-i18n-attr="aria-label:navMain">
+      <a href="#proyectos" data-i18n="navProjects">Proyectos</a>
+      <a href="#opiniones" data-i18n="navReviews">Opiniones</a>
+      <a href="#financiacion" data-i18n="navFinancing">Financiación</a>
+      <a href="#contacto" data-i18n="navContact">Contacto</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Idioma" data-i18n-attr="aria-label:langLabel">
+      <button type="button" data-lang="ca" lang="ca" aria-label="Català" aria-pressed="false">CA</button>
+      <button type="button" data-lang="es" lang="es" aria-label="Castellano" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+    </div>
+    <a class="nav-tel" href="tel:+34937620832">937 620 832</a>
+    <a class="btn btn-dark nav-cta" href="#contacto" data-i18n="cta">Pedir mi presupuesto</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu">Menú</button>
+  </div>
+</header>
+
+<div class="menu" id="menu">
+  <nav aria-label="Menú móvil" data-i18n-attr="aria-label:navMobile">
+    <a href="#proyectos" data-i18n="navProjects">Proyectos</a>
+    <a href="#opiniones" data-i18n="navReviews">Opiniones</a>
+    <a href="#financiacion" data-i18n="navFinancing">Financiación</a>
+    <a href="#contacto" data-i18n="navContact">Contacto</a>
+  </nav>
+  <div class="menu-foot">
+    <a href="tel:+34937620832">937 620 832</a>
+    <a href="tel:+34654628727">654 628 727</a>
+    <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>
+  </div>
+</div>
+
+<main id="contenido">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="inicio" aria-label="Inicio" data-i18n-attr="aria-label:heroLabel">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1 class="hero-title">
+          <span class="w"><span style="--i:0">Pide</span></span>
+          <span class="w"><span style="--i:1">el</span></span>
+          <span class="w"><span style="--i:2">presupuesto</span></span>
+          <span class="w"><span style="--i:3">de</span></span>
+          <span class="keep"><span class="mark"><span class="w"><span style="--i:4">tu</span></span> <span class="w"><span style="--i:5">cocina</span></span></span><span class="w"><span style="--i:6">.</span></span></span>
+        </h1>
+        <p class="hero-sub hero-fade" data-i18n="heroSub">Diseñamos, fabricamos e instalamos cocinas a medida en el Maresme.</p>
+        <div class="hero-actions hero-fade">
+          <a class="btn btn-dark" href="#contacto"><span data-i18n="cta">Pedir mi presupuesto</span>
+            <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>
+          </a>
+          <a class="btn btn-outline" href="tel:+34937620832" aria-label="Llamar al 937 620 832" data-i18n-attr="aria-label:callAria">
+            <svg class="tel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="only-desktop">937 620 832</span><span class="only-mobile" data-i18n="call">Llamar</span>
+          </a>
+        </div>
+      </div>
+      <figure class="hero-photo">
+        <div class="hero-frame"><img src="assets/hero.jpg" alt="Cocina en tonos arena con muebles sin tiradores, mesa redonda de madera y lámpara colgante" width="1402" height="1122" fetchpriority="high" data-i18n-attr="alt:heroAlt"></div>
+        <a class="hero-badge" href="#opiniones"><span class="stars" aria-hidden="true"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></span><span data-i18n="badge">Opiniones reales de Google</span></a>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ FRANJA DE MARCAS ============ -->
+  <section class="brands" id="marcas" aria-label="Marcas con las que trabajamos" data-i18n-attr="aria-label:brandsLabel">
+    <div class="marquee">
+      <div class="marquee-track">
+        <ul class="marquee-list">
+          <li><img src="assets/marcas/marcas_sola.svg" alt="Sola" width="192" height="96"></li>
+          <li><img src="assets/marcas/siemens.png" alt="Siemens" width="192" height="96"></li>
+          <li><img src="assets/marcas/neolith.png" alt="Neolith" width="192" height="96"></li>
+          <li><img src="assets/marcas/marcas_bosh.svg" alt="Bosch" width="192" height="96"></li>
+          <li><img src="assets/marcas/marcas_dekton.svg" alt="Dekton" width="192" height="96"></li>
+          <li><img src="assets/marcas/ascale.png" alt="Ascale" width="192" height="96"></li>
+          <li><img src="assets/marcas/frecan.png" alt="Frecan" width="192" height="96"></li>
+          <li><img src="assets/marcas/marcas_whirpool.svg" alt="Whirlpool" width="192" height="96"></li>
+        </ul>
+        <ul class="marquee-list" aria-hidden="true">
+          <li><img src="assets/marcas/marcas_sola.svg" alt="" width="192" height="96"></li>
+          <li><img src="assets/marcas/siemens.png" alt="" width="192" height="96"></li>
+          <li><img src="assets/marcas/neolith.png" alt="" width="192" height="96"></li>
+          <li><img src="assets/marcas/marcas_bosh.svg" alt="" width="192" height="96"></li>
+          <li><img src="assets/marcas/marcas_dekton.svg" alt="" width="192" height="96"></li>
+          <li><img src="assets/marcas/ascale.png" alt="" width="192" height="96"></li>
+          <li><img src="assets/marcas/frecan.png" alt="" width="192" height="96"></li>
+          <li><img src="assets/marcas/marcas_whirpool.svg" alt="" width="192" height="96"></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROYECTOS ============ -->
+  <!-- Los títulos y descripciones están escritos a partir de lo que se ve en las fotos: cámbialos por los datos reales de cada proyecto. -->
+  <section class="section" id="proyectos" aria-labelledby="projects-title">
+    <div class="wrap">
+      <header class="projects-head">
+        <p class="eyebrow" data-i18n="navProjects">Proyectos</p>
+        <h2 class="h2" id="projects-title" data-reveal data-i18n="projTitle">Algunos de nuestros proyectos</h2>
+        <p class="lead" data-reveal style="--i:1" data-i18n="projLead">Cada proyecto es único, exclusivo y personalizado. Pulsa en cualquiera para ver todas sus fotos.</p>
+      </header>
+    </div>
+
+    <div class="carousel" role="region" aria-roledescription="carrusel" aria-label="Proyectos" data-i18n-attr="aria-roledescription:carousel, aria-label:navProjects" data-reveal>
+      <div class="carousel-track" id="projects-track">
+        <article class="project" role="group" aria-roledescription="diapositiva" aria-label="1 de 6" data-project="1" data-count="5">
+          <div class="project-card">
+            <div class="pc-media">
+              <div class="pc-move"><img src="assets/proyectos/proyecto-1/1.jpg" alt="Cocina en tono arena con isla y taburetes negros" loading="lazy" decoding="async" data-i18n-attr="alt:p1alt"></div>
+              <span class="pc-badge">Proyecto 01</span>
+              <span class="pc-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span>
+            </div>
+            <div class="pc-body">
+              <p class="pc-meta">5 fotos</p>
+              <h3 class="pc-title" data-i18n="p1t">Tonos arena con gola negra</h3>
+              <p class="pc-desc" data-i18n="p1d">Frentes lisos en tono arena con perfiles gola en negro, sin tiradores. La encimera, el frontal y la isla con barra comparten el mismo acabado piedra, y las columnas integran horno, microondas y frigorífico. Una tira LED bajo los muebles altos ilumina la zona de trabajo.</p>
+              <button class="pc-link" type="button"><span data-i18n="viewProject">Ver proyecto</span><span class="sr-only">: Tonos arena con gola negra, 5 fotos</span>
+                <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="project" role="group" aria-roledescription="diapositiva" aria-label="2 de 6" data-project="2" data-count="3">
+          <div class="project-card">
+            <div class="pc-media">
+              <div class="pc-move"><img src="assets/proyectos/proyecto-2/1.jpg" alt="Cocina con isla de frente en acabado madera y encimera clara" loading="lazy" decoding="async" data-i18n-attr="alt:p2alt"></div>
+              <span class="pc-badge">Proyecto 02</span>
+              <span class="pc-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span>
+            </div>
+            <div class="pc-body">
+              <p class="pc-meta">3 fotos</p>
+              <h3 class="pc-title" data-i18n="p2t">Madera y acabado veteado</h3>
+              <p class="pc-desc" data-i18n="p2d">Cocina abierta en un espacio con techo inclinado y grandes ventanales al jardín. La isla combina un frente de madera con cajones blancos sin tiradores y una encimera veteada que continúa en cascada por el lateral. En la pared de columnas se integran dos hornos y hornacinas de madera iluminadas.</p>
+              <button class="pc-link" type="button"><span data-i18n="viewProject">Ver proyecto</span><span class="sr-only">: Madera y acabado veteado, 3 fotos</span>
+                <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="project" role="group" aria-roledescription="diapositiva" aria-label="3 de 6" data-project="3" data-count="4">
+          <div class="project-card">
+            <div class="pc-media">
+              <div class="pc-move"><img src="assets/proyectos/proyecto-3/2.jpg" alt="Cocina en tonos verdes con barra y tres taburetes claros" loading="lazy" decoding="async" data-i18n-attr="alt:p3alt"></div>
+              <span class="pc-badge">Proyecto 03</span>
+              <span class="pc-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span>
+            </div>
+            <div class="pc-body">
+              <p class="pc-meta">4 fotos</p>
+              <h3 class="pc-title" data-i18n="p3t">Tonos verdes y vitrina iluminada</h3>
+              <p class="pc-desc" data-i18n="p3d">Muebles en tono verde de suelo a techo y una península con barra para tres taburetes, abierta al salón. Las columnas integran horno y microondas e incluyen una vitrina vertical con iluminación cálida. La encimera y el revestimiento de la pared, en tonos claros, equilibran el color de los muebles.</p>
+              <button class="pc-link" type="button"><span data-i18n="viewProject">Ver proyecto</span><span class="sr-only">: Tonos verdes y vitrina iluminada, 4 fotos</span>
+                <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="project" role="group" aria-roledescription="diapositiva" aria-label="4 de 6" data-project="4" data-count="4">
+          <div class="project-card">
+            <div class="pc-media">
+              <div class="pc-move"><img src="assets/proyectos/proyecto-4/1.jpg" alt="Cocina blanca con isla, taburetes de ratán y lámparas de fibra" loading="lazy" decoding="async" data-i18n-attr="alt:p4alt"></div>
+              <span class="pc-badge">Proyecto 04</span>
+              <span class="pc-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span>
+            </div>
+            <div class="pc-body">
+              <p class="pc-meta">4 fotos</p>
+              <h3 class="pc-title" data-i18n="p4t">Isla blanca y fibras naturales</h3>
+              <p class="pc-desc" data-i18n="p4d">Cocina en blanco roto sin tiradores, con isla de fregadero y barra para tres taburetes de ratán bajo lámparas de fibra. Entre las columnas se integra una despensa con estantes de madera iluminados, y sobre la placa de cocción un volumen blanco incorpora iluminación LED.</p>
+              <button class="pc-link" type="button"><span data-i18n="viewProject">Ver proyecto</span><span class="sr-only">: Isla blanca y fibras naturales, 4 fotos</span>
+                <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="project" role="group" aria-roledescription="diapositiva" aria-label="5 de 6" data-project="5" data-count="5">
+          <div class="project-card">
+            <div class="pc-media">
+              <div class="pc-move"><img src="assets/proyectos/proyecto-5/1.jpg" alt="Cocina blanca con isla, arco y lámparas de fibra" loading="lazy" decoding="async" data-i18n-attr="alt:p5alt"></div>
+              <span class="pc-badge">Proyecto 05</span>
+              <span class="pc-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span>
+            </div>
+            <div class="pc-body">
+              <p class="pc-meta">5 fotos</p>
+              <h3 class="pc-title" data-i18n="p5t">Blanco con detalles en cobre</h3>
+              <p class="pc-desc" data-i18n="p5d">Diseño en blanco sin tiradores, con grifería y detalles en cobre. Los arcos y los estantes curvos iluminados, integrados en la pared, le dan un estilo mediterráneo. La isla, con taburetes de enea y lámparas de fibra, conecta la cocina con el salón.</p>
+              <button class="pc-link" type="button"><span data-i18n="viewProject">Ver proyecto</span><span class="sr-only">: Blanco con detalles en cobre, 5 fotos</span>
+                <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="project" role="group" aria-roledescription="diapositiva" aria-label="6 de 6" data-project="6" data-count="4">
+          <div class="project-card">
+            <div class="pc-media">
+              <div class="pc-move"><img src="assets/proyectos/proyecto-6/1.jpg" alt="Cocina en U con frentes claros y frontal gris" loading="lazy" decoding="async" data-i18n-attr="alt:p6alt"></div>
+              <span class="pc-badge">Proyecto 06</span>
+              <span class="pc-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span>
+            </div>
+            <div class="pc-body">
+              <p class="pc-meta">4 fotos</p>
+              <h3 class="pc-title" data-i18n="p6t">Cocina en U con frontal gris</h3>
+              <p class="pc-desc" data-i18n="p6d">Distribución en U con frentes claros sin tiradores, y frontal y encimera en gris con acabado piedra. Los estantes abiertos de madera rematan las esquinas, y la columna agrupa horno y microondas junto al frigorífico. Al lado de la ventana, una barra alta con taburetes completa el espacio.</p>
+              <button class="pc-link" type="button"><span data-i18n="viewProject">Ver proyecto</span><span class="sr-only">: Cocina en U con frontal gris, 4 fotos</span>
+                <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrap carousel-nav">
+        <button class="cn-btn" type="button" data-dir="-1" aria-controls="projects-track" aria-label="Proyectos anteriores" data-i18n-attr="aria-label:prevProjects">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 8H2M7 3L2 8l5 5"/></svg>
+        </button>
+        <div class="cn-progress" aria-hidden="true"><span></span></div>
+        <button class="cn-btn" type="button" data-dir="1" aria-controls="projects-track" aria-label="Proyectos siguientes" data-i18n-attr="aria-label:nextProjects">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FORMULARIO ============ -->
+  <section class="section contact" id="contacto" aria-labelledby="contact-title">
+    <div class="wrap contact-grid">
+      <div class="contact-head">
+        <p class="eyebrow" data-i18n="navContact">Contacto</p>
+        <h2 class="h2" id="contact-title" data-reveal data-i18n="contactTitle">Pide tu presupuesto</h2>
+        <p class="lead" data-reveal style="--i:1" data-i18n="contactLead">Déjanos tus datos y nos pondremos en contacto contigo lo antes posible. <strong>Sin compromiso.</strong></p>
+      </div>
+
+      <div class="contact-form" data-reveal style="--i:1">
+        <form id="form" name="contacto" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="f-nombre" data-i18n="fName">Nombre</label>
+              <input type="text" id="f-nombre" name="nombre" autocomplete="name" required aria-describedby="e-nombre">
+              <p class="field-error" id="e-nombre" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="f-telefono" data-i18n="phone">Teléfono</label>
+              <input type="tel" id="f-telefono" name="telefono" autocomplete="tel" inputmode="tel" required aria-describedby="e-telefono">
+              <p class="field-error" id="e-telefono" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="f-email" data-i18n="fEmail">Email</label>
+              <input type="email" id="f-email" name="email" autocomplete="email" required aria-describedby="e-email">
+              <p class="field-error" id="e-email" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="f-poblacion" data-i18n="fTown">Población</label>
+              <input type="text" id="f-poblacion" name="poblacion" autocomplete="address-level2" required aria-describedby="e-poblacion">
+              <p class="field-error" id="e-poblacion" aria-live="polite"></p>
+            </div>
+            <div class="field full">
+              <label for="f-mensaje" data-i18n="fProject">¿Algo que debamos saber antes de que te llamemos? <span class="opt">(opcional)</span></label>
+              <textarea id="f-mensaje" name="mensaje" placeholder="Qué te gustaría cambiar, medidas aproximadas, cuándo quieres empezar…" data-i18n-attr="placeholder:fPlaceholder"></textarea>
+            </div>
+            <div class="field full">
+              <label class="check" for="f-privacidad">
+                <input type="checkbox" id="f-privacidad" name="privacidad" required aria-describedby="e-privacidad">
+                <span data-i18n="fPrivacy">Acepto la <a href="https://cerapal.cat/politica-privacidad/" target="_blank" rel="noopener">política de privacidad</a>.</span>
+              </label>
+              <p class="field-error" id="e-privacidad" aria-live="polite"></p>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-dark" type="submit"><span data-i18n="cta">Pedir mi presupuesto</span>
+              <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>
+            </button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+
+      <div class="contact-info" data-reveal style="--i:2">
+        <dl class="contact-list">
+          <div>
+            <dt data-i18n="phone">Teléfono</dt>
+            <dd><a class="tel" href="tel:+34937620832">937 620 832</a><br><a class="tel" href="tel:+34654628727">654 628 727</a></dd>
+          </div>
+          <div>
+            <dt data-i18n="email">Email</dt>
+            <dd><a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a></dd>
+          </div>
+          <div>
+            <dt data-i18n="studio">Estudio</dt>
+            <dd>Carrer Ramon Turró, 4 · Local 1<br>08389 Palafolls (Barcelona)<br>
+              <a class="link-line" href="https://www.google.com/maps/search/?api=1&amp;query=Carrer%20Ramon%20Turr%C3%B3%204%2C%2008389%20Palafolls" target="_blank" rel="noopener" data-i18n="directions">Cómo llegar</a>
+            </dd>
+          </div>
+          <div>
+            <dt data-i18n="hours">Horario</dt>
+            <dd data-i18n="hoursText">Lunes a viernes<br>9:00–13:00 y 15:00–19:00</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OPINIONES ============ -->
+  <!-- Las 18 opiniones publicadas en cerapal.cat/opiniones (Google), copiadas tal cual.
+       La lista va dos veces para que la cinta no tenga final; la copia está oculta para lectores de pantalla. -->
+  <section class="section" id="opiniones" aria-labelledby="reviews-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow" data-i18n="navReviews">Opiniones</p>
+        <h2 class="h2" id="reviews-title" data-reveal data-i18n="reviewsTitle">Lo que dicen nuestros clientes</h2>
+        <p class="lead" data-reveal style="--i:1" data-i18n="reviewsLead">Opiniones reales de nuestros clientes.</p>
+      </header>
+    </div>
+
+    <div class="reviews-marquee" role="region" aria-label="Opiniones de clientes" data-i18n-attr="aria-label:reviewsLabel" tabindex="0" data-reveal>
+      <div class="reviews-track">
+        <div class="reviews-list">
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Uns grans professionals , del primer a l’últim integrant són un equip formidable. La implicació i bon gust a l’hora d’assessorar-nos en el disseny de la nostra cuina, una planificació i muntatge perfecte, cuidant el més mínim detall, han donat un resultat sensacional. Gràcies per la vostra paciència i amabilitat i felicitats per una feina ben feta.</p></blockquote>
+            <figcaption><strong>Carlos J. Gómez</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Estudio de cocinas de alta calidad. El trato i la atención con el cliente es muy bueno y con mucha profesionalidad. Las propuestas se adaptan a las necesidades de cada uno y se pueden visualizar las cocinas acabadas en 3D. Los acabados de los materiales son TOP. Los recomiendo 100%</p></blockquote>
+            <figcaption><strong>Berna Garcia</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Excellent. Molt bones idees i propostes de disseny de cuines abans de prendre la decisio. I finalment, molt satisfets amb el servei, el resultat, la qualitat, el seguiment de les obres, i els terminis. GRACIES!</p></blockquote>
+            <figcaption><strong>Boris Puig</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Cocina de gran calidad. Estamos muy contentos con el trato durante la toma de decisiones y con el montaje. El resultado ha sido espectacular.</p></blockquote>
+            <figcaption><strong>Eva Arias Rodriguez</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Hace un año que tengo la cocina y he de decir que estoy contentísima. Trato excelente , en el plazo acordado y muy buena atención. Sin duda una buenísima elección. 100 % recomendable. Gracias</p></blockquote>
+            <figcaption><strong>Paqui Vergel</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Encantada con mi cocina de Cerapal 100% recomendable en todos los sentidos!</p></blockquote>
+            <figcaption><strong>Claire Levi</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Ens van recomanar CERAPAL per fer la nostra cuina i hem de dir que va ser el millor que vam poder fer. La professionalitat de les persones que atenen el negoci es respira des del primer minut. No ens podíem imaginar que a l’espai que teníem a casa es podia fer una cuina com la que ens van dissenyar i muntar. Les cares dels amics i familiars que ens venen a veure t’ho diuen tot. Moltes gràcies CERAPAL.</p></blockquote>
+            <figcaption><strong>Josep Rodríguez</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Hem rebut un tracte molt personalitzat i professional per part d’en Juanle i en Benjamí, que han sapigut plasmar la nostra idea de cuina en un projecte amb un resultat de 10. Estem molt contents amb tota la feina feta i els recomanem sense cap mena de dubte.</p></blockquote>
+            <figcaption><strong>Maria Bagó Font</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Mi cocina es pequeña…y me han hecho la cocina que yo queria…no le falta detalle…muy bonita con armarios en blanco y neolit en gris/negro. Trato fántastico…Servicio muy bueno…Muy buena profesionalidad…Estoy encantada!!! Gracias…</p></blockquote>
+            <figcaption><strong>Mari Carmen Martinez</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Professionals i atents, estem molt contents amb la feina feta i el resultat. Agraïts a l’equip Cerapal! Totalment recomanables.</p></blockquote>
+            <figcaption><strong>Yolanda</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Ens vam deixar aconsellar des del primer moment i el resultat ha estat fantàstic. Molt professionals, tracte exquisit, molt recomanable. Gràcies a tot l’equip.</p></blockquote>
+            <figcaption><strong>Meritxell Abella</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Fantástico estudio de cocinas. relación calidad precio, insuperable. Buen y sincero trato personal. Eficiencia màxima si surgen problemas. Un 10 en todo. Seguir así!!!</p></blockquote>
+            <figcaption><strong>Eduard Sanz Esteban</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Estupenda atención y buena profesionalidad colaborando al máximo para realizar nuestras ideas aportando ideas buscando mejoras a nuestros proyecto… Encandato por el trato recibido.</p></blockquote>
+            <figcaption><strong>Rafa G.A.</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Hola chicos soy Maite!! Estoy encantadissima con mi cocina nueva!! Fue tan facil todo.. me dieron un monton de opciones, me hicieron proyectos hasta conseguir el perfecto!!! Solo agradecer a este gran equipo de hacer de mi cocina un sueño!!! Mil gracias por ser tan atentos con nosotros!!! Asi da gusto encargar algo tan importante!! Y porsupuesto que mil veces que repetiria con vosotros!!</p></blockquote>
+            <figcaption><strong>Joventut Handbol Malgrat</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Profesionales y atención exquisita…te sientes como de la familia. Me siento afortunada por haber escogido Cerapal. Gracias</p></blockquote>
+            <figcaption><strong>Angela GJ</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Bona experiència en la reforma de la cuina. Tracte atent i professional. Bon assessorament tècnic i estètic. Seriosos amb els compromisos d’entrega del projecte, del material i del muntatge. Vam quedar molt satisfets del resultat.</p></blockquote>
+            <figcaption><strong>Quim Barris Alvira</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>L’experiència ha estat fantàstica. Amabilitat i implicació en el projecte. Amb ganes de seguir treballant juts.</p></blockquote>
+            <figcaption><strong>Rosa Ma Lopez Monraba</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Gran experiència. D’entrada el tracte que vàrem rebre va ser fantàstic. Tot molt clar i fàcil. El temps va ser el que vam acordar sense cap endarreriment. Empresa molt seriosa, portada per gent molt responsable.</p></blockquote>
+            <figcaption><strong>Joan Roura</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+        </div>
+        <div class="reviews-list" aria-hidden="true">
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Uns grans professionals , del primer a l’últim integrant són un equip formidable. La implicació i bon gust a l’hora d’assessorar-nos en el disseny de la nostra cuina, una planificació i muntatge perfecte, cuidant el més mínim detall, han donat un resultat sensacional. Gràcies per la vostra paciència i amabilitat i felicitats per una feina ben feta.</p></blockquote>
+            <figcaption><strong>Carlos J. Gómez</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Estudio de cocinas de alta calidad. El trato i la atención con el cliente es muy bueno y con mucha profesionalidad. Las propuestas se adaptan a las necesidades de cada uno y se pueden visualizar las cocinas acabadas en 3D. Los acabados de los materiales son TOP. Los recomiendo 100%</p></blockquote>
+            <figcaption><strong>Berna Garcia</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Excellent. Molt bones idees i propostes de disseny de cuines abans de prendre la decisio. I finalment, molt satisfets amb el servei, el resultat, la qualitat, el seguiment de les obres, i els terminis. GRACIES!</p></blockquote>
+            <figcaption><strong>Boris Puig</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Cocina de gran calidad. Estamos muy contentos con el trato durante la toma de decisiones y con el montaje. El resultado ha sido espectacular.</p></blockquote>
+            <figcaption><strong>Eva Arias Rodriguez</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Hace un año que tengo la cocina y he de decir que estoy contentísima. Trato excelente , en el plazo acordado y muy buena atención. Sin duda una buenísima elección. 100 % recomendable. Gracias</p></blockquote>
+            <figcaption><strong>Paqui Vergel</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Encantada con mi cocina de Cerapal 100% recomendable en todos los sentidos!</p></blockquote>
+            <figcaption><strong>Claire Levi</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Ens van recomanar CERAPAL per fer la nostra cuina i hem de dir que va ser el millor que vam poder fer. La professionalitat de les persones que atenen el negoci es respira des del primer minut. No ens podíem imaginar que a l’espai que teníem a casa es podia fer una cuina com la que ens van dissenyar i muntar. Les cares dels amics i familiars que ens venen a veure t’ho diuen tot. Moltes gràcies CERAPAL.</p></blockquote>
+            <figcaption><strong>Josep Rodríguez</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Hem rebut un tracte molt personalitzat i professional per part d’en Juanle i en Benjamí, que han sapigut plasmar la nostra idea de cuina en un projecte amb un resultat de 10. Estem molt contents amb tota la feina feta i els recomanem sense cap mena de dubte.</p></blockquote>
+            <figcaption><strong>Maria Bagó Font</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Mi cocina es pequeña…y me han hecho la cocina que yo queria…no le falta detalle…muy bonita con armarios en blanco y neolit en gris/negro. Trato fántastico…Servicio muy bueno…Muy buena profesionalidad…Estoy encantada!!! Gracias…</p></blockquote>
+            <figcaption><strong>Mari Carmen Martinez</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Professionals i atents, estem molt contents amb la feina feta i el resultat. Agraïts a l’equip Cerapal! Totalment recomanables.</p></blockquote>
+            <figcaption><strong>Yolanda</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Ens vam deixar aconsellar des del primer moment i el resultat ha estat fantàstic. Molt professionals, tracte exquisit, molt recomanable. Gràcies a tot l’equip.</p></blockquote>
+            <figcaption><strong>Meritxell Abella</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Fantástico estudio de cocinas. relación calidad precio, insuperable. Buen y sincero trato personal. Eficiencia màxima si surgen problemas. Un 10 en todo. Seguir así!!!</p></blockquote>
+            <figcaption><strong>Eduard Sanz Esteban</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Estupenda atención y buena profesionalidad colaborando al máximo para realizar nuestras ideas aportando ideas buscando mejoras a nuestros proyecto… Encandato por el trato recibido.</p></blockquote>
+            <figcaption><strong>Rafa G.A.</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Hola chicos soy Maite!! Estoy encantadissima con mi cocina nueva!! Fue tan facil todo.. me dieron un monton de opciones, me hicieron proyectos hasta conseguir el perfecto!!! Solo agradecer a este gran equipo de hacer de mi cocina un sueño!!! Mil gracias por ser tan atentos con nosotros!!! Asi da gusto encargar algo tan importante!! Y porsupuesto que mil veces que repetiria con vosotros!!</p></blockquote>
+            <figcaption><strong>Joventut Handbol Malgrat</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote><p>Profesionales y atención exquisita…te sientes como de la familia. Me siento afortunada por haber escogido Cerapal. Gracias</p></blockquote>
+            <figcaption><strong>Angela GJ</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Bona experiència en la reforma de la cuina. Tracte atent i professional. Bon assessorament tècnic i estètic. Seriosos amb els compromisos d’entrega del projecte, del material i del muntatge. Vam quedar molt satisfets del resultat.</p></blockquote>
+            <figcaption><strong>Quim Barris Alvira</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>L’experiència ha estat fantàstica. Amabilitat i implicació en el projecte. Amb ganes de seguir treballant juts.</p></blockquote>
+            <figcaption><strong>Rosa Ma Lopez Monraba</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+          <figure class="review">
+            <div class="stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5L8 12.2l-4.5 2.4.9-5L.8 6.1l5-.7z"/></svg></div>
+            <blockquote lang="ca"><p>Gran experiència. D’entrada el tracte que vàrem rebre va ser fantàstic. Tot molt clar i fàcil. El temps va ser el que vam acordar sense cap endarreriment. Empresa molt seriosa, portada per gent molt responsable.</p></blockquote>
+            <figcaption><strong>Joan Roura</strong><span>Google · 5/5</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CIERRE ============ -->
+  <section class="section closing" id="financiacion" aria-labelledby="closing-title">
+    <div class="wrap">
+      <h2 class="closing-title" id="closing-title" data-reveal data-i18n="closingTitle">¿Estás pensando en renovar tu cocina?</h2>
+      <p class="closing-lead" data-reveal style="--i:1" data-i18n="closingLead">Ponte en contacto con nosotros, cuéntanos tu proyecto y te ayudaremos a conseguirlo.</p>
+      <div class="closing-actions" data-reveal style="--i:2">
+        <a class="btn btn-light" href="#contacto"><span data-i18n="cta">Pedir mi presupuesto</span>
+          <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>
+        </a>
+        <a class="btn btn-outline-light" href="tel:+34937620832" data-i18n="callAria">Llamar al 937 620 832</a>
+      </div>
+
+      <dl class="stats" data-stagger>
+        <div data-reveal>
+          <dt data-i18n="stat1">adaptando y montando cocinas</dt>
+          <dd><span class="pre" data-i18n="stat1pre">más de</span><span data-count-to="30">30</span><small data-i18n="years">años</small></dd>
+        </div>
+        <div data-reveal>
+          <dt data-i18n="stat2">financiación a medida para tu cocina</dt>
+          <dd><span class="pre" data-i18n="stat2pre">desde</span><span data-count-to="125">125</span><small data-i18n="perMonth">€/mes</small></dd>
+        </div>
+        <div data-reveal>
+          <dt data-i18n="stat3">para pagarla con costes mínimos de financiación</dt>
+          <dd><span class="pre" data-i18n="stat3pre">hasta</span><span data-count-to="5">5</span><small data-i18n="years">años</small></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<!-- ============ PIE ============ -->
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <img src="assets/logo/cerapal-logo-blanco.svg" alt="Cerapal · Estudi de cuines" width="196" height="53" loading="lazy">
+      <p data-i18n="footerTagline">Cada proyecto es único, exclusivo y personalizado.</p>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="studio">Estudio</h3>
+      <p>Carrer Ramon Turró, 4 · Local 1<br>08389 Palafolls (Barcelona)</p>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Carrer%20Ramon%20Turr%C3%B3%204%2C%2008389%20Palafolls" target="_blank" rel="noopener" data-i18n="directions">Cómo llegar</a>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="navContact">Contacto</h3>
+      <a href="tel:+34937620832">937 620 832</a>
+      <a href="tel:+34654628727">654 628 727</a>
+      <a href="mailto:cuines@cerapal.cat">cuines@cerapal.cat</a>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="hours">Horario</h3>
+      <p data-i18n="hoursFooter">Lunes a viernes<br>9:00–13:00<br>15:00–19:00</p>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="follow">Síguenos</h3>
+      <a href="https://www.instagram.com/cuinescerapal/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/cuinescerapal/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <p>© <span id="year">2026</span> Cerapal · Estudi de cuines</p>
+    <nav aria-label="Legal">
+      <a href="https://cerapal.cat/aviso-legal/" data-i18n="legal">Aviso legal</a>
+      <a href="https://cerapal.cat/politica-privacidad/" data-i18n="privacy">Política de privacidad</a>
+      <a href="https://cerapal.cat/politica-cookies/" data-i18n="cookies">Política de cookies</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- ============ GALERÍA ============ -->
+<dialog class="lightbox" id="lightbox" aria-labelledby="lb-title">
+  <div class="lb-top">
+    <p class="lb-title" id="lb-title">Proyecto</p>
+    <p class="lb-count" id="lb-count" aria-live="polite"></p>
+    <button class="btn btn-dark lb-close" id="lb-close" type="button" data-i18n="close">Cerrar</button>
+  </div>
+  <div class="lb-stage">
+    <img id="lb-img" alt="">
+    <button class="lb-nav lb-prev" id="lb-prev" type="button" aria-label="Foto anterior" data-i18n-attr="aria-label:prevPhoto">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 8H2M7 3L2 8l5 5"/></svg>
+    </button>
+    <button class="lb-nav lb-next" id="lb-next" type="button" aria-label="Foto siguiente" data-i18n-attr="aria-label:nextPhoto">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>
+    </button>
+  </div>
+  <div class="lb-thumbs" id="lb-thumbs"></div>
+</dialog>
+
+<script>
+(() => {
+  /* Si conectas un servicio de formularios (Formspree, Getform...), pega aquí su URL.
+     Mientras esté vacío, el formulario abre el programa de correo con el mensaje preparado.
+     PRUEBA: ahora las solicitudes van por FormSubmit a este correo. Para publicar la web, cámbialo por el de Cerapal. */
+  const FORM_ENDPOINT = 'https://formsubmit.co/ajax/nicolau.retamero.jordi@gmail.com';
+  const EMAIL = 'cuines@cerapal.cat';
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const pad = n => String(n).padStart(2, '0');
+
+  /* ---------- Idiomas: el castellano está en el HTML; el catalán y el inglés, al final del script ---------- */
+  const LANGS = ['ca', 'es', 'en'];
+  let lang = 'es';
+  // textos que escribe el propio JavaScript
+  const STR = {
+    es: {
+      menu: 'Menú', menuClose: 'Cerrar', project: 'Proyecto', photos: 'fotos', photo: 'foto', of: 'de', viewPhoto: 'Ver foto', slide: 'diapositiva', stars: '5 de 5 estrellas',
+      errName: 'Escribe tu nombre.', errPhone: 'Escribe un teléfono de contacto de 9 cifras.', errEmail: 'Escribe un email válido.', errTown: 'Escribe tu población.', errPrivacy: 'Acepta la política de privacidad para enviar el mensaje.',
+      sending: 'Enviando…', sent: 'Solicitud enviada. Nos pondremos en contacto contigo lo antes posible.', failed: 'No se ha podido enviar el mensaje. Llámanos al 937 620 832 o escríbenos a ',
+      mailOpened: 'Hemos abierto tu programa de correo con el mensaje preparado. Pulsa Enviar para que nos llegue.',
+      mailSubject: 'Solicitud de presupuesto', mName: 'Nombre', mPhone: 'Teléfono', mEmail: 'Email', mTown: 'Población', mProject: 'Proyecto',
+      title: 'Cerapal · Estudio de cocinas en Palafolls', desc: 'Cocinas exclusivas y personalizadas. Diseño y reforma de cocinas a medida en Palafolls (Barcelona) desde 1996.',
+      h1: { pre: ['Pide', 'el', 'presupuesto', 'de'], mark: ['tu', 'cocina'] }
+    },
+    ca: {
+      menu: 'Menú', menuClose: 'Tanca', project: 'Projecte', photos: 'fotos', photo: 'foto', of: 'de', viewPhoto: 'Veure la foto', slide: 'diapositiva', stars: '5 de 5 estrelles',
+      errName: 'Escriu el teu nom.', errPhone: 'Escriu un telèfon de contacte de 9 xifres.', errEmail: 'Escriu un correu vàlid.', errTown: 'Escriu la teva població.', errPrivacy: 'Accepta la política de privacitat per enviar el missatge.',
+      sending: 'Enviant…', sent: 'Sol·licitud enviada. Ens posarem en contacte amb tu al més aviat possible.', failed: 'No s’ha pogut enviar el missatge. Truca’ns al 937 620 832 o escriu-nos a ',
+      mailOpened: 'Hem obert el teu programa de correu amb el missatge preparat. Prem Envia perquè ens arribi.',
+      mailSubject: 'Sol·licitud de pressupost', mName: 'Nom', mPhone: 'Telèfon', mEmail: 'Correu', mTown: 'Població', mProject: 'Projecte',
+      title: 'Cerapal · Estudi de cuines a Palafolls', desc: 'Cuines exclusives i personalitzades. Disseny i reforma de cuines a mida a Palafolls (Barcelona) des de 1996.',
+      h1: { pre: ['Demana', 'el', 'pressupost', 'de'], mark: ['la', 'teva', 'cuina'] }
+    },
+    en: {
+      menu: 'Menu', menuClose: 'Close', project: 'Project', photos: 'photos', photo: 'photo', of: 'of', viewPhoto: 'View photo', slide: 'slide', stars: '5 out of 5 stars',
+      errName: 'Please enter your name.', errPhone: 'Please enter a 9-digit contact phone number.', errEmail: 'Please enter a valid email address.', errTown: 'Please enter your town.', errPrivacy: 'Please accept the privacy policy to send your request.',
+      sending: 'Sending…', sent: 'Request sent. We’ll get back to you as soon as possible.', failed: 'Your request couldn’t be sent. Call us on 937 620 832 or email us at ',
+      mailOpened: 'We’ve opened your email app with the message ready. Press Send so it reaches us.',
+      mailSubject: 'Quote request', mName: 'Name', mPhone: 'Phone', mEmail: 'Email', mTown: 'Town', mProject: 'Project',
+      title: 'Cerapal · Kitchen design studio in Palafolls', desc: 'Exclusive, tailor-made kitchens. Custom kitchen design and renovation in Palafolls (Barcelona) since 1996.',
+      h1: { pre: ['Get', 'a', 'quote', 'for'], mark: ['your', 'kitchen'] }
+    }
+  };
+  const S = () => STR[lang];
+
+  $('#year').textContent = new Date().getFullYear();
+
+  /* ---------- Navegación ---------- */
+  const nav = $('#nav'), toggle = $('.nav-toggle'), menu = $('#menu');
+  const menuOpen = () => menu.classList.contains('is-open');
+  function setMenu(open) {
+    menu.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', open);
+    toggle.textContent = open ? S().menuClose : S().menu;
+    nav.classList.toggle('is-menu', open);
+    document.documentElement.classList.toggle('menu-open', open);
+  }
+  toggle.addEventListener('click', () => setMenu(!menuOpen()));
+  $$('#menu a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen()) { setMenu(false); toggle.focus(); } });
+
+  /* ---------- Entrada del hero ---------- */
+  // espera a la tipografía (como mucho medio segundo) para que el titular no cambie de letra a media animación
+  const fontsReady = document.fonts ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 500))]) : Promise.resolve();
+  fontsReady.then(() => requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.add('is-loaded'))));
+
+  /* ---------- Hero: la foto crece con el scroll ---------- */
+  // Lo hace el CSS (animación ligada al scroll). Si el navegador no lo admite, se hace aquí solo en ordenador:
+  // en un móvil sin ese soporte la foto se queda quieta, que es mejor que verla a tirones.
+  const heroFrame = $('.hero-frame'), heroImg = $('.hero-frame img');
+  const cssScroll = CSS.supports('animation-timeline: scroll()');
+  const jsGrow = !reduce && !cssScroll && matchMedia('(hover: hover)').matches;
+  function updateHeroGrow() {
+    if (!jsGrow) return;
+    const e = clamp(scrollY / (innerHeight * .85), 0, 1);
+    heroFrame.style.transform = `scale(${(1 + .2 * e).toFixed(4)})`;
+    heroImg.style.transform = `scale(${(1 + .06 * e).toFixed(4)})`;
+  }
+
+  /* ---------- Bucle de scroll ---------- */
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      nav.classList.toggle('is-scrolled', scrollY > 8);
+      updateHeroGrow();
+    });
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  onScroll();
+
+  /* ---------- Apariciones al entrar en pantalla ---------- */
+  $$('[data-stagger]').forEach(c => $$(':scope > [data-reveal]', c).forEach((el, i) => el.style.setProperty('--i', i)));
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    const el = en.target;
+    el.classList.add('in');
+    io.unobserve(el);
+    if (el.hasAttribute('data-reveal')) {
+      const done = () => el.classList.add('is-done');
+      el.addEventListener('transitionend', e => { if (e.target === el && e.propertyName === 'transform') done(); });
+      setTimeout(done, 2500); // por si la transición no llega a terminar
+    }
+  }), { rootMargin: '0px 0px 6% 0px', threshold: 0.01 }); // empiezan justo antes de entrar en pantalla
+  $$('[data-reveal], .section-head').forEach(el => io.observe(el));
+
+  /* ---------- Contadores ---------- */
+  const counters = $$('[data-count-to]');
+  if (!reduce) {
+    counters.forEach(el => { el.textContent = '0'; });
+    const cio = new IntersectionObserver(entries => entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      cio.unobserve(en.target);
+      const el = en.target, to = +el.dataset.countTo, t0 = performance.now(), d = 1800;
+      const step = now => {
+        const t = clamp((now - t0) / d, 0, 1);
+        el.textContent = Math.round(to * (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)));
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }), { threshold: 0.6 });
+    counters.forEach(el => cio.observe(el));
+  }
+
+  /* ---------- Galería de cada proyecto ---------- */
+  const lb = $('#lightbox'), lbImg = $('#lb-img'), lbTitle = $('#lb-title'), lbCount = $('#lb-count'), lbThumbs = $('#lb-thumbs');
+  const src = (n, i) => `assets/proyectos/proyecto-${n}/${i + 1}.jpg`;
+  const mini = (n, i) => `assets/proyectos/proyecto-${n}/mini/${i + 1}.jpg`;
+  let P = { n: 1, count: 1, i: 0 };
+  lbImg.addEventListener('load', () => lbImg.classList.remove('is-loading'));
+
+  function show(i) {
+    P.i = (i + P.count) % P.count;
+    const next = src(P.n, P.i);
+    if (!lbImg.src.endsWith(next)) { lbImg.classList.add('is-loading'); lbImg.src = next; }
+    lbImg.alt = `${S().project} ${pad(P.n)}, ${S().photo} ${P.i + 1} ${S().of} ${P.count}`;
+    lbCount.textContent = `${P.i + 1} / ${P.count}`;
+    $$('button', lbThumbs).forEach((b, j) => b.setAttribute('aria-current', j === P.i));
+    new Image().src = src(P.n, (P.i + 1) % P.count);
+  }
+  function openGallery(n, count) {
+    P = { n, count, i: 0 };
+    lbTitle.textContent = `${S().project} ${pad(n)}`;
+    lbThumbs.innerHTML = '';
+    for (let j = 0; j < count; j++) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', `${S().viewPhoto} ${j + 1} ${S().of} ${count}`);
+      b.innerHTML = `<img src="${mini(n, j)}" alt="" loading="lazy">`;
+      b.addEventListener('click', () => show(j));
+      lbThumbs.append(b);
+    }
+    show(0);
+    lb.showModal();
+    document.documentElement.classList.add('lb-open');
+  }
+  lb.addEventListener('close', () => document.documentElement.classList.remove('lb-open'));
+  $('#lb-close').addEventListener('click', () => lb.close());
+  $('#lb-prev').addEventListener('click', () => show(P.i - 1));
+  $('#lb-next').addEventListener('click', () => show(P.i + 1));
+  lb.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); show(P.i + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(P.i - 1); }
+  });
+  let touchX = null;
+  lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) show(P.i + (dx < 0 ? 1 : -1));
+    touchX = null;
+  });
+  $$('.project').forEach(card => {
+    $('.pc-link', card).addEventListener('click', () => openGallery(+card.dataset.project, +card.dataset.count));
+  });
+
+  /* ---------- Carrusel de proyectos ---------- */
+  function initCarousel(root) {
+    const track = $('.carousel-track', root), slides = [...track.children];
+    const prev = $('.cn-btn[data-dir="-1"]', root), next = $('.cn-btn[data-dir="1"]', root);
+    const bar = $('.cn-progress span', root);
+    const step = () => slides[1].offsetLeft - slides[0].offsetLeft; // ancho de tarjeta + separación
+    const behavior = reduce ? 'auto' : 'smooth';
+
+    function update() {
+      const max = track.scrollWidth - track.clientWidth, x = track.scrollLeft;
+      prev.disabled = x <= 2;
+      next.disabled = x >= max - 2;
+      const w = max > 0 ? track.clientWidth / track.scrollWidth : 1;
+      const width = (w * 100).toFixed(2) + '%';
+      if (bar.style.width !== width) bar.style.width = width;
+      bar.style.transform = `translateX(${max > 0 ? (x / max) * (1 / w - 1) * 100 : 0}%)`;
+    }
+    [prev, next].forEach(b => b.addEventListener('click', () => track.scrollBy({ left: +b.dataset.dir * step(), behavior })));
+    let tick = false;
+    track.addEventListener('scroll', () => {
+      if (tick) return;
+      tick = true;
+      requestAnimationFrame(() => { tick = false; update(); });
+    }, { passive: true });
+    addEventListener('resize', update);
+    update();
+
+    // Con ratón también se puede arrastrar; al soltar, encaja en la tarjeta más cercana.
+    let drag = null, dragged = false;
+    track.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      e.preventDefault(); // evita seleccionar texto o arrastrar la imagen
+      drag = { x: e.clientX, left: track.scrollLeft };
+      dragged = false;
+    });
+    addEventListener('pointermove', e => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      if (!dragged && Math.abs(dx) > 6) { dragged = true; track.classList.add('is-dragging'); }
+      if (dragged) track.scrollLeft = drag.left - dx;
+    });
+    function endDrag() {
+      if (!drag) return;
+      drag = null;
+      if (!dragged) return;
+      const s = step(), target = Math.round(track.scrollLeft / s) * s;
+      const release = () => track.classList.remove('is-dragging');
+      if (Math.abs(target - track.scrollLeft) < 1) release();
+      else {
+        track.scrollTo({ left: target, behavior });
+        track.addEventListener('scrollend', release, { once: true });
+        setTimeout(release, 700);
+      }
+      setTimeout(() => { dragged = false; }, 0);
+    }
+    addEventListener('pointerup', endDrag);
+    addEventListener('pointercancel', endDrag);
+    // soltar después de arrastrar no abre la galería de la tarjeta
+    track.addEventListener('click', e => { if (dragged) { e.preventDefault(); e.stopPropagation(); } }, true);
+  }
+  initCarousel($('#proyectos .carousel'));
+
+  /* ---------- Opiniones: la cinta se para con el cursor encima (CSS); en pantallas táctiles, al tocar una reseña ---------- */
+  const reviewsStrip = $('.reviews-marquee');
+  reviewsStrip.addEventListener('click', e => {
+    if (matchMedia('(hover: hover)').matches || !e.target.closest('.review')) return;
+    reviewsStrip.classList.toggle('is-paused'); // otro toque la vuelve a poner en marcha
+  });
+  document.addEventListener('click', e => {
+    if (!reviewsStrip.contains(e.target)) reviewsStrip.classList.remove('is-paused');
+  });
+
+  /* ---------- Formulario ---------- */
+  const form = $('#form'), statusEl = $('#form-status'), submitBtn = $('button[type="submit"]', form);
+  const rules = {
+    nombre: v => v.trim().length >= 2 || S().errName,
+    telefono: v => v.replace(/\D/g, '').length >= 9 || S().errPhone,
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || S().errEmail,
+    poblacion: v => v.trim().length >= 2 || S().errTown,
+    privacidad: (v, el) => el.checked || S().errPrivacy
+  };
+  function check(name) {
+    const el = form.elements[name];
+    const res = rules[name](el.value, el);
+    const msg = res === true ? '' : res;
+    const field = el.closest('.field');
+    field.classList.toggle('has-error', !!msg);
+    $('.field-error', field).textContent = msg;
+    el.setAttribute('aria-invalid', !!msg);
+    return !msg;
+  }
+  Object.keys(rules).forEach(name => {
+    const el = form.elements[name];
+    el.addEventListener(el.type === 'checkbox' ? 'change' : 'blur', () => {
+      if (el.type === 'checkbox' || el.value || el.closest('.field').classList.contains('has-error')) check(name);
+    });
+  });
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    statusEl.textContent = '';
+    const invalid = Object.keys(rules).filter(name => !check(name));
+    if (invalid.length) { form.elements[invalid[0]].focus(); return; }
+
+    const d = Object.fromEntries(new FormData(form));
+    if (FORM_ENDPOINT) {
+      const submitHTML = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.textContent = S().sending;
+      try {
+        const payload = { ...d, _subject: `${S().mailSubject} · ${d.nombre}`, _template: 'table' };
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json().catch(() => ({}));
+        // FormSubmit responde 200 con success "false" si falta activar el formulario
+        if (!res.ok || String(data.success) === 'false') throw new Error(data.message || res.status);
+        form.reset();
+        statusEl.textContent = S().sent;
+      } catch (err) {
+        statusEl.textContent = S().failed + EMAIL + '.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = submitHTML;
+      }
+      return;
+    }
+    const body = [
+      `${S().mName}: ${d.nombre}`,
+      `${S().mPhone}: ${d.telefono}`,
+      d.email ? `${S().mEmail}: ${d.email}` : '',
+      d.poblacion ? `${S().mTown}: ${d.poblacion}` : '',
+      d.mensaje ? `\n${S().mProject}:\n${d.mensaje}` : ''
+    ].filter(Boolean).join('\n');
+    location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(S().mailSubject + ' · ' + d.nombre)}&body=${encodeURIComponent(body)}`;
+    statusEl.textContent = S().mailOpened;
+  });
+
+  /* ---------- Idioma de la página: catalán, castellano o inglés ---------- */
+  // Textos del HTML. El castellano se lee de la propia página al arrancar; aquí van el catalán y el inglés.
+  // Las opiniones de clientes se dejan en su idioma original.
+  const I18N = {
+    ca: {
+      "skip": "Salta al contingut",
+      "logoHome": "Cerapal, anar a l’inici",
+      "navMain": "Principal",
+      "navMobile": "Menú mòbil",
+      "langLabel": "Idioma",
+      "navProjects": "Projectes",
+      "navReviews": "Opinions",
+      "navFinancing": "Finançament",
+      "navContact": "Contacte",
+      "cta": "Demanar pressupost",
+      "heroLabel": "Inici",
+      "heroSub": "Dissenyem, fabriquem i instal·lem cuines a mida al Maresme.",
+      "callAria": "Trucar al 937 620 832",
+      "call": "Trucar",
+      "heroAlt": "Cuina en tons sorra amb mobles sense tiradors, taula rodona de fusta i llum penjant",
+      "badge": "Opinions reals de Google",
+      "brandsLabel": "Marques amb què treballem",
+      "projTitle": "Alguns dels nostres projectes",
+      "projLead": "Cada projecte és únic, exclusiu i personalitzat. Prem qualsevol projecte per veure’n totes les fotos.",
+      "carousel": "carrusel",
+      "p1alt": "Cuina en to sorra amb illa i tamborets negres",
+      "p2alt": "Cuina amb illa de frontal acabat fusta i taulell clar",
+      "p3alt": "Cuina en tons verds amb barra i tres tamborets clars",
+      "p4alt": "Cuina blanca amb illa, tamborets de rotang i llums de fibra",
+      "p5alt": "Cuina blanca amb illa, arc i llums de fibra",
+      "p6alt": "Cuina en U amb fronts clars i frontal gris",
+      "p1t": "Tons sorra amb gola negra",
+      "p1d": "Fronts llisos en to sorra amb perfils gola en negre, sense tiradors. El taulell, el frontal i l’illa amb barra comparteixen el mateix acabat pedra, i les columnes integren forn, microones i frigorífic. Una tira LED sota els mobles alts il·lumina la zona de treball.",
+      "p2t": "Fusta i acabat vetat",
+      "p2d": "Cuina oberta en un espai amb sostre inclinat i grans finestrals al jardí. L’illa combina un frontal de fusta amb calaixos blancs sense tiradors i un taulell vetat que continua en cascada pel lateral. A la paret de columnes s’integren dos forns i fornícules de fusta il·luminades.",
+      "p3t": "Tons verds i vitrina il·luminada",
+      "p3d": "Mobles en to verd de terra a sostre i una península amb barra per a tres tamborets, oberta a la sala. Les columnes integren forn i microones i inclouen una vitrina vertical amb il·luminació càlida. El taulell i el revestiment de la paret, en tons clars, equilibren el color dels mobles.",
+      "p4t": "Illa blanca i fibres naturals",
+      "p4d": "Cuina en blanc trencat sense tiradors, amb illa d’aigüera i barra per a tres tamborets de rotang sota llums de fibra. Entre les columnes s’integra un rebost amb prestatges de fusta il·luminats, i sobre la placa de cocció un volum blanc incorpora il·luminació LED.",
+      "p5t": "Blanc amb detalls de coure",
+      "p5d": "Disseny en blanc sense tiradors, amb aixeteria i detalls de coure. Els arcs i els prestatges corbs il·luminats, integrats a la paret, li donen un estil mediterrani. L’illa, amb tamborets de boga i llums de fibra, connecta la cuina amb la sala.",
+      "p6t": "Cuina en U amb frontal gris",
+      "p6d": "Distribució en U amb fronts clars sense tiradors, i frontal i taulell en gris amb acabat pedra. Els prestatges oberts de fusta rematen les cantonades, i la columna agrupa forn i microones al costat del frigorífic. Vora la finestra, una barra alta amb tamborets completa l’espai.",
+      "viewProject": "Veure el projecte",
+      "prevProjects": "Projectes anteriors",
+      "nextProjects": "Projectes següents",
+      "contactTitle": "Demana el teu pressupost",
+      "contactLead": "Deixa’ns les teves dades i ens posarem en contacte amb tu al més aviat possible. <strong>Sense compromís.</strong>",
+      "phone": "Telèfon",
+      "email": "Correu",
+      "studio": "Estudi",
+      "directions": "Com arribar-hi",
+      "hours": "Horari",
+      "hoursText": "De dilluns a divendres<br>9:00–13:00 i 15:00–19:00",
+      "fName": "Nom",
+      "fEmail": "Correu",
+      "fTown": "Població",
+      "fProject": "Hi ha alguna cosa que hàgim de saber abans de trucar-te? <span class=\"opt\">(opcional)</span>",
+      "fPlaceholder": "Què t’agradaria canviar, mides aproximades, quan vols començar…",
+      "fPrivacy": "Accepto la <a href=\"https://cerapal.cat/politica-privacidad/\" target=\"_blank\" rel=\"noopener\">política de privacitat</a>.",
+      "reviewsTitle": "El que diuen els nostres clients",
+      "reviewsLead": "Opinions reals dels nostres clients.",
+      "reviewsLabel": "Opinions de clients",
+      "closingTitle": "Estàs pensant a renovar la teva cuina?",
+      "closingLead": "Posa’t en contacte amb nosaltres, explica’ns el teu projecte i t’ajudarem a fer-lo realitat.",
+      "stat1": "adaptant i muntant cuines",
+      "stat1pre": "més de",
+      "years": "anys",
+      "stat2": "finançament a mida per a la teva cuina",
+      "stat2pre": "des de",
+      "perMonth": "€/mes",
+      "stat3": "per pagar-la amb costos mínims de finançament",
+      "stat3pre": "fins a",
+      "footerTagline": "Cada projecte és únic, exclusiu i personalitzat.",
+      "hoursFooter": "De dilluns a divendres<br>9:00–13:00<br>15:00–19:00",
+      "follow": "Segueix-nos",
+      "legal": "Avís legal",
+      "privacy": "Política de privacitat",
+      "cookies": "Política de galetes",
+      "close": "Tanca",
+      "prevPhoto": "Foto anterior",
+      "nextPhoto": "Foto següent"
+    },
+    en: {
+      "skip": "Skip to content",
+      "logoHome": "Cerapal, back to top",
+      "navMain": "Main",
+      "navMobile": "Mobile menu",
+      "langLabel": "Language",
+      "navProjects": "Projects",
+      "navReviews": "Reviews",
+      "navFinancing": "Financing",
+      "navContact": "Contact",
+      "cta": "Get my quote",
+      "heroLabel": "Home",
+      "heroSub": "We design, build and install made-to-measure kitchens in the Maresme.",
+      "callAria": "Call 937 620 832",
+      "call": "Call",
+      "heroAlt": "Sand-toned kitchen with handleless units, a round wooden table and a pendant light",
+      "badge": "Real Google reviews",
+      "brandsLabel": "Brands we work with",
+      "projTitle": "Some of our projects",
+      "projLead": "Every project is unique, exclusive and tailor-made. Tap any of them to see all its photos.",
+      "carousel": "carousel",
+      "p1alt": "Sand-toned kitchen with an island and black stools",
+      "p2alt": "Kitchen with a wood-finish island front and a light worktop",
+      "p3alt": "Green kitchen with a breakfast bar and three light stools",
+      "p4alt": "White kitchen with an island, rattan stools and woven pendant lights",
+      "p5alt": "White kitchen with an island, an archway and woven pendant lights",
+      "p6alt": "U-shaped kitchen with light fronts and a grey splashback",
+      "p1t": "Sand tones with black handle channels",
+      "p1d": "Smooth sand-toned fronts with black handle channels and no handles. The worktop, splashback and breakfast-bar island share the same stone-look finish, and the tall units house the oven, microwave and fridge. An LED strip under the wall units lights the work area.",
+      "p2t": "Wood and a veined finish",
+      "p2d": "An open-plan kitchen in a space with a sloping ceiling and large windows onto the garden. The island combines a wood front with handleless white drawers and a veined worktop that continues down the side as a waterfall. The tall-unit wall houses two ovens and lit wooden niches.",
+      "p3t": "Green tones and a lit display cabinet",
+      "p3d": "Floor-to-ceiling green units and a peninsula with a breakfast bar for three stools, open to the living room. The tall units house the oven and microwave and include a vertical display cabinet with warm lighting. The light worktop and wall cladding balance the colour of the units.",
+      "p4t": "White island and natural fibres",
+      "p4d": "Handleless off-white units, with a sink island and a breakfast bar for three rattan stools under woven pendant lights. A pantry with lit wooden shelves is built in between the tall units, and above the hob a white volume incorporates LED lighting.",
+      "p5t": "White with copper details",
+      "p5d": "A handleless white design with copper taps and details. Arches and curved lit shelves built into the wall give it a Mediterranean style. The island, with rush-seat stools and woven pendant lights, connects the kitchen with the living room.",
+      "p6t": "U-shaped kitchen with a grey splashback",
+      "p6d": "A U-shaped layout with handleless light fronts and a grey stone-finish splashback and worktop. Open wooden shelves finish the corners, and the tall unit groups the oven and microwave next to the fridge. A high bar with stools by the window completes the space.",
+      "viewProject": "View project",
+      "prevProjects": "Previous projects",
+      "nextProjects": "Next projects",
+      "contactTitle": "Get your quote",
+      "contactLead": "Leave your details and we’ll get back to you as soon as possible. <strong>No obligation.</strong>",
+      "phone": "Phone",
+      "email": "Email",
+      "studio": "Studio",
+      "directions": "Get directions",
+      "hours": "Opening hours",
+      "hoursText": "Monday to Friday<br>9:00–13:00 and 15:00–19:00",
+      "fName": "Name",
+      "fEmail": "Email",
+      "fTown": "Town",
+      "fProject": "Anything we should know before we call you? <span class=\"opt\">(optional)</span>",
+      "fPlaceholder": "What you’d like to change, rough measurements, when you’d like to start…",
+      "fPrivacy": "I accept the <a href=\"https://cerapal.cat/politica-privacidad/\" target=\"_blank\" rel=\"noopener\">privacy policy</a>.",
+      "reviewsTitle": "What our clients say",
+      "reviewsLead": "Real reviews from our clients, shown in their original language (Catalan or Spanish).",
+      "reviewsLabel": "Client reviews",
+      "closingTitle": "Thinking of renovating your kitchen?",
+      "closingLead": "Get in touch, tell us about your project and we’ll help you make it happen.",
+      "stat1": "adapting and fitting kitchens",
+      "stat1pre": "over",
+      "years": "years",
+      "stat2": "tailored financing for your kitchen",
+      "stat2pre": "from €",
+      "perMonth": "/month",
+      "stat3": "to pay it off with minimal financing costs",
+      "stat3pre": "up to",
+      "footerTagline": "Every project is unique, exclusive and tailor-made.",
+      "hoursFooter": "Monday to Friday<br>9:00–13:00<br>15:00–19:00",
+      "follow": "Follow us",
+      "legal": "Legal notice",
+      "privacy": "Privacy policy",
+      "cookies": "Cookie policy",
+      "close": "Close",
+      "prevPhoto": "Previous photo",
+      "nextPhoto": "Next photo"
+    }
+  };
+  const textNodes = $$('[data-i18n]'), attrNodes = $$('[data-i18n-attr]');
+  const attrPairs = el => el.dataset.i18nAttr.split(',').map(pair => pair.split(':').map(s => s.trim()));
+  const ES = {};
+  textNodes.forEach(el => { ES[el.dataset.i18n] ??= el.innerHTML; });
+  attrNodes.forEach(el => attrPairs(el).forEach(([attr, key]) => { ES[key] ??= el.getAttribute(attr); }));
+  const titleEl = $('.hero-title'), langBtns = $$('.lang button');
+
+  // el titular se reconstruye palabra a palabra (para su animación) y con la línea bajo las últimas palabras
+  function buildTitle({ pre, mark }) {
+    let i = 0;
+    const word = w => `<span class="w"><span style="--i:${i++}">${w}</span></span>`;
+    return `${pre.map(word).join(' ')} <span class="keep"><span class="mark">${mark.map(word).join(' ')}</span>${word('.')}</span>`;
+  }
+  function applyLang(next) {
+    lang = next;
+    const D = { ...ES, ...(I18N[lang] || {}) };
+    document.documentElement.lang = lang;
+    document.title = S().title;
+    $('meta[name="description"]').setAttribute('content', S().desc);
+    textNodes.forEach(el => { el.innerHTML = D[el.dataset.i18n]; });
+    attrNodes.forEach(el => attrPairs(el).forEach(([attr, key]) => el.setAttribute(attr, D[key])));
+    titleEl.innerHTML = buildTitle(S().h1);
+    const projects = $$('.project');
+    projects.forEach((card, i) => {
+      const count = +card.dataset.count;
+      card.setAttribute('aria-roledescription', S().slide);
+      card.setAttribute('aria-label', `${i + 1} ${S().of} ${projects.length}`);
+      $('.pc-badge', card).textContent = `${S().project} ${pad(+card.dataset.project)}`;
+      $('.pc-meta', card).textContent = `${count} ${S().photos}`;
+      $('.pc-link .sr-only', card).textContent = `: ${$('.pc-title', card).textContent}, ${count} ${S().photos}`;
+    });
+    $$('.review .stars[role="img"]').forEach(el => el.setAttribute('aria-label', S().stars));
+    toggle.textContent = menuOpen() ? S().menuClose : S().menu;
+    langBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+    $$('.field.has-error').forEach(f => { const el = $('input, textarea', f); if (el && rules[el.name]) check(el.name); });
+  }
+  // idioma inicial: el del enlace (?lang=ca), el que eligió la última vez, o el del navegador
+  function initialLang() {
+    const fromUrl = new URLSearchParams(location.search).get('lang');
+    if (LANGS.includes(fromUrl)) return fromUrl;
+    try { const saved = localStorage.getItem('cerapal-lang'); if (LANGS.includes(saved)) return saved; } catch (e) {}
+    for (const l of navigator.languages || [navigator.language || '']) {
+      const code = l.slice(0, 2).toLowerCase();
+      if (LANGS.includes(code)) return code;
+    }
+    return 'es';
+  }
+  langBtns.forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.lang === lang) return;
+    applyLang(b.dataset.lang);
+    try { localStorage.setItem('cerapal-lang', lang); } catch (e) {}
+    try { const url = new URL(location.href); url.searchParams.set('lang', lang); history.replaceState(null, '', url); } catch (e) {}
+  }));
+  const startLang = initialLang();
+  if (startLang !== 'es') applyLang(startLang);
+})();
+</script>
+</body>
+</html>
